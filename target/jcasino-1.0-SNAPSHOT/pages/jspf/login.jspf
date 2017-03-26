@@ -1,0 +1,27 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<form class="login" name="loginForm" method="POST" action="${pageContext.request.contextPath}/controller">
+    <input type="hidden" name="command" value="login"/>
+    <input type="email" name="email" value="${email_input}"
+           placeholder="<fmt:message key="login.email_holder"/>" title="<fmt:message key="register.email.title"/>"
+           pattern="^[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$"
+           maxlength="320" required/>
+    <span></span>
+    <input type="password" name="password" value="" placeholder="<fmt:message key="login.password_holder"/>"
+           pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[\w_-]{8,}$" title="<fmt:message key="register.password.title"/>"
+           required/>
+    <span></span>
+    <noscript><p class="error-message">${errorMessage}</p></noscript>
+    <input class="button-login" type="submit" value="<fmt:message key="login.submit"/>"/>
+    <div class="custom-link"><a href="${pageContext.request.contextPath}/controller?command=goto_recover_password">
+        <fmt:message key="login.forgotpass"/>?</a>
+    </div>
+    <div class="custom-link"><a href="${pageContext.request.contextPath}/controller?command=goto_register">
+        <fmt:message key="login.register"/></a>
+    </div>
+</form>
+<script>
+    var errorMessage = "${errorMessage}";
+    if (errorMessage) {
+        alert(errorMessage);
+    }
+</script>

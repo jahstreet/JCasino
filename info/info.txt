@@ -1,0 +1,33 @@
+заглушка web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <welcome-file-list>
+        <welcome-file>
+            newpage.html
+        </welcome-file>
+    </welcome-file-list>
+</web-app>
+
+
+http://javatalks.ru/topics/36704 - о коннекшн пуле с БД через data source
+
+
+
+jsp-jstl
+connection pool JDBC
+engine js (AJAX ?)
+
+Удаление файла!!!
+File ololo = new File("C:\\xxx.avi");
+if (ololo.exists()) {
+    try {
+        ololo.delete();
+        ololo.createNewFile();
+    } catch (IOException ex) {
+        System.out.println("Ошибко, мля");
+    }
+}
