@@ -19,9 +19,3 @@
         <fmt:message key="login.register"/></a>
     </div>
 </form>
-<script>
-    var errorMessage = "${errorMessage}";
-    if (errorMessage) {
-        alert(errorMessage);
-    }
-</script>

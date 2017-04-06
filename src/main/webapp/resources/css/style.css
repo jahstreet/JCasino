@@ -26,7 +26,7 @@ h1, h2, h3 {
     padding: 0 .7em;
 }
 
-h2 {
+h2, h3 {
     color: #fff;
 }
 
@@ -771,7 +771,7 @@ div.custom-button:focus {
     margin: .5em;
 }
 
-.satisfaction-form input[type="submit"] {
+.inline-option-form input[type="submit"] {
     text-align: center;
     width: 25%;
     padding: .3em;
@@ -780,7 +780,7 @@ div.custom-button:focus {
     cursor: pointer;
 }
 
-.satisfaction-form select.rate-select#rate-select {
+.inline-option-form select.rate-select#rate-select {
     font-size: 1em;
     width: 65%;
     height: 2em;
@@ -799,9 +799,72 @@ div.custom-button:focus {
     min-width: 6em;
 }
 
-select.rate-select#rate-select:hover,
-.satisfaction-form input[type="submit"]:hover {
+.manage-news ul {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.manage-news ul li {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    margin: 0 0 1em;
+    color: #fff;
+    text-align: center;
+
+}
+
+.edit-block input {
+    color: #000;
+}
+
+.edit-block > *:not([class="hidden edit-news"]) {
+    display: inline-block;
+}
+
+.edit-block > button {
+    font-size: 1em;
+    padding: .25em;
+    cursor: pointer;
+}
+
+.edit-block img,
+.edit-block p {
+    width: 90%;
+}
+
+.edit-news input:not([type="submit"]),
+.edit-news textarea {
+    font-size: 1em;
+    width: 80%;
+    padding: .5em;
+    margin: .5em auto;
+    border-radius: .5em;
+    background: #ccc;
+    outline: none;
+}
+
+.edit-news input[type="submit"] {
+    font-size: 1em;
+    border-radius: 50%;
+    padding: .5em;
+}
+
+.edit-news input:hover,
+.edit-news textarea:hover {
     background: #fff;
+}
+
+select.rate-select#rate-select:hover,
+.inline-option-form input[type="submit"]:hover {
+    background: #fff;
+}
+
+.manage-support h3 {
+    color: #fff;
+    text-decoration: underline;
 }
 
 /*tablets and big landscape mobiles*/

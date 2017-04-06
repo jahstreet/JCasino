@@ -1,6 +1,7 @@
 package by.sasnouskikh.jcasino.command.impl;
 
 import by.sasnouskikh.jcasino.command.Command;
+import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
 import by.sasnouskikh.jcasino.logic.PlayerLogic;
@@ -18,42 +19,45 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 public class WithdrawMoneyCommand implements Command {
 
     @Override
-    public String[] execute(HttpServletRequest request) {
+    public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
-        MessageManager messageManager = new MessageManager(locale);
+        MessageManager messageManager = MessageManager.getMessageManager(locale);
         StringBuilder  errorMessage   = new StringBuilder();
-        String[]       queryParams;
-        boolean        valid          = true;
-        Player         player         = (Player) session.getAttribute(ATTR_PLAYER);
+        PageNavigator  navigator;
 
-        String        stringAmount           = request.getParameter(PARAM_AMOUNT);
-        String        password               = request.getParameter(PARAM_PASSWORD);
+        boolean       valid                  = true;
+        Player        player                 = (Player) session.getAttribute(ATTR_PLAYER);
         PlayerAccount account                = player.getAccount();
-        BigDecimal    amount                 = BigDecimal.valueOf(Double.parseDouble(stringAmount));
         BigDecimal    balance                = account.getBalance();
         BigDecimal    currentMonthWithdrawal = account.getThisMonthWithdrawal();
-        BigDecimal    monthWirhdrawalLimit   = account.getStatus().getWithdrawalLimit();
-        BigDecimal    maxWithdrawal          = monthWirhdrawalLimit.subtract(currentMonthWithdrawal);
+        BigDecimal    withdrawalLimit        = account.getStatus().getWithdrawalLimit();
+        BigDecimal    maxWithdrawal          = withdrawalLimit.subtract(currentMonthWithdrawal);
+
+        String     stringAmount = request.getParameter(PARAM_AMOUNT);
+        String     password     = request.getParameter(PARAM_PASSWORD);
+        BigDecimal amount       = null;
 
         if (FormValidator.validateAmount(stringAmount)) {
-            if (amount.compareTo(balance) > 0) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_WITHDRAWAL_NOMONEY)).append(NEW_LINE_SEPARATOR);
-                valid = false;
-            } else {
-                if (amount.compareTo(maxWithdrawal) > 0) {
+            amount = BigDecimal.valueOf(Double.parseDouble(stringAmount));
+            if (amount.compareTo(balance) <= 0) {
+                if (amount.compareTo(maxWithdrawal) <= 0) {
+                    request.setAttribute(ATTR_AMOUNT_INPUT, amount);
+                } else {
                     errorMessage.append(messageManager.getMessage(MESSAGE_WITHDRAWAL_OVERLIMIT)).append(WHITESPACE)
                                 .append(maxWithdrawal).append(DOT).append(NEW_LINE_SEPARATOR);
                     valid = false;
-                } else {
-                    request.setAttribute(ATTR_AMOUNT_INPUT, amount);
                 }
+            } else {
+                errorMessage.append(messageManager.getMessage(MESSAGE_WITHDRAWAL_NOMONEY)).append(NEW_LINE_SEPARATOR);
+                valid = false;
             }
         } else {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_AMOUNT)).append(NEW_LINE_SEPARATOR);
             valid = false;
         }
+        //TODO check if user validation status allows to withdraw money
 
         if (!FormValidator.validatePassword(password)) {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(NEW_LINE_SEPARATOR);
@@ -67,17 +71,15 @@ public class WithdrawMoneyCommand implements Command {
 
         if (valid) {
             if (PlayerLogic.withdrawMoney(player, amount)) {
-                queryParams = new String[]{GOTO_ACCOUNT, REDIRECT};
+                navigator = PageNavigator.REDIRECT_GOTO_ACCOUNT;
             } else {
-                errorMessage.append(messageManager.getMessage(MESSAGE_WITHDRAWAL_INTERRUPTED)).append(NEW_LINE_SEPARATOR);
-                request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-                queryParams = new String[]{PAGE_WITHDRAW_MONEY, FORWARD};
+                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_WITHDRAWAL_INTERRUPTED));
+                navigator = PageNavigator.FORWARD_PAGE_WITHDRAW_MONEY;
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-            queryParams = new String[]{PAGE_WITHDRAW_MONEY, FORWARD};
+            navigator = PageNavigator.FORWARD_PAGE_WITHDRAW_MONEY;
         }
-
-        return queryParams;
+        return navigator;
     }
 }

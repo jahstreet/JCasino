@@ -2,7 +2,7 @@ package by.sasnouskikh.jcasino.logic;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RandomGenerator {
+class RandomGenerator {
     private static final int EMAIL_CODE_LENGTH = 8;
     private static final int RANDOM_INT_BOUND  = 10;
 
@@ -17,7 +17,7 @@ public class RandomGenerator {
     private RandomGenerator() {
     }
 
-    public static String generateEmailCode() {
+    static String generateEmailCode() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < EMAIL_CODE_LENGTH; i++) {
             builder.append(ThreadLocalRandom.current().nextInt(RANDOM_INT_BOUND));
@@ -25,7 +25,7 @@ public class RandomGenerator {
         return builder.toString();
     }
 
-    public static String generatePassword() {
+    static String generatePassword() {
         StringBuilder builder = new StringBuilder();
         builder.append(String.valueOf((char) ThreadLocalRandom.current().nextInt(ASCII_DIGIT_BOUND_BOT, ASCII_DIGIT_BOUND_TOP + 1)));
         builder.append(String.valueOf((char) ThreadLocalRandom.current().nextInt(ASCII_UPPER_BOUND_BOT, ASCII_UPPER_BOUND_TOP + 1)));

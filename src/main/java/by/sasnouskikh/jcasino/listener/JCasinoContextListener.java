@@ -1,11 +1,9 @@
 package by.sasnouskikh.jcasino.listener;
 
-import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.NewsDAOImpl;
 import by.sasnouskikh.jcasino.db.ConnectionPool;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.News;
+import by.sasnouskikh.jcasino.logic.NewsLogic;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.util.ArrayList;
+import java.util.List;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.CONTEXT_NEWSLIST;
 
@@ -33,13 +31,8 @@ public class JCasinoContextListener implements ServletContextListener {
             LOGGER.log(Level.FATAL, e);
             throw new RuntimeException(e);
         }
-        try (NewsDAOImpl newsDAO = DAOFactory.getNewsDAO()) {
-            ArrayList<News> news = newsDAO.takeNews();
-            servletContextEvent.getServletContext().setAttribute(CONTEXT_NEWSLIST, news);
-        } catch (ConnectionPoolException | DAOException e) {
-            LOGGER.log(Level.FATAL, e);
-            throw new RuntimeException();
-        }
+        List<News> news = NewsLogic.takeNewsList();
+        servletContextEvent.getServletContext().setAttribute(CONTEXT_NEWSLIST, news);
     }
 
     @Override

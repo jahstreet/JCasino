@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.Closeable;
+import java.sql.SQLException;
 
 public abstract class AbstractDAO<K, T extends Entity> implements AutoCloseable {
     private static final Logger LOGGER = LogManager.getLogger(AbstractDAO.class);
@@ -23,12 +24,28 @@ public abstract class AbstractDAO<K, T extends Entity> implements AutoCloseable 
         }
     }
 
+    protected AbstractDAO(WrappedConnection connection) {
+        this.connection = connection;
+    }
+
     public WrappedConnection getConnection() {
         return connection;
     }
 
     public void setConnection(WrappedConnection connection) {
         this.connection = connection;
+    }
+
+    public void beginTransaction() throws SQLException {
+        connection.setAutoCommit(false);
+    }
+
+    public void commit() throws SQLException {
+        connection.commit();
+    }
+
+    public void rollback() throws SQLException {
+        connection.rollback();
     }
 
     /**

@@ -1,12 +1,11 @@
 package by.sasnouskikh.jcasino.command.impl;
 
 import by.sasnouskikh.jcasino.command.Command;
-import by.sasnouskikh.jcasino.entity.bean.Player;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
+import by.sasnouskikh.jcasino.command.PageNavigator;
+import by.sasnouskikh.jcasino.logic.QuestionLogic;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.validator.FormValidator;
-import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,39 +15,35 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 public class RateSupportAnswerCommand implements Command {
 
     @Override
-    public String[] execute(HttpServletRequest request) {
+    public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
-        MessageManager messageManager = new MessageManager(locale);
-        StringBuilder  errorMessage   = new StringBuilder();
-        String[]       queryParams;
-        boolean        valid          = true;
+        MessageManager messageManager = MessageManager.getMessageManager(locale);
+        PageNavigator  navigator;
 
-        String id = request.getParameter(PARAM_ID);
-        if (!StringUtils.isNumeric(id)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_JSP)).append(NEW_LINE_SEPARATOR);
-            valid = false;
+        String questionIdString = request.getParameter(PARAM_ID);
+        String satisfaction     = request.getParameter(PARAM_SATISFACTION);
+        int    questionId;
+
+        if (!FormValidator.validateId(questionIdString)) {
+            request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_INVALID_JSP));
+            return PageNavigator.FORWARD_PREV_QUERY;
         }
-        String satisfaction = request.getParameter(PARAM_SATISFACTION);
+        questionId = Integer.parseInt(questionIdString);
+
         if (!FormValidator.validateSatisfaction(satisfaction)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_JSP)).append(NEW_LINE_SEPARATOR);
-            valid = false;
+            request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_INVALID_JSP));
+            return PageNavigator.FORWARD_PREV_QUERY;
         }
 
-        if (valid) {
-            if (PlayerLogic.rateSupportAnswer(Integer.parseInt(id), satisfaction)) {
-                queryParams = new String[]{GOTO_SUPPORT, REDIRECT};
-            } else {
-                errorMessage.append(messageManager.getMessage(MESSAGE_RATE_SUPPORT_INTERRUPTED));
-                request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-                queryParams = new String[]{PAGE_SUPPORT, FORWARD};
-            }
+        if (QuestionLogic.rateAnswer(questionId, satisfaction)) {
+            navigator = PageNavigator.REDIRECT_GOTO_SUPPORT;
         } else {
-            request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-            queryParams = new String[]{PAGE_SUPPORT, FORWARD};
+            request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_RATE_SUPPORT_INTERRUPTED));
+            navigator = PageNavigator.FORWARD_PAGE_SUPPORT;
         }
 
-        return queryParams;
+        return navigator;
     }
 }

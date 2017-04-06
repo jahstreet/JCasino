@@ -1,6 +1,5 @@
 package by.sasnouskikh.jcasino.entity.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends JCasinoUser {

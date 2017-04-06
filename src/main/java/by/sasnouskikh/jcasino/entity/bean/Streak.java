@@ -2,6 +2,7 @@ package by.sasnouskikh.jcasino.entity.bean;
 
 import by.sasnouskikh.jcasino.entity.Entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,12 +14,13 @@ public class Streak extends Entity {
     private LocalDateTime date;
     private List<Roll>    rolls;
 
-    private String roll;
-    private String rollMD5;
-    private String offset;
-    private String lines;
-    private String bet;
-    private String result;
+    private String     roll;
+    private String     rollMD5;
+    private String     offset;
+    private String     lines;
+    private String     bet;
+    private String     result;
+    private BigDecimal total;
 
     public int getId() {
         return id;
@@ -98,5 +100,13 @@ public class Streak extends Entity {
 
     public void setRolls(List<Roll> rolls) {
         this.rolls = rolls;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 }

@@ -13,6 +13,7 @@ public class PlayerVerification extends Entity {
     private String             passport;
     private VerificationStatus status;
     private int                adminId;
+    private String             commentary;
     private LocalDateTime      verificationDate;
 
     public enum VerificationStatus {
@@ -89,5 +90,13 @@ public class PlayerVerification extends Entity {
 
     public void setPassport(String passport) {
         this.passport = passport;
+    }
+
+    public String getCommentary() {
+        return commentary;
+    }
+
+    public void setCommentary(String commentary) {
+        this.commentary = commentary;
     }
 }

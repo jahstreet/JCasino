@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @WebFilter(
 filterName = "PageRedirectFilter",
-urlPatterns = {"/pages/*", "/game/*"},
+urlPatterns = {"/pages/*", "/game/*", "/admin/*"},
 initParams = {@WebInitParam(name = "PAGE_INDEX", value = "/index.jsp")}
 )
 public class PageRedirectSecurityFilter implements Filter {

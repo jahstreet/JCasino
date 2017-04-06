@@ -1,6 +1,7 @@
 package by.sasnouskikh.jcasino.command.impl;
 
 import by.sasnouskikh.jcasino.command.Command;
+import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
 import by.sasnouskikh.jcasino.entity.bean.Player;
@@ -17,16 +18,17 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 public class LoginCommand implements Command {
 
     @Override
-    public String[] execute(HttpServletRequest request) {
+    public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
-        MessageManager messageManager = new MessageManager(locale);
+        MessageManager messageManager = MessageManager.getMessageManager(locale);
         StringBuilder  errorMessage   = new StringBuilder();
-        String[]       queryParams;
-        boolean        valid          = true;
-        String         email          = request.getParameter(PARAM_EMAIL);
-        String         password       = request.getParameter(PARAM_PASSWORD);
+        PageNavigator  navigator;
+
+        boolean valid    = true;
+        String  email    = request.getParameter(PARAM_EMAIL);
+        String  password = request.getParameter(PARAM_PASSWORD);
 
         if (!FormValidator.validateEmail(email)) {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(NEW_LINE_SEPARATOR);
@@ -49,18 +51,18 @@ public class LoginCommand implements Command {
                 }
                 session.setAttribute(ATTR_USER, user);
                 session.setAttribute(ATTR_ROLE, user.getRole());
-                queryParams = new String[]{GOTO_MAIN, REDIRECT};
+                navigator = PageNavigator.REDIRECT_GOTO_MAIN;
             } else {
                 request.setAttribute(ATTR_EMAIL_INPUT, email);
                 errorMessage.append(messageManager.getMessage(MESSAGE_LOGIN_MISMATCH)).append(NEW_LINE_SEPARATOR);
                 request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-                queryParams = new String[]{PAGE_MAIN, FORWARD};
+                navigator = PageNavigator.FORWARD_PAGE_MAIN;
             }
         } else {
             request.setAttribute(ATTR_EMAIL_INPUT, email);
             request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-            return new String[]{PAGE_MAIN, FORWARD};
+            navigator = PageNavigator.FORWARD_PAGE_MAIN;
         }
-        return queryParams;
+        return navigator;
     }
 }

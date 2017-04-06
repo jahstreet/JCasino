@@ -10,6 +10,8 @@ public class PlayerStatus extends Entity {
     private BigDecimal withdrawalLimit;
     private BigDecimal loanPercent;
     private BigDecimal maxLoan;
+    private int adminId;
+    private String commentary;
 
     public enum StatusEnum {
         BASIC, VIP, BAN, UNACTIVE
@@ -53,5 +55,21 @@ public class PlayerStatus extends Entity {
 
     public void setMaxLoan(BigDecimal maxLoan) {
         this.maxLoan = maxLoan;
+    }
+
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
+    }
+
+    public String getCommentary() {
+        return commentary;
+    }
+
+    public void setCommentary(String commentary) {
+        this.commentary = commentary;
     }
 }

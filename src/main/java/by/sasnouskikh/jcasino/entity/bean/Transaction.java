@@ -6,10 +6,15 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Transaction extends Entity {
-    private int           id;
-    private int           playerId;
-    private LocalDateTime date;
-    private BigDecimal    amount;
+    private int             id;
+    private int             playerId;
+    private LocalDateTime   date;
+    private BigDecimal      amount;
+    private TransactionType type;
+
+    public enum TransactionType {
+        REPLENISH, WITHDRAW
+    }
 
     public int getId() {
         return id;
@@ -41,5 +46,13 @@ public class Transaction extends Entity {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public TransactionType getType() {
+        return type;
+    }
+
+    public void setType(TransactionType type) {
+        this.type = type;
     }
 }

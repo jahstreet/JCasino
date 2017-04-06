@@ -32,6 +32,12 @@
             <include-prelude>/pages/jspf/header.jspf</include-prelude>
             <include-coda>/pages/jspf/footer.jspf</include-coda>
         </jsp-property-group>
+        <jsp-property-group>
+            <description>header and footer admin settings</description>
+            <url-pattern>/admin/*</url-pattern>
+            <include-prelude>/admin/jspf/header.jspf</include-prelude>
+            <include-coda>/admin/jspf/footer.jspf</include-coda>
+        </jsp-property-group>
         <taglib>
             <taglib-uri>http://jcasino.by/functions</taglib-uri>
             <taglib-location>/WEB-INF/tld/custom.tld</taglib-location>

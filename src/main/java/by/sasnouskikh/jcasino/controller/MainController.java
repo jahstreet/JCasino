@@ -2,6 +2,8 @@ package by.sasnouskikh.jcasino.controller;
 
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.CommandFactory;
+import by.sasnouskikh.jcasino.command.PageNavigator;
+import by.sasnouskikh.jcasino.manager.QueryManager;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,15 +31,18 @@ public class MainController extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String[]    pageParams;
-        String      query;
-        String      responseType;
-        HttpSession session = request.getSession();
-        Command     command = CommandFactory.defineCommand(request);
-        pageParams = command.execute(request);
-        if (pageParams != null && pageParams.length == 2) {
-            query = pageParams[0];
-            responseType = pageParams[1];
+        PageNavigator navigator;
+        String        query;
+        String        responseType;
+        HttpSession   session = request.getSession();
+        Command       command = CommandFactory.defineCommand(request);
+        navigator = command.execute(request);
+        if (navigator != null) {
+            query = navigator.getQuery();
+            if (PREV_QUERY.equals(query)) {
+                query = QueryManager.takePreviousQuery(request);
+            }
+            responseType = navigator.getResponseType();
             switch (responseType) {
                 case FORWARD:
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(query);
@@ -50,27 +55,18 @@ public class MainController extends HttpServlet {
                     query = GOTO_ERROR_500;
                     String errorMessage = (String) request.getAttribute(ATTR_ERROR_MESSAGE);
                     if (errorMessage == null) {
-                        errorMessage = "";
+                        errorMessage = EMPTY_STRING;
                     } else {
-                        errorMessage += "\n";
+                        errorMessage = errorMessage.trim() + NEW_LINE_SEPARATOR;
                     }
                     session.setAttribute(ATTR_ERROR_MESSAGE,
-                                         errorMessage + "MainController error. No such responseType: " + responseType);
+                                         errorMessage +
+                                         "MainController error. No such responseType: " +
+                                         responseType);
                     response.sendRedirect(request.getContextPath() + query);
             }
         } else {
-            // TODO redirect to main (redirect to index in goto_main if user has no rights)
-            query = GOTO_MAIN;
-            // TODO log error
-//            query = GOTO_ERROR_500;
-//            String errorMessage = (String) session.getAttribute(ATTR_ERROR_MESSAGE);
-//            if (errorMessage == null) {
-//                errorMessage = "";
-//            } else {
-//                errorMessage += "\n";
-//            }
-//            session.setAttribute(ATTR_ERROR_MESSAGE,
-//                    errorMessage + "MainController error. Command is null or it returned null page!");
+            query = GOTO_INDEX;
             response.sendRedirect(request.getContextPath() + query);
         }
     }

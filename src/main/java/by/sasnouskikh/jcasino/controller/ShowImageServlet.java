@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.INIT_PARAM_UPLOADS;
+
 @WebServlet(name = "ShowImageServlet", urlPatterns = {"/image/*"})
 public class ShowImageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -17,7 +19,7 @@ public class ShowImageServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String filename = request.getPathInfo();
-        File   file     = new File("/Library/apache-tomcat-8.5.9/uploads/", filename);
+        File   file     = new File(request.getServletContext().getInitParameter(INIT_PARAM_UPLOADS) + "/", filename);
         response.setHeader("Content-Type", getServletContext().getMimeType(filename));
         response.setHeader("Content-Length", String.valueOf(file.length()));
         response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");

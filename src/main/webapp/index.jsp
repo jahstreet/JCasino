@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+<c:if test="${admin != null}">
+    <jsp:forward page="/admin/jcasino_admin.jsp"/>
+</c:if>
 <jsp:forward page="/pages/main.jsp"/>
 </body>
 </html>

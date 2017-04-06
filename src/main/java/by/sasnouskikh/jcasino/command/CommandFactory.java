@@ -1,7 +1,9 @@
 package by.sasnouskikh.jcasino.command;
 
 import by.sasnouskikh.jcasino.command.impl.*;
-import by.sasnouskikh.jcasino.command.impl.gotocommand.*;
+import by.sasnouskikh.jcasino.command.impl.admin.*;
+import by.sasnouskikh.jcasino.command.impl.navigation.*;
+import by.sasnouskikh.jcasino.command.impl.navigation.admin.*;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -13,7 +15,6 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.PARAM_COMMAND;
 
 public class CommandFactory {
 
-    //    TODO singleton???
     private static final String                        MULTIPART_COMMAND_NAME = "multipart";
     private static       HashMap<CommandType, Command> guestCommands          = new HashMap<>();
     private static       HashMap<CommandType, Command> playerCommands         = new HashMap<>();
@@ -31,6 +32,7 @@ public class CommandFactory {
         guestCommands.put(CommandType.GOTO_RECOVER_PASSWORD, new GotoRecoverPasswordCommand());
         guestCommands.put(CommandType.GOTO_ERROR_500, new GotoError500Command());
         guestCommands.put(CommandType.BACK_FROM_ERROR, new BackFromErrorCommand());
+        guestCommands.put(CommandType.GOTO_GAME_FRUITS, new GotoGameFruitsCommand());
 
         playerCommands.putAll(guestCommands);
         playerCommands.put(CommandType.LOGOUT, new LogoutCommand());
@@ -58,10 +60,35 @@ public class CommandFactory {
         playerCommands.put(CommandType.GOTO_OPERATION_HISTORY, new GotoOperationHistoryCommand());
         playerCommands.put(CommandType.GOTO_EMAIL_VERIFICATION, new GotoEmailVerificationCommand());
         playerCommands.put(CommandType.GOTO_UPLOAD_PASSPORT, new GotoUploadPassportCommand());
-        // + player commands
 
         adminCommands.putAll(guestCommands);
-        // + admin commands
+        adminCommands.put(CommandType.MULTIPART, new MultipartFormCommand());
+        adminCommands.put(CommandType.LOGOUT, new LogoutCommand());
+        adminCommands.put(CommandType.EDIT_NEWS, new EditNewsCommand());
+        adminCommands.put(CommandType.DELETE_NEWS, new DeleteNewsCommand());
+        adminCommands.put(CommandType.SHOW_QUESTIONS, new ShowQuestionsCommand());
+        adminCommands.put(CommandType.SHOW_ANSWERS, new ShowAnswersCommand());
+        adminCommands.put(CommandType.SHOW_TRANSACTIONS, new ShowTransactionsCommand());
+        adminCommands.put(CommandType.SHOW_STREAKS, new ShowStreaksCommand());
+        adminCommands.put(CommandType.SHOW_LOANS, new ShowLoansCommand());
+        adminCommands.put(CommandType.ANSWER_SUPPORT, new AnswerSupportCommand());
+        adminCommands.put(CommandType.VERIFY_SCAN, new VerifyScanCommand());
+        adminCommands.put(CommandType.CANCEL_SCAN_VERIFICATION, new CancelScanVerificationCommand());
+        adminCommands.put(CommandType.CHANGE_ACCOUNT_STATUS, new ChangeAccountStatusCommand());
+        adminCommands.put(CommandType.SHOW_PLAYER_SUPPORT, new ShowPlayerSupportCommand());
+        adminCommands.put(CommandType.SHOW_PLAYER_TRANSACTIONS, new ShowPlayerTransactionsCommand());
+        adminCommands.put(CommandType.SHOW_PLAYER_STREAKS, new ShowPlayerStreaksCommand());
+        adminCommands.put(CommandType.SHOW_PLAYER_LOANS, new ShowPlayerLoansCommand());
+        adminCommands.put(CommandType.GOTO_ADMIN, new GotoAdminCommand());
+        adminCommands.put(CommandType.GOTO_MANAGE_NEWS, new GotoManageNewsCommand());
+        adminCommands.put(CommandType.GOTO_MANAGE_SUPPORT, new GotoManageSupportCommand());
+        adminCommands.put(CommandType.GOTO_ANSWER_SUPPORT, new GotoAnswerSupportCommand());
+        adminCommands.put(CommandType.GOTO_MANAGE_VERIFICATION, new GotoManageVerificationCommand());
+        adminCommands.put(CommandType.GOTO_MANAGE_LOANS, new GotoManageLoansCommand());
+        adminCommands.put(CommandType.GOTO_MANAGE_PLAYER, new GotoManagePlayerCommand());
+        adminCommands.put(CommandType.GOTO_MANAGE_TRANSACTIONS, new GotoManageTransactionsCommand());
+        adminCommands.put(CommandType.GOTO_MANAGE_STREAKS, new GotoManageStreaksCommand());
+        adminCommands.put(CommandType.GOTO_STATS_REPORT, new GotoStatsReportCommand());
     }
 
     private enum CommandType {
@@ -100,7 +127,33 @@ public class CommandFactory {
         GOTO_WITHDRAW_MONEY,
         GOTO_OPERATION_HISTORY,
         GOTO_ERROR_500,
-        BACK_FROM_ERROR
+        BACK_FROM_ERROR,
+        GOTO_ADMIN,
+        EDIT_NEWS,
+        DELETE_NEWS,
+        SHOW_QUESTIONS,
+        SHOW_ANSWERS,
+        SHOW_TRANSACTIONS,
+        SHOW_STREAKS,
+        SHOW_LOANS,
+        ANSWER_SUPPORT,
+        VERIFY_SCAN,
+        CANCEL_SCAN_VERIFICATION,
+        CHANGE_ACCOUNT_STATUS,
+        SHOW_PLAYER_SUPPORT,
+        SHOW_PLAYER_TRANSACTIONS,
+        SHOW_PLAYER_STREAKS,
+        SHOW_PLAYER_LOANS,
+        GOTO_MANAGE_NEWS,
+        GOTO_MANAGE_SUPPORT,
+        GOTO_ANSWER_SUPPORT,
+        GOTO_MANAGE_VERIFICATION,
+        GOTO_MANAGE_LOANS,
+        GOTO_MANAGE_PLAYER,
+        GOTO_MANAGE_TRANSACTIONS,
+        GOTO_MANAGE_STREAKS,
+        GOTO_STATS_REPORT,
+        GOTO_GAME_FRUITS
     }
 
     private CommandFactory() {

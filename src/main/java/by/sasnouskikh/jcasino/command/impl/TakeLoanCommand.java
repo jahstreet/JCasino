@@ -1,8 +1,9 @@
 package by.sasnouskikh.jcasino.command.impl;
 
 import by.sasnouskikh.jcasino.command.Command;
+import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
+import by.sasnouskikh.jcasino.logic.LoanLogic;
 import by.sasnouskikh.jcasino.logic.UserLogic;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
@@ -17,34 +18,34 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 public class TakeLoanCommand implements Command {
 
     @Override
-    public String[] execute(HttpServletRequest request) {
+    public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
-        MessageManager messageManager = new MessageManager(locale);
+        MessageManager messageManager = MessageManager.getMessageManager(locale);
         StringBuilder  errorMessage   = new StringBuilder();
-        String[]       queryParams;
-        boolean        valid          = true;
-        Player         player         = (Player) session.getAttribute(ATTR_PLAYER);
+        PageNavigator  navigator;
 
-        BigDecimal maxLoan      = player.getAccount().getStatus().getMaxLoan();
+        boolean    valid   = true;
+        Player     player  = (Player) session.getAttribute(ATTR_PLAYER);
+        BigDecimal maxLoan = player.getAccount().getStatus().getMaxLoan();
+
         String     password     = request.getParameter(PARAM_PASSWORD);
         String     stringAmount = request.getParameter(PARAM_AMOUNT);
-        BigDecimal amount       = BigDecimal.valueOf(Double.parseDouble(stringAmount));
+        BigDecimal amount       = null;
 
-        if (!FormValidator.validateAmount(stringAmount)) {
+        if (FormValidator.validateAmount(stringAmount)) {
+            amount = BigDecimal.valueOf(Double.parseDouble(stringAmount));
+            if (maxLoan.compareTo(amount) >= 0) {
+                request.setAttribute(ATTR_AMOUNT_INPUT, stringAmount);
+            } else {
+                errorMessage.append(messageManager.getMessage(MESSAGE_AMOUNT_LIMIT_ERROR)).append(WHITESPACE)
+                            .append(maxLoan).append(DOT).append(NEW_LINE_SEPARATOR);
+                valid = false;
+            }
+        } else {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_AMOUNT)).append(NEW_LINE_SEPARATOR);
             valid = false;
-        }
-
-        if (maxLoan.compareTo(amount) < 0) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_AMOUNT_LIMIT_ERROR)).append(WHITESPACE)
-                        .append(maxLoan).append(DOT).append(NEW_LINE_SEPARATOR);
-            valid = false;
-        }
-
-        if (valid) {
-            request.setAttribute(ATTR_AMOUNT_INPUT, stringAmount);
         }
 
         if (!FormValidator.validatePassword(password)) {
@@ -58,18 +59,16 @@ public class TakeLoanCommand implements Command {
         }
 
         if (valid) {
-            if (PlayerLogic.takeNewLoan(player, amount)) {
-                queryParams = new String[]{GOTO_ACCOUNT, REDIRECT};
+            if (LoanLogic.takeNewLoan(player, amount)) {
+                navigator = PageNavigator.REDIRECT_GOTO_ACCOUNT;
             } else {
-                errorMessage.append(messageManager.getMessage(MESSAGE_TAKE_LOAN_INTERRUPTED));
-                request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-                queryParams = new String[]{PAGE_TAKE_LOAN, FORWARD};
+                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_TAKE_LOAN_INTERRUPTED));
+                navigator = PageNavigator.FORWARD_PAGE_TAKE_LOAN;
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-            queryParams = new String[]{PAGE_TAKE_LOAN, FORWARD};
+            navigator = PageNavigator.FORWARD_PAGE_TAKE_LOAN;
         }
-
-        return queryParams;
+        return navigator;
     }
 }

@@ -1,8 +1,9 @@
 package by.sasnouskikh.jcasino.command.impl;
 
 import by.sasnouskikh.jcasino.command.Command;
+import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
-import by.sasnouskikh.jcasino.logic.UserLogic;
+import by.sasnouskikh.jcasino.logic.QuestionLogic;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.validator.FormValidator;
@@ -15,15 +16,16 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 public class SendSupportCommand implements Command {
 
     @Override
-    public String[] execute(HttpServletRequest request) {
+    public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
-        MessageManager messageManager = new MessageManager(locale);
+        MessageManager messageManager = MessageManager.getMessageManager(locale);
         StringBuilder  errorMessage   = new StringBuilder();
-        String[]       queryParams;
-        boolean        valid          = true;
-        Player         player         = (Player) session.getAttribute(ATTR_PLAYER);
+        PageNavigator  navigator;
+
+        boolean valid  = true;
+        Player  player = (Player) session.getAttribute(ATTR_PLAYER);
 
         String email    = request.getParameter(PARAM_EMAIL);
         String topic    = request.getParameter(PARAM_TOPIC);
@@ -47,26 +49,24 @@ public class SendSupportCommand implements Command {
             valid = false;
         }
 
-        if (FormValidator.validateSupportQuestion(question)) {
+        if (FormValidator.validateSupport(question)) {
             request.setAttribute(ATTR_QUESTION_INPUT, question);
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_SUPPORT_QUESTION)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_SUPPORT)).append(NEW_LINE_SEPARATOR);
             valid = false;
         }
 
         if (valid) {
-            if (UserLogic.sendSupport(player, email, topic, question)) {
-                queryParams = new String[]{GOTO_MAIN, REDIRECT};
+            if (QuestionLogic.sendSupport(player, email, topic, question)) {
+                navigator = PageNavigator.REDIRECT_GOTO_MAIN;
             } else {
-                errorMessage.append(messageManager.getMessage(MESSAGE_SEND_SUPPORT_INTERRUPTED));
-                request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-                queryParams = new String[]{PAGE_SUPPORT, FORWARD};
+                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_SEND_SUPPORT_INTERRUPTED));
+                navigator = PageNavigator.FORWARD_PAGE_SUPPORT;
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-            queryParams = new String[]{PAGE_SUPPORT, FORWARD};
+            navigator = PageNavigator.FORWARD_PAGE_SUPPORT;
         }
-
-        return queryParams;
+        return navigator;
     }
 }

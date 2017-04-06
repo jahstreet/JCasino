@@ -1,8 +1,16 @@
 package by.sasnouskikh.jcasino.dao.impl;
 
 import by.sasnouskikh.jcasino.dao.AbstractDAO;
+import by.sasnouskikh.jcasino.db.WrappedConnection;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 
 public class AdminDAOImpl extends AbstractDAO<Integer, Admin> {
+
+    AdminDAOImpl() {
+    }
+
+    AdminDAOImpl(WrappedConnection connection) {
+        super(connection);
+    }
 
 }

@@ -14,10 +14,6 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.5, user-scalable=yes">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
-    <script
-            src="http://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -46,7 +42,8 @@
                 <li><a href="${pageContext.request.contextPath}/controller?command=goto_support">
                     <fmt:message key="header.topmenu.support"/></a>
                 </li>
-                <li><a href="${pageContext.request.contextPath}/game/fruits.html"><fmt:message key="header.topmenu.play"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/controller?command=goto_game_fruits">
+                    <fmt:message key="header.topmenu.play"/></a></li>
             </ul>
         </div>
         <button class="menu-btn-hide"><fmt:message key="header.topmenu.hidemenu"/></button>

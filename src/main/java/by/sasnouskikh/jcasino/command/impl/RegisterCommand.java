@@ -1,6 +1,7 @@
 package by.sasnouskikh.jcasino.command.impl;
 
 import by.sasnouskikh.jcasino.command.Command;
+import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.logic.PlayerLogic;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
@@ -14,14 +15,15 @@ import static by.sasnouskikh.jcasino.validator.FormValidator.*;
 public class RegisterCommand implements Command {
 
     @Override
-    public String[] execute(HttpServletRequest request) {
+    public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
-        MessageManager messageManager = new MessageManager(locale);
+        MessageManager messageManager = MessageManager.getMessageManager(locale);
         StringBuilder  errorMessage   = new StringBuilder();
-        String[]       queryParams;
-        boolean        valid          = true;
+        PageNavigator  navigator;
+
+        boolean valid = true;
 
         String email         = request.getParameter(PARAM_EMAIL);
         String password      = request.getParameter(PARAM_PASSWORD);
@@ -98,22 +100,15 @@ public class RegisterCommand implements Command {
         if (valid) {
             boolean registered = PlayerLogic.registerPlayer(email, password, fName, mName, lName, birthDate, passport, question, answer);
             if (registered) {
-                String query = LOGIN_COMMAND_TEMPLATE + PARAM_EMAIL + VALUE_SEPARATOR + email +
-                               PARAMETER_SEPARATOR + PARAM_PASSWORD + VALUE_SEPARATOR + password;
-                queryParams = new String[]{query, FORWARD};
+                navigator = PageNavigator.REDIRECT_GOTO_INDEX;
             } else {
-                if (LOCALE_EN.equals(session.getAttribute(ATTR_LOCALE))) {
-                    errorMessage.append("User with email '").append(email).append("' already exists.");
-                } else {
-                    errorMessage.append("Пользователь с email '").append(email).append("' уже существует.");
-                }
-                request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-                queryParams = new String[]{PAGE_REGISTER, FORWARD};
+                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_EMAIL_EXIST));
+                navigator = PageNavigator.FORWARD_PAGE_REGISTER;
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-            queryParams = new String[]{PAGE_REGISTER, FORWARD};
+            navigator = PageNavigator.FORWARD_PAGE_REGISTER;
         }
-        return queryParams;
+        return navigator;
     }
 }

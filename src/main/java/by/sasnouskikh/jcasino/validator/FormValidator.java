@@ -1,21 +1,27 @@
 package by.sasnouskikh.jcasino.validator;
 
 import by.sasnouskikh.jcasino.entity.bean.Question;
+import by.sasnouskikh.jcasino.entity.bean.Transaction;
+import org.apache.commons.lang.StringUtils;
 
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.ALL;
+
 public class FormValidator {
 
-    private static final int    MAX_EMAIL_LENGTH            = 320;
-    private static final int    MAX_EMAIL_NAME_LENGTH       = 64;
-    private static final int    MAX_EMAIL_DOMAIN_LENGTH     = 255;
-    private static final String EMAIL_SPLITERATOR           = "@";
-    private static final int    EMAIL_PAIR_LENGTH           = 2;
-    private static final int    MAX_QUESTION_LENGTH         = 64;
-    private static final int    MAX_ANSWER_LENGTH           = 32;
-    private static final int    MAX_SUPPORT_QUESTION_LENGTH = 700;
+    private static final int    MAX_EMAIL_LENGTH        = 320;
+    private static final int    MAX_EMAIL_NAME_LENGTH   = 64;
+    private static final int    MAX_EMAIL_DOMAIN_LENGTH = 255;
+    private static final String EMAIL_SPLITERATOR       = "@";
+    private static final int    EMAIL_PAIR_LENGTH       = 2;
+    private static final int    MAX_QUESTION_LENGTH     = 64;
+    private static final int    MAX_ANSWER_LENGTH       = 32;
+    private static final int    MAX_SUPPORT_LENGTH      = 700;
+    private static final int    MAX_NEWS_HEADER_LENGTH  = 45;
+    private static final int    MAX_NEWS_TEXT_LENGTH    = 700;
 
     private static final String EMAIL_REGEX    = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*" +
                                                  "@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
@@ -99,12 +105,12 @@ public class FormValidator {
         return false;
     }
 
-    public static boolean validateSupportQuestion(String question) {
-        return question != null && !question.trim().isEmpty()
-               && question.trim().length() <= MAX_SUPPORT_QUESTION_LENGTH;
+    public static boolean validateSupport(String text) {
+        return text != null && !text.trim().isEmpty()
+               && text.trim().length() <= MAX_SUPPORT_LENGTH;
     }
 
-    public static boolean validateDate(String date) {
+    public static boolean validateDateMonth(String date) {
         return !(date == null || date.trim().isEmpty())
                && matchPattern(date, DATE_REGEX);
     }
@@ -120,5 +126,32 @@ public class FormValidator {
             }
         }
         return false;
+    }
+
+    public static boolean validateTransactionType(String type) {
+        if (type == null || type.trim().isEmpty()) {
+            return false;
+        }
+        type = type.trim();
+        for (Transaction.TransactionType t : Transaction.TransactionType.values()) {
+            if (type.equalsIgnoreCase(t.toString()) || type.equals(ALL)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean validateId(String id) {
+        return !(id == null || id.trim().isEmpty())
+               && StringUtils.isNumeric(id)
+               && Integer.parseInt(id) > 0;
+    }
+
+    public static boolean validateNewsHeader(String header) {
+        return header != null && !header.trim().isEmpty() && header.trim().length() <= MAX_NEWS_HEADER_LENGTH;
+    }
+
+    public static boolean validateNewsText(String text) {
+        return text != null && !text.trim().isEmpty() && text.trim().length() <= MAX_NEWS_TEXT_LENGTH;
     }
 }

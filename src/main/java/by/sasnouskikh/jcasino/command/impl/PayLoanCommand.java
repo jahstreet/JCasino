@@ -1,9 +1,10 @@
 package by.sasnouskikh.jcasino.command.impl;
 
 import by.sasnouskikh.jcasino.command.Command;
+import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
+import by.sasnouskikh.jcasino.logic.LoanLogic;
 import by.sasnouskikh.jcasino.logic.UserLogic;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
@@ -18,15 +19,16 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 public class PayLoanCommand implements Command {
 
     @Override
-    public String[] execute(HttpServletRequest request) {
+    public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
-        MessageManager messageManager = new MessageManager(locale);
+        MessageManager messageManager = MessageManager.getMessageManager(locale);
         StringBuilder  errorMessage   = new StringBuilder();
-        String[]       queryParams;
-        boolean        valid          = true;
-        Player         player         = (Player) session.getAttribute(ATTR_PLAYER);
+        PageNavigator  navigator;
+
+        boolean valid  = true;
+        Player  player = (Player) session.getAttribute(ATTR_PLAYER);
 
         String        stringAmount = request.getParameter(PARAM_AMOUNT);
         String        password     = request.getParameter(PARAM_PASSWORD);
@@ -59,18 +61,17 @@ public class PayLoanCommand implements Command {
         }
 
         if (valid) {
-            if (PlayerLogic.payLoan(player, amount)) {
-                queryParams = new String[]{GOTO_ACCOUNT, REDIRECT};
+            if (LoanLogic.payLoan(player, amount)) {
+                navigator = PageNavigator.REDIRECT_GOTO_ACCOUNT;
             } else {
                 errorMessage.append(messageManager.getMessage(MESSAGE_PAY_LOAN_INTERRUPTED)).append(NEW_LINE_SEPARATOR);
                 request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-                queryParams = new String[]{PAGE_PAY_LOAN, FORWARD};
+                navigator = PageNavigator.FORWARD_PAGE_PAY_LOAN;
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-            queryParams = new String[]{PAGE_PAY_LOAN, FORWARD};
+            navigator = PageNavigator.FORWARD_PAGE_PAY_LOAN;
         }
-
-        return queryParams;
+        return navigator;
     }
 }

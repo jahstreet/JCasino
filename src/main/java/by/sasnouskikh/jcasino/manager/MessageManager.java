@@ -8,13 +8,34 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.LOCALE_EN;
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.LOCALE_RU;
+
 public class MessageManager {
-    private static final Logger LOGGER = LogManager.getLogger(MessageManager.class);
-    private static final String PATH   = "prop/messages";
+    private static final Logger         LOGGER                = LogManager.getLogger(MessageManager.class);
+    private static final String         PATH                  = "prop/messages";
+    private static final MessageManager messageManagerUS      = new MessageManager(new Locale("en", "US"));
+    private static final MessageManager messageManagerRU      = new MessageManager(new Locale("ru", "RU"));
+    private static final MessageManager messageManagerDefault = new MessageManager(Locale.getDefault());
     private ResourceBundle bundle;
 
-    public MessageManager(String locale) {
-        bundle = ResourceBundle.getBundle(PATH, Locale.forLanguageTag(locale));
+    private MessageManager(Locale locale) {
+        bundle = ResourceBundle.getBundle(PATH, locale);
+    }
+
+    public static MessageManager getMessageManager(String locale) {
+        switch (locale) {
+            case LOCALE_EN:
+                return messageManagerUS;
+            case LOCALE_RU:
+                return messageManagerRU;
+            default:
+                return messageManagerDefault;
+        }
+    }
+
+    public Locale getLocale() {
+        return bundle.getLocale();
     }
 
     /**

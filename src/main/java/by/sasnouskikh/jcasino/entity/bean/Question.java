@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 public class Question extends Entity {
     private int           id;
     private int           playerId;
+    private String        email;
     private QuestionTopic topic;
     private String        question;
     private LocalDateTime questionDate;
@@ -20,7 +21,7 @@ public class Question extends Entity {
     }
 
     public enum Satisfaction {
-        BEST(), GOOD, NORM, BAD, WORST
+        BEST, GOOD, NORM, BAD, WORST
 
     }
 
@@ -94,5 +95,13 @@ public class Question extends Entity {
 
     public void setSatisfaction(Satisfaction satisfaction) {
         this.satisfaction = satisfaction;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
