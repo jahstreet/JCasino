@@ -40,21 +40,21 @@ public class TakeLoanCommand implements Command {
                 request.setAttribute(ATTR_AMOUNT_INPUT, stringAmount);
             } else {
                 errorMessage.append(messageManager.getMessage(MESSAGE_AMOUNT_LIMIT_ERROR)).append(WHITESPACE)
-                            .append(maxLoan).append(DOT).append(NEW_LINE_SEPARATOR);
+                            .append(maxLoan).append(DOT).append(MESSAGE_SEPARATOR);
                 valid = false;
             }
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_AMOUNT)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_AMOUNT)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (!FormValidator.validatePassword(password)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (!UserLogic.checkPassword(player, password)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 

@@ -57,7 +57,7 @@ public class MainController extends HttpServlet {
                     if (errorMessage == null) {
                         errorMessage = EMPTY_STRING;
                     } else {
-                        errorMessage = errorMessage.trim() + NEW_LINE_SEPARATOR;
+                        errorMessage = errorMessage.trim() + MESSAGE_SEPARATOR;
                     }
                     session.setAttribute(ATTR_ERROR_MESSAGE,
                                          errorMessage +

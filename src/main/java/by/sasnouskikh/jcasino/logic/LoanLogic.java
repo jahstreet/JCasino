@@ -151,8 +151,8 @@ public class LoanLogic {
 
     private static class RestComparator implements Comparator<Loan> {
         /**
-         * Compares its two arguments for order.  Returns a negative integer,
-         * zero, or a positive integer as the first argument is less than, equal
+         * Compares its two arguments for order.  Returns pressedKey negative integer,
+         * zero, or pressedKey positive integer as the first argument is less than, equal
          * to, or greater than the second.<p>
          * <p>
          * In the foregoing description, the notation
@@ -182,7 +182,7 @@ public class LoanLogic {
          *
          * @param o1 the first object to be compared.
          * @param o2 the second object to be compared.
-         * @return a negative integer, zero, or a positive integer as the
+         * @return pressedKey negative integer, zero, or pressedKey positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
          * @throws NullPointerException if an argument is null and this

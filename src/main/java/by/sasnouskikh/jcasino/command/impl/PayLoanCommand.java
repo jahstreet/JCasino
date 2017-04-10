@@ -42,21 +42,21 @@ public class PayLoanCommand implements Command {
                 amount = rest;
             }
             if (amount.compareTo(balance) > 0) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_PAY_LOAN_NOMONEY)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_PAY_LOAN_NOMONEY)).append(MESSAGE_SEPARATOR);
                 valid = false;
             }
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_AMOUNT)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_AMOUNT)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (!FormValidator.validatePassword(password)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (!UserLogic.checkPassword(player, password)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
@@ -64,7 +64,7 @@ public class PayLoanCommand implements Command {
             if (LoanLogic.payLoan(player, amount)) {
                 navigator = PageNavigator.REDIRECT_GOTO_ACCOUNT;
             } else {
-                errorMessage.append(messageManager.getMessage(MESSAGE_PAY_LOAN_INTERRUPTED)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_PAY_LOAN_INTERRUPTED)).append(MESSAGE_SEPARATOR);
                 request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
                 navigator = PageNavigator.FORWARD_PAGE_PAY_LOAN;
             }

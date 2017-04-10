@@ -91,7 +91,7 @@ public class ConfigConstant {
     public static final char   QUERY_START_SEPARATOR = '?';
     public static final char   VALUE_SEPARATOR       = '=';
     public static final char   PARAMETER_SEPARATOR   = '&';
-    public static final char   NEW_LINE_SEPARATOR    = '\n';
+    public static final char   MESSAGE_SEPARATOR     = ' ';
     public static final String PERCENT               = "%";
     public static final String MONTH_SEPARATOR       = "-";
     public static final String EMPTY_STRING          = "";
@@ -231,7 +231,7 @@ public class ConfigConstant {
 
     //game
     public static final String GOTO_GAME_FRUITS = "/controller?command=goto_game_fruits";
-    public static final String PAGE_GAME_FRUITS = "/game/fruits.html";
+    public static final String PAGE_GAME_FRUITS = "/game/fruits.jsp";
 
     private ConfigConstant() {
     }

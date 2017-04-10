@@ -39,20 +39,20 @@ public class RegisterCommand implements Command {
         if (validateEmail(email)) {
             request.setAttribute(ATTR_EMAIL_INPUT, email);
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (!validatePassword(password, passwordAgain)) {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(WHITESPACE)
-                        .append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH)).append(NEW_LINE_SEPARATOR);
+                        .append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (validateBirthdate(birthDate)) {
             request.setAttribute(ATTR_BIRTHDATE_INPUT, birthDate);
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_BIRTHDATE)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_BIRTHDATE)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
@@ -70,7 +70,7 @@ public class RegisterCommand implements Command {
         }
         for (boolean nameValid : new boolean[]{fNameValid, mNameValid, lNameValid}) {
             if (!nameValid) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
                 valid = false;
                 break;
             }
@@ -79,21 +79,21 @@ public class RegisterCommand implements Command {
         if (validatePassport(passport)) {
             request.setAttribute(ATTR_PASSPORT_INPUT, passport);
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSPORT)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSPORT)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (validateQuestion(question)) {
             request.setAttribute(ATTR_QUESTION_INPUT, question);
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_QUESTION)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_QUESTION)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (validateAnswer(answer)) {
             request.setAttribute(ATTR_ANSWER_INPUT, answer);
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_ANSWER)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_ANSWER)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 

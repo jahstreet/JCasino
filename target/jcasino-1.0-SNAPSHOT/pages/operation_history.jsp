@@ -23,7 +23,7 @@
             </div>
             <div class="input-block">
                 <label for="operation-month"><fmt:message key="history.input.month.text"/></label>
-                <input id="operation-month" type="month" name="month" value=""
+                <input id="operation-month" type="month" name="month" value="${month_input}"
                        title="<fmt:message key="history.input.month.title"/>"
                        min="2017-01">
             </div>

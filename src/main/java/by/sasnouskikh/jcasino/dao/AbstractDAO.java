@@ -64,7 +64,7 @@ public abstract class AbstractDAO<K, T extends Entity> implements AutoCloseable 
      * the underlying resources and to internally <em>mark</em> the
      * resource as closed, prior to throwing the exception. The {@code
      * close} method is unlikely to be invoked more than once and so
-     * this ensures that the resources are released in a timely manner.
+     * this ensures that the resources are released in pressedKey timely manner.
      * Furthermore it reduces problems that could arise when the resource
      * wraps, or is wrapped, by another resource.
      * <p>
@@ -72,7 +72,7 @@ public abstract class AbstractDAO<K, T extends Entity> implements AutoCloseable 
      * to not have the {@code close} method throw {@link
      * InterruptedException}.</em>
      * <p>
-     * This exception interacts with a thread's interrupted status,
+     * This exception interacts with pressedKey thread's interrupted status,
      * and runtime misbehavior is likely to occur if an {@code
      * InterruptedException} is {@linkplain Throwable#addSuppressed
      * suppressed}.

@@ -46,12 +46,12 @@ public class EditNewsCommand implements Command {
         }
 
         if (!FormValidator.validateNewsHeader(header)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NEWS_HEADER)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NEWS_HEADER)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (!FormValidator.validateNewsText(text)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NEWS_TEXT)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NEWS_TEXT)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 

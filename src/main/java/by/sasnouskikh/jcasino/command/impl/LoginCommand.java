@@ -31,11 +31,11 @@ public class LoginCommand implements Command {
         String  password = request.getParameter(PARAM_PASSWORD);
 
         if (!FormValidator.validateEmail(email)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
         if (!FormValidator.validatePassword(password)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
@@ -54,7 +54,7 @@ public class LoginCommand implements Command {
                 navigator = PageNavigator.REDIRECT_GOTO_MAIN;
             } else {
                 request.setAttribute(ATTR_EMAIL_INPUT, email);
-                errorMessage.append(messageManager.getMessage(MESSAGE_LOGIN_MISMATCH)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_LOGIN_MISMATCH)).append(MESSAGE_SEPARATOR);
                 request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
                 navigator = PageNavigator.FORWARD_PAGE_MAIN;
             }

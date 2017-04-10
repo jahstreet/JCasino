@@ -5,17 +5,17 @@ import java.security.PrivilegedActionException;
 public class DAOException extends Exception {
 
     /**
-     * Constructs a new exception with {@code null} as its detail message.
-     * The cause is not initialized, and may subsequently be initialized by a
+     * Constructs pressedKey new exception with {@code null} as its detail message.
+     * The cause is not initialized, and may subsequently be initialized by pressedKey
      * call to {@link #initCause}.
      */
     public DAOException() {
     }
 
     /**
-     * Constructs a new exception with the specified detail message.  The
+     * Constructs pressedKey new exception with the specified detail message.  The
      * cause is not initialized, and may subsequently be initialized by
-     * a call to {@link #initCause}.
+     * pressedKey call to {@link #initCause}.
      *
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
@@ -25,7 +25,7 @@ public class DAOException extends Exception {
     }
 
     /**
-     * Constructs a new exception with the specified detail message and
+     * Constructs pressedKey new exception with the specified detail message and
      * cause.  <p>Note that the detail message associated with
      * {@code cause} is <i>not</i> automatically incorporated in
      * this exception's detail message.
@@ -43,7 +43,7 @@ public class DAOException extends Exception {
     }
 
     /**
-     * Constructs a new exception with the specified cause and a detail
+     * Constructs pressedKey new exception with the specified cause and pressedKey detail
      * message of <tt>(cause==null ? null : cause.toString())</tt> (which
      * typically contains the class and detail message of <tt>cause</tt>).
      * This constructor is useful for exceptions that are little more than

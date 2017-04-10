@@ -59,16 +59,16 @@ public class EditProfileCommand implements Command {
         if (email != null) {
             String currentEmail = player.getEmail();
             if (email.equals(currentEmail)) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL_EDIT)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL_EDIT)).append(MESSAGE_SEPARATOR);
                 valid = false;
             } else {
                 if (validateEmail(email)) {
                     if (!PlayerLogic.changeEmail(player, email)) {
-                        errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL_INUSE)).append(NEW_LINE_SEPARATOR);
+                        errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL_INUSE)).append(MESSAGE_SEPARATOR);
                         valid = false;
                     }
                 } else {
-                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(NEW_LINE_SEPARATOR);
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(MESSAGE_SEPARATOR);
                     valid = false;
                 }
             }
@@ -76,16 +76,16 @@ public class EditProfileCommand implements Command {
 
         if (password != null && passwordAgain != null && passwordOld != null) {
             if (!validatePassword(passwordOld)) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(MESSAGE_SEPARATOR);
                 valid = false;
             }
             if (!validatePassword(password, passwordAgain)) {
                 errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(WHITESPACE)
-                            .append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH)).append(NEW_LINE_SEPARATOR);
+                            .append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH)).append(MESSAGE_SEPARATOR);
                 valid = false;
             }
             if (valid && !PlayerLogic.changePassword(player, passwordOld, password)) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(MESSAGE_SEPARATOR);
                 valid = false;
             }
         }
@@ -95,7 +95,7 @@ public class EditProfileCommand implements Command {
                 if (validateName(fname)) {
                     PlayerLogic.changeProfileTextItem(player, fname, PlayerLogic.ProfileTextField.FIRST_NAME);
                 } else {
-                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(NEW_LINE_SEPARATOR);
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
                     valid = false;
                 }
             }
@@ -104,7 +104,7 @@ public class EditProfileCommand implements Command {
                 if (validateName(mname)) {
                     PlayerLogic.changeProfileTextItem(player, mname, PlayerLogic.ProfileTextField.MIDDLE_NAME);
                 } else {
-                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(NEW_LINE_SEPARATOR);
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
                     valid = false;
                 }
             }
@@ -113,7 +113,7 @@ public class EditProfileCommand implements Command {
                 if (validateName(lname)) {
                     PlayerLogic.changeProfileTextItem(player, lname, PlayerLogic.ProfileTextField.LAST_NAME);
                 } else {
-                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(NEW_LINE_SEPARATOR);
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
                     valid = false;
                 }
             }
@@ -122,13 +122,13 @@ public class EditProfileCommand implements Command {
                 if (validatePassport(passport)) {
                     PlayerLogic.changeProfileTextItem(player, passport, PlayerLogic.ProfileTextField.PASSPORT);
                 } else {
-                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSPORT)).append(NEW_LINE_SEPARATOR);
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSPORT)).append(MESSAGE_SEPARATOR);
                     valid = false;
                 }
             }
         } catch (LogicException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_JSP)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_JSP)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
@@ -136,7 +136,7 @@ public class EditProfileCommand implements Command {
             if (validateBirthdate(birthDate)) {
                 PlayerLogic.changeBirthDate(player, birthDate);
             } else {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_BIRTHDATE)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_BIRTHDATE)).append(MESSAGE_SEPARATOR);
                 valid = false;
             }
         }
@@ -144,11 +144,11 @@ public class EditProfileCommand implements Command {
         if (question != null && answer != null) {
             if (!validateQuestion(question)) {
 
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_QUESTION)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_QUESTION)).append(MESSAGE_SEPARATOR);
                 valid = false;
             }
             if (!validateAnswer(answer)) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_ANSWER)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_ANSWER)).append(MESSAGE_SEPARATOR);
                 valid = false;
             }
             if (valid) {

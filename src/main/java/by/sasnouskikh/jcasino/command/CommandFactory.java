@@ -6,6 +6,9 @@ import by.sasnouskikh.jcasino.command.impl.navigation.*;
 import by.sasnouskikh.jcasino.command.impl.navigation.admin.*;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -14,6 +17,7 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_ROLE;
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.PARAM_COMMAND;
 
 public class CommandFactory {
+    private static final Logger LOGGER = LogManager.getLogger(CommandFactory.class);
 
     private static final String                        MULTIPART_COMMAND_NAME = "multipart";
     private static       HashMap<CommandType, Command> guestCommands          = new HashMap<>();
@@ -160,24 +164,22 @@ public class CommandFactory {
     }
 
     public static Command defineCommand(HttpServletRequest request) {
-        Command              command;
         String               commandName;
         JCasinoUser.UserRole role = (JCasinoUser.UserRole) request.getSession().getAttribute(ATTR_ROLE);
         if (!ServletFileUpload.isMultipartContent(request)) {
             commandName = request.getParameter(PARAM_COMMAND);
-            if (commandName == null || commandName.trim().isEmpty()) {
-                //TODO return exception log or/and another command
-                // commandName = ... ;
+            if (!validateCommandName(commandName)) {
+                LOGGER.log(Level.ERROR, "Request doesn't have command parameter or it is invalid: " + commandName + ". Check JSP.");
+                return new GotoIndexCommand();
             }
         } else {
             commandName = MULTIPART_COMMAND_NAME;
         }
-        command = defineCommand(commandName, role);
-        return command;
+        return defineCommand(commandName, role);
     }
 
     private static Command defineCommand(String commandName, JCasinoUser.UserRole role) {
-        commandName = commandName.replaceAll("-", "_").toUpperCase();
+        commandName = commandName.trim().replaceAll("-", "_").toUpperCase();
         CommandType commandType = CommandType.valueOf(commandName);
         Command     command;
         switch (role) {
@@ -194,5 +196,17 @@ public class CommandFactory {
             command = new GotoIndexCommand();
         }
         return command;
+    }
+
+    private static boolean validateCommandName(String commandName) {
+        if (commandName == null || commandName.trim().isEmpty()) {
+            return false;
+        }
+        for (CommandType type : CommandType.values()) {
+            if (type.toString().equalsIgnoreCase(commandName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

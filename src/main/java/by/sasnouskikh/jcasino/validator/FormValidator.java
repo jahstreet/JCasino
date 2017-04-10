@@ -30,6 +30,7 @@ public class FormValidator {
     private static final String PASSPORT_REGEX = "\\w{1,30}";
     private static final String AMOUNT_REGEX   = "^[0-9]{1,7}\\.?[0-9]{0,2}$";
     private static final String DATE_REGEX     = "^[12][0-9]{3}\\-((0[1-9])|(1[0-2]))$";
+    private static final String FLOAT_REGEX     = "^[0-9]+\\.?[0-9]{0,2}$";
 
     public static boolean validateEmail(String email) {
         if (email == null || email.isEmpty()
@@ -153,5 +154,9 @@ public class FormValidator {
 
     public static boolean validateNewsText(String text) {
         return text != null && !text.trim().isEmpty() && text.trim().length() <= MAX_NEWS_TEXT_LENGTH;
+    }
+
+    public static boolean isFloat(String source) {
+        return source != null && matchPattern(source, AMOUNT_REGEX);
     }
 }

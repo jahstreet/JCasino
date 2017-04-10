@@ -40,54 +40,65 @@ public class StreakLogicTest {
                                                                false, false, true, true, true,
                                                                false, true, true, true, true};
 
-    @Test
-    public void buildRollStringCheck() {
-        String actual = StreakLogic.buildRollString(ROLL);
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s\n", ROLL_STRING, actual),
-                            ROLL_STRING, actual);
-    }
-
-    @Test
-    public void buildBetStringCheck() {
-        String actual = StreakLogic.buildBetString(BET);
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s\n", BET_STRING, actual),
-                            BET_STRING, actual);
-    }
-
-    @Test
-    public void buildLineString() {
-        String actual = StreakLogic.buildLineString(LINE);
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s\n", LINE_STRING, actual),
-                            LINE_STRING, actual);
-    }
-
-    @Test
-    public void parseRollArrayCheck() {
-        int[] actual = StreakLogic.parseRollArray(ROLL_STRING);
-        Assert.assertTrue(String.format("Expected: %s\nActual: %s\n", Arrays.toString(ROLL), Arrays.toString(actual)),
-                          Arrays.equals(ROLL, actual));
-    }
-
-    @Test
-    public void parseBetArrayCheck() {
-        BigDecimal[] actual = StreakLogic.parseBetArray(BET_STRING);
-        System.out.println(Arrays.toString(actual));
-        Assert.assertTrue(String.format("Expected: %s\nActual: %s\n", Arrays.toString(BET), Arrays.toString(actual)),
-                          Arrays.equals(BET, actual));
-    }
-
-    @Test
-    public void parseLineArrayCheck() {
-        boolean[] actual = StreakLogic.parseLineArray(LINE_STRING);
-        Assert.assertTrue(String.format("Expected: %s\nActual: %s\n", Arrays.toString(LINE), Arrays.toString(actual)),
-                          Arrays.equals(LINE, actual));
-    }
-
-    @Test
-    public void buildRollListCheck() {
-        List<Roll> actual = StreakLogic.buildRollList(ROLL_STRING, ROLL_STRING, LINE_STRING, BET_STRING, BET_STRING);
-        actual.forEach(System.out::println);
-    }
+//    @Test
+//    public void buildRollStringCheck() {
+//        String actual = StreakLogic.buildRollString(ROLL);
+//        Assert.assertEquals(String.format("Expected: %s\nActual: %s\n", ROLL_STRING, actual),
+//                            ROLL_STRING, actual);
+//    }
+//
+//    @Test
+//    public void buildBetStringCheck() {
+//        String actual = StreakLogic.buildBetString(BET);
+//        Assert.assertEquals(String.format("Expected: %s\nActual: %s\n", BET_STRING, actual),
+//                            BET_STRING, actual);
+//    }
+//
+//    @Test
+//    public void buildLineString() {
+//        String actual = StreakLogic.buildLineString(LINE);
+//        Assert.assertEquals(String.format("Expected: %s\nActual: %s\n", LINE_STRING, actual),
+//                            LINE_STRING, actual);
+//    }
+//
+//    @Test
+//    public void parseRollArrayCheck() {
+//        int[] actual = StreakLogic.parseRollArray(ROLL_STRING);
+//        Assert.assertTrue(String.format("Expected: %s\nActual: %s\n", Arrays.toString(ROLL), Arrays.toString(actual)),
+//                          Arrays.equals(ROLL, actual));
+//    }
+//
+//    @Test
+//    public void parseBetArrayCheck() {
+//        BigDecimal[] actual = StreakLogic.parseBetArray(BET_STRING);
+//        System.out.println(Arrays.toString(actual));
+//        Assert.assertTrue(String.format("Expected: %s\nActual: %s\n", Arrays.toString(BET), Arrays.toString(actual)),
+//                          Arrays.equals(BET, actual));
+//    }
+//
+//    @Test
+//    public void parseLineArrayCheck() {
+//        boolean[] actual = StreakLogic.parseLineArray(LINE_STRING);
+//        Assert.assertTrue(String.format("Expected: %s\nActual: %s\n", Arrays.toString(LINE), Arrays.toString(actual)),
+//                          Arrays.equals(LINE, actual));
+//    }
+//
+//    @Test
+//    public void buildRollListCheck() {
+//        List<Roll> actual = StreakLogic.buildRollList(ROLL_STRING, ROLL_STRING, LINE_STRING, BET_STRING, BET_STRING);
+//        actual.forEach(System.out::println);
+//    }
+//
+//    @Test
+//    public void generateStreakStringTest() {
+//        System.out.println(Arrays.toString(StreakLogic.generateRollArray()));
+//    }
+//
+//    @Test
+//    public void buildRollStringTest() {
+//        List<Roll> actual = StreakLogic.buildRollList(ROLL_STRING, ROLL_STRING, LINE_STRING, BET_STRING, BET_STRING);
+//        System.out.println(StreakLogic.buildRollString(actual));
+//    }
 
 
 }

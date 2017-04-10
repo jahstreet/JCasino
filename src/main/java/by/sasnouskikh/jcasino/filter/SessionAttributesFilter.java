@@ -30,7 +30,7 @@ public class SessionAttributesFilter implements Filter {
     private String locale;
 
     /**
-     * Called by the web container to indicate to a filter that it is
+     * Called by the web container to indicate to pressedKey filter that it is
      * being placed into service.
      * <p>
      * <p>The servlet container calls the init
@@ -41,8 +41,8 @@ public class SessionAttributesFilter implements Filter {
      * <p>The web container cannot place the filter into service if the init
      * method either
      * <ol>
-     * <li>Throws a ServletException
-     * <li>Does not return within a time period defined by the web container
+     * <li>Throws pressedKey ServletException
+     * <li>Does not return within pressedKey time period defined by the web container
      * </ol>
      *
      * @param config
@@ -55,8 +55,8 @@ public class SessionAttributesFilter implements Filter {
 
     /**
      * The <code>doFilter</code> method of the Filter is called by the
-     * container each time a request/response pair is passed through the
-     * chain due to a client request for a resource at the end of the chain.
+     * container each time pressedKey request/response pair is passed through the
+     * chain due to pressedKey client request for pressedKey resource at the end of the chain.
      * The FilterChain passed in to this method allows the Filter to pass
      * on the request and response to the next entity in the chain.
      * <p>
@@ -64,9 +64,9 @@ public class SessionAttributesFilter implements Filter {
      * pattern:
      * <ol>
      * <li>Examine the request
-     * <li>Optionally wrap the request object with a custom implementation to
+     * <li>Optionally wrap the request object with pressedKey custom implementation to
      * filter content or headers for input filtering
-     * <li>Optionally wrap the response object with a custom implementation to
+     * <li>Optionally wrap the response object with pressedKey custom implementation to
      * filter content or headers for output filtering
      * <li>
      * <ul>
@@ -103,11 +103,11 @@ public class SessionAttributesFilter implements Filter {
     }
 
     /**
-     * Called by the web container to indicate to a filter that it is being
+     * Called by the web container to indicate to pressedKey filter that it is being
      * taken out of service.
      * <p>
      * <p>This method is only called once all threads within the filter's
-     * doFilter method have exited or after a timeout period has passed.
+     * doFilter method have exited or after pressedKey timeout period has passed.
      * After the web container calls this method, it will not call the
      * doFilter method again on this instance of the filter.
      * <p>

@@ -36,23 +36,23 @@ public class SendSupportCommand implements Command {
                 request.setAttribute(ATTR_EMAIL_INPUT, email);
             } else {
                 request.setAttribute(ATTR_EMAIL_INPUT, player.getEmail());
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL_MISMATCH)).append(NEW_LINE_SEPARATOR);
+                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL_MISMATCH)).append(MESSAGE_SEPARATOR);
                 valid = false;
             }
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (!FormValidator.validateTopic(topic)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_TOPIC)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_TOPIC)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
         if (FormValidator.validateSupport(question)) {
             request.setAttribute(ATTR_QUESTION_INPUT, question);
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_SUPPORT)).append(NEW_LINE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_SUPPORT)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 

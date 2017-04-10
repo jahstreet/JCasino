@@ -11,7 +11,7 @@ public class GotoAdminCommand implements Command {
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         QueryManager.saveQueryToSession(request);
-        // TODO update tasks list???
+        // TODO updateStreak tasks list???
         return PageNavigator.FORWARD_PAGE_ADMIN;
     }
 }

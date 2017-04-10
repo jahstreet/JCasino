@@ -11,6 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,13 +25,14 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.PERCENT;
 public class StreakLogic {
     private static final Logger LOGGER = LogManager.getLogger(StreakLogic.class);
 
-    private static final int    BETS_IN_STREAK    = 10;
-    private static final int    REEL_NUMBER       = 3;
-    private static final int    LINE_NUMBER       = 5;
-    private static final char   LINE_NOT_SELECTED = '0';
-    private static final char   LINE_SELECTED     = '1';
-    private static final String BET_SPLITERATOR   = "_";
-    private static final String REEL_SPLITERATOR  = "-";
+    private static final int  REEL_LENGTH       = 60;
+    private static final int  BETS_IN_STREAK    = 10;
+    private static final int  REEL_NUMBER       = 3;
+    private static final int  LINE_NUMBER       = 5;
+    private static final char LINE_NOT_SELECTED = '0';
+    private static final char LINE_SELECTED     = '1';
+    private static final char BET_SPLITERATOR   = '_';
+    private static final char REEL_SPLITERATOR  = '-';
 
     private StreakLogic() {
     }
@@ -71,80 +74,69 @@ public class StreakLogic {
         return streakList;
     }
 
-    public static String buildRollString(int[] source) {
-        StringBuilder builder = new StringBuilder();
+    public static boolean updateStreak(Streak streak) {
+        int        id           = streak.getId();
+        List<Roll> rolls        = streak.getRolls();
+        String     rollString   = buildRollString(rolls);
+        String     offsetString = buildOffsetString(rolls);
+        String     lineString   = buildLineString(rolls);
+        String     betString    = buildBetString(rolls);
+        String     resultString = buildResultString(rolls);
+        try (StreakDAOImpl streakDAO = DAOFactory.getStreakDAO()) {
+            return streakDAO.updateStreak(id, rollString, offsetString, lineString, betString, resultString);
+        } catch (ConnectionPoolException | DAOException e) {
+            LOGGER.log(Level.ERROR, e.getMessage());
+        }
+        return false;
+    }
+
+    public static String generateRollString() {
+        StringBuilder streak = new StringBuilder();
         for (int i = 0; i < BETS_IN_STREAK; i++) {
-            int offset = i * REEL_NUMBER;
             for (int j = 0; j < REEL_NUMBER; j++) {
-                builder.append(source[offset + j]);
-                if (j < REEL_NUMBER - 1) {
-                    builder.append(REEL_SPLITERATOR);
-                }
+                streak.append(RandomGenerator.generateNumber(1, REEL_LENGTH)).append(REEL_SPLITERATOR);
             }
-            builder.append(BET_SPLITERATOR);
+            streak.setCharAt(streak.length() - 1, BET_SPLITERATOR);
         }
-        String result = builder.toString();
-        return result.substring(0, result.length() - 1);
+        return streak.deleteCharAt(streak.length() - 1).toString().trim();
     }
 
-    public static String buildBetString(BigDecimal[] source) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            builder.append(source[i]).append(BET_SPLITERATOR);
-        }
-        String result = builder.toString();
-        return result.substring(0, result.length() - 1);
+    public static int[] generateRollArray() {
+        return parseRollArray(generateRollString());
     }
 
-    public static String buildLineString(boolean[] source) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            int offset = i * LINE_NUMBER;
-            for (int j = 0; j < LINE_NUMBER; j++) {
-                if (source[offset + j]) {
-                    builder.append(LINE_SELECTED);
-                } else {
-                    builder.append(LINE_NOT_SELECTED);
-                }
+    public static Streak generateStreak() {
+        Streak streak = new Streak();
+        streak.setDate(LocalDateTime.now());
+        String roll = generateRollString();
+        streak.setRoll(roll);
+        streak.setRollMD5(JCasinoEncryptor.encryptMD5(roll));
+        streak.setRolls(new ArrayList<>());
+        return streak;
+    }
+
+    public static Streak generateStreak(int playerId) {
+        Streak streak = null;
+        try (StreakDAOImpl streakDAO = DAOFactory.getStreakDAO()) {
+            streakDAO.beginTransaction();
+            int streakId = streakDAO.insertStreak(playerId, generateRollString());
+            streak = streakDAO.takeStreak(streakId);
+            if (streak != null) {
+                streakDAO.commit();
             }
-            builder.append(BET_SPLITERATOR);
+        } catch (ConnectionPoolException | DAOException e) {
+            LOGGER.log(Level.ERROR, e.getMessage());
+        } catch (SQLException e) {
+            LOGGER.log(Level.ERROR, "Database connection error while doing sql transaction. " + e);
         }
-        String result = builder.toString();
-        return result.substring(0, result.length() - 1);
+        return streak;
     }
 
-    public static int[] parseRollArray(String source) {
-        String[] betArray = source.split(BET_SPLITERATOR);
-        int[]    result   = new int[BETS_IN_STREAK * REEL_NUMBER];
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            int      offset     = i * REEL_NUMBER;
-            String[] reelValues = betArray[i].split(REEL_SPLITERATOR);
-            for (int j = 0; j < REEL_NUMBER; j++) {
-                result[offset + j] = Integer.parseInt(reelValues[j]);
-            }
-        }
-        return result;
-    }
-
-    public static BigDecimal[] parseBetArray(String source) {
-        String[]     betArray = source.split(BET_SPLITERATOR);
-        BigDecimal[] result   = new BigDecimal[BETS_IN_STREAK];
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            result[i] = new BigDecimal(betArray[i]);
-        }
-        return result;
-    }
-
-    public static boolean[] parseLineArray(String source) {
-        String[]  betArray = source.split(BET_SPLITERATOR);
-        boolean[] result   = new boolean[BETS_IN_STREAK * LINE_NUMBER];
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            int offset = i * LINE_NUMBER;
-            for (int j = 0; j < LINE_NUMBER; j++) {
-                result[offset + j] = betArray[i].charAt(j) == LINE_SELECTED;
-            }
-        }
-        return result;
+    public static int[] parseCurrentRollArray(String roll, int rollsPlayed) {
+        int[] rollArray = parseRollArray(roll);
+        int   from      = (rollsPlayed) * REEL_NUMBER;
+        int   to        = from + REEL_NUMBER;
+        return Arrays.copyOfRange(rollArray, from, to);
     }
 
     public static List<Roll> buildRollList(Streak streak) {
@@ -176,6 +168,135 @@ public class StreakLogic {
             rollList.add(roll);
         }
         return rollList;
+    }
+
+    public static String buildRollString(List<Roll> rolls) {
+        StringBuilder result = new StringBuilder();
+        for (Roll r : rolls) {
+            int[] roll = r.getRoll();
+            for (int i : roll) {
+                result.append(i).append(REEL_SPLITERATOR);
+            }
+            result.setCharAt(result.length() - 1, BET_SPLITERATOR);
+        }
+        return result.deleteCharAt(result.length() - 1).toString().trim();
+    }
+
+    public static String buildOffsetString(List<Roll> rolls) {
+        StringBuilder result = new StringBuilder();
+        for (Roll r : rolls) {
+            int[] offset = r.getOffset();
+            for (int i : offset) {
+                result.append(i).append(REEL_SPLITERATOR);
+            }
+            result.setCharAt(result.length() - 1, BET_SPLITERATOR);
+        }
+        return result.deleteCharAt(result.length() - 1).toString().trim();
+    }
+
+    public static String buildLineString(List<Roll> rolls) {
+        StringBuilder result = new StringBuilder();
+        for (Roll r : rolls) {
+            boolean[] lines = r.getLines();
+            for (boolean line : lines) {
+                if (line) {
+                    result.append(1);
+                } else {
+                    result.append(0);
+                }
+                result.append(BET_SPLITERATOR);
+            }
+        }
+        return result.deleteCharAt(result.length() - 1).toString().trim();
+    }
+
+    public static String buildBetString(List<Roll> rolls) {
+        StringBuilder result = new StringBuilder();
+        for (Roll r : rolls) {
+            result.append(r.getBet().toPlainString()).append(BET_SPLITERATOR);
+        }
+        return result.deleteCharAt(result.length() - 1).toString().trim();
+    }
+
+    public static String buildResultString(List<Roll> rolls) {
+        StringBuilder result = new StringBuilder();
+        for (Roll r : rolls) {
+            result.append(r.getResult().toPlainString()).append(BET_SPLITERATOR);
+        }
+        return result.deleteCharAt(result.length() - 1).toString().trim();
+    }
+
+    public static int[] parseRollArray(String source) {
+        String[] betArray = source.split(String.valueOf(BET_SPLITERATOR));
+        int[]    result   = new int[BETS_IN_STREAK * REEL_NUMBER];
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            int      offset     = i * REEL_NUMBER;
+            String[] reelValues = betArray[i].split(String.valueOf(REEL_SPLITERATOR));
+            for (int j = 0; j < REEL_NUMBER; j++) {
+                result[offset + j] = Integer.parseInt(reelValues[j]);
+            }
+        }
+        return result;
+    }
+
+    public static BigDecimal[] parseBetArray(String source) {
+        String[]     betArray = source.split(String.valueOf(BET_SPLITERATOR));
+        BigDecimal[] result   = new BigDecimal[BETS_IN_STREAK];
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            result[i] = new BigDecimal(betArray[i]);
+        }
+        return result;
+    }
+
+    public static boolean[] parseLineArray(String source) {
+        String[]  betArray = source.split(String.valueOf(BET_SPLITERATOR));
+        boolean[] result   = new boolean[BETS_IN_STREAK * LINE_NUMBER];
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            int offset = i * LINE_NUMBER;
+            for (int j = 0; j < LINE_NUMBER; j++) {
+                result[offset + j] = betArray[i].charAt(j) == LINE_SELECTED;
+            }
+        }
+        return result;
+    }
+
+    //TODO need?
+    public static String buildRollString(int[] source) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            int offset = i * REEL_NUMBER;
+            for (int j = 0; j < REEL_NUMBER; j++) {
+                builder.append(source[offset + j]).append(REEL_SPLITERATOR);
+            }
+            builder.setCharAt(builder.length() - 1, BET_SPLITERATOR);
+        }
+        return builder.deleteCharAt(builder.length() - 1).toString().trim();
+    }
+
+    //TODO need?
+    public static String buildLineString(boolean[] source) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            int offset = i * LINE_NUMBER;
+            for (int j = 0; j < LINE_NUMBER; j++) {
+                if (source[offset + j]) {
+                    builder.append(LINE_SELECTED);
+                } else {
+                    builder.append(LINE_NOT_SELECTED);
+                }
+            }
+            builder.append(BET_SPLITERATOR);
+        }
+        return builder.deleteCharAt(builder.length() - 1).toString().trim();
+    }
+
+    //TODO need?
+    public static String buildBetString(BigDecimal[] source) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            builder.append(source[i]).append(BET_SPLITERATOR);
+        }
+        return builder.deleteCharAt(builder.length() - 1).toString();
     }
 
     public static BigDecimal countStreakTotal(List<Roll> rolls) {
@@ -263,11 +384,16 @@ public class StreakLogic {
         Collections.sort(list, comparator);
     }
 
+    public static boolean isComplete(Streak streak) {
+        return !(streak == null || streak.getRolls() == null)
+               && streak.getRolls().size() >= BETS_IN_STREAK;
+    }
+
     private static class TotalComparator implements Comparator<Streak> {
 
         /**
-         * Compares its two arguments for order.  Returns a negative integer,
-         * zero, or a positive integer as the first argument is less than, equal
+         * Compares its two arguments for order.  Returns pressedKey negative integer,
+         * zero, or pressedKey positive integer as the first argument is less than, equal
          * to, or greater than the second.<p>
          * <p>
          * In the foregoing description, the notation
@@ -297,7 +423,7 @@ public class StreakLogic {
          *
          * @param o1 the first object to be compared.
          * @param o2 the second object to be compared.
-         * @return a negative integer, zero, or a positive integer as the
+         * @return pressedKey negative integer, zero, or pressedKey positive integer as the
          * first argument is less than, equal to, or greater than the
          * second.
          * @throws NullPointerException if an argument is null and this
