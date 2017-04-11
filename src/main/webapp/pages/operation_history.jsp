@@ -87,42 +87,56 @@
                         </tr>
                         <c:forEach var="streak" items="${streaks}">
                             <tbody>
-                            <tr>
-                                <td rowspan="5">${j:formatDateTime(streak.date, "dd.MM.yyyy HH:mm")}</td>
-                                <td><fmt:message key="history.table.streaks.roll"/></td>
-                                <c:forEach var="roll" items="${streak.rolls}">
-                                    <td><c:forEach var="reel" items="${roll.roll}"> ${reel} </c:forEach></td>
-                                </c:forEach>
-                                <td rowspan="5">${streak.total}</td>
-                            </tr>
-                            <tr>
-                                <td><fmt:message key="history.table.streaks.offset"/></td>
-                                <c:forEach var="roll" items="${streak.rolls}">
-                                    <td><c:forEach var="offset" items="${roll.offset}"> ${offset} </c:forEach></td>
-                                </c:forEach>
-                            </tr>
-                            <tr>
-                                <td><fmt:message key="history.table.streaks.lines"/></td>
-                                <c:forEach var="roll" items="${streak.rolls}">
-                                    <td>
-                                        <c:forEach var="line" items="${roll.lines}" varStatus="status">
-                                            <c:if test="${line}"> ${status.index+1} </c:if>
+                            <c:choose>
+                                <c:when test="${streak.rolls!=null && !streak.rolls.isEmpty()}">
+                                    <tr>
+                                        <td rowspan="5">${j:formatDateTime(streak.date, "dd.MM.yyyy HH:mm")}</td>
+                                        <td><fmt:message key="history.table.streaks.roll"/></td>
+                                        <c:forEach var="roll" items="${streak.rolls}">
+                                            <td><c:forEach var="reel" items="${roll.roll}"> ${reel} </c:forEach></td>
                                         </c:forEach>
-                                    </td>
-                                </c:forEach>
-                            </tr>
-                            <tr>
-                                <td><fmt:message key="history.table.streaks.bet"/></td>
-                                <c:forEach var="roll" items="${streak.rolls}">
-                                    <td>${roll.bet}</td>
-                                </c:forEach>
-                            </tr>
-                            <tr>
-                                <td><fmt:message key="history.table.streaks.result"/></td>
-                                <c:forEach var="roll" items="${streak.rolls}">
-                                    <td>${roll.result}</td>
-                                </c:forEach>
-                            </tr>
+
+                                        <td rowspan="5">${streak.total}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><fmt:message key="history.table.streaks.offset"/></td>
+                                        <c:forEach var="roll" items="${streak.rolls}">
+                                            <td><c:forEach var="offset"
+                                                           items="${roll.offset}"> ${offset} </c:forEach></td>
+                                        </c:forEach>
+                                    </tr>
+                                    <tr>
+                                        <td><fmt:message key="history.table.streaks.lines"/></td>
+                                        <c:forEach var="roll" items="${streak.rolls}">
+                                            <td>
+                                                <c:forEach var="line" items="${roll.lines}" varStatus="status">
+                                                    <c:if test="${line}"> ${status.index+1} </c:if>
+                                                </c:forEach>
+                                            </td>
+                                        </c:forEach>
+                                    </tr>
+                                    <tr>
+                                        <td><fmt:message key="history.table.streaks.bet"/></td>
+                                        <c:forEach var="roll" items="${streak.rolls}">
+                                            <td>${roll.bet}</td>
+                                        </c:forEach>
+                                    </tr>
+                                    <tr>
+                                        <td><fmt:message key="history.table.streaks.result"/></td>
+                                        <c:forEach var="roll" items="${streak.rolls}">
+                                            <td>${roll.result}</td>
+                                        </c:forEach>
+                                    </tr>
+                                </c:when>
+                                <c:otherwise>
+                                    <tr>
+                                        <td rowspan="5">${j:formatDateTime(streak.date, "dd.MM.yyyy HH:mm")}</td>
+                                        <td colspan="12" rowspan="5">
+                                            <fmt:message key="history.table.streaks.not.finished"/>
+                                        </td>
+                                    </tr>
+                                </c:otherwise>
+                            </c:choose>
                             </tbody>
                         </c:forEach>
                     </table>

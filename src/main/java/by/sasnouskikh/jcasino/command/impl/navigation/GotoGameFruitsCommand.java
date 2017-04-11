@@ -3,24 +3,27 @@ package by.sasnouskikh.jcasino.command.impl.navigation;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
+import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.logic.PlayerLogic;
+import by.sasnouskikh.jcasino.logic.StreakLogic;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 
-import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_PLAYER;
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
 public class GotoGameFruitsCommand implements Command {
 
     @Override
     public PageNavigator execute(HttpServletRequest request) {
-        QueryManager.saveQueryToSession(request);
+        QueryManager.logQuery(request);
         HttpSession session = request.getSession();
         Player      player  = (Player) session.getAttribute(ATTR_PLAYER);
+        Streak      streak  = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
         BigDecimal  money   = BigDecimal.ZERO;
-        session.setAttribute("demo_play", null);
+        boolean     demo    = session.getAttribute(ATTR_DEMO_PLAY) != null;
         if (player != null) {
             PlayerLogic.updateAccountInfo(player);
             if (player.getAccount() != null) {
@@ -29,11 +32,28 @@ public class GotoGameFruitsCommand implements Command {
                     money = balance;
                 }
             }
+            if (demo || streak == null) {
+                streak = StreakLogic.generateStreak(player.getId());
+                session.setAttribute(ATTR_DEMO_PLAY, null);
+            }
         } else {
-            money = BigDecimal.valueOf(50.00);
-            session.setAttribute("demo_play", "demo_play");
+            money = DEMO_START_MONEY;
+            if (streak == null) {
+                streak = StreakLogic.generateStreak();
+            }
+            if (!demo) {
+                session.setAttribute(ATTR_DEMO_PLAY, ATTR_DEMO_PLAY);
+            }
         }
-        request.setAttribute("money_input", money.toPlainString());
+        String streakInfo;
+        if (streak.getRolls().size() < BETS_IN_STREAK) {
+            streakInfo = streak.getRollMD5();
+        } else {
+            streakInfo = streak.getRoll();
+        }
+        request.setAttribute(ATTR_STREAK_INFO, streakInfo);
+        request.setAttribute(ATTR_MONEY_INPUT, money.toPlainString());
+        session.setAttribute(ATTR_CURRENT_STREAK, streak);
         return PageNavigator.FORWARD_PAGE_GAME_FRUITS;
     }
 }

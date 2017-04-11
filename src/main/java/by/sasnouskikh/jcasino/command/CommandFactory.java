@@ -37,6 +37,7 @@ public class CommandFactory {
         guestCommands.put(CommandType.GOTO_ERROR_500, new GotoError500Command());
         guestCommands.put(CommandType.BACK_FROM_ERROR, new BackFromErrorCommand());
         guestCommands.put(CommandType.GOTO_GAME_FRUITS, new GotoGameFruitsCommand());
+        guestCommands.put(CommandType.BACK_FROM_GAME, new BackFromGameCommand());
 
         playerCommands.putAll(guestCommands);
         playerCommands.put(CommandType.LOGOUT, new LogoutCommand());
@@ -157,7 +158,8 @@ public class CommandFactory {
         GOTO_MANAGE_TRANSACTIONS,
         GOTO_MANAGE_STREAKS,
         GOTO_STATS_REPORT,
-        GOTO_GAME_FRUITS
+        GOTO_GAME_FRUITS,
+        BACK_FROM_GAME
     }
 
     private CommandFactory() {

@@ -4,15 +4,15 @@ import by.sasnouskikh.jcasino.entity.Entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.ArrayDeque;
 
 public class Streak extends Entity {
 
     private int id;
     private int playerId;
 
-    private LocalDateTime date;
-    private List<Roll>    rolls;
+    private LocalDateTime    date;
+    private ArrayDeque<Roll> rolls;
 
     private String     roll;
     private String     rollMD5;
@@ -94,11 +94,11 @@ public class Streak extends Entity {
         this.result = result;
     }
 
-    public List<Roll> getRolls() {
+    public ArrayDeque<Roll> getRolls() {
         return rolls;
     }
 
-    public void setRolls(List<Roll> rolls) {
+    public void setRolls(ArrayDeque<Roll> rolls) {
         this.rolls = rolls;
     }
 

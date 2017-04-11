@@ -14,9 +14,8 @@ import by.sasnouskikh.jcasino.validator.FormValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
-import java.util.Arrays;
+import java.util.ArrayDeque;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
@@ -34,7 +33,7 @@ public class SpinCommand implements AjaxCommand {
         Map<String, Object> responseMap    = new HashMap<>();
 
         Player  player = (Player) session.getAttribute(ATTR_PLAYER);
-        Streak  streak = (Streak) session.getAttribute("current_streak");
+        Streak  streak = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
         boolean demo   = player == null || request.getParameter("demo") != null;
 
         if (streak != null) {
@@ -49,6 +48,7 @@ public class SpinCommand implements AjaxCommand {
                 } else {
                     streak = StreakLogic.generateStreak();
                 }
+                session.setAttribute(ATTR_CURRENT_STREAK, streak);
             }
         } else {
             if (!demo) {
@@ -56,7 +56,7 @@ public class SpinCommand implements AjaxCommand {
             } else {
                 streak = StreakLogic.generateStreak();
             }
-            session.setAttribute("current_streak", streak);
+            session.setAttribute(ATTR_CURRENT_STREAK, streak);
         }
         if (streak == null) {
             errorMessage.append("Streak generation error.").append(MESSAGE_SEPARATOR);
@@ -82,17 +82,6 @@ public class SpinCommand implements AjaxCommand {
             valid = false;
         }
 
-        System.out.println(betString);
-        System.out.println(offset1String);
-        System.out.println(offset2String);
-        System.out.println(offset3String);
-        System.out.println(line1);
-        System.out.println(line2);
-        System.out.println(line3);
-        System.out.println(line4);
-        System.out.println(line5);
-        System.out.println(demo);
-
         if (valid) {
             BigDecimal bet     = BigDecimal.valueOf(Double.parseDouble(betString));
             int        offset1 = Integer.parseInt(offset1String);
@@ -100,32 +89,40 @@ public class SpinCommand implements AjaxCommand {
             int        offset3 = Integer.parseInt(offset3String);
             int[]      offset  = new int[]{offset1, offset2, offset3};
             boolean[]  lines   = new boolean[]{line1, line2, line3, line4, line5};
+
+            BigDecimal totalBet = GameEngine.countTotalBet(bet, lines);
+            if (!demo && player.getAccount().getBalance().compareTo(totalBet) < 0) {
+                errorMessage.append("Not enough money error.");
+                responseMap.put(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
+                return responseMap;
+            }
+
             try {
                 if (!demo) {
-                    streak = GameEngine.spin(streak, offset, lines, bet);
+                    BigDecimal total   = GameEngine.spin(streak, offset, lines, bet);
+                    BigDecimal balance = player.getAccount().getBalance();
+                    player.getAccount().setBalance(balance.add(total));
                 } else {
-                    streak = GameEngine.spinDemo(streak, offset, lines, bet);
-                }
-                List<Roll> rollList = streak.getRolls();
-                Roll       roll     = rollList.get(rollList.size() - 1);
-                BigDecimal result   = roll.getResult();
-                int[]      realPos  = GameEngine.defineReelPos(roll.getRoll(), roll.getOffset());
-                boolean[]  winLines = GameEngine.defineWinLines(realPos);
-
-                boolean[] rollWinLines = new boolean[5];
-                for (int i = 0; i < 5; i++) {
-                    rollWinLines[i] = lines[i] && winLines[i];
+                    GameEngine.spinDemo(streak, offset, lines, bet);
                 }
 
-                System.out.println(streak.getRoll());
-                System.out.println(Arrays.toString(roll.getRoll()));
-                System.out.println(Arrays.toString(realPos));
-                System.out.println(Arrays.toString(winLines));
-                System.out.println(Arrays.toString(rollWinLines));
-
+                ArrayDeque<Roll> rollArrayDeque = streak.getRolls();
+                Roll             lastRoll       = rollArrayDeque.getLast();
+                BigDecimal       result         = lastRoll.getResult();
+                int[]            reelPos        = GameEngine.defineReelPos(lastRoll.getRoll(), offset);
+                boolean[]        winLines       = GameEngine.defineWinLines(reelPos, lines);
+                int              streakNumber   = rollArrayDeque.size();
+                String           streakInfo;
+                if (streakNumber < BETS_IN_STREAK) {
+                    streakInfo = streak.getRollMD5();
+                } else {
+                    streakInfo = streak.getRoll();
+                }
+                responseMap.put("streakInfo", streakInfo);
+                responseMap.put("rollNumber", streakNumber);
                 responseMap.put("winResult", result.toPlainString());
-                responseMap.put("offsets", realPos);
-                responseMap.put("lines", rollWinLines);
+                responseMap.put("offsets", reelPos);
+                responseMap.put("lines", winLines);
 
             } catch (LogicException e) {
                 responseMap.put(ATTR_ERROR_MESSAGE, "Spin error database connection etc.");

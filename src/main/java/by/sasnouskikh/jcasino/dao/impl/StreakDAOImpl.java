@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,7 +130,7 @@ public class StreakDAOImpl extends AbstractDAO<Integer, Streak> {
             streak.setLines(resultSet.getString("lines"));
             streak.setBet(resultSet.getString("bet"));
             streak.setResult(resultSet.getString("result"));
-            List<Roll> rolls = StreakLogic.buildRollList(streak);
+            ArrayDeque<Roll> rolls = StreakLogic.buildRollList(streak);
             streak.setRolls(rolls);
             streak.setTotal(StreakLogic.countStreakTotal(rolls));
         }

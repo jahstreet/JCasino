@@ -19,8 +19,20 @@
 <body id="body">
 <h1 class="title">JCasino Fruits</h1>
 <canvas id="canvas" width="600" height="450"></canvas>
-<div id="money">${money_input}</div>
+<div id="money"><fmt:message key="fruits.info.balance"/><br>
+    <span id="money-info">${money_input}</span>
+</div>
 <div id="music">&#9835;</div>
+<div id="back">
+    <a href="${pageContext.request.contextPath}/controller?command=back_from_game">&#10006;</a>
+</div>
+<div id="streak-info">
+    <u><fmt:message key="fruits.info.streak"/></u><br>
+    <span id="streak-info-text">${streak_info}</span>
+</div>
+<div id="roll-number"><fmt:message key="fruits.info.roll.number"/>:
+    <span id="roll-number-text">${current_streak.rolls.size()}</span>
+</div>
 <section class="button-container clearfix">
     <div class="buttons">
         <input class="button" type="button" form="spin" onclick="spin()"

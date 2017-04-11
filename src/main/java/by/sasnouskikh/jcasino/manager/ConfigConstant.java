@@ -1,5 +1,7 @@
 package by.sasnouskikh.jcasino.manager;
 
+import java.math.BigDecimal;
+
 public class ConfigConstant {
 
     public static final String DEFAULT_LOCALE = "default";
@@ -13,6 +15,12 @@ public class ConfigConstant {
     public static final byte PASSPORT_VER_MASK = 0b100;
     public static final byte FULL_VER_MASK     = 0b111;
 
+    public static final int        REEL_LENGTH      = 60;
+    public static final int        BETS_IN_STREAK   = 10;
+    public static final int        REEL_NUMBER      = 3;
+    public static final int        LINE_NUMBER      = 5;
+    public static final BigDecimal DEMO_START_MONEY = BigDecimal.valueOf(50);
+
     public static final String ATTR_ROLE          = "role";
     public static final String ATTR_USER          = "user";
     public static final String ATTR_PLAYER        = "player";
@@ -25,12 +33,15 @@ public class ConfigConstant {
     public static final String ATTR_ANSWER_INPUT        = "answer_input";
     public static final String ATTR_BIRTHDATE_INPUT     = "birthdate_input";
     public static final String ATTR_COMMENTARY_INPUT    = "commentary_input";
+    public static final String ATTR_CURRENT_STREAK      = "current_streak";
+    public static final String ATTR_DEMO_PLAY           = "demo_play";
     public static final String ATTR_EMAIL_INPUT         = "email_input";
     public static final String ATTR_FNAME_INPUT         = "fname_input";
     public static final String ATTR_HEADER_INPUT        = "header_input";
     public static final String ATTR_LNAME_INPUT         = "lname_input";
     public static final String ATTR_LOANS               = "loans";
     public static final String ATTR_MNAME_INPUT         = "mname_input";
+    public static final String ATTR_MONEY_INPUT         = "money_input";
     public static final String ATTR_MONTH_INPUT         = "month_input";
     public static final String ATTR_MONTH_ACQUIRE_INPUT = "month_acquire_input";
     public static final String ATTR_MONTH_EXPIRE_INPUT  = "month_expire_input";
@@ -39,6 +50,7 @@ public class ConfigConstant {
     public static final String ATTR_QUESTION_INPUT      = "question_input";
     public static final String ATTR_QUESTION_LIST       = "questionList";
     public static final String ATTR_SCAN_INPUT          = "scan_input";
+    public static final String ATTR_STREAK_INFO         = "streak_info";
     public static final String ATTR_STREAKS             = "streaks";
     public static final String ATTR_TEXT_INPUT          = "text_input";
     public static final String ATTR_TRANSACTIONS        = "transactions";

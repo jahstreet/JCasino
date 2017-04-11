@@ -16,22 +16,20 @@ import org.apache.logging.log4j.Logger;
 import java.math.BigDecimal;
 
 import static by.sasnouskikh.jcasino.game.ReelValue.*;
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.LINE_NUMBER;
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.REEL_LENGTH;
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.REEL_NUMBER;
 
 public class GameEngine {
-    private static final int CHERRY_MULTIPLIER     = 2;
-    private static final int GRAPES_MULTIPLIER     = 4;
-    private static final int LEMON_MULTIPLIER      = 12;
-    private static final int APPLE_MULTIPLIER      = 15;
-    private static final int ORANGE_MULTIPLIER     = 20;
-    private static final int BANANA_MULTIPLIER     = 30;
-    private static final int WATERMELON_MULTIPLIER = 60;
-
     private static final Logger LOGGER = LogManager.getLogger(GameEngine.class);
 
-    private static final int REEL_LENGTH    = 60;
-    private static final int BETS_IN_STREAK = 10;
-    private static final int REEL_NUMBER    = 3;
-    private static final int LINE_NUMBER    = 5;
+    private static final int CHERRY_MULTIPLIER     = 6;
+    private static final int GRAPES_MULTIPLIER     = 12;
+    private static final int LEMON_MULTIPLIER      = 32;
+    private static final int APPLE_MULTIPLIER      = 45;
+    private static final int ORANGE_MULTIPLIER     = 60;
+    private static final int BANANA_MULTIPLIER     = 90;
+    private static final int WATERMELON_MULTIPLIER = 180;
 
     private static final ReelValue[] reelValues = new ReelValue[]{
     CHERRY, GRAPES, CHERRY, LEMON, CHERRY, GRAPES, CHERRY, APPLE, CHERRY, GRAPES,
@@ -45,25 +43,30 @@ public class GameEngine {
     private GameEngine() {
     }
 
-    public static Streak spin(Streak streak, int[] offset, boolean[] lines, BigDecimal bet) throws LogicException {
+    public static BigDecimal spin(Streak streak, int[] offset, boolean[] lines, BigDecimal bet) throws LogicException {
+        int        playerId = streak.getPlayerId();
+        BigDecimal totalBet = countTotalBet(bet, lines);
+        Roll       roll     = buildRoll(StreakLogic.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet);
+        BigDecimal result   = roll.getResult();
+        BigDecimal total    = result.subtract(totalBet);
         try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-            if (!playerDAO.changeBalance(streak.getPlayerId(),
-                                         bet, Transaction.TransactionType.WITHDRAW)) {
+            if (!playerDAO.changeBalance(playerId, total, Transaction.TransactionType.REPLENISH)) {
                 throw new LogicException("Database connection error while spinning.");
             }
+            streak.getRolls().add(roll);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
         }
-        streak.getRolls().add(buildRoll(StreakLogic.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet));
-        return streak;
+        return total;
     }
 
-    public static Streak spinDemo(Streak streak, int[] offset, boolean[] lines, BigDecimal bet) {
-        if (StreakLogic.isComplete(streak)) {
-            streak = StreakLogic.generateStreak();
-        }
-        streak.getRolls().add(buildRoll(StreakLogic.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet));
-        return streak;
+    public static BigDecimal spinDemo(Streak streak, int[] offset, boolean[] lines, BigDecimal bet) {
+        BigDecimal totalBet = countTotalBet(bet, lines);
+        Roll       roll     = buildRoll(StreakLogic.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet);
+        BigDecimal result   = roll.getResult();
+        BigDecimal total    = result.subtract(totalBet);
+        streak.getRolls().add(roll);
+        return total;
     }
 
     private static Roll buildRoll(int[] roll, int[] offset, boolean[] lines, BigDecimal bet) {
@@ -79,9 +82,9 @@ public class GameEngine {
     private static BigDecimal countResult(int[] roll, int[] offset, boolean[] lines, BigDecimal bet) {
         BigDecimal result   = BigDecimal.ZERO;
         int[]      reelPos  = defineReelPos(roll, offset);
-        boolean[]  winLines = defineWinLines(reelPos);
+        boolean[]  winLines = defineWinLines(reelPos, lines);
         for (int i = 0; i < LINE_NUMBER; i++) {
-            if (winLines[i] && lines[i]) {
+            if (winLines[i]) {
                 result = result.add(bet.multiply(defineMultiplier(reelPos[0], i + 1)));
             }
         }
@@ -106,7 +109,6 @@ public class GameEngine {
         if (reelValue == null) {
             return BigDecimal.ZERO;
         }
-        System.out.println(reelValue);
         int multiplier;
         switch (reelValue) {
             case CHERRY:
@@ -134,25 +136,9 @@ public class GameEngine {
                 return BigDecimal.ZERO;
         }
         return BigDecimal.valueOf(multiplier);
-
-
     }
 
-    public static int[] defineReelPos(int[] roll, int[] offset) {
-        int[] reelPos = new int[REEL_NUMBER];
-        for (int i = 0; i < REEL_NUMBER; i++) {
-            reelPos[i] = roll[i] + offset[i];
-            while (reelPos[i] < 1) {
-                reelPos[i] += 60;
-            }
-            while (reelPos[i] > 60) {
-                reelPos[i] -= 60;
-            }
-        }
-        return reelPos;
-    }
-
-    private static int countPlayedLines(boolean[] lines) {
+    public static int countPlayedLines(boolean[] lines) {
         int result = 0;
         for (boolean line : lines) {
             if (line) {
@@ -163,12 +149,11 @@ public class GameEngine {
     }
 
     private static ReelValue getReelValue(int index) {
-        int length = reelValues.length;
         while (index < 1) {
-            index += length;
+            index += REEL_LENGTH;
         }
-        while (index > length) {
-            index -= length;
+        while (index > REEL_LENGTH) {
+            index -= REEL_LENGTH;
         }
         return reelValues[index - 1];
     }
@@ -191,5 +176,37 @@ public class GameEngine {
                         && getReelValue(pos[0] + 2) == getReelValue(pos[2]);
 
         return new boolean[]{line1, line2, line3, line4, line5};
+    }
+
+    public static boolean[] defineWinLines(int[] pos, boolean[] playedLines) {
+        boolean[] result   = new boolean[LINE_NUMBER];
+        boolean[] winLines = defineWinLines(pos);
+        for (int i = 0; i < LINE_NUMBER; i++) {
+            result[i] = winLines[i] && playedLines[i];
+        }
+        return result;
+    }
+
+    public static boolean[] defineWinLines(int[] roll, int[] offset, boolean[] playedLines) {
+        int[] reelPos = defineReelPos(roll, offset);
+        return defineWinLines(reelPos, playedLines);
+    }
+
+    public static int[] defineReelPos(int[] roll, int[] offset) {
+        int[] reelPos = new int[REEL_NUMBER];
+        for (int i = 0; i < REEL_NUMBER; i++) {
+            reelPos[i] = roll[i] + offset[i];
+            while (reelPos[i] < 1) {
+                reelPos[i] += 60;
+            }
+            while (reelPos[i] > 60) {
+                reelPos[i] -= 60;
+            }
+        }
+        return reelPos;
+    }
+
+    public static BigDecimal countTotalBet(BigDecimal bet, boolean[] playedLines) {
+        return bet.multiply(BigDecimal.valueOf(countPlayedLines(playedLines)));
     }
 }

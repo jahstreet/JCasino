@@ -22,7 +22,7 @@ public class JCasinoContextListener implements ServletContextListener {
     private ConnectionPool pool;
 
     @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent) {
+    public void contextInitialized(ServletContextEvent event) {
         try {
             pool = ConnectionPool.getInstance();
             pool.initPool();
@@ -32,11 +32,11 @@ public class JCasinoContextListener implements ServletContextListener {
             throw new RuntimeException(e);
         }
         List<News> news = NewsLogic.takeNewsList();
-        servletContextEvent.getServletContext().setAttribute(CONTEXT_NEWSLIST, news);
+        event.getServletContext().setAttribute(CONTEXT_NEWSLIST, news);
     }
 
     @Override
-    public void contextDestroyed(ServletContextEvent servletContextEvent) {
+    public void contextDestroyed(ServletContextEvent event) {
         pool.destroyPool();
         LOGGER.log(Level.INFO, "ConnectionPool was destroyed.");
         LogManager.shutdown(); //to prevent exceptions and warnings on server shutdown

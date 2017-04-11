@@ -10,11 +10,12 @@ var context = $('#canvas')[0].getContext('2d'),
     stopReel = loadAudio(['/resources/game/fruits/audio/stop_reel.mp3']),
     isSpinning = false,
     isLinesShown = false,
-    isResulting = false,
     cur_off1 = -Math.ceil(Math.random() * 59) * 150,
     cur_off2 = -Math.ceil(Math.random() * 59) * 150,
     cur_off3 = -Math.ceil(Math.random() * 59) * 150,
-    money = $('#money'),
+    money = $('#money-info'),
+    streakInfo = $('#streak-info-text'),
+    rollNumber = $('#roll-number-text'),
     winTimeout = 2000,
     musicDiv = $('#music')[0];
 
@@ -30,6 +31,9 @@ setInterval(function () {
     if (pressedKey == 27) {
         theme.stop();
         musicDiv.innerHTML = '&#9836;';
+    }
+    if (pressedKey == 32) {
+        spin();
     }
     pressedKey = 0;
 }, 200);
@@ -225,6 +229,11 @@ function spin() {
     });
     var totalBet = bet * counter;
 
+    if (totalBet > parseFloat(money.text())) {
+        alert('Not enough money.');
+        return;
+    }
+
     if (!isSpinning) {
         isSpinning = true;
         spin_sound.play();
@@ -292,6 +301,9 @@ function spin() {
                     result = parseFloat(data.winResult);
                     console.log(result);
                     lineResult = data.lines;
+                    streakInfo.html(data.streakInfo);
+                    rollNumber.html(data.rollNumber);
+
                 } else {
                     offset1 = -(Math.ceil(Math.random() * 60) - 1) * 150;
                     offset2 = -(Math.ceil(Math.random() * 60) - 1) * 150;
