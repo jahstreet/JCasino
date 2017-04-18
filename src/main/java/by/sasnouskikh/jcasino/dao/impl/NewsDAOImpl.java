@@ -99,6 +99,7 @@ class NewsDAOImpl extends NewsDAO {
     /**
      * Takes {@link News} by its id.
      *
+     * @param newsId id of {@link News} object to take
      * @return {@link News} with definite id or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      * @see WrappedConnection#prepareStatement(String)
@@ -120,6 +121,9 @@ class NewsDAOImpl extends NewsDAO {
     /**
      * Inserts {@link News} to database.
      *
+     * @param adminId id of admin who inserts {@link News} object
+     * @param header  news header
+     * @param text    news text
      * @return int value of inserted news generated id or 0
      * @throws DAOException if {@link SQLException} occurred while working with database
      * @see WrappedConnection#prepareStatement(String, int)
@@ -143,6 +147,9 @@ class NewsDAOImpl extends NewsDAO {
     /**
      * Updates definite {@link News} 'header' and fixes admin who proceeded it.
      *
+     * @param newsId  id of news to update
+     * @param adminId id of admin who updates {@link News} object
+     * @param header  news header
      * @return true if operation processed successfully
      * @throws DAOException if {@link SQLException} occurred while working with database
      * @see WrappedConnection#prepareStatement(String)
@@ -167,6 +174,9 @@ class NewsDAOImpl extends NewsDAO {
     /**
      * Updates definite {@link News} 'text' and fixes admin who proceeded it.
      *
+     * @param newsId  id of news to update
+     * @param text    news text
+     * @param adminId id of admin who updates {@link News} object
      * @return true if operation processed successfully
      * @throws DAOException if {@link SQLException} occurred while working with database
      * @see WrappedConnection#prepareStatement(String)
@@ -191,6 +201,7 @@ class NewsDAOImpl extends NewsDAO {
     /**
      * Deletes definite {@link News}.
      *
+     * @param id id of news to delete
      * @return true if operation processed successfully
      * @throws DAOException if {@link SQLException} occurred while working with database
      * @see WrappedConnection#prepareStatement(String)
@@ -215,9 +226,8 @@ class NewsDAOImpl extends NewsDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link News} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      */
     private News buildNews(ResultSet resultSet) throws SQLException {
         News news = null;
@@ -237,9 +247,8 @@ class NewsDAOImpl extends NewsDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link List} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      * @see #buildNews(ResultSet)
      */
     private List<News> buildNewsList(ResultSet resultSet) throws SQLException {

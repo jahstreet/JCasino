@@ -76,6 +76,8 @@ public class ConnectionPool {
 
     /**
      * Singleton getter. Locks for first access.
+     *
+     * @return {@link #instance}
      */
     public static ConnectionPool getInstance() {
         if (!created.get()) {

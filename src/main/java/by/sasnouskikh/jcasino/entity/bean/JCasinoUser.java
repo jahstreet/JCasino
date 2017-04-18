@@ -64,7 +64,9 @@ public class JCasinoUser extends Entity {
         }
 
         /**
-         * String representation of user role instance getter.
+         * Getter of string representation of user role instance.
+         *
+         * @return string representation of user role instance
          */
         public String getRole() {
             return role;
@@ -230,11 +232,9 @@ public class JCasinoUser extends Entity {
      * Clones instance of this object.
      *
      * @return a clone of this instance.
-     * @throws CloneNotSupportedException if the object's class does not
-     *                                    support the {@code Cloneable} interface. Subclasses
-     *                                    that override the {@code clone} method can also
-     *                                    throw this exception to indicate that an instance cannot
-     *                                    be cloned.
+     * @throws CloneNotSupportedException if the object's class does not support the {@code Cloneable} interface.
+     *                                    Subclasses that override the {@code clone} method can also throw this
+     *                                    exception to indicate that an instance cannot be cloned.
      * @see Cloneable
      */
     @Override

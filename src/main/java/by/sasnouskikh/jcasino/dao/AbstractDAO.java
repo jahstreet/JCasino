@@ -45,6 +45,8 @@ public abstract class AbstractDAO {
 
     /**
      * {@link AbstractDAO#connection} field getter.
+     *
+     * @return {@link #connection}
      */
     protected WrappedConnection getConnection() {
         return connection;

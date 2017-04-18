@@ -54,6 +54,7 @@ public abstract class NewsDAO extends AbstractDAO {
     /**
      * Takes {@link News} by its id.
      *
+     * @param newsId id of {@link News} object to take
      * @return {@link News} with definite id
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
@@ -62,6 +63,9 @@ public abstract class NewsDAO extends AbstractDAO {
     /**
      * Inserts {@link News} to database.
      *
+     * @param adminId id of admin who inserts {@link News} object
+     * @param header  news header
+     * @param text    news text
      * @return int value of inserted news id
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
@@ -70,6 +74,9 @@ public abstract class NewsDAO extends AbstractDAO {
     /**
      * Updates definite {@link News} 'header' and fixes admin who proceeded it.
      *
+     * @param newsId  id of news to update
+     * @param adminId id of admin who updates {@link News} object
+     * @param header  news header
      * @return true if operation processed successfully
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
@@ -78,6 +85,9 @@ public abstract class NewsDAO extends AbstractDAO {
     /**
      * Updates definite {@link News} 'text' and fixes admin who proceeded it.
      *
+     * @param newsId  id of news to update
+     * @param text    news text
+     * @param adminId id of admin who updates {@link News} object
      * @return true if operation processed successfully
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
@@ -86,6 +96,7 @@ public abstract class NewsDAO extends AbstractDAO {
     /**
      * Deletes definite {@link News}=.
      *
+     * @param id id of news to delete
      * @return true if operation processed successfully
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
