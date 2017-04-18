@@ -1,9 +1,9 @@
 package by.sasnouskikh.jcasino.logic;
 
 import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.PlayerDAOImpl;
-import by.sasnouskikh.jcasino.dao.impl.UserDAOImpl;
+import by.sasnouskikh.jcasino.dao.PlayerDAO;
+import by.sasnouskikh.jcasino.dao.UserDAO;
+import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
@@ -23,7 +23,8 @@ public class AdminLogic {
 
     public static Player takePlayer(int id) {
         JCasinoUser user = null;
-        try (UserDAOImpl userDAO = DAOFactory.getUserDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            UserDAO userDAO = daoHelper.getUserDAO();
             user = userDAO.takeUser(id);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -33,7 +34,8 @@ public class AdminLogic {
 
     public static List<PlayerVerification> takeReadyForVerification() {
         List<PlayerVerification> verificationList = null;
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
             verificationList = playerDAO.takeReadyForVerification();
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -44,7 +46,8 @@ public class AdminLogic {
     public static boolean changeAccountStatus(int playerId, Admin admin, String status, String commentary) {
         int adminId = admin.getId();
         status = status.toLowerCase();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
             return playerDAO.changeAccountStatus(playerId, adminId, status, commentary);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());

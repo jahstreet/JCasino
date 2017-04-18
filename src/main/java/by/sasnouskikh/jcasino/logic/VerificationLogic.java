@@ -1,8 +1,8 @@
 package by.sasnouskikh.jcasino.logic;
 
 import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.PlayerDAOImpl;
+import by.sasnouskikh.jcasino.dao.PlayerDAO;
+import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.PlayerVerification;
@@ -26,7 +26,8 @@ public class VerificationLogic {
 
     public static boolean changePlayerVerStatus(int playerId, byte verMask, VerificationLogic.MaskOperation operation, Admin admin, String commentary) {
         int adminId = admin.getId();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO          playerDAO    = daoHelper.getPlayerDAO();
             PlayerVerification verification = playerDAO.takeVerification(playerId);
             byte               newStatus    = VerificationLogic.buildNewStatus(verification, verMask, operation);
             return playerDAO.changeVerificationStatus(playerId, newStatus, adminId, commentary);
@@ -38,13 +39,14 @@ public class VerificationLogic {
 
     public static boolean cancelScanVerification(int playerId, Admin admin, String commentary) {
         int adminId = admin.getId();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO          playerDAO    = daoHelper.getPlayerDAO();
             PlayerVerification verification = playerDAO.takeVerification(playerId);
             byte               newStatus    = VerificationLogic.buildNewStatus(verification, (byte) ~PASSPORT_VER_MASK, VerificationLogic.MaskOperation.AND);
-            playerDAO.beginTransaction();
+            daoHelper.beginTransaction();
             if (playerDAO.changeVerificationStatus(playerId, newStatus, adminId, commentary)
                 && playerDAO.changeScanPath(playerId, null)) {
-                playerDAO.commit();
+                daoHelper.commit();
                 return true;
             }
         } catch (ConnectionPoolException | DAOException e) {

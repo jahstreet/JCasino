@@ -1,8 +1,8 @@
 package by.sasnouskikh.jcasino.game;
 
 import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.PlayerDAOImpl;
+import by.sasnouskikh.jcasino.dao.PlayerDAO;
+import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Roll;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
@@ -15,10 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 
-import static by.sasnouskikh.jcasino.game.ReelValue.*;
-import static by.sasnouskikh.jcasino.manager.ConfigConstant.LINE_NUMBER;
-import static by.sasnouskikh.jcasino.manager.ConfigConstant.REEL_LENGTH;
-import static by.sasnouskikh.jcasino.manager.ConfigConstant.REEL_NUMBER;
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
 public class GameEngine {
     private static final Logger LOGGER = LogManager.getLogger(GameEngine.class);
@@ -31,14 +28,7 @@ public class GameEngine {
     private static final int BANANA_MULTIPLIER     = 90;
     private static final int WATERMELON_MULTIPLIER = 180;
 
-    private static final ReelValue[] reelValues = new ReelValue[]{
-    CHERRY, GRAPES, CHERRY, LEMON, CHERRY, GRAPES, CHERRY, APPLE, CHERRY, GRAPES,
-    CHERRY, GRAPES, CHERRY, LEMON, CHERRY, ORANGE, CHERRY, GRAPES, CHERRY, GRAPES,
-    CHERRY, APPLE, CHERRY, LEMON, CHERRY, GRAPES, CHERRY, BANANA, CHERRY, GRAPES,
-    CHERRY, GRAPES, CHERRY, ORANGE, CHERRY, GRAPES, CHERRY, APPLE, CHERRY, GRAPES,
-    CHERRY, WATERMELON, CHERRY, LEMON, CHERRY, GRAPES, CHERRY, BANANA, CHERRY, GRAPES,
-    CHERRY, APPLE, CHERRY, LEMON, CHERRY, GRAPES, CHERRY, ORANGE, CHERRY, GRAPES
-    };
+    private static final ReelValue[] reelValues = new ReelValues().getReelValues();
 
     private GameEngine() {
     }
@@ -49,7 +39,8 @@ public class GameEngine {
         Roll       roll     = buildRoll(StreakLogic.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet);
         BigDecimal result   = roll.getResult();
         BigDecimal total    = result.subtract(totalBet);
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
             if (!playerDAO.changeBalance(playerId, total, Transaction.TransactionType.REPLENISH)) {
                 throw new LogicException("Database connection error while spinning.");
             }

@@ -6,6 +6,8 @@ import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.logic.PlayerLogic;
 import by.sasnouskikh.jcasino.logic.StreakLogic;
+import by.sasnouskikh.jcasino.manager.ConfigConstant;
+import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +16,30 @@ import java.math.BigDecimal;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides navigating to game page.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see Command
+ */
 public class GotoGameFruitsCommand implements Command {
 
+    /**
+     * <p>Provides navigating to game page.
+     * <p>Initializes if it is necessary game-mode, user balance and other attributes of
+     * {@link HttpServletRequest} and {@link HttpSession} due to application logic.</p>
+     * <p>Navigates to {@link PageNavigator#FORWARD_PAGE_GAME_FRUITS}.</p>
+     *
+     * @param request request from client to get parameters to work with
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
+     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @see QueryManager
+     * @see MessageManager
+     * @see ConfigConstant
+     * @see PlayerLogic#updateAccountInfo(Player)
+     * @see StreakLogic#generateStreak()
+     * @see StreakLogic#generateStreak(int)
+     */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);

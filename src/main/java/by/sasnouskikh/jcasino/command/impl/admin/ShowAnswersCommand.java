@@ -5,6 +5,7 @@ import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.Question;
 import by.sasnouskikh.jcasino.logic.QuestionLogic;
+import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.validator.FormValidator;
@@ -15,7 +16,33 @@ import java.util.List;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides showing answered support questions for admin.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see Command
+ */
 public class ShowAnswersCommand implements Command {
+
+    /**
+     * <p>Provides showing answered support questions for admin.
+     * <p>Takes input parameters from {@link HttpServletRequest#getParameter(String)} and validates them.
+     * <p>If any parameter is invalid adds {@link ConfigConstant#ATTR_ERROR_MESSAGE} attribute to
+     * {@link HttpServletRequest#setAttribute(String, Object)} and navigates to
+     * {@link PageNavigator#FORWARD_PREV_QUERY}.
+     * <p>If all the parameters are valid converts them to relevant data types and passes converted parameters further
+     * to the Logic layer, saves current query to session, sets {@link ConfigConstant#ATTR_QUESTION_LIST} attribute to
+     * {@link HttpServletRequest#setAttribute(String, Object)} and navigates to
+     * {@link PageNavigator#FORWARD_PAGE_MANAGE_SUPPORT}.
+     *
+     * @param request request from client to get parameters to work with
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
+     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @see QueryManager
+     * @see MessageManager
+     * @see FormValidator
+     * @see QuestionLogic#takeAnswered(String, String, boolean, Admin, boolean)
+     */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         HttpSession    session        = request.getSession();
@@ -26,10 +53,10 @@ public class ShowAnswersCommand implements Command {
         boolean valid = true;
         Admin   admin = (Admin) session.getAttribute(ATTR_ADMIN);
 
-        String  month            = request.getParameter(PARAM_MONTH);
-        String  topic            = request.getParameter(PARAM_TOPIC);
-        boolean showMy           = request.getParameter(PARAM_SHOW_MY) != null;
-        boolean satisfactionSort = request.getParameter(PARAM_SATISFACTION) != null;
+        String  month              = request.getParameter(PARAM_MONTH);
+        String  topic              = request.getParameter(PARAM_TOPIC);
+        boolean filterMy           = request.getParameter(PARAM_FILTER_MY) != null;
+        boolean sortBySatisfaction = request.getParameter(PARAM_SORT_BY_SATISFACTION) != null;
 
         if (month == null || month.isEmpty() || FormValidator.validateDateMonth(month)) {
             request.setAttribute(ATTR_MONTH_INPUT, month);
@@ -43,7 +70,7 @@ public class ShowAnswersCommand implements Command {
 
         if (valid) {
             QueryManager.saveQueryToSession(request);
-            List<Question> questionList = QuestionLogic.takeAnswered(topic, month, showMy, admin, satisfactionSort);
+            List<Question> questionList = QuestionLogic.takeAnswered(topic, month, filterMy, admin, sortBySatisfaction);
             request.setAttribute(ATTR_QUESTION_LIST, questionList);
             navigator = PageNavigator.FORWARD_PAGE_MANAGE_SUPPORT;
         } else {

@@ -1,9 +1,9 @@
 package by.sasnouskikh.jcasino.logic;
 
 import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.PlayerDAOImpl;
-import by.sasnouskikh.jcasino.dao.impl.QuestionDAOImpl;
+import by.sasnouskikh.jcasino.dao.PlayerDAO;
+import by.sasnouskikh.jcasino.dao.QuestionDAO;
+import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
@@ -31,7 +31,8 @@ public class QuestionLogic {
 
     public static Question takeQuestion(int id) {
         Question question = null;
-        try (QuestionDAOImpl questionDAO = DAOFactory.getQuestionDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            QuestionDAO questionDAO = daoHelper.getQuestionDAO();
             question = questionDAO.takeQuestion(id);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -41,7 +42,8 @@ public class QuestionLogic {
 
     public static List<Question> takePlayerQuestions(int playerId) {
         List<Question> questions = null;
-        try (QuestionDAOImpl questionDAO = DAOFactory.getQuestionDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            QuestionDAO questionDAO = daoHelper.getQuestionDAO();
             questions = questionDAO.takePlayerQuestions(playerId);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -58,7 +60,8 @@ public class QuestionLogic {
             topicPattern = EMPTY_STRING;
         }
         topicPattern = topicPattern.trim().toLowerCase() + PERCENT;
-        try (QuestionDAOImpl questionDAO = DAOFactory.getQuestionDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            QuestionDAO questionDAO = daoHelper.getQuestionDAO();
             questionList = questionDAO.takeUnanswered(topicPattern);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -89,7 +92,8 @@ public class QuestionLogic {
         }
         topicPattern = topicPattern + PERCENT;
         monthPattern = monthPattern + PERCENT;
-        try (QuestionDAOImpl questionDAO = DAOFactory.getQuestionDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            QuestionDAO questionDAO = daoHelper.getQuestionDAO();
             questionList = questionDAO.takeAnswered(topicPattern, monthPattern, adminPattern);
             if (satisfactionSort) {
                 sortBySatisfaction(questionList);
@@ -104,7 +108,8 @@ public class QuestionLogic {
         email = email.trim().toLowerCase();
         topic = topic.trim().toLowerCase();
         question = question.trim();
-        try (QuestionDAOImpl questionDAO = DAOFactory.getQuestionDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            QuestionDAO questionDAO = daoHelper.getQuestionDAO();
             if (user == null) {
                 return questionDAO.insertQuestion(email, topic, question) != 0;
             } else {
@@ -121,23 +126,23 @@ public class QuestionLogic {
         int questionId = question.getId();
         int adminId    = admin.getId();
         answer = answer.trim();
-        try (QuestionDAOImpl questionDAO = DAOFactory.getQuestionDAO()) {
-            questionDAO.beginTransaction();
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            QuestionDAO questionDAO = daoHelper.getQuestionDAO();
+            daoHelper.beginTransaction();
             if (questionDAO.answerQuestion(questionId, answer, adminId)) {
                 String email        = question.getEmail();
                 String questionText = question.getQuestion();
                 String emailPattern = MessageManager.getMessageManager(locale).getMessage(EMAIL_PATTERN_ANSWER_SUPPORT);
                 String emailText    = String.format(emailPattern, questionText, answer, EMPTY_STRING);
-                String subject      = null;
-                int    playerId     = question.getPlayerId();
+
+                //defining subject name
+                String subject  = null;
+                int    playerId = question.getPlayerId();
                 if (playerId != 0) {
-                    try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-                        PlayerProfile playerProfile = playerDAO.takeProfile(playerId);
-                        if (playerProfile != null) {
-                            subject = playerProfile.getfName();
-                        }
-                    } catch (ConnectionPoolException | DAOException e) {
-                        LOGGER.log(Level.ERROR, e.getMessage());
+                    PlayerDAO     playerDAO     = daoHelper.getPlayerDAO();
+                    PlayerProfile playerProfile = playerDAO.takeProfile(playerId);
+                    if (playerProfile != null) {
+                        subject = playerProfile.getfName();
                     }
                     if (subject == null) {
                         subject = JCasinoUser.UserRole.PLAYER.toString();
@@ -145,19 +150,17 @@ public class QuestionLogic {
                 } else {
                     subject = JCasinoUser.UserRole.GUEST.toString();
                 }
-                try {
-                    if (MailerSSL.sendEmail(subject, emailText, email)) {
-                        questionDAO.commit();
-                        return true;
-                    }
-                } catch (MailerException e) {
-                    LOGGER.log(Level.ERROR, "Sending e-mail answering support error. " + e.getMessage());
+                if (MailerSSL.sendEmail(subject, emailText, email)) {
+                    daoHelper.commit();
+                    return true;
                 }
             }
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Database connection error while doing sql transaction. " + e);
+        } catch (MailerException e) {
+            LOGGER.log(Level.ERROR, "Sending e-mail answering support error. " + e.getMessage());
         }
         return false;
     }
@@ -166,7 +169,8 @@ public class QuestionLogic {
         if (satisfaction != null) {
             satisfaction = satisfaction.toLowerCase();
         }
-        try (QuestionDAOImpl questionDAO = DAOFactory.getQuestionDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            QuestionDAO questionDAO = daoHelper.getQuestionDAO();
             return questionDAO.changeQuestionSatisfaction(id, satisfaction);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -182,23 +186,15 @@ public class QuestionLogic {
         if (list == null || list.isEmpty()) {
             return;
         }
-        Collections.sort(list, new Comparator<Question>() {
-            @Override
-            public int compare(Question o1, Question o2) {
-                if (o1.getSatisfaction() == null) {
-                    return 1;
-                }
-                if (o2.getSatisfaction() == null) {
-                    return -1;
-                }
-                return o1.getSatisfaction().compareTo(o2.getSatisfaction());
+        Collections.sort(list, ((Comparator<Question>) (o1, o2) -> {
+            if (o1.getSatisfaction() == null) {
+                return 1;
             }
-        }.thenComparing(new Comparator<Question>() {
-            @Override
-            public int compare(Question o1, Question o2) {
-                return o2.getQuestionDate().compareTo(o1.getQuestionDate());
+            if (o2.getSatisfaction() == null) {
+                return -1;
             }
-        }));
+            return o1.getSatisfaction().compareTo(o2.getSatisfaction());
+        }).thenComparing((o1, o2) -> o2.getQuestionDate().compareTo(o1.getQuestionDate())));
     }
 
 

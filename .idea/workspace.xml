@@ -2,37 +2,152 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e983f2f-bc48-465a-a9b4-edfcca97a100" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromGameCommand.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoSessionListener.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT.war" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoRulesCommand.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/LoanDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/NewsDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/PlayerDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/QuestionDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/StreakDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/TransactionDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/UserDAO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/DAOHelper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/ReelValues.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/pages/rules.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/manager/MyTestClass.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/AdminDAOImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/DAOFactory.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/command/CommandFactory$1.class" afterPath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/command/CommandFactory$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/command/CommandFactory$CommandType.class" afterPath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/command/CommandFactory$CommandType.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/command/CommandFactory.class" afterPath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/command/CommandFactory.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/entity/bean/Streak.class" afterPath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/entity/bean/Streak.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/listener/JCasinoContextListener.class" afterPath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/listener/JCasinoContextListener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/manager/ConfigConstant.class" afterPath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/manager/ConfigConstant.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT.war" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/CommandFactory$1.class" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/CommandFactory$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/CommandFactory$CommandType.class" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/CommandFactory$CommandType.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/CommandFactory.class" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/CommandFactory.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Streak.class" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Streak.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/listener/JCasinoContextListener.class" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/listener/JCasinoContextListener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/manager/ConfigConstant.class" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/manager/ConfigConstant.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/aleksandrsosnovskih.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/aleksandrsosnovskih.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/Command.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/Command.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/CommandFactory.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/CommandFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/PageNavigator.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/PageNavigator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/AjaxCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/AjaxCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/AjaxCommandFactory.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/AjaxCommandFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/command/SpinCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/command/SpinCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ChangeLocaleCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ChangeLocaleCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/EditProfileCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/EditProfileCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/LoginCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/LoginCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/LogoutCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/LogoutCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/MultipartFormCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/MultipartFormCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/PayLoanCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/PayLoanCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/RateSupportAnswerCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/RateSupportAnswerCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/RecoverPasswordCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/RecoverPasswordCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/RegisterCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/RegisterCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ReplenishAccountCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ReplenishAccountCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ResetSupportAnswerRatingCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ResetSupportAnswerRatingCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/SendEmailCodeCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/SendEmailCodeCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/SendSupportCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/SendSupportCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ShowHistoryCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ShowHistoryCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/TakeLoanCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/TakeLoanCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/VerifyEmailCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/VerifyEmailCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/VerifyProfileCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/VerifyProfileCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/WithdrawMoneyCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/WithdrawMoneyCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/AnswerSupportCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/AnswerSupportCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/CancelScanVerificationCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/CancelScanVerificationCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ChangeAccountStatusCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ChangeAccountStatusCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/DeleteNewsCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/DeleteNewsCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/EditNewsCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/EditNewsCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowAnswersCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowAnswersCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowLoansCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowLoansCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerLoansCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerLoansCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerStreaksCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerStreaksCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerSupportCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerSupportCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerTransactionsCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerTransactionsCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowQuestionsCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowQuestionsCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowStreaksCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowStreaksCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowTransactionsCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowTransactionsCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/VerifyScanCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/VerifyScanCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromErrorCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromErrorCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromGameCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromGameCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoAccountCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoAccountCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoEmailVerificationCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoEmailVerificationCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoError500Command.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoError500Command.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoGameFruitsCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoGameFruitsCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoIndexCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoIndexCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoMainCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoMainCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoOperationHistoryCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoOperationHistoryCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoPayLoanCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoPayLoanCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoPlayerProfileCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoPlayerProfileCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoRecoverPasswordCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoRecoverPasswordCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoRegisterCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoRegisterCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoReplenishAccountCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoReplenishAccountCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoStatsCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoStatsCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoSupportCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoSupportCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoTakeLoanCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoTakeLoanCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoUploadPassportCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoUploadPassportCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoVerificationCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoVerificationCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoWithdrawMoneyCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoWithdrawMoneyCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoAdminCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoAdminCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoAnswerSupportCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoAnswerSupportCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageLoansCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageLoansCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageNewsCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageNewsCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManagePlayerCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManagePlayerCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageStreaksCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageStreaksCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageSupportCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageSupportCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageTransactionsCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageTransactionsCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageVerificationCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageVerificationCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoStatsReportCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoStatsReportCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/AjaxController.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/AjaxController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/MainController.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/MainController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/ShowImageServlet.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/ShowImageServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/AbstractDAO.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/AbstractDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/DAOException.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/DAOException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/LoanDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/LoanDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/NewsDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/NewsDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/PlayerDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/PlayerDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/QuestionDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/QuestionDAOImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/StreakDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/StreakDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/TransactionDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/TransactionDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/UserDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/UserDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ConnectionPool.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ConnectionPool.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ConnectionPoolException.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ConnectionPoolException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/WrappedConnection.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/WrappedConnection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/Entity.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/Entity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Admin.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Admin.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/JCasinoUser.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/JCasinoUser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Loan.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Loan.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/News.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/News.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Player.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerAccount.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerAccount.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerProfile.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerProfile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerStats.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerStats.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerStatus.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerStatus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerVerification.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerVerification.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Question.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Question.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Roll.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Roll.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Streak.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Streak.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Transaction.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Transaction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/GameEngine.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/GameEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoContextListener.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoContextListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoSessionListener.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoSessionListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/AdminLogic.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/AdminLogic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/LoanLogic.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/LoanLogic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/NewsLogic.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/NewsLogic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/PlayerLogic.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/PlayerLogic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/QuestionLogic.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/QuestionLogic.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/StreakLogic.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/StreakLogic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/TransactionLogic.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/TransactionLogic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/UserLogic.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/UserLogic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/VerificationLogic.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/VerificationLogic.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/ConfigConstant.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/ConfigConstant.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/prop/messages.properties" afterPath="$PROJECT_DIR$/src/main/resources/prop/messages.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/prop/messages_en_US.properties" afterPath="$PROJECT_DIR$/src/main/resources/prop/messages_en_US.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/prop/messages_ru_RU.properties" afterPath="$PROJECT_DIR$/src/main/resources/prop/messages_ru_RU.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/prop/pagecontent.properties" afterPath="$PROJECT_DIR$/src/main/resources/prop/pagecontent.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/prop/pagecontent_en_US.properties" afterPath="$PROJECT_DIR$/src/main/resources/prop/pagecontent_en_US.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/prop/pagecontent_ru_RU.properties" afterPath="$PROJECT_DIR$/src/main/resources/prop/pagecontent_ru_RU.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/admin/manage_streaks.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/admin/manage_streaks.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/game/fruits.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/game/fruits.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/operation_history.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pages/operation_history.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/jspf/header.jspf" afterPath="$PROJECT_DIR$/src/main/webapp/pages/jspf/header.jspf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/style.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/game/fruits/css/fruits.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/game/fruits/css/fruits.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/game/fruits/js/slot.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/game/fruits/js/slot.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/prop/pagecontent.properties" afterPath="$PROJECT_DIR$/target/classes/prop/pagecontent.properties" />
@@ -41,7 +156,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/pagecontent.properties" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/pagecontent.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/pagecontent_en_US.properties" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/pagecontent_en_US.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/pagecontent_ru_RU.properties" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/pagecontent_ru_RU.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/operation_history.jsp" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/operation_history.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/jspf/header.jspf" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/jspf/header.jspf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/css/style.css" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/css/fruits.css" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/css/fruits.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/js/slot.js" afterPath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/js/slot.js" />
     </list>
@@ -67,127 +183,22 @@
     <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="MySQL - jcasino@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="JCasino" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SpinCommand.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/command/SpinCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameEngine.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/GameEngine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BackFromGameCommand.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromGameCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommandFactory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/CommandFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="199" column="23" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GotoGameFruitsCommand.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoGameFruitsCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GotoIndexCommand.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoIndexCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="13" column="48" selection-start-line="12" selection-start-column="8" selection-end-line="13" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fruits.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/game/fruits/css/fruits.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="139" column="29" selection-start-line="139" selection-start-column="29" selection-end-line="139" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fruits.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/game/fruits.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="26" column="81" selection-start-line="26" selection-start-column="81" selection-end-line="26" selection-end-column="81" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="slot.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/game/fruits/js/slot.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="304" column="52" selection-start-line="304" selection-start-column="52" selection-end-line="304" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Jsp File" />
         <option value="Interface" />
         <option value="Enum" />
         <option value="JavaScript File" />
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -203,57 +214,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/VerifyEmailCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/WithdrawMoneyCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/MultipartFormCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/ShowImageServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ReplenishAccountCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/QuestionDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/TransactionLogic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/PlayerDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/EditProfileCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/recover_password.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/PlayerLogic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/PageNavigator.java" />
-        <option value="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/manager/MessageManagerTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/MessageManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/VerifyProfileCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/support.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/jspf/header.jspf" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/AjaxCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/AjaxCommandFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/QueryManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/GameLogic.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/RandomGenerator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/AjaxController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/game/quantity.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/game/fruits/js/quantity.js" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/LoginCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/jspf/footer.jspf" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/MainController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/validator/FormValidator.java" />
-        <option value="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/manager/StreakLogicTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/ReelValue.java" />
-        <option value="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/manager/GameEngineTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Streak.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/StreakDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/operation_history.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/admin/manage_streaks.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoSessionListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/GameEngine.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/StreakLogic.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/QuestionLogic.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/TransactionLogic.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/UserLogic.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/VerificationLogic.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/ShowImageServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/DAOException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/DAOHelper.java" />
+        <option value="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/manager/ЬнЫ.java" />
+        <option value="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/manager/MyTestClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/ConfigConstant.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/game/fruits/js/slot.js" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/command/SpinCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoContextListener.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/game/fruits/css/fruits.css" />
-        <option value="$PROJECT_DIR$/src/main/webapp/game/fruits.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/CommandFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromGameCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoGameFruitsCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/AbstractDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/LoanDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/NewsDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/PlayerDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/QuestionDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/NewsDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/PlayerDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/AjaxCommandFactory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/AjaxController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/MainController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/UserDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/UserDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/QuestionDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/StreakDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/LoanDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/TransactionDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/TransactionDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/GameEngine.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/StreakDAOImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ConnectionPoolException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ConnectionPool.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/DAOHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/WrappedConnection.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Admin.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/JCasinoUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Player.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerProfile.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/Entity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerAccount.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerStatus.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/StreakLogic.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerStats.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerVerification.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Loan.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Roll.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Question.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/News.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Streak.java" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Transaction.java" />
       </list>
     </option>
   </component>
@@ -290,9 +301,9 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="228" />
+    <option name="x" value="173" />
     <option name="y" value="23" />
-    <option name="width" value="1212" />
+    <option name="width" value="1267" />
     <option name="height" value="873" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -339,7 +350,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -371,36 +384,6 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -417,36 +400,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -523,156 +476,6 @@
               <option name="myItemId" value="jcasino" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="validator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="listener" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="game" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -738,278 +541,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="command" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="command" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="command" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="navigation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="command" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ajax" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="command" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ajax" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="command" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1024,7 +557,8 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/SQL Dialects" value="MySQL" />
     <property name="ignore_missing_gitignore" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="ProfileF&#9;PSI&#9;JAVA://by.sasnouskikh.jcasino.dao.impl.PlayerDAOImpl.ProfileField&#10;PATTERN&#9;PSI&#9;JAVA://by.sasnouskikh.jcasino.manager.ConfigConstant#EMAIL_PATTERN_NEW_PASSWORD" />
+    <property name="SearchEverywhereHistoryKey" value="loanLo&#9;PSI&#9;JAVA://by.sasnouskikh.jcasino.logic.LoanLogic&#10;ProfileF&#9;PSI&#9;JAVA://by.sasnouskikh.jcasino.dao.impl.PlayerDAOImpl.ProfileField&#10;PATTERN&#9;PSI&#9;JAVA://by.sasnouskikh.jcasino.manager.ConfigConstant#EMAIL_PATTERN_NEW_PASSWORD" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1619,7 +1153,12 @@
       <workItem from="1490815102343" duration="6275000" />
       <workItem from="1491211289320" duration="116767000" />
       <workItem from="1491590992942" duration="10838000" />
-      <workItem from="1491734409398" duration="74246000" />
+      <workItem from="1491734409398" duration="91715000" />
+      <workItem from="1492419772484" duration="32812000" />
+      <workItem from="1492509093970" duration="6289000" />
+      <workItem from="1492518232093" duration="1208000" />
+      <workItem from="1492521299092" duration="13068000" />
+      <workItem from="1492537781012" duration="18466000" />
     </task>
     <task id="LOCAL-00001" summary="First big redactoring">
       <created>1491502443971</created>
@@ -1635,7 +1174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491867681418</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Project is good! Lets refactor!">
+      <created>1491929382810</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1491929382810</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1671,7 +1217,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="840090000" />
+    <option name="totallyTimeSpent" value="929402000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1683,11 +1229,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="228" y="23" width="1212" height="873" extended-state="1" />
-    <editor active="true" />
+    <frame x="173" y="23" width="1267" height="873" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277849" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.121638924" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32266325" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32818532" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1696,19 +1242,19 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1956242" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1559322" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.49679896" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18181819" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32818532" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34188035" sideWeight="0.77319586" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27183673" sideWeight="0.77319586" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25870255" sideWeight="0.22680412" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16604477" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16571428" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7183099" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39948782" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39948782" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1724,7 +1270,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1956242" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1956242" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1559322" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1738,15 +1284,15 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277849" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32266325" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32818532" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32818532" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20486556" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21638924" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32818532" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890856" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22327045" sideWeight="0.77319586" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25790513" sideWeight="0.77319586" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25870255" sideWeight="0.22680412" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7183099" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -1780,435 +1326,476 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/game/fruits/js/quantity.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManagePlayerCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+        <state relative-caret-position="123">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageStreaksCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="1274" column="0" selection-start-line="1274" selection-start-column="0" selection-end-line="1274" selection-end-column="0" />
+        <state relative-caret-position="150">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/game/fruits/img/reel.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript5.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageSupportCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+        <state relative-caret-position="150">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageTransactionsCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="1179" column="0" selection-start-line="1179" selection-start-column="0" selection-end-line="1179" selection-end-column="0" />
+        <state relative-caret-position="150">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/jspf/header.jspf">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/MultipartFormCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoMainCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="150">
+          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/AjaxController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="35" column="65" selection-start-line="35" selection-start-column="65" selection-end-line="35" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/Command.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/main.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/jspf/footer.jspf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/LoginCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+        <state relative-caret-position="229">
+          <caret line="66" column="12" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
+        <state relative-caret-position="-305">
+          <caret line="49" column="12" selection-start-line="49" selection-start-column="12" selection-end-line="49" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/style.css">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/controller/ShowImageServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="78" selection-end-column="1" />
+        <state relative-caret-position="315">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.6/commons-lang-2.6-sources.jar!/org/apache/commons/lang/StringUtils.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/PlayerDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="5417" column="26" selection-start-line="5417" selection-start-column="26" selection-end-line="5417" selection-end-column="26" />
+        <state relative-caret-position="4590">
+          <caret line="318" column="7" selection-start-line="318" selection-start-column="7" selection-end-line="318" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/util/regex/Pattern.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/UserDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="1085" column="19" selection-start-line="1085" selection-start-column="19" selection-end-line="1085" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/util/regex/Matcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="1260" column="12" selection-start-line="1260" selection-start-column="12" selection-end-line="1260" selection-end-column="12" />
-          <folding>
-            <element signature="e#21591#21592#0" expanded="false" />
-            <element signature="e#21636#21637#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/validator/FormValidator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-693">
-          <caret line="92" column="27" selection-start-line="92" selection-start-column="27" selection-end-line="92" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/lang/AbstractStringBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="821" column="33" selection-start-line="821" selection-start-column="33" selection-end-line="821" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/lang/StringBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="252" column="22" selection-start-line="252" selection-start-column="22" selection-end-line="252" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/manager/StreakLogicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="611">
-          <caret line="100" column="7" selection-start-line="100" selection-start-column="7" selection-end-line="100" selection-end-column="7" />
-          <folding>
-            <marker date="1491854814000" expanded="true" signature="2900:3118" ph="{...}" />
-            <marker date="1491854814000" expanded="true" signature="3174:3388" ph="{...}" />
-            <marker date="1491854814000" expanded="true" signature="3440:3658" ph="{...}" />
-            <marker date="1491854814000" expanded="true" signature="3714:3968" ph="{...}" />
-            <marker date="1491854814000" expanded="true" signature="4023:4335" ph="{...}" />
-            <marker date="1491854814000" expanded="true" signature="4391:4649" ph="{...}" />
-            <marker date="1491854814000" expanded="true" signature="4704:4880" ph="{...}" />
-            <marker date="1491854814000" expanded="false" signature="4940:4953" ph=" { " />
-            <marker date="1491854814000" expanded="false" signature="5022:5030" ph=" }" />
-            <marker date="1491854814000" expanded="true" signature="5086:5282" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/ReelValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/lib/ant-javafx.jar!/resources/web-files/dtjava.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="266" column="47" selection-start-line="266" selection-start-column="47" selection-end-line="266" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/manager/GameEngineTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/util/ArrayDeque.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="330" column="13" selection-start-line="330" selection-start-column="13" selection-end-line="330" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/UserLogic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="55" column="31" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/PlayerLogic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="137" column="9" selection-start-line="135" selection-start-column="9" selection-end-line="137" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/PlayerDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="380" column="19" selection-start-line="380" selection-start-column="19" selection-end-line="380" selection-end-column="19" />
-          <folding>
-            <marker date="1491496747000" expanded="true" signature="2130:2399" ph="SELECT id, s... verification" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/util/Collections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-105">
-          <caret line="649" column="74" selection-start-line="649" selection-start-column="74" selection-end-line="649" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/util/Arrays.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="3780" column="56" selection-start-line="3780" selection-start-column="32" selection-end-line="3780" selection-end-column="56" />
-          <folding>
-            <element signature="e#177013#177014#0" expanded="false" />
-            <element signature="e#177054#177055#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/math/BigDecimal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="1285" column="22" selection-start-line="1285" selection-start-column="22" selection-end-line="1285" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/TransactionLogic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="64" column="22" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/operation_history.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="90" column="94" selection-start-line="90" selection-start-column="46" selection-end-line="90" selection-end-column="94" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/admin/manage_streaks.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/StatsHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoSessionListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="27" column="56" selection-start-line="27" selection-start-column="56" selection-end-line="27" selection-end-column="56" />
+        <state relative-caret-position="654">
+          <caret line="89" column="7" selection-start-line="89" selection-start-column="7" selection-end-line="89" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Streak.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/NewsDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        <state relative-caret-position="583">
+          <caret line="242" column="12" selection-start-line="242" selection-start-column="12" selection-end-line="242" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1492538640000" expanded="true" signature="750:856" ph="SELECT id, d... news" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/PlayerDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="863" column="17" selection-start-line="863" selection-start-column="17" selection-end-line="863" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1492538640000" expanded="true" signature="1481:1578" ph="SELECT id FR... user" />
+            <marker date="1492538640000" expanded="true" signature="1697:1794" ph="SELECT email... user" />
+            <marker date="1492538640000" expanded="true" signature="1921:2105" ph="SELECT fname... player" />
+            <marker date="1492538640000" expanded="true" signature="2235:2453" ph="SELECT fname... player" />
+            <marker date="1492538640000" expanded="true" signature="2582:2818" ph="SELECT id, s... verification" />
+            <marker date="1492538640000" expanded="true" signature="2985:3254" ph="SELECT id, s... verification" />
+            <marker date="1492538640000" expanded="true" signature="3383:3818" ph="SELECT balan... player" />
+            <marker date="1492538640000" expanded="true" signature="3963:4184" ph="SELECT ABS(S... transaction" />
+            <marker date="1492538640000" expanded="true" signature="4326:4483" ph="INSERT INTO user... " />
+            <marker date="1492538640000" expanded="true" signature="4626:4808" ph="INSERT INTO player... " />
+            <marker date="1492538640000" expanded="true" signature="4956:5059" ph="INSERT INTO verification... " />
+            <marker date="1492538640000" expanded="true" signature="5185:5361" ph="UPDATE user " />
+            <marker date="1492538640000" expanded="true" signature="5498:5681" ph="UPDATE user " />
+            <marker date="1492538640000" expanded="true" signature="5810:5988" ph="UPDATE playe... " />
+            <marker date="1492538640000" expanded="true" signature="6118:6296" ph="UPDATE playe... " />
+            <marker date="1492538640000" expanded="true" signature="6424:6602" ph="UPDATE playe... " />
+            <marker date="1492538640000" expanded="true" signature="6736:6917" ph="UPDATE playe... " />
+            <marker date="1492538640000" expanded="true" signature="7045:7227" ph="UPDATE playe... " />
+            <marker date="1492538640000" expanded="true" signature="7386:7581" ph="UPDATE playe... " />
+            <marker date="1492538640000" expanded="true" signature="7797:7984" ph="UPDATE verif... " />
+            <marker date="1492538640000" expanded="true" signature="8135:8320" ph="UPDATE verif... " />
+            <marker date="1492538640000" expanded="true" signature="8507:8730" ph="UPDATE verif... " />
+            <marker date="1492538640000" expanded="true" signature="8887:9075" ph="UPDATE playe... " />
+            <marker date="1492538640000" expanded="true" signature="9244:9449" ph="UPDATE playe... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/QuestionDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="334" column="33" selection-start-line="334" selection-start-column="33" selection-end-line="334" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/UserDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="191" column="7" selection-start-line="191" selection-start-column="7" selection-end-line="191" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/StreakDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="80" column="76" selection-start-line="80" selection-start-column="76" selection-end-line="80" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/TransactionDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="203" column="40" selection-start-line="203" selection-start-column="40" selection-end-line="203" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/TransactionDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="69" column="65" selection-start-line="69" selection-start-column="65" selection-end-line="69" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/LoanDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="20" column="7" selection-start-line="18" selection-start-column="4" selection-end-line="20" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/StreakDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="118" column="19" selection-start-line="118" selection-start-column="19" selection-end-line="118" selection-end-column="19" />
+        <state relative-caret-position="226">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/GameEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="48" column="52" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoContextListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/DAOException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ConnectionPoolException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+          <folding>
+            <element signature="e#943#944#0" expanded="true" />
+            <element signature="e#973#974#0" expanded="true" />
+            <element signature="e#1727#1728#0" expanded="true" />
+            <element signature="e#1764#1765#0" expanded="true" />
+            <element signature="e#2507#2508#0" expanded="true" />
+            <element signature="e#2535#2536#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/LoanDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3690">
+          <caret line="265" column="4" selection-start-line="265" selection-start-column="4" selection-end-line="265" selection-end-column="4" />
+          <folding>
+            <marker date="1492542650000" expanded="true" signature="1133:1474" ph="SELECT id, p... loan" />
+            <marker date="1492542650000" expanded="true" signature="1702:2062" ph="SELECT id, p... loan" />
+            <marker date="1492542650000" expanded="true" signature="2259:2532" ph="SELECT id, p... loan" />
+            <marker date="1492542650000" expanded="true" signature="2785:3147" ph="SELECT id, p... loan" />
+            <marker date="1492542650000" expanded="true" signature="3265:3424" ph="INSERT INTO loan... " />
+            <marker date="1492542650000" expanded="true" signature="3581:3773" ph="UPDATE loan " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ConnectionPool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-282">
+          <caret line="152" column="49" selection-start-line="152" selection-start-column="49" selection-end-line="152" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/DAOHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="170" column="7" selection-start-line="170" selection-start-column="7" selection-end-line="170" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/WrappedConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1680">
+          <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/AbstractDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="13" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/time/LocalDate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="136" column="19" selection-start-line="136" selection-start-column="19" selection-end-line="136" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/QueryManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="81" column="41" selection-start-line="81" selection-start-column="41" selection-end-line="81" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="36" column="28" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/util/Arrays.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="4138" column="22" selection-start-line="4138" selection-start-column="22" selection-end-line="4138" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/util/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="127" column="25" selection-start-line="127" selection-start-column="25" selection-end-line="127" selection-end-column="25" />
+          <folding>
+            <element signature="e#3914#3915#0" expanded="false" />
+            <element signature="e#3960#3961#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/math/BigDecimal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="2203" column="15" selection-start-line="2203" selection-start-column="15" selection-end-line="2203" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/StatsHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/logic/StreakLogic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="30" column="54" selection-start-line="30" selection-start-column="54" selection-end-line="30" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/ConfigConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="36" column="31" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
+        <state relative-caret-position="203">
+          <caret line="250" column="22" selection-start-line="250" selection-start-column="22" selection-end-line="250" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoContextListener.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/src.zip!/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
+        <state relative-caret-position="199">
+          <caret line="110" column="19" selection-start-line="110" selection-start-column="19" selection-end-line="110" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/game/fruits/js/slot.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="304" column="52" selection-start-line="304" selection-start-column="52" selection-end-line="304" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/game/fruits/css/fruits.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="139" column="29" selection-start-line="139" selection-start-column="29" selection-end-line="139" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/GameEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoIndexCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="13" column="48" selection-start-line="12" selection-start-column="8" selection-end-line="13" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/game/fruits.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="26" column="81" selection-start-line="26" selection-start-column="81" selection-end-line="26" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/CommandFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="199" column="23" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/command/SpinCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromGameCommand.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Roll.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoGameFruitsCommand.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Question.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
+        <state relative-caret-position="120">
+          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerVerification.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4140">
+          <caret line="319" column="5" selection-start-line="319" selection-start-column="5" selection-end-line="319" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3675">
+          <caret line="284" column="35" selection-start-line="284" selection-start-column="35" selection-end-line="284" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerProfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2640">
+          <caret line="205" column="89" selection-start-line="205" selection-start-column="89" selection-end-line="205" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/News.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Loan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/JCasinoUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Admin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Streak.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="334" column="9" selection-start-line="334" selection-start-column="9" selection-end-line="334" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="48" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/PlayerAccount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Transaction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="678">
+          <caret line="199" column="34" selection-start-line="199" selection-start-column="34" selection-end-line="199" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3421#3422#0" expanded="true" />
+            <element signature="e#3490#3491#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="137" column="4" selection-start-line="137" selection-start-column="4" selection-end-line="141" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>

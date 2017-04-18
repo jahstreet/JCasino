@@ -39,10 +39,10 @@
             <ul>
                 <li><a href="${pageContext.request.contextPath}/controller?command=goto_main">
                     <fmt:message key="header.topmenu.main"/></a></li>
-                <li><a href="#"><fmt:message key="header.topmenu.rules"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/controller?command=goto_rules">
+                    <fmt:message key="header.topmenu.rules"/></a></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=goto_support">
-                    <fmt:message key="header.topmenu.support"/></a>
-                </li>
+                    <fmt:message key="header.topmenu.support"/></a></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=goto_game_fruits">
                     <fmt:message key="header.topmenu.play"/></a></li>
             </ul>

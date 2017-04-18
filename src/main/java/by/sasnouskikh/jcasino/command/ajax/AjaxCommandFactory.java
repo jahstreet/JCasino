@@ -12,23 +12,57 @@ import java.util.HashMap;
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_ROLE;
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.PARAM_COMMAND;
 
+/**
+ * The factory of Commands suitable to use with {@link by.sasnouskikh.jcasino.controller.AjaxController}.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see AjaxCommand
+ */
 public class AjaxCommandFactory {
     private static final Logger LOGGER = LogManager.getLogger(AjaxCommandFactory.class);
 
-    private static HashMap<AjaxCommandFactory.CommandType, AjaxCommand> guestCommands  = new HashMap<>();
+    /**
+     * {@link HashMap} collection of commands available to
+     * {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole#GUEST}.
+     */
+    private static HashMap<AjaxCommandFactory.CommandType, AjaxCommand> guestCommands = new HashMap<>();
+
+    /**
+     * {@link HashMap} collection of commands available to
+     * {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole#PLAYER}.
+     */
     private static HashMap<AjaxCommandFactory.CommandType, AjaxCommand> playerCommands = new HashMap<>();
 
     static {
         guestCommands.put(CommandType.SPIN, new SpinCommand());
-
         playerCommands.putAll(guestCommands);
-
     }
 
+    /**
+     * Enumeration of Commands suitable to use with {@link by.sasnouskikh.jcasino.controller.AjaxController}.
+     */
     private enum CommandType {
         SPIN
     }
 
+    /**
+     * Private constructor to forbid create {@link AjaxCommandFactory} instances.
+     */
+    private AjaxCommandFactory() {
+    }
+
+    /**
+     * Defines {@link AjaxCommand} due to {@link by.sasnouskikh.jcasino.manager.ConfigConstant#PARAM_COMMAND} parameter
+     * of {@link HttpServletRequest#getParameter(String)} (should be {@link String#equalsIgnoreCase} to
+     * {@link CommandType}) and {@link by.sasnouskikh.jcasino.manager.ConfigConstant#ATTR_ROLE} attribute of
+     * {@link javax.servlet.http.HttpSession#getAttribute(String)}
+     *
+     * @param request request from client to get parameters to work with
+     * @return defined {@link AjaxCommand} or null
+     * @see by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole
+     * @see #validateCommandName(String)
+     * @see #defineCommand(String, JCasinoUser.UserRole)
+     */
     public static AjaxCommand defineCommand(HttpServletRequest request) {
         String               commandName = request.getParameter(PARAM_COMMAND);
         JCasinoUser.UserRole role        = (JCasinoUser.UserRole) request.getSession().getAttribute(ATTR_ROLE);
@@ -39,6 +73,15 @@ public class AjaxCommandFactory {
         return defineCommand(commandName, role);
     }
 
+    /**
+     * Defines {@link AjaxCommand} due to {@link String} commandName (should be {@link String#equalsIgnoreCase} to
+     * {@link CommandType}) and {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole}
+     *
+     * @param commandName name of the command
+     * @param role        user's role
+     * @return defined {@link AjaxCommand} or null
+     * @see HashMap#get(Object)
+     */
     private static AjaxCommand defineCommand(String commandName, JCasinoUser.UserRole role) {
         CommandType commandType = CommandType.valueOf(commandName.replaceAll("-", "_").toUpperCase());
         AjaxCommand command;
@@ -50,6 +93,12 @@ public class AjaxCommandFactory {
         return command;
     }
 
+    /**
+     * Checks if {@link String} commandName is valid
+     *
+     * @param commandName name of the command
+     * @return true if commandName is valid
+     */
     private static boolean validateCommandName(String commandName) {
         if (commandName == null || commandName.trim().isEmpty()) {
             return false;

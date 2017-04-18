@@ -1,8 +1,8 @@
 package by.sasnouskikh.jcasino.logic;
 
 import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.StreakDAOImpl;
+import by.sasnouskikh.jcasino.dao.StreakDAO;
+import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Roll;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
@@ -42,7 +42,8 @@ public class StreakLogic {
         }
         monthPattern = monthPattern.trim() + PERCENT;
         List<Streak> streakList = null;
-        try (StreakDAOImpl streakDAO = DAOFactory.getStreakDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            StreakDAO streakDAO = daoHelper.getStreakDAO();
             streakList = streakDAO.takePlayerStreaks(id, monthPattern);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -59,7 +60,8 @@ public class StreakLogic {
             monthPattern = EMPTY_STRING;
         }
         monthPattern = monthPattern.trim() + PERCENT;
-        try (StreakDAOImpl streakDAO = DAOFactory.getStreakDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            StreakDAO streakDAO = daoHelper.getStreakDAO();
             streakList = streakDAO.takeStreakList(monthPattern);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -78,27 +80,13 @@ public class StreakLogic {
         String           lineString   = buildLineString(rolls);
         String           betString    = buildBetString(rolls);
         String           resultString = buildResultString(rolls);
-        try (StreakDAOImpl streakDAO = DAOFactory.getStreakDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            StreakDAO streakDAO = daoHelper.getStreakDAO();
             return streakDAO.updateStreak(id, rollString, offsetString, lineString, betString, resultString);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
         }
         return false;
-    }
-
-    public static String generateRollString() {
-        StringBuilder streak = new StringBuilder();
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            for (int j = 0; j < REEL_NUMBER; j++) {
-                streak.append(RandomGenerator.generateNumber(1, REEL_LENGTH)).append(REEL_SPLITERATOR);
-            }
-            streak.setCharAt(streak.length() - 1, BET_SPLITERATOR);
-        }
-        return streak.deleteCharAt(streak.length() - 1).toString().trim();
-    }
-
-    public static int[] generateRollArray() {
-        return parseRollArray(generateRollString());
     }
 
     public static Streak generateStreak() {
@@ -113,12 +101,13 @@ public class StreakLogic {
 
     public static Streak generateStreak(int playerId) {
         Streak streak = null;
-        try (StreakDAOImpl streakDAO = DAOFactory.getStreakDAO()) {
-            streakDAO.beginTransaction();
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            StreakDAO streakDAO = daoHelper.getStreakDAO();
+            daoHelper.beginTransaction();
             int streakId = streakDAO.insertStreak(playerId, generateRollString());
             streak = streakDAO.takeStreak(streakId);
             if (streak != null) {
-                streakDAO.commit();
+                daoHelper.commit();
             }
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -144,180 +133,6 @@ public class StreakLogic {
         return buildRollList(roll, offset, lines, bet, result);
     }
 
-    public static ArrayDeque<Roll> buildRollList(String stringRoll, String stringOffset, String stringLines,
-                                                String stringBet, String stringResult) {
-        ArrayDeque<Roll> rollArrayDeque = new ArrayDeque<>();
-        if (stringRoll == null || stringRoll.trim().isEmpty()
-            || stringOffset == null || stringOffset.trim().isEmpty()
-            || stringLines == null || stringLines.trim().isEmpty()
-            || stringBet == null || stringBet.trim().isEmpty()
-            || stringResult == null || stringResult.trim().isEmpty()) {
-            return rollArrayDeque;
-        }
-        int[]        rolls   = parseRollArray(stringRoll);
-        int[]        offsets = parseRollArray(stringOffset);
-        boolean[]    lines   = parseLineArray(stringLines);
-        BigDecimal[] bets    = parseBetArray(stringBet);
-        BigDecimal[] results = parseBetArray(stringResult);
-        if (rolls == null || rolls.length < BETS_IN_STREAK * REEL_NUMBER
-            || offsets == null || offsets.length < BETS_IN_STREAK * REEL_NUMBER
-            || lines == null || lines.length < BETS_IN_STREAK * LINE_NUMBER
-            || bets == null || bets.length < BETS_IN_STREAK
-            || results == null || results.length < BETS_IN_STREAK) {
-            return rollArrayDeque;
-        }
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            int  reelOffset = i * REEL_NUMBER;
-            int  lineOffset = i * LINE_NUMBER;
-            Roll roll       = new Roll();
-            roll.setRoll(Arrays.copyOfRange(rolls, reelOffset, reelOffset + REEL_NUMBER));
-            roll.setLines(Arrays.copyOfRange(lines, lineOffset, lineOffset + LINE_NUMBER));
-            roll.setOffset(Arrays.copyOfRange(offsets, reelOffset, reelOffset + REEL_NUMBER));
-            roll.setBet(bets[i]);
-            roll.setResult(results[i]);
-            rollArrayDeque.add(roll);
-        }
-        return rollArrayDeque;
-    }
-
-    public static String buildRollString(ArrayDeque<Roll> rolls) {
-        StringBuilder result = new StringBuilder();
-        for (Roll r : rolls) {
-            int[] roll = r.getRoll();
-            for (int i : roll) {
-                result.append(i).append(REEL_SPLITERATOR);
-            }
-            result.setCharAt(result.length() - 1, BET_SPLITERATOR);
-        }
-        return result.deleteCharAt(result.length() - 1).toString().trim();
-    }
-
-    public static String buildOffsetString(ArrayDeque<Roll> rolls) {
-        StringBuilder result = new StringBuilder();
-        for (Roll r : rolls) {
-            int[] offset = r.getOffset();
-            for (int i : offset) {
-                result.append(i).append(REEL_SPLITERATOR);
-            }
-            result.setCharAt(result.length() - 1, BET_SPLITERATOR);
-        }
-        return result.deleteCharAt(result.length() - 1).toString().trim();
-    }
-
-    public static String buildLineString(ArrayDeque<Roll> rolls) {
-        StringBuilder result = new StringBuilder();
-        for (Roll r : rolls) {
-            boolean[] lines = r.getLines();
-            for (int j = 0; j < LINE_NUMBER; j++) {
-                if (lines[j]) {
-                    result.append(LINE_SELECTED);
-                } else {
-                    result.append(LINE_NOT_SELECTED);
-                }
-            }
-            result.append(BET_SPLITERATOR);
-        }
-        return result.deleteCharAt(result.length() - 1).toString().trim();
-    }
-
-    public static String buildBetString(ArrayDeque<Roll> rolls) {
-        StringBuilder result = new StringBuilder();
-        for (Roll r : rolls) {
-            result.append(r.getBet().toPlainString()).append(BET_SPLITERATOR);
-        }
-        return result.deleteCharAt(result.length() - 1).toString().trim();
-    }
-
-    public static String buildResultString(ArrayDeque<Roll> rolls) {
-        StringBuilder result = new StringBuilder();
-        for (Roll r : rolls) {
-            result.append(r.getResult().toPlainString()).append(BET_SPLITERATOR);
-        }
-        return result.deleteCharAt(result.length() - 1).toString().trim();
-    }
-
-    public static int[] parseRollArray(String source) {
-        if (source == null || source.trim().isEmpty()) {
-            return new int[]{};
-        }
-        String[] betArray = source.split(String.valueOf(BET_SPLITERATOR));
-        int[]    result   = new int[BETS_IN_STREAK * REEL_NUMBER];
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            int      offset     = i * REEL_NUMBER;
-            String[] reelValues = betArray[i].split(String.valueOf(REEL_SPLITERATOR));
-            for (int j = 0; j < REEL_NUMBER; j++) {
-                result[offset + j] = Integer.parseInt(reelValues[j]);
-            }
-        }
-        return result;
-    }
-
-    public static BigDecimal[] parseBetArray(String source) {
-        if (source == null || source.trim().isEmpty()) {
-            return new BigDecimal[]{};
-        }
-        String[]     betArray = source.split(String.valueOf(BET_SPLITERATOR));
-        BigDecimal[] result   = new BigDecimal[BETS_IN_STREAK];
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            result[i] = new BigDecimal(betArray[i]);
-        }
-        return result;
-    }
-
-    public static boolean[] parseLineArray(String source) {
-        if (source == null || source.trim().isEmpty()) {
-            return new boolean[]{};
-        }
-        String[]  betArray = source.split(String.valueOf(BET_SPLITERATOR));
-        boolean[] result   = new boolean[BETS_IN_STREAK * LINE_NUMBER];
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            int offset = i * LINE_NUMBER;
-            for (int j = 0; j < LINE_NUMBER; j++) {
-                result[offset + j] = betArray[i].charAt(j) == LINE_SELECTED;
-            }
-        }
-        return result;
-    }
-
-    //TODO need?
-    public static String buildRollString(int[] source) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            int offset = i * REEL_NUMBER;
-            for (int j = 0; j < REEL_NUMBER; j++) {
-                builder.append(source[offset + j]).append(REEL_SPLITERATOR);
-            }
-            builder.setCharAt(builder.length() - 1, BET_SPLITERATOR);
-        }
-        return builder.deleteCharAt(builder.length() - 1).toString().trim();
-    }
-
-    //TODO need?
-    public static String buildLineString(boolean[] source) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            int offset = i * LINE_NUMBER;
-            for (int j = 0; j < LINE_NUMBER; j++) {
-                if (source[offset + j]) {
-                    builder.append(LINE_SELECTED);
-                } else {
-                    builder.append(LINE_NOT_SELECTED);
-                }
-            }
-            builder.append(BET_SPLITERATOR);
-        }
-        return builder.deleteCharAt(builder.length() - 1).toString().trim();
-    }
-
-    //TODO need?
-    public static String buildBetString(BigDecimal[] source) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < BETS_IN_STREAK; i++) {
-            builder.append(source[i]).append(BET_SPLITERATOR);
-        }
-        return builder.deleteCharAt(builder.length() - 1).toString();
-    }
-
     public static BigDecimal countStreakTotal(ArrayDeque<Roll> rolls) {
         BigDecimal total = BigDecimal.ZERO;
         for (Roll roll : rolls) {
@@ -327,6 +142,34 @@ public class StreakLogic {
             }
         }
         return total;
+    }
+
+    public static void completeStreak(Streak streak) {
+        final int[]     nullOffsetArray = new int[]{0, 0, 0, 0, 0};
+        final boolean[] nullLinesArray  = new boolean[]{false, false, false, false, false};
+        if (isComplete(streak)) {
+            return;
+        }
+        ArrayDeque<Roll> rolls      = streak.getRolls();
+        String           rollString = streak.getRoll();
+        while (rolls.size() < BETS_IN_STREAK) {
+            Roll roll = new Roll();
+            roll.setRoll(parseCurrentRollArray(rollString, rolls.size()));
+            roll.setOffset(nullOffsetArray);
+            roll.setLines(nullLinesArray);
+            roll.setBet(BigDecimal.ZERO);
+            roll.setResult(BigDecimal.ZERO);
+            rolls.add(roll);
+        }
+        streak.setOffset(buildOffsetString(rolls));
+        streak.setLines(buildLineString(rolls));
+        streak.setBet(buildBetString(rolls));
+        streak.setResult(buildResultString(rolls));
+    }
+
+    public static boolean isComplete(Streak streak) {
+        return !(streak == null || streak.getRolls() == null)
+               && streak.getRolls().size() >= BETS_IN_STREAK;
     }
 
     static BigDecimal defineMaxBet(List<Streak> streaks) {
@@ -411,7 +254,7 @@ public class StreakLogic {
             for (Streak streak : streaks) {
                 for (Roll roll : streak.getRolls()) {
                     BigDecimal result = roll.getResult();
-                    if (result != null) {
+                    if (result != null && result.signum() > 0) {
                         totalWin = totalWin.add(result);
                     }
                 }
@@ -420,7 +263,153 @@ public class StreakLogic {
         return totalWin;
     }
 
-    static void sortByTotal(List<Streak> list, boolean ascending) {
+    private static String generateRollString() {
+        StringBuilder streak = new StringBuilder();
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            for (int j = 0; j < REEL_NUMBER; j++) {
+                streak.append(RandomGenerator.generateNumber(1, REEL_LENGTH)).append(REEL_SPLITERATOR);
+            }
+            streak.setCharAt(streak.length() - 1, BET_SPLITERATOR);
+        }
+        return streak.deleteCharAt(streak.length() - 1).toString().trim();
+    }
+
+    private static ArrayDeque<Roll> buildRollList(String stringRoll, String stringOffset, String stringLines,
+                                                 String stringBet, String stringResult) {
+        ArrayDeque<Roll> rollArrayDeque = new ArrayDeque<>();
+        if (stringRoll == null || stringRoll.trim().isEmpty()
+            || stringOffset == null || stringOffset.trim().isEmpty()
+            || stringLines == null || stringLines.trim().isEmpty()
+            || stringBet == null || stringBet.trim().isEmpty()
+            || stringResult == null || stringResult.trim().isEmpty()) {
+            return rollArrayDeque;
+        }
+        int[]        rolls   = parseRollArray(stringRoll);
+        int[]        offsets = parseRollArray(stringOffset);
+        boolean[]    lines   = parseLineArray(stringLines);
+        BigDecimal[] bets    = parseBetArray(stringBet);
+        BigDecimal[] results = parseBetArray(stringResult);
+        if (rolls == null || rolls.length < BETS_IN_STREAK * REEL_NUMBER
+            || offsets == null || offsets.length < BETS_IN_STREAK * REEL_NUMBER
+            || lines == null || lines.length < BETS_IN_STREAK * LINE_NUMBER
+            || bets == null || bets.length < BETS_IN_STREAK
+            || results == null || results.length < BETS_IN_STREAK) {
+            return rollArrayDeque;
+        }
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            int  reelOffset = i * REEL_NUMBER;
+            int  lineOffset = i * LINE_NUMBER;
+            Roll roll       = new Roll();
+            roll.setRoll(Arrays.copyOfRange(rolls, reelOffset, reelOffset + REEL_NUMBER));
+            roll.setLines(Arrays.copyOfRange(lines, lineOffset, lineOffset + LINE_NUMBER));
+            roll.setOffset(Arrays.copyOfRange(offsets, reelOffset, reelOffset + REEL_NUMBER));
+            roll.setBet(bets[i]);
+            roll.setResult(results[i]);
+            rollArrayDeque.add(roll);
+        }
+        return rollArrayDeque;
+    }
+
+    private static String buildRollString(ArrayDeque<Roll> rolls) {
+        StringBuilder result = new StringBuilder();
+        for (Roll r : rolls) {
+            int[] roll = r.getRoll();
+            for (int i : roll) {
+                result.append(i).append(REEL_SPLITERATOR);
+            }
+            result.setCharAt(result.length() - 1, BET_SPLITERATOR);
+        }
+        return result.deleteCharAt(result.length() - 1).toString().trim();
+    }
+
+    private static String buildOffsetString(ArrayDeque<Roll> rolls) {
+        StringBuilder result = new StringBuilder();
+        for (Roll r : rolls) {
+            int[] offset = r.getOffset();
+            for (int i : offset) {
+                result.append(i).append(REEL_SPLITERATOR);
+            }
+            result.setCharAt(result.length() - 1, BET_SPLITERATOR);
+        }
+        return result.deleteCharAt(result.length() - 1).toString().trim();
+    }
+
+    private static String buildLineString(ArrayDeque<Roll> rolls) {
+        StringBuilder result = new StringBuilder();
+        for (Roll r : rolls) {
+            boolean[] lines = r.getLines();
+            for (int j = 0; j < LINE_NUMBER; j++) {
+                if (lines[j]) {
+                    result.append(LINE_SELECTED);
+                } else {
+                    result.append(LINE_NOT_SELECTED);
+                }
+            }
+            result.append(BET_SPLITERATOR);
+        }
+        return result.deleteCharAt(result.length() - 1).toString().trim();
+    }
+
+    private static String buildBetString(ArrayDeque<Roll> rolls) {
+        StringBuilder result = new StringBuilder();
+        for (Roll r : rolls) {
+            result.append(r.getBet().toPlainString()).append(BET_SPLITERATOR);
+        }
+        return result.deleteCharAt(result.length() - 1).toString().trim();
+    }
+
+    private static String buildResultString(ArrayDeque<Roll> rolls) {
+        StringBuilder result = new StringBuilder();
+        for (Roll r : rolls) {
+            result.append(r.getResult().toPlainString()).append(BET_SPLITERATOR);
+        }
+        return result.deleteCharAt(result.length() - 1).toString().trim();
+    }
+
+    private static int[] parseRollArray(String source) {
+        if (source == null || source.trim().isEmpty()) {
+            return new int[]{};
+        }
+        String[] betArray = source.split(String.valueOf(BET_SPLITERATOR));
+        int[]    result   = new int[BETS_IN_STREAK * REEL_NUMBER];
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            int      offset     = i * REEL_NUMBER;
+            String[] reelValues = betArray[i].split(String.valueOf(REEL_SPLITERATOR));
+            for (int j = 0; j < REEL_NUMBER; j++) {
+                result[offset + j] = Integer.parseInt(reelValues[j]);
+            }
+        }
+        return result;
+    }
+
+    private static BigDecimal[] parseBetArray(String source) {
+        if (source == null || source.trim().isEmpty()) {
+            return new BigDecimal[]{};
+        }
+        String[]     betArray = source.split(String.valueOf(BET_SPLITERATOR));
+        BigDecimal[] result   = new BigDecimal[BETS_IN_STREAK];
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            result[i] = new BigDecimal(betArray[i]);
+        }
+        return result;
+    }
+
+    private static boolean[] parseLineArray(String source) {
+        if (source == null || source.trim().isEmpty()) {
+            return new boolean[]{};
+        }
+        String[]  betArray = source.split(String.valueOf(BET_SPLITERATOR));
+        boolean[] result   = new boolean[BETS_IN_STREAK * LINE_NUMBER];
+        for (int i = 0; i < BETS_IN_STREAK; i++) {
+            int offset = i * LINE_NUMBER;
+            for (int j = 0; j < LINE_NUMBER; j++) {
+                result[offset + j] = betArray[i].charAt(j) == LINE_SELECTED;
+            }
+        }
+        return result;
+    }
+
+    private static void sortByTotal(List<Streak> list, boolean ascending) {
         if (list == null || list.isEmpty()) {
             return;
         }
@@ -429,34 +418,6 @@ public class StreakLogic {
             comparator = comparator.reversed();
         }
         Collections.sort(list, comparator);
-    }
-
-    public static void completeStreak(Streak streak) {
-        final int[]     nullOffsetArray = new int[]{0, 0, 0, 0, 0};
-        final boolean[] nullLinesArray  = new boolean[]{false, false, false, false, false};
-        if (isComplete(streak)) {
-            return;
-        }
-        ArrayDeque<Roll> rolls      = streak.getRolls();
-        String           rollString = streak.getRoll();
-        while (rolls.size() < BETS_IN_STREAK) {
-            Roll roll = new Roll();
-            roll.setRoll(parseCurrentRollArray(rollString, rolls.size()));
-            roll.setOffset(nullOffsetArray);
-            roll.setLines(nullLinesArray);
-            roll.setBet(BigDecimal.ZERO);
-            roll.setResult(BigDecimal.ZERO);
-            rolls.add(roll);
-        }
-        streak.setOffset(buildOffsetString(rolls));
-        streak.setLines(buildLineString(rolls));
-        streak.setBet(buildBetString(rolls));
-        streak.setResult(buildResultString(rolls));
-    }
-
-    public static boolean isComplete(Streak streak) {
-        return !(streak == null || streak.getRolls() == null)
-               && streak.getRolls().size() >= BETS_IN_STREAK;
     }
 
     private static class TotalComparator implements Comparator<Streak> {

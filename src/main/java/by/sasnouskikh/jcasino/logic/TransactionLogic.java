@@ -1,8 +1,8 @@
 package by.sasnouskikh.jcasino.logic;
 
 import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.TransactionDAOImpl;
+import by.sasnouskikh.jcasino.dao.TransactionDAO;
+import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
 import org.apache.logging.log4j.Level;
@@ -31,7 +31,8 @@ public class TransactionLogic {
         }
         monthPattern = monthPattern.trim() + PERCENT;
         List<Transaction> transactionList = null;
-        try (TransactionDAOImpl transactionDAO = DAOFactory.getTransactionDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            TransactionDAO transactionDAO = daoHelper.getTransactionDAO();
             transactionList = transactionDAO.takePlayerTransactions(id, monthPattern);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -48,7 +49,8 @@ public class TransactionLogic {
             monthPattern = EMPTY_STRING;
         }
         monthPattern = monthPattern.trim() + PERCENT;
-        try (TransactionDAOImpl transactionDAO = DAOFactory.getTransactionDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            TransactionDAO transactionDAO = daoHelper.getTransactionDAO();
             transactionList = transactionDAO.takeTransactionList(monthPattern);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -120,14 +122,14 @@ public class TransactionLogic {
         return totalWithdrawal.abs();
     }
 
-    static void filterByType(List<Transaction> list, Transaction.TransactionType type) {
+    private static void filterByType(List<Transaction> list, Transaction.TransactionType type) {
         if (list == null || list.isEmpty()) {
             return;
         }
         list.removeIf(s -> s.getType() != type);
     }
 
-    static void sortByAmount(List<Transaction> list, boolean ascending) {
+    private static void sortByAmount(List<Transaction> list, boolean ascending) {
         if (list == null || list.isEmpty()) {
             return;
         }

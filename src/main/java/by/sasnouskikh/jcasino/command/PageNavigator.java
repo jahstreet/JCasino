@@ -1,9 +1,25 @@
 package by.sasnouskikh.jcasino.command;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * <p>Enumeration of objects used for navigation purposes in {@link by.sasnouskikh.jcasino.controller.MainController}.
+ * Each contain 'query' and 'responseType' {@link String} objects.
+ * <p>Objects to order {@link by.sasnouskikh.jcasino.controller.MainController} to go to definite page using
+ * definite way and response type.
+ * <p>There is 3 ways of processing navigation:
+ * <ol>
+ * <li>Forwarding to jsp-page</li>
+ * <li>Forwarding to command-query, which processes navigation to definite page</li>
+ * <li>Redirecting to command-query, which processes navigation to definite page</li>
+ * </ol>
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see by.sasnouskikh.jcasino.manager.ConfigConstant
+ */
 public enum PageNavigator {
-
     FORWARD_PAGE_INDEX(PAGE_INDEX, FORWARD),
     FORWARD_GOTO_INDEX(GOTO_INDEX, FORWARD),
     REDIRECT_GOTO_INDEX(GOTO_INDEX, REDIRECT),
@@ -68,6 +84,10 @@ public enum PageNavigator {
     FORWARD_GOTO_UPLOAD_PASSPORT(GOTO_UPLOAD_PASSPORT, FORWARD),
     REDIRECT_GOTO_UPLOAD_PASSPORT(GOTO_UPLOAD_PASSPORT, REDIRECT),
 
+    FORWARD_PAGE_RULES(PAGE_RULES, FORWARD),
+    FORWARD_GOTO_RULES(GOTO_RULES, FORWARD),
+    REDIRECT_GOTO_RULES(GOTO_RULES, REDIRECT),
+
     FORWARD_PAGE_ERROR_500(PAGE_ERROR_500, FORWARD),
     FORWARD_GOTO_ERROR_500(GOTO_ERROR_500, FORWARD),
     REDIRECT_GOTO_ERROR_500(GOTO_ERROR_500, REDIRECT),
@@ -119,24 +139,57 @@ public enum PageNavigator {
     FORWARD_GOTO_GAME_FRUITS(GOTO_GAME_FRUITS, FORWARD),
     REDIRECT_GOTO_GAME_FRUITS(GOTO_GAME_FRUITS, REDIRECT),
 
+    /**
+     * Used to order {@link by.sasnouskikh.jcasino.controller.MainController} to take previous query from
+     * {@link by.sasnouskikh.jcasino.manager.QueryManager#takePreviousQuery(HttpServletRequest)} and process it using
+     * Forward response type
+     */
     FORWARD_PREV_QUERY(PREV_QUERY, FORWARD),
-    REDIRECT_PREV_QUERY(PREV_QUERY, FORWARD);
+    /**
+     * Used to order {@link by.sasnouskikh.jcasino.controller.MainController} to take previous query from
+     * {@link by.sasnouskikh.jcasino.manager.QueryManager#takePreviousQuery(HttpServletRequest)} and process it using
+     * Redirect response type
+     */
+    REDIRECT_PREV_QUERY(PREV_QUERY, REDIRECT);
 
+    /**
+     * Query to process
+     */
     private String query;
+
+    /**
+     * Response type of query processing
+     *
+     * @see by.sasnouskikh.jcasino.manager.ConfigConstant#FORWARD
+     * @see by.sasnouskikh.jcasino.manager.ConfigConstant#REDIRECT
+     */
     private String responseType;
 
-    PageNavigator() {
-    }
-
-    PageNavigator(String page, String responseType) {
-        this.query = page;
+    /**
+     * Constructs enumeration objects with definite query and response type of its processing
+     *
+     * @param query        - query to process
+     * @param responseType - response type of query processing
+     */
+    PageNavigator(String query, String responseType) {
+        this.query = query;
         this.responseType = responseType;
     }
 
+    /**
+     * Getter of query
+     *
+     * @return {@link String} query to process
+     */
     public String getQuery() {
         return query;
     }
 
+    /**
+     * Getter of response type
+     *
+     * @return {@link String} response type of query processing
+     */
     public String getResponseType() {
         return responseType;
     }

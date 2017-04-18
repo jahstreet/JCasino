@@ -1,42 +1,38 @@
 package by.sasnouskikh.jcasino.entity.bean;
 
-import java.util.ArrayList;
-
+/**
+ * The class represents info about application admin.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see JCasinoUser
+ */
 public class Admin extends JCasinoUser {
-    private ArrayList<News>               news;
-    private ArrayList<PlayerVerification> verifications;
-    private ArrayList<Question>           questions;
-    private ArrayList<Player>             statusedPlayers;
 
-    public ArrayList<News> getNews() {
-        return news;
+    /**
+     * Builds {@link String} representation of this instance.
+     *
+     * @return built {@link String} representation of this instance
+     */
+    @Override
+    public String toString() {
+        return "Admin{" + super.toString() + '}';
     }
 
-    public void setNews(ArrayList<News> news) {
-        this.news = news;
+    /**
+     * Clones instance of this object.
+     *
+     * @return a clone of this instance.
+     * @throws CloneNotSupportedException if the object's class does not
+     *                                    support the {@code Cloneable} interface. Subclasses
+     *                                    that override the {@code clone} method can also
+     *                                    throw this exception to indicate that an instance cannot
+     *                                    be cloned.
+     * @see Cloneable
+     */
+    @Override
+    protected Admin clone() throws CloneNotSupportedException {
+        return (Admin) super.clone();
     }
 
-    public ArrayList<PlayerVerification> getVerifications() {
-        return verifications;
-    }
 
-    public void setVerifications(ArrayList<PlayerVerification> verifications) {
-        this.verifications = verifications;
-    }
-
-    public ArrayList<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(ArrayList<Question> questions) {
-        this.questions = questions;
-    }
-
-    public ArrayList<Player> getStatusedPlayers() {
-        return statusedPlayers;
-    }
-
-    public void setStatusedPlayers(ArrayList<Player> statusedPlayers) {
-        this.statusedPlayers = statusedPlayers;
-    }
 }

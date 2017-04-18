@@ -4,6 +4,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.servlet.ServletContextEvent;
+import javax.servlet.http.HttpServlet;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,23 +13,58 @@ import java.util.Enumeration;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Class provides singleton container for {@link WrappedConnection} objects.
+ *
+ * @author Sasnouskikh Aliaksandr
+ */
 public class ConnectionPool {
-    private static final Logger LOGGER        = LogManager.getLogger(ConnectionPool.class);
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
+
+    /**
+     * Database property-file path relative to Maven directory 'resources'.
+     */
     private static final String DB_PROPERTIES = "database";
+    /**
+     * Database property-file keys.
+     */
     private static final String JDBC_URL      = "url";
     private static final String DB_LOGIN      = "user";
     private static final String DB_PASSWORD   = "password";
     private static final String POOL_SIZE     = "poolsize";
+    /**
+     * Class singleton instance.
+     */
     private static ConnectionPool instance;
+    /**
+     * Marker to check if {@link #instance} is created.
+     */
     private static AtomicBoolean created = new AtomicBoolean(false);
+    /**
+     * Class lock for {@link #getInstance()} method.
+     */
     private static ReentrantLock lock    = new ReentrantLock();
+    /**
+     * Size of {@link #connections} to initialize and destroy pool.
+     */
     private static int poolSize;
 
+    /**
+     * Collection of {@link java.sql.Connection} objects.
+     */
     private ArrayBlockingQueue<WrappedConnection> connections;
 
+    /**
+     * Registers MySQL JDBC driver while constructing {@link #instance}.
+     *
+     * @throws RuntimeException if {@link SQLException} occurred during registering driver
+     * @see DriverManager#registerDriver(Driver)
+     * @see com.mysql.cj.jdbc.Driver
+     */
     private ConnectionPool() {
         try {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
@@ -37,6 +74,9 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Singleton getter. Locks for first access.
+     */
     public static ConnectionPool getInstance() {
         if (!created.get()) {
             lock.lock();
@@ -52,6 +92,14 @@ public class ConnectionPool {
         return instance;
     }
 
+    /**
+     * Initializes pool due to config data. Calls at {@link HttpServlet#init()} or
+     * {@link javax.servlet.ServletContextListener#contextInitialized(ServletContextEvent)}.
+     *
+     * @throws ConnectionPoolException if {@link InterruptedException} occurred while putting {@link WrappedConnection}
+     *                                 to {@link #connections}
+     * @see ResourceBundle
+     */
     public void initPool() throws ConnectionPoolException {
         ResourceBundle resourceBundle;
         String         url;
@@ -76,9 +124,15 @@ public class ConnectionPool {
                 throw new ConnectionPoolException("ConnectionPool initializing was interrupted.", e);
             }
         }
-        //TODO если не создалось нужное количество - попробовать досоздавать
     }
 
+    /**
+     * Takes {@link WrappedConnection} from {@link #connections} collection.
+     *
+     * @return taken {@link WrappedConnection}
+     * @throws ConnectionPoolException if {@link InterruptedException} occurred while taking {@link WrappedConnection}
+     *                                 from {@link #connections}
+     */
     public WrappedConnection takeConnection() throws ConnectionPoolException {
         WrappedConnection connection;
         try {
@@ -89,6 +143,15 @@ public class ConnectionPool {
         return connection;
     }
 
+    /**
+     * Returns {@link WrappedConnection} to {@link #connections} collection. Rollbacks any transaction and sets
+     * auto-commit of connection to true.
+     *
+     * @param connection {@link WrappedConnection} to return
+     * @throws ConnectionPoolException if {@link InterruptedException} occurred while putting {@link WrappedConnection}
+     *                                 to {@link #connections} or if {@link WrappedConnection} was lost, closed
+     *                                 or damaged
+     */
     public void returnConnection(WrappedConnection connection) throws ConnectionPoolException {
         try {
             if (connection.isNull() || connection.isClosed()) {
@@ -101,20 +164,26 @@ public class ConnectionPool {
                 }
                 connections.put(connection);
             } catch (SQLException e) {
-                LOGGER.log(Level.ERROR, "Exception while setting autoCommit.", e);
+                throw new ConnectionPoolException("Exception while setting autoCommit to connection.");
             } catch (InterruptedException e) {
-                LOGGER.log(Level.ERROR, "Putting connection back into pool was interrupted.", e);
+                throw new ConnectionPoolException("Putting connection back into pool was interrupted.");
             }
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Database access error occurred.", e);
         }
     }
 
+    /**
+     * Destroys pool. Calls at {@link HttpServlet#destroy()} or
+     * {@link javax.servlet.ServletContextListener#contextDestroyed(ServletContextEvent)}.
+     *
+     * @see WrappedConnection
+     * @see DriverManager
+     */
     public void destroyPool() {
-        //TODO blabla
         for (int i = 0; i < poolSize; i++) {
             try {
-                WrappedConnection connection = connections.take(); //TODO poll timeout
+                WrappedConnection connection = connections.poll(10, TimeUnit.SECONDS);
                 connection.closeConnection();
             } catch (SQLException e) {
                 LOGGER.log(Level.ERROR, "Database access error occurred.", e);

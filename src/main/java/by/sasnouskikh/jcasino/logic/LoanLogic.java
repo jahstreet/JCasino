@@ -1,9 +1,9 @@
 package by.sasnouskikh.jcasino.logic;
 
 import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.LoanDAOImpl;
-import by.sasnouskikh.jcasino.dao.impl.PlayerDAOImpl;
+import by.sasnouskikh.jcasino.dao.LoanDAO;
+import by.sasnouskikh.jcasino.dao.PlayerDAO;
+import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Loan;
 import by.sasnouskikh.jcasino.entity.bean.Player;
@@ -39,7 +39,8 @@ public class LoanLogic {
         }
         monthPattern = monthPattern.trim() + PERCENT;
         List<Loan> loanList = null;
-        try (LoanDAOImpl loanDAO = DAOFactory.getLoanDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            LoanDAO loanDAO = daoHelper.getLoanDAO();
             loanList = loanDAO.takePlayerLoans(id, monthPattern);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -63,7 +64,8 @@ public class LoanLogic {
         }
         acquirePattern = acquirePattern + PERCENT;
         expirePattern = expirePattern + PERCENT;
-        try (LoanDAOImpl loanDAO = DAOFactory.getLoanDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            LoanDAO loanDAO = daoHelper.getLoanDAO();
             loanList = loanDAO.takeLoanList(acquirePattern, expirePattern);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -84,12 +86,13 @@ public class LoanLogic {
         int        id      = player.getId();
         BigDecimal percent = player.getAccount().getStatus().getLoanPercent();
         amount = LoanLogic.countLoan(amount, percent);
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-            LoanDAOImpl loanDAO = DAOFactory.getLoanDAO(playerDAO.getConnection());
-            playerDAO.beginTransaction();
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
+            LoanDAO   loanDAO   = daoHelper.getLoanDAO();
+            daoHelper.beginTransaction();
             if (loanDAO.insertLoan(id, amount, percent) != 0
                 && playerDAO.changeBalance(id, amount, Transaction.TransactionType.REPLENISH)) {
-                playerDAO.commit();
+                daoHelper.commit();
                 return true;
             }
         } catch (ConnectionPoolException | DAOException e) {
@@ -103,12 +106,13 @@ public class LoanLogic {
     public static boolean payLoan(Player player, BigDecimal amount) {
         int id     = player.getId();
         int loanId = player.getAccount().getCurrentLoan().getId();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-            LoanDAOImpl loanDAO = DAOFactory.getLoanDAO(playerDAO.getConnection());
-            playerDAO.beginTransaction();
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
+            LoanDAO   loanDAO   = daoHelper.getLoanDAO();
+            daoHelper.beginTransaction();
             if (playerDAO.changeBalance(id, amount, Transaction.TransactionType.WITHDRAW)
                 && loanDAO.payLoan(loanId, amount)) {
-                playerDAO.commit();
+                daoHelper.commit();
                 return true;
             }
         } catch (ConnectionPoolException | DAOException e) {
@@ -119,18 +123,18 @@ public class LoanLogic {
         return false;
     }
 
-    static BigDecimal countLoan(BigDecimal amount, BigDecimal percent) {
+    private static BigDecimal countLoan(BigDecimal amount, BigDecimal percent) {
         return amount.multiply(percent).divide(ONE_HUNDRED, BigDecimal.ROUND_HALF_UP).add(amount);
     }
 
-    static void filterNotPaid(List<Loan> list) {
+    private static void filterNotPaid(List<Loan> list) {
         if (list == null || list.isEmpty()) {
             return;
         }
         list.removeIf(l -> l.getRest().compareTo(BigDecimal.ZERO) == 0);
     }
 
-    static void filterOverdued(List<Loan> list) {
+    private static void filterOverdued(List<Loan> list) {
         if (list == null || list.isEmpty()) {
             return;
         }
@@ -138,7 +142,7 @@ public class LoanLogic {
         list.removeIf(l -> l.getExpire().isAfter(LocalDate.now()));
     }
 
-    static void sortByRest(List<Loan> list, boolean ascending) {
+    private static void sortByRest(List<Loan> list, boolean ascending) {
         if (list == null || list.isEmpty()) {
             return;
         }

@@ -2,11 +2,13 @@ package by.sasnouskikh.jcasino.command.ajax.command;
 
 import by.sasnouskikh.jcasino.command.ajax.AjaxCommand;
 import by.sasnouskikh.jcasino.entity.bean.Player;
+import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
 import by.sasnouskikh.jcasino.entity.bean.Roll;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.game.GameEngine;
 import by.sasnouskikh.jcasino.logic.LogicException;
 import by.sasnouskikh.jcasino.logic.StreakLogic;
+import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.validator.FormValidator;
@@ -20,8 +22,42 @@ import java.util.Map;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides spin operation of slot-machine.
+ * Is suitable to use with {@link by.sasnouskikh.jcasino.controller.AjaxController}.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see AjaxCommand
+ * @see by.sasnouskikh.jcasino.command.ajax.AjaxCommandFactory
+ */
 public class SpinCommand implements AjaxCommand {
 
+    /**
+     * <p>Provides spin operation of slot-machine.
+     * <p>Defines if game mode is 'Demo' ({@link HttpSession#getAttribute(String)} has attribute
+     * {@link ConfigConstant#ATTR_PLAYER} or {@link HttpServletRequest#getParameter(String)} has parameter
+     * {@link ConfigConstant#PARAM_DEMO}).
+     * <p>Takes {@link ConfigConstant#ATTR_CURRENT_STREAK} from {@link HttpSession#getAttribute(String)} and checks if
+     * {@link Streak} is valid for continue using. If no - generates new one and adds it to
+     * {@link HttpSession#setAttribute(String, Object)}.
+     * <p>Takes input parameters from {@link HttpServletRequest#getParameter(String)} and validates them.
+     * <p>If all the parameters are valid converts them to relevant data types. (If play mode is 'Non-demo' checks if
+     * {@link PlayerAccount#getBalance()} {@literal >}= totalBet counted using input data.)
+     * <p>If everything is ok passes converted parameters further to the Logic layer. Then builds {@link HashMap}
+     * responseMap corresponding to modified by Logic layer {@link Streak} object data.
+     * <p>If there was any error while validating operations returning {@link HashMap} would contain key
+     * {@link ConfigConstant#ATTR_ERROR_MESSAGE} with {@link String} value.
+     *
+     * @param request request from client to get parameters to work with
+     * @return {@link HashMap} with response parameters
+     * @see QueryManager
+     * @see MessageManager
+     * @see FormValidator
+     * @see StreakLogic#generateStreak(int)
+     * @see StreakLogic#generateStreak()
+     * @see GameEngine#spin(Streak, int[], boolean[], BigDecimal)
+     * @see GameEngine#spinDemo(Streak, int[], boolean[], BigDecimal)
+     */
     @Override
     public Map<String, Object> execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
@@ -34,15 +70,17 @@ public class SpinCommand implements AjaxCommand {
 
         Player  player = (Player) session.getAttribute(ATTR_PLAYER);
         Streak  streak = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
-        boolean demo   = player == null || request.getParameter("demo") != null;
+        boolean demo   = player == null || request.getParameter(PARAM_DEMO) != null;
 
+        //validate/generate streak
         if (streak != null) {
             if (StreakLogic.isComplete(streak)) {
                 if (!demo) {
                     if (StreakLogic.updateStreak(streak)) {
                         streak = StreakLogic.generateStreak(player.getId());
                     } else {
-                        errorMessage.append("Streak generating error.").append(MESSAGE_SEPARATOR);
+                        errorMessage.append(messageManager.getMessage(MESSAGE_STREAK_GENERATION_ERROR))
+                                    .append(MESSAGE_SEPARATOR);
                         valid = false;
                     }
                 } else {
@@ -59,20 +97,20 @@ public class SpinCommand implements AjaxCommand {
             session.setAttribute(ATTR_CURRENT_STREAK, streak);
         }
         if (streak == null) {
-            errorMessage.append("Streak generation error.").append(MESSAGE_SEPARATOR);
+            errorMessage.append(messageManager.getMessage(MESSAGE_STREAK_GENERATION_ERROR)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
-        String betString     = request.getParameter("bet");
-        String offset1String = request.getParameter("offset1");
-        String offset2String = request.getParameter("offset2");
-        String offset3String = request.getParameter("offset3");
+        String betString     = request.getParameter(PARAM_BET);
+        String offset1String = request.getParameter(PARAM_OFFSET1);
+        String offset2String = request.getParameter(PARAM_OFFSET2);
+        String offset3String = request.getParameter(PARAM_OFFSET3);
 
-        boolean line1 = request.getParameter("line1") != null;
-        boolean line2 = request.getParameter("line2") != null;
-        boolean line3 = request.getParameter("line3") != null;
-        boolean line4 = request.getParameter("line4") != null;
-        boolean line5 = request.getParameter("line5") != null;
+        boolean line1 = request.getParameter(PARAM_LINE1) != null;
+        boolean line2 = request.getParameter(PARAM_LINE2) != null;
+        boolean line3 = request.getParameter(PARAM_LINE3) != null;
+        boolean line4 = request.getParameter(PARAM_LINE4) != null;
+        boolean line5 = request.getParameter(PARAM_LINE5) != null;
 
         if (!FormValidator.isFloat(betString)
             || !FormValidator.isFloat(offset1String)
@@ -83,6 +121,8 @@ public class SpinCommand implements AjaxCommand {
         }
 
         if (valid) {
+
+            //convert data to corresponding data types
             BigDecimal bet     = BigDecimal.valueOf(Double.parseDouble(betString));
             int        offset1 = Integer.parseInt(offset1String);
             int        offset2 = Integer.parseInt(offset2String);
@@ -90,14 +130,16 @@ public class SpinCommand implements AjaxCommand {
             int[]      offset  = new int[]{offset1, offset2, offset3};
             boolean[]  lines   = new boolean[]{line1, line2, line3, line4, line5};
 
+            //check balance
             BigDecimal totalBet = GameEngine.countTotalBet(bet, lines);
             if (!demo && player.getAccount().getBalance().compareTo(totalBet) < 0) {
-                errorMessage.append("Not enough money error.");
+                errorMessage.append(messageManager.getMessage(MESSAGE_NO_MONEY));
                 responseMap.put(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
                 return responseMap;
             }
 
             try {
+                //pass to Logic layer
                 if (!demo) {
                     BigDecimal total   = GameEngine.spin(streak, offset, lines, bet);
                     BigDecimal balance = player.getAccount().getBalance();
@@ -106,6 +148,7 @@ public class SpinCommand implements AjaxCommand {
                     GameEngine.spinDemo(streak, offset, lines, bet);
                 }
 
+                //build response parameters map
                 ArrayDeque<Roll> rollArrayDeque = streak.getRolls();
                 Roll             lastRoll       = rollArrayDeque.getLast();
                 BigDecimal       result         = lastRoll.getResult();
@@ -118,14 +161,14 @@ public class SpinCommand implements AjaxCommand {
                 } else {
                     streakInfo = streak.getRoll();
                 }
-                responseMap.put("streakInfo", streakInfo);
-                responseMap.put("rollNumber", streakNumber);
-                responseMap.put("winResult", result.toPlainString());
-                responseMap.put("offsets", reelPos);
-                responseMap.put("lines", winLines);
+                responseMap.put(AJAX_STREAK_INFO, streakInfo);
+                responseMap.put(AJAX_ROLL_NUMBER, streakNumber);
+                responseMap.put(AJAX_WIN_RESULT, result.toPlainString());
+                responseMap.put(AJAX_OFFSETS, reelPos);
+                responseMap.put(AJAX_LINES, winLines);
 
             } catch (LogicException e) {
-                responseMap.put(ATTR_ERROR_MESSAGE, "Spin error database connection etc.");
+                responseMap.put(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
             }
         } else {
             responseMap.put(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());

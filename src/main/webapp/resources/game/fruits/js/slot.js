@@ -17,7 +17,8 @@ var context = $('#canvas')[0].getContext('2d'),
     streakInfo = $('#streak-info-text'),
     rollNumber = $('#roll-number-text'),
     winTimeout = 2000,
-    musicDiv = $('#music')[0];
+    musicDiv = $('#music')[0],
+    totalBetWindow = $('#total-bet');
 
 sprite.src = "/resources/game/fruits/img/reel.png";
 sprite.onload = function () {
@@ -52,8 +53,32 @@ $(document).ready(function () {
             theme.play();
             this.innerHTML = '&#9835;';
         }
-    }
+    };
+    $('#bet').change(updateTotalBet);
+    $('#line1').change(updateTotalBet);
+    $('#line2').change(updateTotalBet);
+    $('#line3').change(updateTotalBet);
+    $('#line4').change(updateTotalBet);
+    $('#line5').change(updateTotalBet);
 });
+
+function updateTotalBet() {
+    var bet = parseFloat($('#bet').val()),
+        l1 = $('#line1')[0].checked,
+        l2 = $('#line2')[0].checked,
+        l3 = $('#line3')[0].checked,
+        l4 = $('#line4')[0].checked,
+        l5 = $('#line5')[0].checked;
+
+    var l = [l1, l2, l3, l4, l5],
+        counter = 0;
+    l.forEach(function (item) {
+        if (item) {
+            counter++;
+        }
+    });
+    totalBetWindow.html(bet * counter);
+}
 
 function loadAudio(arr, vol) {
     var audio = document.createElement('audio');
@@ -212,22 +237,22 @@ function spin() {
         offset1,
         offset2,
         offset3,
-        lineResult,
-        bet = parseFloat($('#bet').val()),
-        l1 = $('#line1')[0].checked,
-        l2 = $('#line2')[0].checked,
-        l3 = $('#line3')[0].checked,
-        l4 = $('#line4')[0].checked,
-        l5 = $('#line5')[0].checked;
-
-    var l = [l1, l2, l3, l4, l5],
-        counter = 0;
-    l.forEach(function (item) {
-        if (item) {
-            counter++;
-        }
-    });
-    var totalBet = bet * counter;
+        lineResult;
+    //     bet = parseFloat($('#bet').val()),
+    //     l1 = $('#line1')[0].checked,
+    //     l2 = $('#line2')[0].checked,
+    //     l3 = $('#line3')[0].checked,
+    //     l4 = $('#line4')[0].checked,
+    //     l5 = $('#line5')[0].checked;
+    //
+    // var l = [l1, l2, l3, l4, l5],
+    //     counter = 0;
+    // l.forEach(function (item) {
+    //     if (item) {
+    //         counter++;
+    //     }
+    // });
+    var totalBet = parseFloat(totalBetWindow.text());
 
     if (totalBet > parseFloat(money.text())) {
         alert('Not enough money.');

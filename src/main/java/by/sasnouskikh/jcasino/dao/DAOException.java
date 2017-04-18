@@ -2,6 +2,12 @@ package by.sasnouskikh.jcasino.dao;
 
 import java.security.PrivilegedActionException;
 
+/**
+ * The class provides custom Exception to throw at DAO layer classes.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see Exception
+ */
 public class DAOException extends Exception {
 
     /**

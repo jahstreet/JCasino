@@ -4,6 +4,7 @@ import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.logic.PlayerLogic;
+import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 
@@ -12,8 +13,32 @@ import javax.servlet.http.HttpSession;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides navigating to e-mail verification page for player.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see Command
+ */
 public class GotoEmailVerificationCommand implements Command {
 
+    /**
+     * <p>Provides navigating to e-mail verification page for player.
+     * <p>Takes e-mail code from {@link by.sasnouskikh.jcasino.entity.bean.PlayerVerification} field of
+     * {@link ConfigConstant#ATTR_PLAYER} attribute of {@link HttpSession#getAttribute(String)}.
+     * <p>If e-mail code exists saves current query to session and navigates to
+     * {@link PageNavigator#FORWARD_PAGE_EMAIL_VERIFICATION}
+     * <p>If e-mail code doesn't exist sends new e-mail code at Logic layer. If Logic operation passed successfully
+     * saves current query to session and navigates to {@link PageNavigator#FORWARD_PAGE_EMAIL_VERIFICATION}, else adds
+     * {@link ConfigConstant#ATTR_ERROR_MESSAGE} attribute to {@link HttpServletRequest#setAttribute(String, Object)}
+     * and navigates to {@link PageNavigator#FORWARD_PAGE_VERIFICATION}.
+     *
+     * @param request request from client to get parameters to work with
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
+     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @see QueryManager
+     * @see MessageManager
+     * @see PlayerLogic#sendEmailCode(Player, String)
+     */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         HttpSession    session        = request.getSession();

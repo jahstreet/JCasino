@@ -58,8 +58,22 @@ div#money {
     width: 3.5em;
     padding: 1em;
     position: absolute;
-    left: 0;
     top: 3em;
+    background: #fffc00;
+    border-radius: 25%;
+}
+
+div#total-bet-info {
+    font-size: 2em;
+    text-align: center;
+    word-wrap: break-word;
+    color: rgb(0, 40, 162);
+    display: block;
+    width: 3.5em;
+    padding: 1em;
+    position: absolute;
+    top: 8em;
+    /* left: 0; */
     background: #fffc00;
     border-radius: 25%;
 }
@@ -74,7 +88,7 @@ div#music {
     line-height: 2em;
     padding: .7em;
     position: absolute;
-    top: 8em;
+    top: 13em;
     left: 1em;
     background: #fffc00;
     border-radius: 50%;

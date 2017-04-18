@@ -3,8 +3,10 @@ package by.sasnouskikh.jcasino.command.impl;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.logic.PlayerLogic;
+import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,8 +14,34 @@ import javax.servlet.http.HttpSession;
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 import static by.sasnouskikh.jcasino.validator.FormValidator.*;
 
+/**
+ * The class provides registering player.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see Command
+ */
 public class RegisterCommand implements Command {
 
+    /**
+     * <p>Provides registering player.
+     * <p>Takes input parameters from {@link HttpServletRequest#getParameter(String)} and validates them.
+     * <p>If any parameter is invalid adds {@link ConfigConstant#ATTR_ERROR_MESSAGE} attribute to
+     * {@link HttpServletRequest#setAttribute(String, Object)} and navigates to
+     * {@link PageNavigator#FORWARD_PAGE_REGISTER}.
+     * <p>If all the parameters are valid converts them to relevant data types and passes converted parameters further
+     * to the Logic layer.
+     * <p>If Logic operation passed successfully navigates to {@link PageNavigator#REDIRECT_GOTO_INDEX}, else adds
+     * {@link ConfigConstant#ATTR_ERROR_MESSAGE} attribute to {@link HttpServletRequest#setAttribute(String, Object)}
+     * and navigates to {@link PageNavigator#FORWARD_PAGE_REGISTER}.
+     *
+     * @param request request from client to get parameters to work with
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
+     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @see QueryManager
+     * @see MessageManager
+     * @see FormValidator
+     * @see PlayerLogic#registerPlayer(String, String, String, String, String, String, String, String, String)
+     */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
@@ -98,8 +126,7 @@ public class RegisterCommand implements Command {
         }
 
         if (valid) {
-            boolean registered = PlayerLogic.registerPlayer(email, password, fName, mName, lName, birthDate, passport, question, answer);
-            if (registered) {
+            if (PlayerLogic.registerPlayer(email, password, fName, mName, lName, birthDate, passport, question, answer)) {
                 navigator = PageNavigator.REDIRECT_GOTO_INDEX;
             } else {
                 request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_EMAIL_EXIST));

@@ -1,8 +1,8 @@
 package by.sasnouskikh.jcasino.logic;
 
 import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.UserDAOImpl;
+import by.sasnouskikh.jcasino.dao.UserDAO;
+import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
@@ -21,7 +21,8 @@ public class UserLogic {
         JCasinoUser user = null;
         email = email.toLowerCase().trim();
         password = JCasinoEncryptor.encryptMD5(password);
-        try (UserDAOImpl userDAO = DAOFactory.getUserDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            UserDAO userDAO = daoHelper.getUserDAO();
             user = userDAO.authorizeUser(email, password);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -39,7 +40,8 @@ public class UserLogic {
     public static boolean checkPassword(JCasinoUser user, String password) {
         password = JCasinoEncryptor.encryptMD5(password);
         int id = user.getId();
-        try (UserDAOImpl userDAO = DAOFactory.getUserDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            UserDAO userDAO = daoHelper.getUserDAO();
             return userDAO.checkPassword(id, password);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());

@@ -4,6 +4,7 @@ import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.logic.VerificationLogic;
+import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.validator.FormValidator;
@@ -13,8 +14,34 @@ import javax.servlet.http.HttpSession;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides definite player passport scan verifying for admin.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see Command
+ */
 public class VerifyScanCommand implements Command {
 
+    /**
+     * <p>Provides definite player passport scan verifying for admin.
+     * <p>Takes input parameters from {@link HttpServletRequest#getParameter(String)} and validates them.
+     * <p>If any parameter is invalid adds {@link ConfigConstant#ATTR_ERROR_MESSAGE} attribute to
+     * {@link HttpServletRequest#setAttribute(String, Object)} and navigates to
+     * {@link PageNavigator#FORWARD_PREV_QUERY}.
+     * <p>If all the parameters are valid converts them to relevant data types and passes converted parameters further
+     * to the Logic layer.
+     * <p>If Logic operation passed successfully navigates to {@link PageNavigator#REDIRECT_PREV_QUERY}, else adds
+     * {@link ConfigConstant#ATTR_ERROR_MESSAGE} attribute to {@link HttpServletRequest#setAttribute(String, Object)}
+     * and navigates to {@link PageNavigator#FORWARD_PREV_QUERY}.
+     *
+     * @param request request from client to get parameters to work with
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
+     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @see QueryManager
+     * @see MessageManager
+     * @see FormValidator
+     * @see VerificationLogic#changePlayerVerStatus(int, byte, VerificationLogic.MaskOperation, Admin, String)
+     */
     @SuppressWarnings("Duplicates")
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -29,6 +56,7 @@ public class VerifyScanCommand implements Command {
         String playerIdString = request.getParameter(PARAM_ID);
         int    playerId;
 
+        //suppressed duplicate warning code-block
         if (FormValidator.validateId(playerIdString)) {
             playerId = Integer.parseInt(playerIdString);
         } else {
@@ -37,7 +65,8 @@ public class VerifyScanCommand implements Command {
             return PageNavigator.FORWARD_PREV_QUERY;
         }
 
-        if (VerificationLogic.changePlayerVerStatus(playerId, PASSPORT_VER_MASK, VerificationLogic.MaskOperation.OR, admin, null)) {
+        if (VerificationLogic.changePlayerVerStatus(playerId, PASSPORT_VER_MASK, VerificationLogic.MaskOperation.OR,
+                                                    admin, null)) {
             navigator = PageNavigator.REDIRECT_PREV_QUERY;
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_VERIFY_SCAN_ERROR));

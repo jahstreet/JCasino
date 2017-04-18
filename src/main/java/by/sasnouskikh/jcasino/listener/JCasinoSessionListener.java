@@ -39,7 +39,6 @@ public class JCasinoSessionListener implements HttpSessionListener {
         HttpSession session       = event.getSession();
         Player      player        = (Player) session.getAttribute(ATTR_PLAYER);
         Streak      currentStreak = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
-        System.out.println("destroying: " + currentStreak);
         if (player != null && currentStreak != null) {
             StreakLogic.completeStreak(currentStreak);
             if (!StreakLogic.updateStreak(currentStreak)) {

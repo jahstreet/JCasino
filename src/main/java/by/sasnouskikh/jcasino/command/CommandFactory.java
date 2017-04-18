@@ -16,15 +16,42 @@ import java.util.HashMap;
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_ROLE;
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.PARAM_COMMAND;
 
+/**
+ * The factory of Commands suitable to use with {@link by.sasnouskikh.jcasino.controller.MainController}.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see Command
+ */
 public class CommandFactory {
     private static final Logger LOGGER = LogManager.getLogger(CommandFactory.class);
 
-    private static final String                        MULTIPART_COMMAND_NAME = "multipart";
-    private static       HashMap<CommandType, Command> guestCommands          = new HashMap<>();
-    private static       HashMap<CommandType, Command> playerCommands         = new HashMap<>();
-    private static       HashMap<CommandType, Command> adminCommands          = new HashMap<>();
+    /**
+     * Name of command to work with multipart/form-data enctype request
+     */
+    private static final String MULTIPART_COMMAND_NAME = "multipart";
+
+    /**
+     * {@link HashMap} collection of commands available to
+     * {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole#GUEST}.
+     */
+    private static HashMap<CommandType, Command> guestCommands  = new HashMap<>();
+
+    /**
+     * {@link HashMap} collection of commands available to
+     * {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole#PLAYER}.
+     */
+    private static HashMap<CommandType, Command> playerCommands = new HashMap<>();
+
+    /**
+     * {@link HashMap} collection of commands available to
+     * {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole#ADMIN}.
+     */
+    private static HashMap<CommandType, Command> adminCommands  = new HashMap<>();
 
     static {
+        Command logout    = new LogoutCommand();
+        Command multipart = new MultipartFormCommand();
+
         guestCommands.put(CommandType.LOGIN, new LoginCommand());
         guestCommands.put(CommandType.REGISTER, new RegisterCommand());
         guestCommands.put(CommandType.CHANGE_LOCALE, new ChangeLocaleCommand());
@@ -34,16 +61,17 @@ public class CommandFactory {
         guestCommands.put(CommandType.GOTO_SUPPORT, new GotoSupportCommand());
         guestCommands.put(CommandType.GOTO_REGISTER, new GotoRegisterCommand());
         guestCommands.put(CommandType.GOTO_RECOVER_PASSWORD, new GotoRecoverPasswordCommand());
+        guestCommands.put(CommandType.GOTO_RULES, new GotoRulesCommand());
         guestCommands.put(CommandType.GOTO_ERROR_500, new GotoError500Command());
         guestCommands.put(CommandType.BACK_FROM_ERROR, new BackFromErrorCommand());
         guestCommands.put(CommandType.GOTO_GAME_FRUITS, new GotoGameFruitsCommand());
         guestCommands.put(CommandType.BACK_FROM_GAME, new BackFromGameCommand());
 
         playerCommands.putAll(guestCommands);
-        playerCommands.put(CommandType.LOGOUT, new LogoutCommand());
+        playerCommands.put(CommandType.LOGOUT, logout);
         playerCommands.put(CommandType.GOTO_MAIN, new GotoMainCommand());
         playerCommands.put(CommandType.GOTO_STATS, new GotoStatsCommand());
-        playerCommands.put(CommandType.MULTIPART, new MultipartFormCommand());
+        playerCommands.put(CommandType.MULTIPART, multipart);
         playerCommands.put(CommandType.EDIT_PROFILE, new EditProfileCommand());
         playerCommands.put(CommandType.VERIFY_PROFILE, new VerifyProfileCommand());
         playerCommands.put(CommandType.VERIFY_EMAIL, new VerifyEmailCommand());
@@ -67,8 +95,8 @@ public class CommandFactory {
         playerCommands.put(CommandType.GOTO_UPLOAD_PASSPORT, new GotoUploadPassportCommand());
 
         adminCommands.putAll(guestCommands);
-        adminCommands.put(CommandType.MULTIPART, new MultipartFormCommand());
-        adminCommands.put(CommandType.LOGOUT, new LogoutCommand());
+        adminCommands.put(CommandType.MULTIPART, multipart);
+        adminCommands.put(CommandType.LOGOUT, logout);
         adminCommands.put(CommandType.EDIT_NEWS, new EditNewsCommand());
         adminCommands.put(CommandType.DELETE_NEWS, new DeleteNewsCommand());
         adminCommands.put(CommandType.SHOW_QUESTIONS, new ShowQuestionsCommand());
@@ -96,6 +124,9 @@ public class CommandFactory {
         adminCommands.put(CommandType.GOTO_STATS_REPORT, new GotoStatsReportCommand());
     }
 
+    /**
+     * Enumeration of Commands suitable to use with {@link by.sasnouskikh.jcasino.controller.MainController}.
+     */
     private enum CommandType {
         LOGIN,
         LOGOUT,
@@ -131,6 +162,7 @@ public class CommandFactory {
         GOTO_TAKE_LOAN,
         GOTO_WITHDRAW_MONEY,
         GOTO_OPERATION_HISTORY,
+        GOTO_RULES,
         GOTO_ERROR_500,
         BACK_FROM_ERROR,
         GOTO_ADMIN,
@@ -162,16 +194,32 @@ public class CommandFactory {
         BACK_FROM_GAME
     }
 
+    /**
+     * Private constructor to forbid create {@link CommandFactory} instances.
+     */
     private CommandFactory() {
     }
 
+    /**
+     * Defines {@link Command} due to {@link by.sasnouskikh.jcasino.manager.ConfigConstant#PARAM_COMMAND} parameter
+     * of {@link HttpServletRequest#getParameter(String)} (should be {@link String#equalsIgnoreCase} to
+     * {@link CommandType}) and {@link by.sasnouskikh.jcasino.manager.ConfigConstant#ATTR_ROLE} attribute
+     * of {@link javax.servlet.http.HttpSession#getAttribute(String)}
+     *
+     * @param request - request from client to get parameters to work with
+     * @return defined {@link Command}
+     * @see by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole
+     * @see CommandFactory#validateCommandName(String)
+     * @see CommandFactory#defineCommand(String, JCasinoUser.UserRole)
+     */
     public static Command defineCommand(HttpServletRequest request) {
         String               commandName;
         JCasinoUser.UserRole role = (JCasinoUser.UserRole) request.getSession().getAttribute(ATTR_ROLE);
         if (!ServletFileUpload.isMultipartContent(request)) {
             commandName = request.getParameter(PARAM_COMMAND);
             if (!validateCommandName(commandName)) {
-                LOGGER.log(Level.ERROR, "Request doesn't have command parameter or it is invalid: " + commandName + ". Check JSP.");
+                LOGGER.log(Level.ERROR, "Request doesn't have command parameter or it is invalid: " + commandName +
+                                        ". Check JSP.");
                 return new GotoIndexCommand();
             }
         } else {
@@ -180,6 +228,15 @@ public class CommandFactory {
         return defineCommand(commandName, role);
     }
 
+    /**
+     * Defines {@link Command} due to {@link String} commandName (should be {@link String#equalsIgnoreCase} to
+     * {@link CommandType}) and {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole}
+     *
+     * @param commandName - name of the command
+     * @param role        - user's role
+     * @return defined {@link Command} or null
+     * @see HashMap#get(Object)
+     */
     private static Command defineCommand(String commandName, JCasinoUser.UserRole role) {
         commandName = commandName.trim().replaceAll("-", "_").toUpperCase();
         CommandType commandType = CommandType.valueOf(commandName);
@@ -200,6 +257,12 @@ public class CommandFactory {
         return command;
     }
 
+    /**
+     * Checks if {@link String} commandName is valid
+     *
+     * @param commandName - name of the command
+     * @return true if commandName is valid
+     */
     private static boolean validateCommandName(String commandName) {
         if (commandName == null || commandName.trim().isEmpty()) {
             return false;

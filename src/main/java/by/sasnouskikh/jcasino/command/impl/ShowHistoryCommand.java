@@ -9,6 +9,7 @@ import by.sasnouskikh.jcasino.entity.bean.Transaction;
 import by.sasnouskikh.jcasino.logic.LoanLogic;
 import by.sasnouskikh.jcasino.logic.StreakLogic;
 import by.sasnouskikh.jcasino.logic.TransactionLogic;
+import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.validator.FormValidator;
@@ -19,11 +20,32 @@ import java.util.List;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides showing operation history for player.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see Command
+ */
 public class ShowHistoryCommand implements Command {
 
-//    private static final int DEFAULT_ELEMENTS_ON_PAGE = 10;
-//    private static final int FIRST_PAGE               = 1;
-
+    /**
+     * <p>Provides showing operation history for player.
+     * <p>Takes input parameters from {@link HttpServletRequest#getParameter(String)} and validates them.
+     * <p>If any parameter is invalid adds {@link ConfigConstant#ATTR_ERROR_MESSAGE} attribute to
+     * {@link HttpServletRequest#setAttribute(String, Object)}.
+     * <p>Sets list of taken data to correspondent {@link HttpSession#setAttribute(String, Object)} attribute
+     * and navigates to {@link PageNavigator#FORWARD_PAGE_OPERATION_HISTORY}.
+     *
+     * @param request request from client to get parameters to work with
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
+     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @see QueryManager
+     * @see MessageManager
+     * @see FormValidator
+     * @see TransactionLogic#takePlayerTransactions(int, String)
+     * @see LoanLogic#takePlayerLoans(int, String)
+     * @see StreakLogic#takePlayerStreaks(int, String)
+     */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         QueryManager.saveQueryToSession(request);

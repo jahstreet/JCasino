@@ -1,8 +1,8 @@
 package by.sasnouskikh.jcasino.logic;
 
 import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.NewsDAOImpl;
+import by.sasnouskikh.jcasino.dao.NewsDAO;
+import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.News;
@@ -28,7 +28,8 @@ public class NewsLogic {
 
     public static List<News> takeNewsList() {
         List<News> newsList = null;
-        try (NewsDAOImpl newsDAO = DAOFactory.getNewsDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            NewsDAO newsDAO = daoHelper.getNewsDAO();
             newsList = newsDAO.takeNews();
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -40,13 +41,14 @@ public class NewsLogic {
         header = StringUtils.capitalize(header);
         text = StringUtils.capitalize(text);
         int adminId = admin.getId();
-        try (NewsDAOImpl newsDAO = DAOFactory.getNewsDAO()) {
-            newsDAO.beginTransaction();
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            NewsDAO newsDAO = daoHelper.getNewsDAO();
+            daoHelper.beginTransaction();
             int newsId = newsDAO.insertNews(adminId, header, text);
             if (newsId != 0) {
                 News news = newsDAO.takeNews(newsId);
                 if (news != null && updateNewsImage(newsId, newsImage, uploadDir)) {
-                    newsDAO.commit();
+                    daoHelper.commit();
                     return news;
                 }
             }
@@ -66,7 +68,8 @@ public class NewsLogic {
         boolean changedText   = true;
         boolean changedHeader = true;
         boolean changedImage  = true;
-        try (NewsDAOImpl newsDAO = DAOFactory.getNewsDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            NewsDAO newsDAO = daoHelper.getNewsDAO();
             if (header != null) {
                 changedText = newsDAO.changeNewsHeader(newsId, header, adminId);
             }
@@ -83,6 +86,19 @@ public class NewsLogic {
             LOGGER.log(Level.ERROR, e.getMessage());
         }
         return news;
+    }
+
+    public static List<News> deleteNews(int id) {
+        List<News> newsList = null;
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            NewsDAO newsDAO = daoHelper.getNewsDAO();
+            if (newsDAO.deleteNews(id)) {
+                newsList = newsDAO.takeNews();
+            }
+        } catch (ConnectionPoolException | DAOException e) {
+            LOGGER.log(Level.ERROR, e.getMessage());
+        }
+        return newsList;
     }
 
     private static boolean updateNewsImage(int newsId, FileItem newsImage, String uploadDir) throws LogicException {
@@ -108,17 +124,5 @@ public class NewsLogic {
             LOGGER.log(Level.ERROR, e.getMessage());
         }
         return false;
-    }
-
-    public static List<News> deleteNews(int id) {
-        List<News> newsList = null;
-        try (NewsDAOImpl newsDAO = DAOFactory.getNewsDAO()) {
-            if (newsDAO.deleteNews(id)) {
-                newsList = newsDAO.takeNews();
-            }
-        } catch (ConnectionPoolException | DAOException e) {
-            LOGGER.log(Level.ERROR, e.getMessage());
-        }
-        return newsList;
     }
 }

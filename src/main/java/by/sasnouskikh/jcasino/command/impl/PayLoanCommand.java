@@ -6,6 +6,7 @@ import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
 import by.sasnouskikh.jcasino.logic.LoanLogic;
 import by.sasnouskikh.jcasino.logic.UserLogic;
+import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.validator.FormValidator;
@@ -16,8 +17,34 @@ import java.math.BigDecimal;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides paying loan for player.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see Command
+ */
 public class PayLoanCommand implements Command {
 
+    /**
+     * <p>Provides paying loan for player.
+     * <p>Takes input parameters from {@link HttpServletRequest#getParameter(String)} and validates them.
+     * <p>If any parameter is invalid adds {@link ConfigConstant#ATTR_ERROR_MESSAGE} attribute to
+     * {@link HttpServletRequest#setAttribute(String, Object)} and navigates to
+     * {@link PageNavigator#FORWARD_PAGE_PAY_LOAN}.
+     * <p>If all the parameters are valid converts them to relevant data types and passes converted parameters further
+     * to the Logic layer.
+     * <p>If Logic operation passed successfully navigates to {@link PageNavigator#REDIRECT_GOTO_ACCOUNT}, else adds
+     * {@link ConfigConstant#ATTR_ERROR_MESSAGE} attribute to {@link HttpServletRequest#setAttribute(String, Object)}
+     * and navigates to {@link PageNavigator#FORWARD_PAGE_PAY_LOAN}.
+     *
+     * @param request request from client to get parameters to work with
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
+     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @see QueryManager
+     * @see MessageManager
+     * @see FormValidator
+     * @see LoanLogic#payLoan(Player, BigDecimal)
+     */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
@@ -64,8 +91,7 @@ public class PayLoanCommand implements Command {
             if (LoanLogic.payLoan(player, amount)) {
                 navigator = PageNavigator.REDIRECT_GOTO_ACCOUNT;
             } else {
-                errorMessage.append(messageManager.getMessage(MESSAGE_PAY_LOAN_INTERRUPTED)).append(MESSAGE_SEPARATOR);
-                request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
+                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PAY_LOAN_INTERRUPTED));
                 navigator = PageNavigator.FORWARD_PAGE_PAY_LOAN;
             }
         } else {

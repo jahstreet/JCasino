@@ -1,12 +1,12 @@
 package by.sasnouskikh.jcasino.logic;
 
 import by.sasnouskikh.jcasino.dao.DAOException;
-import by.sasnouskikh.jcasino.dao.impl.DAOFactory;
-import by.sasnouskikh.jcasino.dao.impl.LoanDAOImpl;
-import by.sasnouskikh.jcasino.dao.impl.PlayerDAOImpl;
-import by.sasnouskikh.jcasino.dao.impl.StreakDAOImpl;
-import by.sasnouskikh.jcasino.dao.impl.TransactionDAOImpl;
-import by.sasnouskikh.jcasino.dao.impl.UserDAOImpl;
+import by.sasnouskikh.jcasino.dao.LoanDAO;
+import by.sasnouskikh.jcasino.dao.PlayerDAO;
+import by.sasnouskikh.jcasino.dao.StreakDAO;
+import by.sasnouskikh.jcasino.dao.TransactionDAO;
+import by.sasnouskikh.jcasino.dao.UserDAO;
+import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
 import by.sasnouskikh.jcasino.entity.bean.Loan;
@@ -51,9 +51,10 @@ public class PlayerLogic {
 
     public static boolean updateProfileInfo(Player player) {
         int id = player.getId();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-            PlayerProfile profile = playerDAO.takeProfile(player.getId());
-            String        email   = playerDAO.defineEmailById(id);
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO     playerDAO = daoHelper.getPlayerDAO();
+            PlayerProfile profile   = playerDAO.takeProfile(player.getId());
+            String        email     = playerDAO.defineEmailById(id);
             player.setProfile(profile);
             player.setEmail(email);
             return true;
@@ -65,8 +66,9 @@ public class PlayerLogic {
 
     public static boolean updateAccountInfo(Player player) {
         int id = player.getId();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO();
-             LoanDAOImpl loanDAO = DAOFactory.getLoanDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO     playerDAO   = daoHelper.getPlayerDAO();
+            LoanDAO       loanDAO     = daoHelper.getLoanDAO();
             PlayerAccount account     = playerDAO.takeAccount(id);
             Loan          currentLoan = loanDAO.takeCurrentLoan(id);
             account.setCurrentLoan(currentLoan);
@@ -80,11 +82,12 @@ public class PlayerLogic {
 
     public static boolean updateStatsInfo(Player player) {
         int id = player.getId();
-        try (StreakDAOImpl streakDAO = DAOFactory.getStreakDAO();
-             TransactionDAOImpl transactionDAO = DAOFactory.getTransactionDAO()) {
-            List<Streak>      streaks      = streakDAO.takePlayerStreaks(id);
-            List<Transaction> transactions = transactionDAO.takePlayerTransactions(id);
-            PlayerStats       playerStats  = StatsHelper.buildStats(streaks, transactions);
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            StreakDAO         streakDAO      = daoHelper.getStreakDAO();
+            TransactionDAO    transactionDAO = daoHelper.getTransactionDAO();
+            List<Streak>      streaks        = streakDAO.takePlayerStreaks(id);
+            List<Transaction> transactions   = transactionDAO.takePlayerTransactions(id);
+            PlayerStats       playerStats    = StatsHelper.buildStats(streaks, transactions);
             player.setStats(playerStats);
             return true;
         } catch (ConnectionPoolException | DAOException e) {
@@ -95,7 +98,8 @@ public class PlayerLogic {
 
     public static boolean updateVerificationInfo(Player player) {
         int id = player.getId();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO          playerDAO          = daoHelper.getPlayerDAO();
             PlayerVerification playerVerification = playerDAO.takeVerification(id);
             player.setVerification(playerVerification);
             return true;
@@ -122,13 +126,14 @@ public class PlayerLogic {
             question = question.trim();
             answer = JCasinoEncryptor.encryptMD5(answer.trim());
         }
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-            playerDAO.beginTransaction();
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
+            daoHelper.beginTransaction();
             int id = playerDAO.insertUserPlayer(email, password);
             if (id != 0
                 && playerDAO.insertPlayer(id, fName, mName, lName, birthDate, passport, question, answer)
                 && playerDAO.insertEmptyVerification(id)) {
-                playerDAO.commit();
+                daoHelper.commit();
                 return true;
             }
         } catch (ConnectionPoolException | DAOException e) {
@@ -142,17 +147,18 @@ public class PlayerLogic {
     public static boolean changeEmail(Player player, String email) {
         email = email.trim().toLowerCase();
         int id = player.getId();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO();
-             UserDAOImpl userDAO = DAOFactory.getUserDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
+            UserDAO   userDAO   = daoHelper.getUserDAO();
             if (userDAO.checkEmailExist(email)) {
                 return false;
             }
-            playerDAO.beginTransaction();
+            daoHelper.beginTransaction();
             if (playerDAO.changeEmail(id, email)) {
                 PlayerVerification verification = player.getVerification();
                 byte               newStatus    = VerificationLogic.buildNewStatus(verification, (byte) ~EMAIL_VER_MASK, VerificationLogic.MaskOperation.AND);
                 if (playerDAO.changeVerificationStatus(id, newStatus)) {
-                    playerDAO.commit();
+                    daoHelper.commit();
                     return true;
                 }
             }
@@ -168,8 +174,9 @@ public class PlayerLogic {
         int id = player.getId();
         oldPassword = JCasinoEncryptor.encryptMD5(oldPassword);
         newPassword = JCasinoEncryptor.encryptMD5(newPassword);
-        try (UserDAOImpl userDAO = DAOFactory.getUserDAO();
-             PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            UserDAO   userDAO   = daoHelper.getUserDAO();
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
             return userDAO.checkPassword(id, oldPassword)
                    && playerDAO.changePassword(id, newPassword);
         } catch (ConnectionPoolException | DAOException e) {
@@ -181,13 +188,14 @@ public class PlayerLogic {
     public static boolean recoverPassword(String email, String locale) {
         email = email.toLowerCase().trim();
         MessageManager messageManager = MessageManager.getMessageManager(locale);
-        try (UserDAOImpl userDAO = DAOFactory.getUserDAO();
-             PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            UserDAO   userDAO   = daoHelper.getUserDAO();
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
             if (userDAO.checkEmailExist(email)) {
                 JCasinoUser user        = userDAO.takeUser(email);
                 int         id          = user.getId();
                 String      newPassword = RandomGenerator.generatePassword();
-                playerDAO.beginTransaction();
+                daoHelper.beginTransaction();
                 if (!playerDAO.changePassword(id, JCasinoEncryptor.encryptMD5(newPassword))) {
                     return false;
                 }
@@ -197,7 +205,7 @@ public class PlayerLogic {
                 }
                 String message = messageManager.getMessage(EMAIL_PATTERN_NEW_PASSWORD) + WHITESPACE + newPassword;
                 if (MailerSSL.sendEmail(userName, message, email)) {
-                    playerDAO.commit();
+                    daoHelper.commit();
                     return true;
                 }
             }
@@ -218,8 +226,9 @@ public class PlayerLogic {
         } else {
             text = EMPTY_STRING;
         }
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-            playerDAO.beginTransaction();
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
+            daoHelper.beginTransaction();
             boolean changed;
             switch (field) {
                 case FIRST_NAME:
@@ -241,7 +250,7 @@ public class PlayerLogic {
                 PlayerVerification verification = player.getVerification();
                 byte               newStatus    = VerificationLogic.buildNewStatus(verification, EMAIL_VER_MASK, VerificationLogic.MaskOperation.AND);
                 if (playerDAO.changeVerificationStatus(id, newStatus)) {
-                    playerDAO.commit();
+                    daoHelper.commit();
                     return true;
                 }
             }
@@ -256,12 +265,13 @@ public class PlayerLogic {
     public static boolean changeBirthDate(Player player, String birthDate) {
         int                id           = player.getId();
         PlayerVerification verification = player.getVerification();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-            playerDAO.beginTransaction();
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
+            daoHelper.beginTransaction();
             if (playerDAO.changeBirthdate(id, birthDate)) {
                 byte newStatus = VerificationLogic.buildNewStatus(verification, EMAIL_VER_MASK, VerificationLogic.MaskOperation.AND);
                 if (playerDAO.changeVerificationStatus(id, newStatus)) {
-                    playerDAO.commit();
+                    daoHelper.commit();
                     return true;
                 }
             }
@@ -277,7 +287,8 @@ public class PlayerLogic {
         int id = player.getId();
         question = question.trim();
         answer = answer.trim();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
             return playerDAO.changeSecretQuestion(id, question, answer);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -295,8 +306,9 @@ public class PlayerLogic {
         if (fName != null && !fName.isEmpty()
             && lName != null && !lName.isEmpty()
             && passport != null && !passport.isEmpty()) {
-            try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-                byte newStatus = VerificationLogic.buildNewStatus(verification, PROFILE_VER_MASK, VerificationLogic.MaskOperation.OR);
+            try (DAOHelper daoHelper = new DAOHelper()) {
+                PlayerDAO playerDAO = daoHelper.getPlayerDAO();
+                byte      newStatus = VerificationLogic.buildNewStatus(verification, PROFILE_VER_MASK, VerificationLogic.MaskOperation.OR);
                 return playerDAO.changeVerificationStatus(id, newStatus);
             } catch (ConnectionPoolException | DAOException e) {
                 LOGGER.log(Level.ERROR, e.getMessage());
@@ -331,7 +343,8 @@ public class PlayerLogic {
         PlayerVerification verification = player.getVerification();
         if (enteredCode != null && enteredCode.equals(emailCode)) {
             byte newStatus = VerificationLogic.buildNewStatus(verification, EMAIL_VER_MASK, VerificationLogic.MaskOperation.OR);
-            try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+            try (DAOHelper daoHelper = new DAOHelper()) {
+                PlayerDAO playerDAO = daoHelper.getPlayerDAO();
                 return playerDAO.changeVerificationStatus(id, newStatus);
             } catch (ConnectionPoolException | DAOException e) {
                 LOGGER.log(Level.ERROR, e.getMessage());
@@ -369,7 +382,8 @@ public class PlayerLogic {
         } while (storeFile.exists());
         try {
             scanFileItem.write(storeFile);
-            try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
+            try (DAOHelper daoHelper = new DAOHelper()) {
+                PlayerDAO playerDAO = daoHelper.getPlayerDAO();
                 return playerDAO.changeScanPath(id, dbFilePath);
             }
         } catch (Exception e) {
@@ -380,12 +394,13 @@ public class PlayerLogic {
 
     public static boolean replenishAccount(Player player, BigDecimal amount) {
         int id = player.getId();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-            TransactionDAOImpl transactionDAO = DAOFactory.getTransactionDAO(playerDAO.getConnection());
-            playerDAO.beginTransaction();
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO      playerDAO      = daoHelper.getPlayerDAO();
+            TransactionDAO transactionDAO = daoHelper.getTransactionDAO();
+            daoHelper.beginTransaction();
             if (transactionDAO.insertTransaction(id, amount, Transaction.TransactionType.REPLENISH) != 0
                 && playerDAO.changeBalance(id, amount, Transaction.TransactionType.REPLENISH)) {
-                playerDAO.commit();
+                daoHelper.commit();
                 return true;
             }
         } catch (ConnectionPoolException | DAOException e) {
@@ -398,12 +413,13 @@ public class PlayerLogic {
 
     public static boolean withdrawMoney(Player player, BigDecimal amount) {
         int id = player.getId();
-        try (PlayerDAOImpl playerDAO = DAOFactory.getPlayerDAO()) {
-            TransactionDAOImpl transactionDAO = DAOFactory.getTransactionDAO(playerDAO.getConnection());
-            playerDAO.beginTransaction();
+        try (DAOHelper daoHelper = new DAOHelper()) {
+            PlayerDAO      playerDAO      = daoHelper.getPlayerDAO();
+            TransactionDAO transactionDAO = daoHelper.getTransactionDAO();
+            daoHelper.beginTransaction();
             if (transactionDAO.insertTransaction(id, amount, Transaction.TransactionType.WITHDRAW) != 0
                 && playerDAO.changeBalance(id, amount, Transaction.TransactionType.WITHDRAW)) {
-                playerDAO.commit();
+                daoHelper.commit();
                 return true;
             }
         } catch (ConnectionPoolException | DAOException e) {
