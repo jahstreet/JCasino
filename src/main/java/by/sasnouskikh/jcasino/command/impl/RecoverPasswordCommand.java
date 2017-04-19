@@ -34,8 +34,8 @@ public class RecoverPasswordCommand implements Command {
      * and navigates to {@link PageNavigator#FORWARD_PAGE_RECOVER_PASSWORD}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator

@@ -10,8 +10,16 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
+/**
+ * The class provides actions of e-mail sending.
+ *
+ * @author Sasnouskikh Aliaksandr
+ */
 public class MailerSSL {
 
+    /**
+     * Access info of e-mail box and other settings.
+     */
     private static final String USERNAME = "slots.jcasino@gmail.com";
     private static final String PASSWORD = "s-a100500";
     private static final Properties PROPS;
@@ -25,9 +33,21 @@ public class MailerSSL {
         PROPS.put("mail.smtp.port", "465");
     }
 
+    /**
+     * Outer forbidding to create this class instances.
+     */
     private MailerSSL() {
     }
 
+    /**
+     * Sends e-mail to definite e-mail address.
+     *
+     * @param subject name of subject
+     * @param text    text of e-mail message
+     * @param toEmail e-mail address
+     * @return true if operation proceeded successfully
+     * @throws MailerException if {@link MessagingException} occurred during e-mail sending
+     */
     public static boolean sendEmail(String subject, String text, String toEmail) throws MailerException {
         Session session = Session.getDefaultInstance(PROPS, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {

@@ -32,6 +32,8 @@ public class MainController extends HttpServlet {
      *
      * @param request  request from client to get parameters to work with
      * @param response response to client with parameters to work with on client side
+     * @throws IOException      if an input or output error is detected when the servlet handles the request
+     * @throws ServletException if the request could not be handled
      * @see HttpServletRequest
      * @see HttpServletResponse
      * @see #processRequest(HttpServletRequest, HttpServletResponse)
@@ -45,6 +47,8 @@ public class MainController extends HttpServlet {
      *
      * @param request  request from client to get parameters to work with
      * @param response response to client with parameters to work with on client side
+     * @throws IOException      if an input or output error is detected when the servlet handles the request
+     * @throws ServletException if the request could not be handled
      * @see HttpServletRequest
      * @see HttpServletResponse
      * @see #processRequest(HttpServletRequest, HttpServletResponse)
@@ -66,6 +70,8 @@ public class MainController extends HttpServlet {
      *
      * @param request  request from client to get parameters to work with
      * @param response response to client with parameters to work with on client side
+     * @throws IOException      if an input or output error is detected when the servlet handles the request
+     * @throws ServletException if the request could not be handled
      * @see CommandFactory#defineCommand(HttpServletRequest)
      * @see QueryManager#takePreviousQuery(HttpServletRequest)
      */

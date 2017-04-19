@@ -58,6 +58,8 @@ public class JCasinoUser extends Entity {
 
         /**
          * User role instance constructor.
+         *
+         * @param role string representation of user role instance
          */
         UserRole(String role) {
             this.role = role;

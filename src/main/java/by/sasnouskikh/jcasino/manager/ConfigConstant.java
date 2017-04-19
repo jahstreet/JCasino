@@ -113,33 +113,33 @@ public class ConfigConstant {
     /**
      * {@link javax.servlet.http.HttpServletRequest} parameter names
      */
-    public static final String PARAM_AMOUNT          = "amount";
-    public static final String PARAM_ANSWER          = "answer";
-    public static final String PARAM_BET             = "bet";
-    public static final String PARAM_BIRTHDATE       = "birthdate";
-    public static final String PARAM_COMMAND         = "command";
-    public static final String PARAM_COMMENTARY      = "commentary";
-    public static final String PARAM_DEMO            = "demo";
-    public static final String PARAM_EMAIL           = "email";
-    public static final String PARAM_EMAIL_CODE      = "email_code";
-    public static final String PARAM_FILTER_NOT_PAID = "filter_not_paid";
-    public static final String PARAM_FILTER_OVERDUED = "filter_overdued";
-    public static final String PARAM_FNAME           = "fname";
-    public static final String PARAM_HEADER          = "header";
-    public static final String PARAM_ID              = "id";
-    public static final String PARAM_LINE1           = "line1";
-    public static final String PARAM_LINE2           = "line2";
-    public static final String PARAM_LINE3           = "line3";
-    public static final String PARAM_LINE4           = "line4";
-    public static final String PARAM_LINE5           = "line5";
-    public static final String PARAM_LNAME           = "lname";
-    public static final String PARAM_LOCALE          = "locale";
-    public static final String PARAM_MNAME           = "mname";
-    public static final String PARAM_MONTH           = "month";
-    public static final String PARAM_MONTH_ACQUIRE   = "month_acquire";
-    public static final String PARAM_MONTH_EXPIRE    = "month_expire";
-    public static final String PARAM_NEWS_IMAGE      = "news_image";
-    public static final String PARAM_OFFSET1         = "offset1";
+    public static final String PARAM_AMOUNT               = "amount";
+    public static final String PARAM_ANSWER               = "answer";
+    public static final String PARAM_BET                  = "bet";
+    public static final String PARAM_BIRTHDATE            = "birthdate";
+    public static final String PARAM_COMMAND              = "command";
+    public static final String PARAM_COMMENTARY           = "commentary";
+    public static final String PARAM_DEMO                 = "demo";
+    public static final String PARAM_EMAIL                = "email";
+    public static final String PARAM_EMAIL_CODE           = "email_code";
+    public static final String PARAM_FILTER_NOT_PAID      = "filter_not_paid";
+    public static final String PARAM_FILTER_OVERDUED      = "filter_overdued";
+    public static final String PARAM_FNAME                = "fname";
+    public static final String PARAM_HEADER               = "header";
+    public static final String PARAM_ID                   = "id";
+    public static final String PARAM_LINE1                = "line1";
+    public static final String PARAM_LINE2                = "line2";
+    public static final String PARAM_LINE3                = "line3";
+    public static final String PARAM_LINE4                = "line4";
+    public static final String PARAM_LINE5                = "line5";
+    public static final String PARAM_LNAME                = "lname";
+    public static final String PARAM_LOCALE               = "locale";
+    public static final String PARAM_MNAME                = "mname";
+    public static final String PARAM_MONTH                = "month";
+    public static final String PARAM_MONTH_ACQUIRE        = "month_acquire";
+    public static final String PARAM_MONTH_EXPIRE         = "month_expire";
+    public static final String PARAM_NEWS_IMAGE           = "news_image";
+    public static final String PARAM_OFFSET1              = "offset1";
     public static final String PARAM_OFFSET2              = "offset2";
     public static final String PARAM_OFFSET3              = "offset3";
     public static final String PARAM_PASSPORT             = "passport";
@@ -156,7 +156,7 @@ public class ConfigConstant {
     public static final String PARAM_STATUS               = "status";
     public static final String PARAM_TEXT                 = "text";
     public static final String PARAM_TOPIC                = "topic";
-    public static final String PARAM_TYPE           = "type";
+    public static final String PARAM_TYPE                 = "type";
 
     /**
      * Server message property keys

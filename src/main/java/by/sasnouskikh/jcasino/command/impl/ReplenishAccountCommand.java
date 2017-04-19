@@ -3,6 +3,7 @@ package by.sasnouskikh.jcasino.command.impl;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
+import by.sasnouskikh.jcasino.entity.bean.Transaction;
 import by.sasnouskikh.jcasino.logic.PlayerLogic;
 import by.sasnouskikh.jcasino.logic.UserLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
@@ -42,7 +43,7 @@ public class ReplenishAccountCommand implements Command {
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see PlayerLogic#replenishAccount(Player, BigDecimal)
+     * @see PlayerLogic#makeTransaction(Player, BigDecimal, Transaction.TransactionType)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -79,7 +80,7 @@ public class ReplenishAccountCommand implements Command {
         }
 
         if (valid) {
-            if (PlayerLogic.replenishAccount(player, amount)) {
+            if (PlayerLogic.makeTransaction(player, amount, Transaction.TransactionType.REPLENISH)) {
                 navigator = PageNavigator.REDIRECT_GOTO_ACCOUNT;
             } else {
                 request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_REPLENISH_INTERRUPTED));

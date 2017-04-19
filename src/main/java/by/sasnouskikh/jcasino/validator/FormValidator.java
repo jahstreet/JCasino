@@ -10,8 +10,16 @@ import java.util.regex.Pattern;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.ALL;
 
+/**
+ * The class provides form input parameters sent with requests and other values validation logic.
+ *
+ * @author Sasnouskikh Aliaksandr
+ */
 public class FormValidator {
 
+    /**
+     * Validation constants.
+     */
     private static final int    MAX_EMAIL_LENGTH        = 320;
     private static final int    MAX_EMAIL_NAME_LENGTH   = 64;
     private static final int    MAX_EMAIL_DOMAIN_LENGTH = 255;
@@ -23,15 +31,23 @@ public class FormValidator {
     private static final int    MAX_NEWS_HEADER_LENGTH  = 45;
     private static final int    MAX_NEWS_TEXT_LENGTH    = 700;
 
-    private static final String EMAIL_REGEX    = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*" +
-                                                 "@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[\\w_-]{8,}$";
-    private static final String NAME_REGEX     = "[A-Za-z ]{1,70}";
-    private static final String PASSPORT_REGEX = "\\w{1,30}";
-    private static final String AMOUNT_REGEX   = "^[0-9]{1,7}\\.?[0-9]{0,2}$";
-    private static final String DATE_REGEX     = "^[12][0-9]{3}\\-((0[1-9])|(1[0-2]))$";
-    private static final String FLOAT_REGEX     = "^[0-9]+\\.?[0-9]{0,2}$";
+    /**
+     * Validation regular expressions.
+     */
+    private static final String EMAIL_REGEX      = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*" +
+                                                   "@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+    private static final String PASSWORD_REGEX   = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[\\w_-]{8,}$";
+    private static final String NAME_REGEX       = "[A-Za-z ]{1,70}";
+    private static final String PASSPORT_REGEX   = "\\w{1,30}";
+    private static final String AMOUNT_REGEX     = "^[0-9]{1,7}\\.?[0-9]{0,2}$";
+    private static final String DATE_MONTH_REGEX = "^[12][0-9]{3}\\-((0[1-9])|(1[0-2]))$";
 
+    /**
+     * Validates user e-mail.
+     *
+     * @param email user e-mail
+     * @return true if e-mail valid
+     */
     public static boolean validateEmail(String email) {
         if (email == null || email.isEmpty()
             || email.length() > MAX_EMAIL_LENGTH
@@ -48,27 +64,64 @@ public class FormValidator {
                && domain.length() <= MAX_EMAIL_DOMAIN_LENGTH;
     }
 
+    /**
+     * Validates user password.
+     *
+     * @param password user password
+     * @return true if password valid
+     */
     public static boolean validatePassword(String password) {
         return !(password == null || password.trim().isEmpty()) && matchPattern(password, PASSWORD_REGEX);
     }
 
+    /**
+     * Validates user password and compares it with password entered again.
+     *
+     * @param password      user password
+     * @param passwordAgain user password entered again
+     * @return true if password valid and matches to entered again
+     */
     public static boolean validatePassword(String password, String passwordAgain) {
         return !(password == null || password.trim().isEmpty() || !password.equals(passwordAgain))
                && validatePassword(password);
     }
 
+    /**
+     * Validates user name.
+     *
+     * @param name user name
+     * @return true if name is valid
+     */
     public static boolean validateName(String name) {
         return name == null || name.trim().isEmpty() || matchPattern(name, NAME_REGEX);
     }
 
+    /**
+     * Validates user secret question.
+     *
+     * @param question user secret question
+     * @return true if question is valid
+     */
     public static boolean validateQuestion(String question) {
         return question == null || question.trim().isEmpty() || question.trim().length() <= MAX_QUESTION_LENGTH;
     }
 
+    /**
+     * Validates user answer to secret question.
+     *
+     * @param answer user answer to secret question
+     * @return true if answer is valid
+     */
     public static boolean validateAnswer(String answer) {
         return answer == null || answer.trim().isEmpty() || answer.trim().length() <= MAX_ANSWER_LENGTH;
     }
 
+    /**
+     * Validates user birthdate.
+     *
+     * @param birthdate user birthdate
+     * @return true if birthdate is valid
+     */
     public static boolean validateBirthdate(String birthdate) {
         if (birthdate == null || birthdate.trim().isEmpty()) {
             return false;
@@ -79,20 +132,48 @@ public class FormValidator {
 
     }
 
+    /**
+     * Validates user passport number.
+     *
+     * @param passport user passport number
+     * @return true if passport number is valid
+     */
     public static boolean validatePassport(String passport) {
         return passport != null && matchPattern(passport, PASSPORT_REGEX);
     }
 
+    /**
+     * Validates string representation of decimal amount value.
+     *
+     * @param amount string representation of decimal amount value
+     * @return true if amount is valid
+     */
     public static boolean validateAmount(String amount) {
         return amount != null && matchPattern(amount, AMOUNT_REGEX);
     }
 
+    /**
+     * Checks if given string matches regular expression pattern.
+     *
+     * @param string string value
+     * @param regex  string regular expression
+     * @return true if string matches pattern is valid
+     * @see Pattern
+     * @see Matcher
+     */
     private static boolean matchPattern(String string, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
 
+    /**
+     * Validates string representation of support question topic.
+     *
+     * @param topic string representation of support question topic
+     * @return true if topic is valid
+     * @see by.sasnouskikh.jcasino.entity.bean.Question.QuestionTopic
+     */
     public static boolean validateTopic(String topic) {
         if (topic == null || topic.trim().isEmpty()) {
             return false;
@@ -106,16 +187,35 @@ public class FormValidator {
         return false;
     }
 
+    /**
+     * Validates support question or answer text.
+     *
+     * @param text support question or answer text
+     * @return true if text is valid
+     */
     public static boolean validateSupport(String text) {
         return text != null && !text.trim().isEmpty()
                && text.trim().length() <= MAX_SUPPORT_LENGTH;
     }
 
-    public static boolean validateDateMonth(String date) {
-        return !(date == null || date.trim().isEmpty())
-               && matchPattern(date, DATE_REGEX);
+    /**
+     * Validates string representation of date month in 'yyyy-mm' format.
+     *
+     * @param month string representation of date month in 'yyyy-mm' format
+     * @return true if month is valid
+     */
+    public static boolean validateDateMonth(String month) {
+        return !(month == null || month.trim().isEmpty())
+               && matchPattern(month, DATE_MONTH_REGEX);
     }
 
+    /**
+     * Validates string representation of player satisfaction with admin answer to support question.
+     *
+     * @param satisfaction string representation of player satisfaction with admin answer to support question
+     * @return true if satisfaction is valid
+     * @see by.sasnouskikh.jcasino.entity.bean.Question.Satisfaction
+     */
     public static boolean validateSatisfaction(String satisfaction) {
         if (satisfaction == null || satisfaction.trim().isEmpty()) {
             return false;
@@ -129,6 +229,14 @@ public class FormValidator {
         return false;
     }
 
+    /**
+     * Validates string representation of transaction type.
+     *
+     * @param type string representation of transaction type
+     * @return true if type is valid
+     * @see by.sasnouskikh.jcasino.entity.bean.Transaction.TransactionType
+     * @see by.sasnouskikh.jcasino.manager.ConfigConstant#ALL
+     */
     public static boolean validateTransactionType(String type) {
         if (type == null || type.trim().isEmpty()) {
             return false;
@@ -142,20 +250,45 @@ public class FormValidator {
         return false;
     }
 
+    /**
+     * Validates string representation of id int number.
+     *
+     * @param id string representation of id int number
+     * @return true if id is valid
+     * @see StringUtils#isNumeric(String)
+     */
     public static boolean validateId(String id) {
         return !(id == null || id.trim().isEmpty())
                && StringUtils.isNumeric(id)
                && Integer.parseInt(id) > 0;
     }
 
+    /**
+     * Validates news header.
+     *
+     * @param header news header
+     * @return true if header is valid
+     */
     public static boolean validateNewsHeader(String header) {
         return header != null && !header.trim().isEmpty() && header.trim().length() <= MAX_NEWS_HEADER_LENGTH;
     }
 
+    /**
+     * Validates news text.
+     *
+     * @param text news text
+     * @return true if text is valid
+     */
     public static boolean validateNewsText(String text) {
         return text != null && !text.trim().isEmpty() && text.trim().length() <= MAX_NEWS_TEXT_LENGTH;
     }
 
+    /**
+     * Validates string representation of float number.
+     *
+     * @param source string representation of float number
+     * @return true if source is valid
+     */
     public static boolean isFloat(String source) {
         return source != null && matchPattern(source, AMOUNT_REGEX);
     }

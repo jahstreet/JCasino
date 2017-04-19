@@ -30,6 +30,8 @@ public class AjaxController extends HttpServlet {
      *
      * @param request  request from client to get parameters to work with
      * @param response response to client with parameters to work with on client side
+     * @throws IOException      if an input or output error is detected when the servlet handles the request
+     * @throws ServletException if the request could not be handled
      * @see HttpServletRequest
      * @see HttpServletResponse
      * @see #processRequest(HttpServletRequest, HttpServletResponse)
@@ -43,6 +45,8 @@ public class AjaxController extends HttpServlet {
      *
      * @param request  request from client to get parameters to work with
      * @param response response to client with parameters to work with on client side
+     * @throws IOException      if an input or output error is detected when the servlet handles the request
+     * @throws ServletException if the request could not be handled
      * @see HttpServletRequest
      * @see HttpServletResponse
      * @see #processRequest(HttpServletRequest, HttpServletResponse)
@@ -63,6 +67,8 @@ public class AjaxController extends HttpServlet {
      *
      * @param request  request from client to get parameters to work with
      * @param response response to client with parameters to work with on client side
+     * @throws IOException      if an input or output error is detected when the servlet handles the request
+     * @throws ServletException if the request could not be handled
      * @see AjaxCommandFactory#defineCommand(HttpServletRequest)
      * @see #write(HttpServletResponse, Map)
      */
@@ -83,7 +89,7 @@ public class AjaxController extends HttpServlet {
      *
      * @param response response to client with parameters to work with on client side
      * @param map      {@link HashMap} to convert and write
-     * @throws IOException
+     * @throws IOException if an input or output exception occurred while getting response writer
      */
     private void write(HttpServletResponse response, Map map) throws IOException {
         response.setContentType("application/json");

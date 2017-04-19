@@ -2,10 +2,22 @@ package by.sasnouskikh.jcasino.logic;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * The class provides generation of pseudo-random numbers and values for Logic layer need.
+ *
+ * @author Sasnouskikh Aliaksandr
+ */
 class RandomGenerator {
+
+    /**
+     * Constants for e-mail code generation
+     */
     private static final int EMAIL_CODE_LENGTH = 8;
     private static final int RANDOM_INT_BOUND  = 10;
 
+    /**
+     * Constants for password generation
+     */
     private static final int PASSWORD_MIN_LENGTH   = 8;
     private static final int ASCII_DIGIT_BOUND_BOT = 48;
     private static final int ASCII_DIGIT_BOUND_TOP = 57;
@@ -14,9 +26,17 @@ class RandomGenerator {
     private static final int ASCII_LOWER_BOUND_BOT = 97;
     private static final int ASCII_LOWER_BOUND_TOP = 122;
 
+    /**
+     * Outer forbidding to create this class instances.
+     */
     private RandomGenerator() {
     }
 
+    /**
+     * Generates random e-mail code for player e-mail verification.
+     *
+     * @return e-mail code
+     */
     static String generateEmailCode() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < EMAIL_CODE_LENGTH; i++) {
@@ -25,6 +45,11 @@ class RandomGenerator {
         return builder.toString();
     }
 
+    /**
+     * Generates random password.
+     *
+     * @return password
+     */
     static String generatePassword() {
         StringBuilder builder = new StringBuilder();
         builder.append(String.valueOf((char) ThreadLocalRandom.current().nextInt(ASCII_DIGIT_BOUND_BOT, ASCII_DIGIT_BOUND_TOP + 1)));
@@ -35,6 +60,13 @@ class RandomGenerator {
         return builder.toString();
     }
 
+    /**
+     * Generates random int number between given values.
+     *
+     * @param from random number bottom value including
+     * @param to   random number top value including
+     * @return generated number
+     */
     static int generateNumber(int from, int to) {
         return ThreadLocalRandom.current().nextInt(from, to + 1);
     }

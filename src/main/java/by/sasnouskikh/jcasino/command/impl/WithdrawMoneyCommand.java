@@ -4,6 +4,7 @@ import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
+import by.sasnouskikh.jcasino.entity.bean.Transaction;
 import by.sasnouskikh.jcasino.logic.PlayerLogic;
 import by.sasnouskikh.jcasino.logic.UserLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
@@ -38,12 +39,12 @@ public class WithdrawMoneyCommand implements Command {
      * and navigates to {@link PageNavigator#FORWARD_PAGE_WITHDRAW_MONEY}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see PlayerLogic#withdrawMoney(Player, BigDecimal)
+     * @see PlayerLogic#makeTransaction(Player, BigDecimal, Transaction.TransactionType)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -97,7 +98,7 @@ public class WithdrawMoneyCommand implements Command {
         }
 
         if (valid) {
-            if (PlayerLogic.withdrawMoney(player, amount)) {
+            if (PlayerLogic.makeTransaction(player, amount, Transaction.TransactionType.WITHDRAW)) {
                 navigator = PageNavigator.REDIRECT_GOTO_ACCOUNT;
             } else {
                 request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_WITHDRAWAL_INTERRUPTED));

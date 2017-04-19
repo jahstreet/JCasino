@@ -14,22 +14,48 @@ import java.sql.SQLException;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides Logic layer actions with player verification.
+ *
+ * @author Sasnouskikh Aliaksandr
+ */
 public class VerificationLogic {
     private static final Logger LOGGER = LogManager.getLogger(VerificationLogic.class);
 
+    /**
+     * Available verification mask operation enumeration value instances.
+     */
     public enum MaskOperation {
         AND, OR
     }
 
+    /**
+     * Outer forbidding to create this class instances.
+     */
     private VerificationLogic() {
     }
 
+    /**
+     * Calls DAO layer to update player verification status data due given parameters.
+     *
+     * @param playerId   player id whose data is updating
+     * @param verMask    verification binary mask
+     * @param operation  type of logic operation with current verification binary mask and given verification binary
+     *                   mask
+     * @param admin      admin id who processes verification status change
+     * @param commentary admin commentary
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see PlayerDAO#takeVerification(int)
+     * @see #buildNewStatus(PlayerVerification, byte, MaskOperation)
+     * @see PlayerDAO#changeVerificationStatus(int, byte, int, String)
+     */
     public static boolean changePlayerVerStatus(int playerId, byte verMask, VerificationLogic.MaskOperation operation, Admin admin, String commentary) {
         int adminId = admin.getId();
         try (DAOHelper daoHelper = new DAOHelper()) {
             PlayerDAO          playerDAO    = daoHelper.getPlayerDAO();
             PlayerVerification verification = playerDAO.takeVerification(playerId);
-            byte               newStatus    = VerificationLogic.buildNewStatus(verification, verMask, operation);
+            byte               newStatus    = buildNewStatus(verification, verMask, operation);
             return playerDAO.changeVerificationStatus(playerId, newStatus, adminId, commentary);
         } catch (ConnectionPoolException | DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
@@ -37,12 +63,25 @@ public class VerificationLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to cancel player passport scan verification by admin.
+     *
+     * @param playerId   player id whose data is updating
+     * @param admin      admin who cancels passport scan verification
+     * @param commentary admin commentary
+     * @return true if transaction proceeded successfully
+     * @see DAOHelper
+     * @see PlayerDAO#takeVerification(int)
+     * @see #buildNewStatus(PlayerVerification, byte, MaskOperation)
+     * @see PlayerDAO#changeVerificationStatus(int, byte, int, String)
+     * @see PlayerDAO#changeScanPath(int, String)
+     */
     public static boolean cancelScanVerification(int playerId, Admin admin, String commentary) {
         int adminId = admin.getId();
         try (DAOHelper daoHelper = new DAOHelper()) {
             PlayerDAO          playerDAO    = daoHelper.getPlayerDAO();
             PlayerVerification verification = playerDAO.takeVerification(playerId);
-            byte               newStatus    = VerificationLogic.buildNewStatus(verification, (byte) ~PASSPORT_VER_MASK, VerificationLogic.MaskOperation.AND);
+            byte               newStatus    = buildNewStatus(verification, (byte) ~PASSPORT_VER_MASK, VerificationLogic.MaskOperation.AND);
             daoHelper.beginTransaction();
             if (playerDAO.changeVerificationStatus(playerId, newStatus, adminId, commentary)
                 && playerDAO.changeScanPath(playerId, null)) {
@@ -57,11 +96,29 @@ public class VerificationLogic {
         return false;
     }
 
+    /**
+     * Builds new status binary mask from given parameters.
+     *
+     * @param verification current {@link PlayerVerification} object
+     * @param changeMask   verification binary mask
+     * @param operation    logic operation with current verification binary mask and given verification binary mask
+     * @return byte value of built verification binary mask
+     * @see #ejectBinStatus(PlayerVerification)
+     * @see #buildNewStatus(byte, byte, MaskOperation)
+     */
     static byte buildNewStatus(PlayerVerification verification, byte changeMask, MaskOperation operation) {
         byte status = ejectBinStatus(verification);
         return buildNewStatus(status, changeMask, operation);
     }
 
+    /**
+     * Builds new status binary mask from given parameters.
+     *
+     * @param status     current verification binary mask
+     * @param changeMask verification binary mask
+     * @param operation  logic operation with current verification binary mask and given verification binary mask
+     * @return byte value of built verification binary mask
+     */
     private static byte buildNewStatus(byte status, byte changeMask, MaskOperation operation) {
         byte newStatus;
         if (operation == MaskOperation.AND) {
@@ -72,6 +129,12 @@ public class VerificationLogic {
         return newStatus;
     }
 
+    /**
+     * Ejects verification binary mask from given {@link PlayerVerification} object.
+     *
+     * @param verification {@link PlayerVerification} object to eject binary mask from
+     * @return byte value of ejected verification binary mask
+     */
     private static byte ejectBinStatus(PlayerVerification verification) {
         byte status = 0;
         if (verification.getStatus() == PlayerVerification.VerificationStatus.VERIFIED) {

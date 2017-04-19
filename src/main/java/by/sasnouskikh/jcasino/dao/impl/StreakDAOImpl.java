@@ -7,7 +7,7 @@ import by.sasnouskikh.jcasino.db.ConnectionPool;
 import by.sasnouskikh.jcasino.db.WrappedConnection;
 import by.sasnouskikh.jcasino.entity.bean.Roll;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
-import by.sasnouskikh.jcasino.logic.JCasinoEncryptor;
+import by.sasnouskikh.jcasino.manager.JCasinoEncryptor;
 import by.sasnouskikh.jcasino.logic.StreakLogic;
 
 import java.sql.PreparedStatement;

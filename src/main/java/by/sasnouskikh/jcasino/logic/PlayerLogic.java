@@ -19,6 +19,7 @@ import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
 import by.sasnouskikh.jcasino.mailer.MailerException;
 import by.sasnouskikh.jcasino.mailer.MailerSSL;
+import by.sasnouskikh.jcasino.manager.JCasinoEncryptor;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.io.FilenameUtils;
@@ -35,20 +36,30 @@ import java.util.List;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides Logic layer actions with player.
+ *
+ * @author Sasnouskikh Aliaksandr
+ */
 public class PlayerLogic {
     private static final Logger LOGGER = LogManager.getLogger(PlayerLogic.class);
 
+    /**
+     * Enumeration of available {@link PlayerProfile} text fields to edit.
+     */
     public enum ProfileTextField {
         FIRST_NAME, MIDDLE_NAME, LAST_NAME, PASSPORT
     }
 
-    static boolean initPlayerInfo(Player player) {
-        return updateProfileInfo(player)
-               & updateAccountInfo(player)
-               & updateStatsInfo(player)
-               & updateVerificationInfo(player);
-    }
-
+    /**
+     * Calls DAO layer to fill given {@link Player} object with latest {@link PlayerProfile} data.
+     *
+     * @param player {@link Player} object to update data
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see PlayerDAO#takeProfile(int)
+     * @see PlayerDAO#defineEmailById(int)
+     */
     public static boolean updateProfileInfo(Player player) {
         int id = player.getId();
         try (DAOHelper daoHelper = new DAOHelper()) {
@@ -64,6 +75,15 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to fill given {@link Player} object with latest {@link PlayerAccount} data.
+     *
+     * @param player {@link Player} object to update data
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see PlayerDAO#takeAccount(int)
+     * @see LoanDAO#takeCurrentLoan(int)
+     */
     public static boolean updateAccountInfo(Player player) {
         int id = player.getId();
         try (DAOHelper daoHelper = new DAOHelper()) {
@@ -80,6 +100,16 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to fill given {@link Player} object with latest {@link PlayerStats} data.
+     *
+     * @param player {@link Player} object to update data
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see StreakDAO#takePlayerStreaks(int)
+     * @see TransactionDAO#takePlayerTransactions(int)
+     * @see StatsHelper#buildStats(List, List)
+     */
     public static boolean updateStatsInfo(Player player) {
         int id = player.getId();
         try (DAOHelper daoHelper = new DAOHelper()) {
@@ -96,6 +126,14 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to fill given {@link Player} object with latest {@link PlayerVerification} data.
+     *
+     * @param player {@link Player} object to update data
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see PlayerDAO#takeVerification(int)
+     */
     public static boolean updateVerificationInfo(Player player) {
         int id = player.getId();
         try (DAOHelper daoHelper = new DAOHelper()) {
@@ -109,6 +147,25 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Provides player registration operation. Calls DAO layer to insert all given and other needed data.
+     *
+     * @param email     player e-mail
+     * @param password  player password
+     * @param fName     player first name
+     * @param mName     player middle name
+     * @param lName     player last name
+     * @param birthDate player birthdate
+     * @param passport  player passport number
+     * @param question  player secret question
+     * @param answer    player answer to secret question
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see JCasinoEncryptor
+     * @see PlayerDAO#insertUserPlayer(String, String)
+     * @see PlayerDAO#insertPlayer(int, String, String, String, String, String, String, String)
+     * @see PlayerDAO#insertEmptyVerification(int)
+     */
     public static boolean registerPlayer(String email, String password, String fName, String mName, String lName, String birthDate, String passport, String question, String answer) {
         email = email.trim().toLowerCase();
         password = JCasinoEncryptor.encryptMD5(password);
@@ -144,6 +201,18 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to change player e-mail and resets player e-mail verification status.
+     *
+     * @param player {@link Player} object whose e-mail to change
+     * @param email  new e-mail
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see UserDAO#checkEmailExist(String)
+     * @see PlayerDAO#changeEmail(int, String)
+     * @see PlayerDAO#changeVerificationStatus(int, byte)
+     * @see VerificationLogic#buildNewStatus(PlayerVerification, byte, VerificationLogic.MaskOperation)
+     */
     public static boolean changeEmail(Player player, String email) {
         email = email.trim().toLowerCase();
         int id = player.getId();
@@ -170,6 +239,18 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to change player password.
+     *
+     * @param player      {@link Player} object whose password to change
+     * @param oldPassword old password
+     * @param newPassword new password
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see JCasinoEncryptor
+     * @see UserDAO#checkPassword(int, String)
+     * @see PlayerDAO#changePassword(int, String)
+     */
     public static boolean changePassword(Player player, String oldPassword, String newPassword) {
         int id = player.getId();
         oldPassword = JCasinoEncryptor.encryptMD5(oldPassword);
@@ -185,6 +266,21 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to change player password and sends new generated password to user e-mail.
+     *
+     * @param email  user e-mail on which to send new password
+     * @param locale locale string to define language of sending e-mail with new password
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see JCasinoEncryptor
+     * @see MessageManager
+     * @see RandomGenerator
+     * @see MailerSSL
+     * @see UserDAO#checkEmailExist(String)
+     * @see PlayerDAO#changePassword(int, String)
+     * @see PlayerDAO#defineNameByEmail(String)
+     */
     public static boolean recoverPassword(String email, String locale) {
         email = email.toLowerCase().trim();
         MessageManager messageManager = MessageManager.getMessageManager(locale);
@@ -219,6 +315,22 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to change player profile text item and resets player profile verification status.
+     *
+     * @param player player whose data is updating
+     * @param text   new textfield value
+     * @param field  {@link ProfileTextField} enumeration value instance
+     * @return true if transaction proceeded successfully
+     * @throws LogicException if given {@link ProfileTextField} update is not supported
+     * @see DAOHelper
+     * @see PlayerDAO#changeFirstName(int, String)
+     * @see PlayerDAO#changeMiddleName(int, String)
+     * @see PlayerDAO#changeLastName(int, String)
+     * @see PlayerDAO#changePassportNumber(int, String)
+     * @see VerificationLogic#buildNewStatus(PlayerVerification, byte, VerificationLogic.MaskOperation)
+     * @see PlayerDAO#changeVerificationStatus(int, byte)
+     */
     public static boolean changeProfileTextItem(Player player, String text, ProfileTextField field) throws LogicException {
         int id = player.getId();
         if (text != null) {
@@ -262,6 +374,17 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to change player birthdate and resets player profile verification status.
+     *
+     * @param player    player whose data is updating
+     * @param birthDate new birthdate value
+     * @return true if transaction proceeded successfully
+     * @see DAOHelper
+     * @see PlayerDAO#changeBirthdate(int, String)
+     * @see VerificationLogic#buildNewStatus(PlayerVerification, byte, VerificationLogic.MaskOperation)
+     * @see PlayerDAO#changeVerificationStatus(int, byte)
+     */
     public static boolean changeBirthDate(Player player, String birthDate) {
         int                id           = player.getId();
         PlayerVerification verification = player.getVerification();
@@ -283,10 +406,21 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to change player secret question.
+     *
+     * @param player   player whose data is updating
+     * @param question new secret question
+     * @param answer   answer to new secret question
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see JCasinoEncryptor
+     * @see PlayerDAO#changeSecretQuestion(int, String, String)
+     */
     public static boolean changeSecretQuestion(Player player, String question, String answer) {
         int id = player.getId();
         question = question.trim();
-        answer = answer.trim();
+        answer = JCasinoEncryptor.encryptMD5(answer.trim());
         try (DAOHelper daoHelper = new DAOHelper()) {
             PlayerDAO playerDAO = daoHelper.getPlayerDAO();
             return playerDAO.changeSecretQuestion(id, question, answer);
@@ -296,6 +430,15 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Calls DAO layer to verify player profile if it is filled.
+     *
+     * @param player player whose profile is verifying
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see PlayerDAO#changeVerificationStatus(int, byte)
+     * @see VerificationLogic#buildNewStatus(PlayerVerification, byte, VerificationLogic.MaskOperation)
+     */
     public static boolean verifyProfile(Player player) {
         int                id           = player.getId();
         PlayerProfile      profile      = player.getProfile();
@@ -317,6 +460,16 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Sends new e-mail code to player e-mail and ads it to {@link PlayerVerification} object.
+     *
+     * @param player player to whom e-mail code is sending
+     * @param locale locale string to define language of sending e-mail with e-mail code
+     * @return true if operation proceeded successfully
+     * @see MessageManager
+     * @see RandomGenerator#generateEmailCode()
+     * @see MailerSSL
+     */
     public static boolean sendEmailCode(Player player, String locale) {
         String             name           = player.getProfile().getfName();
         String             emailTo        = player.getEmail();
@@ -338,6 +491,17 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Verifies player e-mail by comparing given code with {@link PlayerVerification#emailCode}.
+     *
+     * @param player      player whose e-mail is verifying
+     * @param enteredCode code entered by player
+     * @param emailCode   e-mail code to compare with code entered by player
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see PlayerDAO#changeVerificationStatus(int, byte)
+     * @see VerificationLogic#buildNewStatus(PlayerVerification, byte, VerificationLogic.MaskOperation)
+     */
     public static boolean verifyEmail(Player player, String enteredCode, String emailCode) {
         int                id           = player.getId();
         PlayerVerification verification = player.getVerification();
@@ -353,6 +517,18 @@ public class PlayerLogic {
         return false;
     }
 
+    /**
+     * Uploads definite player passport scan image file.
+     *
+     * @param player       player whose passport scan is uploading
+     * @param scanFileItem {@link FileItem} image file of player passport scan
+     * @param uploadPath   path to 'uploads' directory
+     * @return true if operation proceeded successfully
+     * @throws LogicException if passport scan image file extension isn't supported
+     * @see DAOHelper
+     * @see PlayerDAO#changeScanPath(int, String)
+     * @see by.sasnouskikh.jcasino.manager.ConfigConstant#AVAILABLE_SCAN_EXT
+     */
     public static boolean uploadPassportScan(Player player, FileItem scanFileItem, String uploadPath) throws LogicException {
         int    id            = player.getId();
         String playerDirName = String.valueOf(id);
@@ -392,14 +568,26 @@ public class PlayerLogic {
         return false;
     }
 
-    public static boolean replenishAccount(Player player, BigDecimal amount) {
+    /**
+     * Calls DAO layer to make an account transaction of definite
+     * {@link by.sasnouskikh.jcasino.entity.bean.Transaction.TransactionType}.
+     *
+     * @param player player who processes transaction
+     * @param amount amount of money player transacts
+     * @param type   type of transaction
+     * @return true if transaction proceeded successfully
+     * @see DAOHelper
+     * @see TransactionDAO#insertTransaction(int, BigDecimal, Transaction.TransactionType)
+     * @see PlayerDAO#changeBalance(int, BigDecimal, Transaction.TransactionType)
+     */
+    public static boolean makeTransaction(Player player, BigDecimal amount, Transaction.TransactionType type) {
         int id = player.getId();
         try (DAOHelper daoHelper = new DAOHelper()) {
             PlayerDAO      playerDAO      = daoHelper.getPlayerDAO();
             TransactionDAO transactionDAO = daoHelper.getTransactionDAO();
             daoHelper.beginTransaction();
-            if (transactionDAO.insertTransaction(id, amount, Transaction.TransactionType.REPLENISH) != 0
-                && playerDAO.changeBalance(id, amount, Transaction.TransactionType.REPLENISH)) {
+            if (transactionDAO.insertTransaction(id, amount, type) != 0
+                && playerDAO.changeBalance(id, amount, type)) {
                 daoHelper.commit();
                 return true;
             }
@@ -411,22 +599,20 @@ public class PlayerLogic {
         return false;
     }
 
-    public static boolean withdrawMoney(Player player, BigDecimal amount) {
-        int id = player.getId();
-        try (DAOHelper daoHelper = new DAOHelper()) {
-            PlayerDAO      playerDAO      = daoHelper.getPlayerDAO();
-            TransactionDAO transactionDAO = daoHelper.getTransactionDAO();
-            daoHelper.beginTransaction();
-            if (transactionDAO.insertTransaction(id, amount, Transaction.TransactionType.WITHDRAW) != 0
-                && playerDAO.changeBalance(id, amount, Transaction.TransactionType.WITHDRAW)) {
-                daoHelper.commit();
-                return true;
-            }
-        } catch (ConnectionPoolException | DAOException e) {
-            LOGGER.log(Level.ERROR, e.getMessage());
-        } catch (SQLException e) {
-            LOGGER.log(Level.ERROR, "Database connection error while doing sql transaction. " + e);
-        }
-        return false;
+    /**
+     * Inits given {@link Player} object data.
+     *
+     * @param player {@link Player} object to init
+     * @return true if operation proceeded successfully
+     * @see #updateProfileInfo(Player)
+     * @see #updateAccountInfo(Player)
+     * @see #updateStatsInfo(Player)
+     * @see #updateVerificationInfo(Player)
+     */
+    static boolean initPlayerInfo(Player player) {
+        return updateProfileInfo(player)
+               & updateAccountInfo(player)
+               & updateStatsInfo(player)
+               & updateVerificationInfo(player);
     }
 }

@@ -7,6 +7,7 @@ import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Roll;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.game.GameEngine;
+import by.sasnouskikh.jcasino.manager.JCasinoEncryptor;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,17 +23,38 @@ import java.util.List;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides Logic layer actions with streaks.
+ *
+ * @author Sasnouskikh Aliaksandr
+ */
 public class StreakLogic {
     private static final Logger LOGGER = LogManager.getLogger(StreakLogic.class);
 
+    /**
+     * Class constants.
+     */
     private static final char LINE_NOT_SELECTED = '0';
     private static final char LINE_SELECTED     = '1';
     private static final char BET_SPLITERATOR   = '_';
     private static final char REEL_SPLITERATOR  = '-';
 
+    /**
+     * Outer forbidding to create this class instances.
+     */
     private StreakLogic() {
     }
 
+    /**
+     * Calls DAO layer to take {@link List} collection of definite player {@link Streak} objects which were generated on
+     * given month.
+     *
+     * @param id    player id
+     * @param month string representation of month value in format 'yyyy-mm'
+     * @return taken {@link List} collection
+     * @see DAOHelper
+     * @see StreakDAO#takePlayerStreaks(int, String)
+     */
     public static List<Streak> takePlayerStreaks(int id, String month) {
         String monthPattern;
         if (month != null) {
@@ -51,6 +73,15 @@ public class StreakLogic {
         return streakList;
     }
 
+    /**
+     * Calls DAO layer to take {@link List} collection of {@link Streak} objects due to given parameters.
+     *
+     * @param month       string representation of month value in format 'yyyy-mm'
+     * @param sortByTotal is sort by {@link Streak#result} needed
+     * @return taken {@link List} collection
+     * @see DAOHelper
+     * @see StreakDAO#takeStreakList(String)
+     */
     public static List<Streak> takeStreakList(String month, boolean sortByTotal) {
         List<Streak> streakList = null;
         String       monthPattern;
@@ -72,6 +103,19 @@ public class StreakLogic {
         return streakList;
     }
 
+    /**
+     * Calls DAO layer to save data about given {@link Streak} to database.
+     *
+     * @param streak {@link Streak} to be saved
+     * @return true if operation proceeded successfully
+     * @see DAOHelper
+     * @see StreakDAO#updateStreak(int, String, String, String, String, String)
+     * @see #buildRollString(ArrayDeque)
+     * @see #buildOffsetString(ArrayDeque)
+     * @see #buildLineString(ArrayDeque)
+     * @see #buildBetString(ArrayDeque)
+     * @see #buildResultString(ArrayDeque)
+     */
     public static boolean updateStreak(Streak streak) {
         int              id           = streak.getId();
         ArrayDeque<Roll> rolls        = streak.getRolls();
@@ -89,6 +133,13 @@ public class StreakLogic {
         return false;
     }
 
+    /**
+     * Generates new streak for play in demo mode and inits it.
+     *
+     * @return generated {@link Streak} object
+     * @see #generateRollString()
+     * @see JCasinoEncryptor
+     */
     public static Streak generateStreak() {
         Streak streak = new Streak();
         streak.setDate(LocalDateTime.now());
@@ -99,6 +150,16 @@ public class StreakLogic {
         return streak;
     }
 
+    /**
+     * Generates new streak for play on real money mode, inits it and inserts into database.
+     *
+     * @param playerId id of player who will play generated streak
+     * @return generated {@link Streak} object
+     * @see DAOHelper
+     * @see #generateRollString()
+     * @see StreakDAO#insertStreak(int, String)
+     * @see StreakDAO#takeStreak(int)
+     */
     public static Streak generateStreak(int playerId) {
         Streak streak = null;
         try (DAOHelper daoHelper = new DAOHelper()) {
@@ -117,6 +178,15 @@ public class StreakLogic {
         return streak;
     }
 
+    /**
+     * Parses int array of reel positions of definite roll from {@link Streak#roll} string.
+     *
+     * @param roll      {@link String} object in special format with info about all rolls reel positions in streak
+     * @param rollIndex index number of roll in streak
+     * @return int array of roll reel positions
+     * @see #parseRollArray(String)
+     * @see Arrays#copyOfRange(int[], int, int)
+     */
     public static int[] parseCurrentRollArray(String roll, int rollIndex) {
         int[] rollArray = parseRollArray(roll);
         int   from      = rollIndex * REEL_NUMBER;
@@ -124,6 +194,14 @@ public class StreakLogic {
         return Arrays.copyOfRange(rollArray, from, to);
     }
 
+    /**
+     * Build {@link List} collection of {@link Roll} objects of given {@link Streak} object.
+     *
+     * @param streak {@link Streak} object source with initialized {@link Streak#roll}, {@link Streak#offset}, {@link
+     *               Streak#lines}, {@link Streak#bet}, {@link Streak#result} fields
+     * @return built {@link ArrayDeque} collection
+     * @see #buildRollList(String, String, String, String, String)
+     */
     public static ArrayDeque<Roll> buildRollList(Streak streak) {
         String roll   = streak.getRoll();
         String offset = streak.getOffset();
@@ -133,6 +211,12 @@ public class StreakLogic {
         return buildRollList(roll, offset, lines, bet, result);
     }
 
+    /**
+     * Counts streak result from given {@link ArrayDeque} collection of {@link Roll} objects.
+     *
+     * @param rolls {@link ArrayDeque} collection of {@link Roll} objects
+     * @return {@link BigDecimal} streak result value
+     */
     public static BigDecimal countStreakTotal(ArrayDeque<Roll> rolls) {
         BigDecimal total = BigDecimal.ZERO;
         for (Roll roll : rolls) {
@@ -144,6 +228,17 @@ public class StreakLogic {
         return total;
     }
 
+    /**
+     * Completes given {@link Streak} object by filling its fields by empty data.
+     *
+     * @param streak {@link Streak} object to be completed
+     * @see #parseCurrentRollArray(String, int)
+     * @see #isComplete(Streak)
+     * @see #buildOffsetString(ArrayDeque)
+     * @see #buildLineString(ArrayDeque)
+     * @see #buildBetString(ArrayDeque)
+     * @see #buildResultString(ArrayDeque)
+     */
     public static void completeStreak(Streak streak) {
         final int[]     nullOffsetArray = new int[]{0, 0, 0, 0, 0};
         final boolean[] nullLinesArray  = new boolean[]{false, false, false, false, false};
@@ -167,11 +262,27 @@ public class StreakLogic {
         streak.setResult(buildResultString(rolls));
     }
 
+    /**
+     * Checks if given {@link Streak} object is completed.
+     *
+     * @param streak {@link Streak} object to be checked
+     * @return true if given {@link Streak} object is completed
+     */
     public static boolean isComplete(Streak streak) {
         return !(streak == null || streak.getRolls() == null)
                && streak.getRolls().size() >= BETS_IN_STREAK;
     }
 
+    /**
+     * Defines max total bet value on 1 roll from {@link List} collection of {@link Streak} objects.
+     *
+     * @param streaks {@link List} collection of {@link Streak} objects to be filtered
+     * @return max total bet value on 1 roll
+     * @see GameEngine#countTotalBet(BigDecimal, boolean[])
+     * @see Arrays#copyOfRange(boolean[], int, int)
+     * @see #parseBetArray(String)
+     * @see #parseLineArray(String)
+     */
     static BigDecimal defineMaxBet(List<Streak> streaks) {
         BigDecimal maxBet = BigDecimal.ZERO;
         if (streaks != null) {
@@ -197,6 +308,13 @@ public class StreakLogic {
         return maxBet;
     }
 
+    /**
+     * Counts total sum of all total bet values on 1 roll from {@link List} collection of {@link Streak} objects.
+     *
+     * @param streaks {@link List} collection of {@link Streak} objects to be filtered
+     * @return total bet value
+     * @see GameEngine#countTotalBet(BigDecimal, boolean[])
+     */
     static BigDecimal countTotalBet(List<Streak> streaks) {
         BigDecimal totalBet = BigDecimal.ZERO;
         if (streaks != null) {
@@ -204,7 +322,7 @@ public class StreakLogic {
                 for (Roll roll : streak.getRolls()) {
                     BigDecimal bet = roll.getBet();
                     if (bet != null) {
-                        totalBet = totalBet.add(bet);
+                        totalBet = totalBet.add(GameEngine.countTotalBet(bet, roll.getLines()));
                     }
                 }
             }
@@ -212,6 +330,13 @@ public class StreakLogic {
         return totalBet;
     }
 
+    /**
+     * Counts total sum of all total bet values on 1 roll from {@link List} collection of {@link Streak} objects.
+     *
+     * @param streaks {@link List} collection of {@link Streak} objects to be filtered
+     * @return total bet value
+     * @see GameEngine#countTotalBet(BigDecimal, boolean[])
+     */
     static BigDecimal defineMaxWinRoll(List<Streak> streaks) {
         BigDecimal maxWinRoll = BigDecimal.ZERO;
         if (streaks != null) {
@@ -229,6 +354,12 @@ public class StreakLogic {
         return maxWinRoll;
     }
 
+    /**
+     * Defines max {@link Streak#result} value from given {@link List} collection of {@link Streak} objects.
+     *
+     * @param streaks {@link List} collection of {@link Streak} objects to be filtered
+     * @return max win streak value
+     */
     static BigDecimal defineMaxWinStreak(List<Streak> streaks) {
         BigDecimal maxWinStreak = BigDecimal.ZERO;
         if (streaks != null) {
@@ -248,6 +379,12 @@ public class StreakLogic {
         return maxWinStreak;
     }
 
+    /**
+     * Counts sum of positive {@link Streak#result} values from given {@link List} collection of {@link Streak} objects.
+     *
+     * @param streaks {@link List} collection of {@link Streak} objects to be filtered
+     * @return total win value
+     */
     static BigDecimal countTotalWin(List<Streak> streaks) {
         BigDecimal totalWin = BigDecimal.ZERO;
         if (streaks != null) {
@@ -263,6 +400,11 @@ public class StreakLogic {
         return totalWin;
     }
 
+    /**
+     * Generates string of streak roll reel values in special format.
+     *
+     * @return generated string
+     */
     private static String generateRollString() {
         StringBuilder streak = new StringBuilder();
         for (int i = 0; i < BETS_IN_STREAK; i++) {
@@ -274,6 +416,19 @@ public class StreakLogic {
         return streak.deleteCharAt(streak.length() - 1).toString().trim();
     }
 
+    /**
+     * Builds {@link List} collection of {@link Streak} objects due to given parameters.
+     *
+     * @param stringRoll   string in a special format with info about reel positions of all streak rolls
+     * @param stringOffset string in a special format with info about reel offsets of all streak rolls
+     * @param stringLines  string in a special format with info about played lines state of all streak rolls
+     * @param stringBet    string in a special format with info about bets on 1 line of all streak rolls
+     * @param stringResult string in a special format with info about results of all streak rolls
+     * @return built {@link List} collection of {@link Streak} objects
+     * @see #parseRollArray(String)
+     * @see #parseLineArray(String)
+     * @see #parseBetArray(String)
+     */
     private static ArrayDeque<Roll> buildRollList(String stringRoll, String stringOffset, String stringLines,
                                                  String stringBet, String stringResult) {
         ArrayDeque<Roll> rollArrayDeque = new ArrayDeque<>();
@@ -310,6 +465,14 @@ public class StreakLogic {
         return rollArrayDeque;
     }
 
+    /**
+     * Builds string in a special format with info about reel positions of all streak rolls from given {@link
+     * ArrayDeque} collection of {@link Roll} objects.
+     *
+     * @param rolls {@link ArrayDeque} collection of {@link Roll} objects to be parsed
+     * @return built {@link String} object
+     * @see StringBuilder
+     */
     private static String buildRollString(ArrayDeque<Roll> rolls) {
         StringBuilder result = new StringBuilder();
         for (Roll r : rolls) {
@@ -322,6 +485,14 @@ public class StreakLogic {
         return result.deleteCharAt(result.length() - 1).toString().trim();
     }
 
+    /**
+     * Builds string in a special format with info about reel offsets of all streak rolls from given {@link
+     * ArrayDeque} collection of {@link Roll} objects.
+     *
+     * @param rolls {@link ArrayDeque} collection of {@link Roll} objects to be parsed
+     * @return built {@link String} object
+     * @see StringBuilder
+     */
     private static String buildOffsetString(ArrayDeque<Roll> rolls) {
         StringBuilder result = new StringBuilder();
         for (Roll r : rolls) {
@@ -334,6 +505,14 @@ public class StreakLogic {
         return result.deleteCharAt(result.length() - 1).toString().trim();
     }
 
+    /**
+     * Builds string in a special format with info about played line states of all streak rolls from given {@link
+     * ArrayDeque} collection of {@link Roll} objects.
+     *
+     * @param rolls {@link ArrayDeque} collection of {@link Roll} objects to be parsed
+     * @return built {@link String} object
+     * @see StringBuilder
+     */
     private static String buildLineString(ArrayDeque<Roll> rolls) {
         StringBuilder result = new StringBuilder();
         for (Roll r : rolls) {
@@ -350,6 +529,14 @@ public class StreakLogic {
         return result.deleteCharAt(result.length() - 1).toString().trim();
     }
 
+    /**
+     * Builds string in a special format with info about bets of all streak rolls from given {@link
+     * ArrayDeque} collection of {@link Roll} objects.
+     *
+     * @param rolls {@link ArrayDeque} collection of {@link Roll} objects to be parsed
+     * @return built {@link String} object
+     * @see StringBuilder
+     */
     private static String buildBetString(ArrayDeque<Roll> rolls) {
         StringBuilder result = new StringBuilder();
         for (Roll r : rolls) {
@@ -358,6 +545,14 @@ public class StreakLogic {
         return result.deleteCharAt(result.length() - 1).toString().trim();
     }
 
+    /**
+     * Builds string in a special format with info about results of all streak rolls from given {@link
+     * ArrayDeque} collection of {@link Roll} objects.
+     *
+     * @param rolls {@link ArrayDeque} collection of {@link Roll} objects to be parsed
+     * @return built {@link String} object
+     * @see StringBuilder
+     */
     private static String buildResultString(ArrayDeque<Roll> rolls) {
         StringBuilder result = new StringBuilder();
         for (Roll r : rolls) {
@@ -366,6 +561,12 @@ public class StreakLogic {
         return result.deleteCharAt(result.length() - 1).toString().trim();
     }
 
+    /**
+     * Parses int array of reel positions from a string in a special format.
+     *
+     * @param source source {@link String} object to be parsed
+     * @return parsed int array
+     */
     private static int[] parseRollArray(String source) {
         if (source == null || source.trim().isEmpty()) {
             return new int[]{};
@@ -382,6 +583,12 @@ public class StreakLogic {
         return result;
     }
 
+    /**
+     * Parses {@link BigDecimal} array of bet on 1 line values from a string in a special format.
+     *
+     * @param source source {@link String} object to be parsed
+     * @return parsed {@link BigDecimal} array
+     */
     private static BigDecimal[] parseBetArray(String source) {
         if (source == null || source.trim().isEmpty()) {
             return new BigDecimal[]{};
@@ -394,6 +601,12 @@ public class StreakLogic {
         return result;
     }
 
+    /**
+     * Parses boolean array of played lines state from a string in a special format.
+     *
+     * @param source source {@link String} object to be parsed
+     * @return parsed boolean array
+     */
     private static boolean[] parseLineArray(String source) {
         if (source == null || source.trim().isEmpty()) {
             return new boolean[]{};
@@ -409,6 +622,15 @@ public class StreakLogic {
         return result;
     }
 
+    /**
+     * Sorts given {@link List} collection of {@link Streak} objects by {@link Streak#total} due to boolean marker
+     * order.
+     *
+     * @param list      {@link List} collection of {@link Streak} objects to be sorted
+     * @param ascending marker of sort order
+     * @see Collections#sort(List, Comparator)
+     * @see TotalComparator
+     */
     private static void sortByTotal(List<Streak> list, boolean ascending) {
         if (list == null || list.isEmpty()) {
             return;
@@ -423,44 +645,36 @@ public class StreakLogic {
     private static class TotalComparator implements Comparator<Streak> {
 
         /**
-         * Compares its two arguments for order.  Returns pressedKey negative integer,
+         * <p>Compares its two arguments for order.  Returns pressedKey negative integer,
          * zero, or pressedKey positive integer as the first argument is less than, equal
-         * to, or greater than the second.<p>
-         * <p>
-         * In the foregoing description, the notation
+         * to, or greater than the second. In the foregoing description, the notation
          * <tt>sgn(</tt><i>expression</i><tt>)</tt> designates the mathematical
          * <i>signum</i> function, which is defined to return one of <tt>-1</tt>,
          * <tt>0</tt>, or <tt>1</tt> according to whether the value of
-         * <i>expression</i> is negative, zero or positive.<p>
-         * <p>
-         * The implementor must ensure that <tt>sgn(compare(x, y)) ==
+         * <i>expression</i> is negative, zero or positive.
+         * <p>The implementor must ensure that <tt>sgn(compare(x, y)) ==
          * -sgn(compare(y, x))</tt> for all <tt>x</tt> and <tt>y</tt>.  (This
          * implies that <tt>compare(x, y)</tt> must throw an exception if and only
-         * if <tt>compare(y, x)</tt> throws an exception.)<p>
-         * <p>
-         * The implementor must also ensure that the relation is transitive:
+         * if <tt>compare(y, x)</tt> throws an exception.)
+         * <p>The implementor must also ensure that the relation is transitive:
          * <tt>((compare(x, y)&gt;0) &amp;&amp; (compare(y, z)&gt;0))</tt> implies
-         * <tt>compare(x, z)&gt;0</tt>.<p>
-         * <p>
-         * Finally, the implementor must ensure that <tt>compare(x, y)==0</tt>
+         * <tt>compare(x, z)&gt;0</tt>.
+         * <p>Finally, the implementor must ensure that <tt>compare(x, y)==0</tt>
          * implies that <tt>sgn(compare(x, z))==sgn(compare(y, z))</tt> for all
-         * <tt>z</tt>.<p>
-         * <p>
-         * It is generally the case, but <i>not</i> strictly required that
+         * <tt>z</tt>.
+         * <p>It is generally the case, but <i>not</i> strictly required that
          * <tt>(compare(x, y)==0) == (x.equals(y))</tt>.  Generally speaking,
          * any comparator that violates this condition should clearly indicate
          * this fact.  The recommended language is "Note: this comparator
          * imposes orderings that are inconsistent with equals."
+         * <p>Compares {@link Streak} objects due to their {@link Streak#total} field values
          *
          * @param o1 the first object to be compared.
          * @param o2 the second object to be compared.
-         * @return pressedKey negative integer, zero, or pressedKey positive integer as the
-         * first argument is less than, equal to, or greater than the
-         * second.
-         * @throws NullPointerException if an argument is null and this
-         *                              comparator does not permit null arguments
-         * @throws ClassCastException   if the arguments' types prevent them from
-         *                              being compared by this comparator.
+         * @return pressedKey negative integer, zero, or pressedKey positive integer as the first argument is less than,
+         * equal to, or greater than the second.
+         * @throws NullPointerException if an argument is null and this comparator does not permit null arguments
+         * @throws ClassCastException   if the arguments' types prevent them from being compared by this comparator.
          */
         @Override
         public int compare(Streak o1, Streak o2) {

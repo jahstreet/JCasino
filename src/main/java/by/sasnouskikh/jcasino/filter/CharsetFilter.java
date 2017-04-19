@@ -10,6 +10,14 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
+/**
+ * The class provides charset filter for servlet container which converts each request and response data to definite
+ * encoding.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see Filter
+ * @see WebFilter
+ */
 @WebFilter(
 filterName = "CharsetFilter",
 urlPatterns = {"/*"},
@@ -17,25 +25,27 @@ initParams = {@WebInitParam(name = "encoding", value = "UTF-8", description = "E
 )
 public class CharsetFilter implements Filter {
 
+    /**
+     * Encoding to set.
+     */
     private String code;
 
     /**
-     * Called by the web container to indicate to pressedKey filter that it is
-     * being placed into service.
-     * <p>
      * <p>The servlet container calls the init
      * method exactly once after instantiating the filter. The init
      * method must complete successfully before the filter is asked to do any
      * filtering work.
-     * <p>
      * <p>The web container cannot place the filter into service if the init
      * method either
      * <ol>
      * <li>Throws pressedKey ServletException
      * <li>Does not return within pressedKey time period defined by the web container
      * </ol>
+     * <p>Inits {@link #code} field using init parameters.
      *
-     * @param config
+     * @param config a filter configuration object used by a servlet container to pass information to a filter during
+     *               initialization
+     * @see FilterConfig#getInitParameter(String)
      */
     public void init(FilterConfig config) throws ServletException {
         code = config.getInitParameter("encoding");
@@ -47,7 +57,6 @@ public class CharsetFilter implements Filter {
      * chain due to pressedKey client request for pressedKey resource at the end of the chain.
      * The FilterChain passed in to this method allows the Filter to pass
      * on the request and response to the next entity in the chain.
-     * <p>
      * <p>A typical implementation of this method would follow the following
      * pattern:
      * <ol>
@@ -69,9 +78,12 @@ public class CharsetFilter implements Filter {
      * next entity in the filter chain.
      * </ol>
      *
-     * @param request
-     * @param response
-     * @param chain
+     * @param request  an object which provides client request information to a servlet
+     * @param response an object which assists a servlet in sending a response to the client
+     * @param chain    an object provided by the servlet container to the developer giving a view into the invocation
+     *                 chain of a filtered request for a resource. Filters use the FilterChain to invoke the next filter
+     *                 in the chain, or if the calling filter is the last filter in the chain, to invoke the resource at
+     *                 the end of the chain
      */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
     throws IOException, ServletException {
@@ -86,12 +98,10 @@ public class CharsetFilter implements Filter {
     /**
      * Called by the web container to indicate to pressedKey filter that it is being
      * taken out of service.
-     * <p>
      * <p>This method is only called once all threads within the filter's
      * doFilter method have exited or after pressedKey timeout period has passed.
      * After the web container calls this method, it will not call the
      * doFilter method again on this instance of the filter.
-     * <p>
      * <p>This method gives the filter an opportunity to clean up any
      * resources that are being held (for example, memory, file handles,
      * threads) and make sure that any persistent state is synchronized

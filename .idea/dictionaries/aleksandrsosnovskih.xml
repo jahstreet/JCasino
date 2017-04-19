@@ -3,6 +3,10 @@
     <words>
       <w>birthdate</w>
       <w>encryptor</w>
+      <w>inits</w>
+      <w>overdued</w>
+      <w>paytable</w>
+      <w>spliterator</w>
       <w>unactive</w>
     </words>
   </dictionary>

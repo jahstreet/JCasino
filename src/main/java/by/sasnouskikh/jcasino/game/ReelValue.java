@@ -1,6 +1,11 @@
 package by.sasnouskikh.jcasino.game;
 
-public enum ReelValue {
+/**
+ * The class provides enumeration of available reel value of slot-machine instances.
+ *
+ * @author Sasnouskikh Aliaksandr
+ */
+enum ReelValue {
     CHERRY,
     GRAPES,
     LEMON,
