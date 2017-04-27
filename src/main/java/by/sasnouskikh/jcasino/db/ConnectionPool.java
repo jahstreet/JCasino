@@ -95,22 +95,22 @@ public class ConnectionPool {
     }
 
     /**
-     * Initializes pool due to config data. Calls at {@link HttpServlet#init()} or
+     * Initializes pool due to given config data. Calls at {@link HttpServlet#init()} or
      * {@link javax.servlet.ServletContextListener#contextInitialized(ServletContextEvent)}.
      *
      * @throws ConnectionPoolException if {@link InterruptedException} occurred while putting {@link WrappedConnection}
      *                                 to {@link #connections}
      * @see ResourceBundle
      */
-    public void initPool() throws ConnectionPoolException {
+    public void initPool(String properties) throws ConnectionPoolException {
         ResourceBundle resourceBundle;
         String         url;
         String         login;
         String         password;
         try {
-            resourceBundle = ResourceBundle.getBundle(DB_PROPERTIES);
+            resourceBundle = ResourceBundle.getBundle(properties);
         } catch (MissingResourceException e) {
-            LOGGER.log(Level.ERROR, "Invalid resource path to database.properties");
+            LOGGER.log(Level.ERROR, "Invalid resource path to database *.properties file");
             throw new RuntimeException();
         }
         poolSize = Integer.parseInt(resourceBundle.getString(POOL_SIZE));
@@ -126,6 +126,19 @@ public class ConnectionPool {
                 throw new ConnectionPoolException("ConnectionPool initializing was interrupted.", e);
             }
         }
+    }
+
+    /**
+     * Initializes pool due to default config data. Calls at {@link HttpServlet#init()} or
+     * {@link javax.servlet.ServletContextListener#contextInitialized(ServletContextEvent)}.
+     *
+     * @throws ConnectionPoolException if {@link InterruptedException} occurred while putting {@link WrappedConnection}
+     *                                 to {@link #connections}
+     * @see ResourceBundle
+     * @see #initPool(String)
+     */
+    public void initPool() throws ConnectionPoolException {
+        initPool(DB_PROPERTIES);
     }
 
     /**
@@ -151,8 +164,8 @@ public class ConnectionPool {
      *
      * @param connection {@link WrappedConnection} to return
      * @throws ConnectionPoolException if {@link InterruptedException} occurred while putting {@link WrappedConnection}
-     *                                 to {@link #connections} or if {@link WrappedConnection} was lost, closed
-     *                                 or damaged
+     *                                 to {@link #connections} or if {@link WrappedConnection} was lost, closed or
+     *                                 damaged
      */
     public void returnConnection(WrappedConnection connection) throws ConnectionPoolException {
         try {
@@ -186,7 +199,9 @@ public class ConnectionPool {
         for (int i = 0; i < poolSize; i++) {
             try {
                 WrappedConnection connection = connections.poll(10, TimeUnit.SECONDS);
-                connection.closeConnection();
+                if (connection != null) {
+                    connection.closeConnection();
+                }
             } catch (SQLException e) {
                 LOGGER.log(Level.ERROR, "Database access error occurred.", e);
             } catch (InterruptedException e) {

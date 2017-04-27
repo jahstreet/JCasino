@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_ERROR_MESSAGE;
 
@@ -78,6 +79,7 @@ public class AjaxController extends HttpServlet {
         if (command != null) {
             map = command.execute(request);
         } else {
+            //TODO message manager to message
             map.put(ATTR_ERROR_MESSAGE, "Unknown AJAX command.");
         }
         write(response, map);

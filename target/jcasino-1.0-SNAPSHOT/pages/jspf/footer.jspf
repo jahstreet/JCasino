@@ -1,4 +1,6 @@
 <footer>
+    ${sessionScope['abc']='gavno'}
+    <%--${sessionScope.abc}--%>
     <p><a href="mailto:jahstreetlove@gmai.com"><fmt:message key="footer.mailto"/></a></p>
 </footer>
 <script>

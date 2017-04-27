@@ -34,10 +34,17 @@ class LoanDAOImpl extends LoanDAO {
     /**
      * Selects loans of definite player and orders them by expire date in descending order.
      */
-    private static final String SQL_SELECT_BY_PLAYER_ID        = "SELECT id, player_id, amount, acquire, expire, percent, amount-amount_paid AS rest " +
-                                                                 "FROM loan " +
-                                                                 "WHERE player_id=? " +
-                                                                 "ORDER BY expire DESC";
+    private static final String SQL_SELECT_BY_PLAYER_ID = "SELECT id, player_id, amount, acquire, expire, percent, amount-amount_paid AS rest " +
+                                                          "FROM loan " +
+                                                          "WHERE player_id=? " +
+                                                          "ORDER BY expire DESC";
+    /**
+     * Selects loan by its id.
+     */
+    private static final String SQL_SELECT_BY_ID        = "SELECT id, player_id, amount, acquire, expire, percent, amount-amount_paid AS rest " +
+                                                          "FROM loan " +
+                                                          "WHERE id=?";
+
     /**
      * Selects loans of definite player where acquire date is like definite pattern and orders them by expire date in
      * descending order.
@@ -90,6 +97,24 @@ class LoanDAOImpl extends LoanDAO {
      */
     LoanDAOImpl(WrappedConnection connection) {
         super(connection);
+    }
+
+    /**
+     * Takes {@link Loan} by its id.
+     *
+     * @param id loan id
+     * @return taken {@link Loan} objects
+     * @throws DAOException if {@link Exception} occurred while working with database
+     */
+    @Override
+    public Loan takeLoan(int id) throws DAOException {
+        try (PreparedStatement statement = connection.prepareStatement(SQL_SELECT_BY_ID)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            return buildLoan(resultSet);
+        } catch (SQLException e) {
+            throw new DAOException("Database connection error while taking loan. " + e);
+        }
     }
 
     /**
@@ -244,9 +269,8 @@ class LoanDAOImpl extends LoanDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link Loan} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      */
     private Loan buildLoan(ResultSet resultSet) throws SQLException {
         Loan loan = null;
@@ -268,9 +292,8 @@ class LoanDAOImpl extends LoanDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link List} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      * @see #buildLoan(ResultSet)
      */
     private List<Loan> buildLoanList(ResultSet resultSet) throws SQLException {

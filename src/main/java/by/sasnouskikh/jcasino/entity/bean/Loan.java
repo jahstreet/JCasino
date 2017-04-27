@@ -187,11 +187,11 @@ public class Loan extends Entity {
         Loan loan = (Loan) o;
         return id == loan.id &&
                playerId == loan.playerId &&
-               Objects.equals(amount, loan.amount) &&
+               (Objects.equals(amount, loan.amount) || amount.compareTo(amount) == 0) &&
                Objects.equals(acquire, loan.acquire) &&
                Objects.equals(expire, loan.expire) &&
-               Objects.equals(percent, loan.percent) &&
-               Objects.equals(rest, loan.rest);
+               (Objects.equals(percent, loan.percent) || percent.compareTo(loan.percent) == 0) &&
+               (Objects.equals(rest, loan.rest) || rest.compareTo(loan.rest) == 0);
     }
 
     /**
@@ -226,11 +226,9 @@ public class Loan extends Entity {
      * Clones instance of this object.
      *
      * @return a clone of this instance.
-     * @throws CloneNotSupportedException if the object's class does not
-     *                                    support the {@code Cloneable} interface. Subclasses
-     *                                    that override the {@code clone} method can also
-     *                                    throw this exception to indicate that an instance cannot
-     *                                    be cloned.
+     * @throws CloneNotSupportedException if the object's class does not support the {@code Cloneable} interface.
+     *                                    Subclasses that override the {@code clone} method can also throw this
+     *                                    exception to indicate that an instance cannot be cloned.
      * @see Cloneable
      */
     @Override

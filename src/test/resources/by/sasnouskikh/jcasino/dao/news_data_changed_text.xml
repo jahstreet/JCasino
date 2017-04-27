@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <user id="100" password_md5="c070202aef2d05077de4a4d16bf26875" email="anhelina@gmail.com" role="admin"
+          registration_date="2017-04-13 14:52:06.0"/>
+    <user id="101" password_md5="c070202aef2d05077de4a4d16bf26875" email="anhel@gmail.com" role="admin"
+          registration_date="2017-04-14 14:52:06.0"/>
+
+    <news date="2017-04-14" header="header1" text="текст2" admin_id="101"/>
+    <news date="2017-04-15" header="header2" text="текст2" admin_id="100"/>
+    <news date="2017-04-16" header="header3" text="текст3" admin_id="101"/>
+    <news date="2017-05-15" header="header4" text="текст4" admin_id="101"/>
+    <news date="2017-05-16" header="header5" text="текст5" admin_id="101"/>
+
+</dataset>

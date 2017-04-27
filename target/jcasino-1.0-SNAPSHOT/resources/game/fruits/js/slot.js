@@ -328,7 +328,6 @@ function spin() {
                     lineResult = data.lines;
                     streakInfo.html(data.streakInfo);
                     rollNumber.html(data.rollNumber);
-
                 } else {
                     offset1 = -(Math.ceil(Math.random() * 60) - 1) * 150;
                     offset2 = -(Math.ceil(Math.random() * 60) - 1) * 150;

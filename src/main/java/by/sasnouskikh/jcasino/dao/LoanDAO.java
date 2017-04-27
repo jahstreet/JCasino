@@ -47,6 +47,15 @@ public abstract class LoanDAO extends AbstractDAO {
     }
 
     /**
+     * Takes {@link Loan} by its id.
+     *
+     * @param id loan id
+     * @return taken {@link Loan} objects
+     * @throws DAOException if {@link Exception} occurred while working with database
+     */
+    public abstract Loan takeLoan(int id) throws DAOException;
+
+    /**
      * Takes {@link List} filled by definite player {@link Loan} objects.
      *
      * @param playerId id of player whose loans to take
