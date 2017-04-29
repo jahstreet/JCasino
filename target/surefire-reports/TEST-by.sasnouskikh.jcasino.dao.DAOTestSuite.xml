@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="by.sasnouskikh.jcasino.dao.DAOTestSuite" time="56.447" tests="48" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="by.sasnouskikh.jcasino.dao.DAOTestSuite" time="43.382" tests="48" errors="0" skipped="0" failures="0">
   <properties>
     <property name="idea.version" value="2016.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -13,7 +13,7 @@
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="idea.launcher.port" value="7532"/>
+    <property name="idea.launcher.port" value="7533"/>
     <property name="user.country" value="RU"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
@@ -64,52 +64,52 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="takeLoanListOnlyExpireCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="1.536"/>
-  <testcase name="takePlayerLoansCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="1.186"/>
-  <testcase name="playerIdFkConstraintCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="1.503"/>
-  <testcase name="takeLoanListNoPatternCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="1.213"/>
-  <testcase name="payLoanTrueCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.715"/>
-  <testcase name="takeLoanListAcquireExpireCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="1.205"/>
-  <testcase name="insertLoanIdCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.862"/>
-  <testcase name="insertLoanCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="1.038"/>
-  <testcase name="payLoanCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.942"/>
-  <testcase name="takePlayerLoansAcquireCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.846"/>
-  <testcase name="takeCurrentLoanCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.746"/>
-  <testcase name="takeLoanListOnlyAcquireCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.78"/>
-  <testcase name="takeLoanCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.793"/>
-  <testcase name="takePlayerLoansNoPatternCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.79"/>
-  <testcase name="insertNewsCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.905"/>
-  <testcase name="changeNewsHeaderTrueCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="1.19"/>
-  <testcase name="changeNewsTextCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="1.268"/>
-  <testcase name="takeAllNewsCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="2.188"/>
-  <testcase name="takeNewsCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="1.063"/>
-  <testcase name="adminIdFkConstraintCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="1.207"/>
-  <testcase name="deleteNewsTrueCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.892"/>
-  <testcase name="deleteNewsCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="1.274"/>
-  <testcase name="insertNewsIdCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="1.468"/>
-  <testcase name="changeNewsHeaderCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="1.095"/>
-  <testcase name="changeNewsTextTrueCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="1.454"/>
-  <testcase name="takeVerificationCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="3.289"/>
-  <testcase name="takeMonthWithdrawalCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="1.879"/>
-  <testcase name="defineNameByEmailCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="1.074"/>
-  <testcase name="takeMonthWithdrawalAllCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="1.247"/>
-  <testcase name="takeReadyForVerificationCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.83"/>
-  <testcase name="insertPlayerCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.932"/>
-  <testcase name="takeReadyForVerificationNoSuchCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.748"/>
-  <testcase name="defineIdByEmailNoEmailCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.783"/>
-  <testcase name="takeMonthWithdrawalNoCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.732"/>
-  <testcase name="takeProfileNoSuchCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.711"/>
-  <testcase name="defineEmailByIdCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="1.453"/>
-  <testcase name="defineNameByEmailNoEmailCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.845"/>
-  <testcase name="takeAccountCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.756"/>
-  <testcase name="defineEmailByIdNoIdCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.7"/>
-  <testcase name="takeProfileCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.779"/>
-  <testcase name="defineIdByEmailCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.78"/>
-  <testcase name="insertUserPlayerCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.778"/>
-  <testcase name="takeAccountNoSuchCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.704"/>
-  <testcase name="insertUserPlayerIdCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.714"/>
-  <testcase name="defineNameByEmailNoNameCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.758"/>
-  <testcase name="takeVerificationNoSuchCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.746"/>
-  <testcase name="insertUserPlayerUniqueEmailCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.815"/>
-  <testcase name="insertPlayerTrueCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.726"/>
+  <testcase name="takeLoanListOnlyExpireCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="1.011"/>
+  <testcase name="takePlayerLoansCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.995"/>
+  <testcase name="playerIdFkConstraintCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.897"/>
+  <testcase name="takeLoanListNoPatternCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.709"/>
+  <testcase name="payLoanTrueCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.725"/>
+  <testcase name="takeLoanListAcquireExpireCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.713"/>
+  <testcase name="insertLoanIdCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.782"/>
+  <testcase name="insertLoanCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.847"/>
+  <testcase name="payLoanCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.757"/>
+  <testcase name="takePlayerLoansAcquireCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.923"/>
+  <testcase name="takeCurrentLoanCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.829"/>
+  <testcase name="takeLoanListOnlyAcquireCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.734"/>
+  <testcase name="takeLoanCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.769"/>
+  <testcase name="takePlayerLoansNoPatternCheck" classname="by.sasnouskikh.jcasino.dao.LoanDAOTest" time="0.781"/>
+  <testcase name="insertNewsCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.757"/>
+  <testcase name="changeNewsHeaderTrueCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.748"/>
+  <testcase name="changeNewsTextCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.735"/>
+  <testcase name="takeAllNewsCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="1.424"/>
+  <testcase name="takeNewsCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.884"/>
+  <testcase name="adminIdFkConstraintCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.804"/>
+  <testcase name="deleteNewsTrueCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.912"/>
+  <testcase name="deleteNewsCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.805"/>
+  <testcase name="insertNewsIdCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.797"/>
+  <testcase name="changeNewsHeaderCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.726"/>
+  <testcase name="changeNewsTextTrueCheck" classname="by.sasnouskikh.jcasino.dao.NewsDAOTest" time="0.714"/>
+  <testcase name="takeVerificationCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.881"/>
+  <testcase name="takeMonthWithdrawalCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.725"/>
+  <testcase name="defineNameByEmailCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.815"/>
+  <testcase name="takeMonthWithdrawalAllCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.758"/>
+  <testcase name="takeReadyForVerificationCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.736"/>
+  <testcase name="insertPlayerCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.88"/>
+  <testcase name="takeReadyForVerificationNoSuchCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.746"/>
+  <testcase name="defineIdByEmailNoEmailCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.725"/>
+  <testcase name="takeMonthWithdrawalNoCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.747"/>
+  <testcase name="takeProfileNoSuchCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.747"/>
+  <testcase name="defineEmailByIdCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.781"/>
+  <testcase name="defineNameByEmailNoEmailCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.745"/>
+  <testcase name="takeAccountCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.792"/>
+  <testcase name="defineEmailByIdNoIdCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.763"/>
+  <testcase name="takeProfileCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="1.098"/>
+  <testcase name="defineIdByEmailCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.795"/>
+  <testcase name="insertUserPlayerCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="1.054"/>
+  <testcase name="takeAccountNoSuchCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.724"/>
+  <testcase name="insertUserPlayerIdCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.888"/>
+  <testcase name="defineNameByEmailNoNameCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.791"/>
+  <testcase name="takeVerificationNoSuchCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.791"/>
+  <testcase name="insertUserPlayerUniqueEmailCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.758"/>
+  <testcase name="insertPlayerTrueCheck" classname="by.sasnouskikh.jcasino.dao.PlayerDAOTest" time="0.767"/>
 </testsuite>

@@ -1,257 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e983f2f-bc48-465a-a9b4-edfcca97a100" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT.war" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/Command.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/CommandFactory$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/CommandFactory$CommandType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/CommandFactory.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/PageNavigator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/ajax/AjaxCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/ajax/AjaxCommandFactory$CommandType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/ajax/AjaxCommandFactory.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/ajax/command/SpinCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/ChangeLocaleCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/EditProfileCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/LoginCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/LogoutCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/MultipartFormCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/PayLoanCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/RateSupportAnswerCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/RecoverPasswordCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/RegisterCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/ReplenishAccountCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/ResetSupportAnswerRatingCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/SendEmailCodeCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/SendSupportCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/ShowHistoryCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/TakeLoanCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/VerifyEmailCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/VerifyProfileCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/WithdrawMoneyCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/AnswerSupportCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/CancelScanVerificationCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/ChangeAccountStatusCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/DeleteNewsCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/EditNewsCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/ShowAnswersCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/ShowLoansCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerLoansCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerStreaksCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerSupportCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayerTransactionsCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/ShowQuestionsCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/ShowStreaksCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/ShowTransactionsCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/admin/VerifyScanCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/BackFromErrorCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/BackFromGameCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoAccountCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoEmailVerificationCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoError500Command.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoGameFruitsCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoIndexCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoMainCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoOperationHistoryCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoPayLoanCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoPlayerProfileCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoRecoverPasswordCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoRegisterCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoReplenishAccountCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoRulesCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoStatsCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoSupportCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoTakeLoanCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoUploadPassportCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoVerificationCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/GotoWithdrawMoneyCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoAdminCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoAnswerSupportCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageLoansCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageNewsCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManagePlayerCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageStreaksCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageSupportCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageTransactionsCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoManageVerificationCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/command/impl/navigation/admin/GotoStatsReportCommand.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/controller/AjaxController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/controller/MainController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/controller/ShowImageServlet.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/AbstractDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/DAOException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/LoanDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/NewsDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/PlayerDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/QuestionDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/StreakDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/TransactionDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/UserDAO.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/impl/DAOHelper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/impl/LoanDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/impl/NewsDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/impl/PlayerDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/impl/QuestionDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/impl/StreakDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/impl/TransactionDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/dao/impl/UserDAOImpl.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/db/ConnectionPool.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/db/ConnectionPoolException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/db/WrappedConnection.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/Entity.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Admin.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/JCasinoUser$UserRole.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/JCasinoUser.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Loan.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/News.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Player.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/PlayerAccount.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/PlayerProfile.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/PlayerStats.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/PlayerStatus$StatusEnum.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/PlayerStatus.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/PlayerVerification$VerificationStatus.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/PlayerVerification.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Question$QuestionTopic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Question$Satisfaction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Question.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Roll.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Streak.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Transaction$TransactionType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/entity/bean/Transaction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/filter/CharsetFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/filter/PageRedirectSecurityFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/filter/SessionAttributesFilter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/game/GameEngine$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/game/GameEngine.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/game/ReelValue.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/game/ReelValues.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/listener/JCasinoContextListener.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/listener/JCasinoSessionListener.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/AdminLogic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/LoanLogic$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/LoanLogic$RestComparator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/LoanLogic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/LogicException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/NewsLogic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/PlayerLogic$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/PlayerLogic$ProfileTextField.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/PlayerLogic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/QuestionLogic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/RandomGenerator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/StatsHelper.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/StreakLogic$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/StreakLogic$TotalComparator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/StreakLogic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/TransactionLogic$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/TransactionLogic$AmountComparator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/TransactionLogic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/UserLogic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/VerificationLogic$MaskOperation.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/logic/VerificationLogic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/mailer/MailerException.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/mailer/MailerSSL$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/mailer/MailerSSL.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/manager/ConfigConstant.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/manager/JCasinoEncryptor.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/manager/MessageManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/manager/QueryManager.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/tag/JCasinoDateFormatter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/by/sasnouskikh/jcasino/validator/FormValidator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/database.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/log4j2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/messages.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/messages_en_US.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/messages_ru_RU.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/pagecontent.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/pagecontent_en_US.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/classes/prop/pagecontent_ru_RU.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/activation-1.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/commons-codec-1.9.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/commons-fileupload-1.3.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/commons-io-2.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/commons-lang-2.6.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/gson-2.8.0.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/javax.servlet-api-3.0.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/jsp-api-2.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/jstl-1.2.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/log4j-api-2.7.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/log4j-core-2.7.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/mail-1.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/lib/mysql-connector-java-6.0.5.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/tld/custom.tld" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/WEB-INF/web.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/answer_support.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/jcasino_admin.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/jspf/footer.jspf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/jspf/header.jspf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/jspf/left_menu.jspf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/jspf/user_block.jspf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/manage_loans.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/manage_news.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/manage_player.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/manage_streaks.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/manage_support.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/manage_transactions.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/manage_verification.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/admin/stats_report.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/game/fruits.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/index.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/account.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/email_verification.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/error/error_500.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/jspf/footer.jspf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/jspf/header.jspf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/jspf/leftmenu.jspf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/jspf/login.jspf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/jspf/user.jspf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/main.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/operation_history.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/pay_loan.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/profile.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/recover_password.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/register.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/replenish_account.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/rules.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/stats.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/support.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/take_loan.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/upload_passport.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/verification.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/pages/withdraw_money.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/css/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/audio/main-theme.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/audio/spin.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/audio/stop_reel.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/audio/win1.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/audio/win2.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/css/fruits.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/img/background.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/img/ball.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/img/mask.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/img/reel.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/img/slot_spritesheet.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/img/sound_switcher.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/img/spin.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/js/quantity.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/game/fruits/js/slot.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/img/cap.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/img/casino-logo.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/img/flags.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/img/mainback-big.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/img/slider-cap.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/js/edit_profile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/js/jquery-3.2.0.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/jcasino-1.0-SNAPSHOT/resources/js/register.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/jcasino.log" afterPath="$PROJECT_DIR$/logs/jcasino.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
-    </list>
+    <list default="true" id="3e983f2f-bc48-465a-a9b4-edfcca97a100" name="Default" comment="" />
     <ignored path="JCasino.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -295,7 +45,7 @@
         <entry file="file://$PROJECT_DIR$/Procfile">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="89" selection-start-line="0" selection-start-column="89" selection-end-line="0" selection-end-column="89" />
+              <caret line="0" column="46" selection-start-line="0" selection-start-column="46" selection-end-line="0" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -519,10 +269,6 @@
               <option name="myItemId" value="JCasino" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -531,66 +277,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="info" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1402,7 +1088,7 @@
       <workItem from="1493387675723" duration="33872000" />
       <workItem from="1493504735893" duration="55000" />
       <workItem from="1493505473421" duration="260000" />
-      <workItem from="1493505761919" duration="2506000" />
+      <workItem from="1493505761919" duration="2657000" />
     </task>
     <task id="LOCAL-00001" summary="First big redactoring">
       <created>1491502443971</created>
@@ -1496,7 +1182,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1083160000" />
+    <option name="totallyTimeSpent" value="1083311000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1509,7 +1195,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="37" y="23" width="1360" height="870" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.121638924" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1523,7 +1209,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38174808" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3497724" sideWeight="0.77319586" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3497724" sideWeight="0.77319586" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25870255" sideWeight="0.22680412" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19968677" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2040,7 +1726,7 @@
     <entry file="file://$PROJECT_DIR$/Procfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="89" selection-start-line="0" selection-start-column="89" selection-end-line="0" selection-end-column="89" />
+          <caret line="0" column="46" selection-start-line="0" selection-start-column="46" selection-end-line="0" selection-end-column="46" />
           <folding />
         </state>
       </provider>
