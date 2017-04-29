@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <player_status status="basic" bet_limit="5.00" withdrawal_limit="300.00" loan_percent="20.00"
+                   max_loan_amount="25.00"/>
+    <player_status status="vip" bet_limit="50.00" withdrawal_limit="10000.00" loan_percent="5.00"
+                   max_loan_amount="100.00"/>
+    <player_status status="ban" bet_limit="0.00" withdrawal_limit="0.00" loan_percent="20.00" max_loan_amount="0.00"/>
+    <player_status status="unactive" bet_limit="0.00" withdrawal_limit="0.00" loan_percent="20.00"
+                   max_loan_amount="0.00"/>
+
+</dataset>
