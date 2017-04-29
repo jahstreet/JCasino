@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <transaction id="10" player_id="100" date="2017-02-11 01:22:02.0" amount="50.00"/>
+    <transaction id="11" player_id="100" date="2017-03-12 12:42:16.0" amount="500.00"/>
+    <transaction id="12" player_id="100" date="2017-04-13 13:32:03.0" amount="-35.00"/>
+    <transaction id="13" player_id="100" date="2017-04-13 13:32:03.0" amount="-5.00"/>
+    <transaction id="14" player_id="100" date="2017-05-14 14:52:22.0" amount="-85.00"/>
+    <transaction id="15" player_id="100" date="2017-06-15 15:12:33.0" amount="0.00"/>
+
+</dataset>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <transaction id="10" player_id="100" amount="50.00"/>
+    <transaction id="11" player_id="100" amount="500.00"/>
+    <transaction id="12" player_id="100" amount="-35.00"/>
+    <transaction id="13" player_id="100" amount="-85.00"/>
+    <transaction id="14" player_id="100" amount="0.00"/>
+
+</dataset>

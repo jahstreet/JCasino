@@ -194,14 +194,18 @@ public class PlayerStatus extends Entity {
         if (!(o instanceof PlayerStatus)) {
             return false;
         }
-        PlayerStatus status1 = (PlayerStatus) o;
-        return adminId == status1.adminId &&
-               status == status1.status &&
-               Objects.equals(betLimit, status1.betLimit) &&
-               Objects.equals(withdrawalLimit, status1.withdrawalLimit) &&
-               Objects.equals(loanPercent, status1.loanPercent) &&
-               Objects.equals(maxLoan, status1.maxLoan) &&
-               Objects.equals(commentary, status1.commentary);
+        PlayerStatus playerStatus = (PlayerStatus) o;
+        return adminId == playerStatus.adminId &&
+               status == playerStatus.status &&
+               (Objects.equals(betLimit, playerStatus.betLimit)
+                || betLimit.compareTo(playerStatus.betLimit) == 0) &&
+               (Objects.equals(withdrawalLimit, playerStatus.withdrawalLimit)
+                || withdrawalLimit.compareTo(playerStatus.withdrawalLimit) == 0) &&
+               (Objects.equals(loanPercent, playerStatus.loanPercent)
+                || loanPercent.compareTo(playerStatus.loanPercent) == 0) &&
+               (Objects.equals(maxLoan, playerStatus.maxLoan)
+                || maxLoan.compareTo(playerStatus.maxLoan) == 0) &&
+               Objects.equals(commentary, playerStatus.commentary);
     }
 
     /**
@@ -236,11 +240,9 @@ public class PlayerStatus extends Entity {
      * Clones instance of this object.
      *
      * @return a clone of this instance.
-     * @throws CloneNotSupportedException if the object's class does not
-     *                                    support the {@code Cloneable} interface. Subclasses
-     *                                    that override the {@code clone} method can also
-     *                                    throw this exception to indicate that an instance cannot
-     *                                    be cloned.
+     * @throws CloneNotSupportedException if the object's class does not support the {@code Cloneable} interface.
+     *                                    Subclasses that override the {@code clone} method can also throw this
+     *                                    exception to indicate that an instance cannot be cloned.
      * @see Cloneable
      */
     @Override

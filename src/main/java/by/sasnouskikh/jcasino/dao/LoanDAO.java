@@ -50,7 +50,7 @@ public abstract class LoanDAO extends AbstractDAO {
      * Takes {@link Loan} by its id.
      *
      * @param id loan id
-     * @return taken {@link Loan} objects
+     * @return taken {@link Loan} object or null
      * @throws DAOException if {@link Exception} occurred while working with database
      */
     public abstract Loan takeLoan(int id) throws DAOException;
@@ -59,7 +59,7 @@ public abstract class LoanDAO extends AbstractDAO {
      * Takes {@link List} filled by definite player {@link Loan} objects.
      *
      * @param playerId id of player whose loans to take
-     * @return {@link List} filled by definite player {@link Loan} objects
+     * @return {@link List} filled by definite player {@link Loan} objects or null
      * @throws DAOException if {@link Exception} occurred while working with database
      */
     public abstract List<Loan> takePlayerLoans(int playerId) throws DAOException;
@@ -70,7 +70,7 @@ public abstract class LoanDAO extends AbstractDAO {
      *
      * @param playerId       id of player whose loans to take
      * @param acquirePattern pattern of loan acquire date conforming to <code>SQL LIKE</code> operator
-     * @return {@link List} filled by definite player {@link Loan} objects
+     * @return {@link List} filled by definite player {@link Loan} objects or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract List<Loan> takePlayerLoans(int playerId, String acquirePattern) throws DAOException;
@@ -79,7 +79,7 @@ public abstract class LoanDAO extends AbstractDAO {
      * Takes current unpaid {@link Loan} of definite player.
      *
      * @param playerId id of player whose loan to take
-     * @return current unpaid {@link Loan} of definite player
+     * @return current unpaid {@link Loan} of definite player or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract Loan takeCurrentLoan(int playerId) throws DAOException;
@@ -90,7 +90,7 @@ public abstract class LoanDAO extends AbstractDAO {
      *
      * @param acquirePattern pattern of loan acquire date conforming to <code>SQL LIKE</code> operator
      * @param expirePattern  pattern of loan expire date conforming to <code>SQL LIKE</code> operator
-     * @return {@link List} filled by {@link Loan} objects with definite acquire and expire dates
+     * @return {@link List} filled by {@link Loan} objects with definite acquire and expire dates or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract List<Loan> takeLoanList(String acquirePattern, String expirePattern) throws DAOException;
@@ -101,7 +101,7 @@ public abstract class LoanDAO extends AbstractDAO {
      * @param playerId id of player whose loan to insert
      * @param amount   amount of money player should return to pay loan
      * @param percent  percent multiplier used to count 'amount' value
-     * @return int value of inserted loan id
+     * @return int value of inserted loan id or 0
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract int insertLoan(int playerId, BigDecimal amount, BigDecimal percent) throws DAOException;

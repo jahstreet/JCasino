@@ -119,8 +119,9 @@ public class PlayerAccount extends Entity {
         }
         PlayerAccount account = (PlayerAccount) o;
         return Objects.equals(status, account.status) &&
-               Objects.equals(balance, account.balance) &&
-               Objects.equals(thisMonthWithdrawal, account.thisMonthWithdrawal) &&
+               (Objects.equals(balance, account.balance) || balance.compareTo(account.balance) == 0) &&
+               (Objects.equals(thisMonthWithdrawal, account.thisMonthWithdrawal)
+                || thisMonthWithdrawal.compareTo(account.thisMonthWithdrawal) == 0) &&
                Objects.equals(currentLoan, account.currentLoan);
     }
 
@@ -153,11 +154,9 @@ public class PlayerAccount extends Entity {
      * Clones instance of this object.
      *
      * @return a clone of this instance.
-     * @throws CloneNotSupportedException if the object's class does not
-     *                                    support the {@code Cloneable} interface. Subclasses
-     *                                    that override the {@code clone} method can also
-     *                                    throw this exception to indicate that an instance cannot
-     *                                    be cloned.
+     * @throws CloneNotSupportedException if the object's class does not support the {@code Cloneable} interface.
+     *                                    Subclasses that override the {@code clone} method can also throw this
+     *                                    exception to indicate that an instance cannot be cloned.
      * @see Cloneable
      */
     @Override

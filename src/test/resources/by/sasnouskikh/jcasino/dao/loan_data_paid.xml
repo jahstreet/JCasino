@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
+
     <user id="100" password_md5="c070202aef2d05077de4a4d16bf26875" email="anhelina@gmail.com" role="player"
           registration_date="2017-04-13 14:52:06.0"/>
     <player id="100" fname="ALIAKSANDER" mname="ALBERTOVICH" lname="SASNOUSKIKH" birthdate="1991-09-24"
             passport="KH1731245" question="Maya?" answer_md5="7fa3b767c460b54a2be4d49030b349c7" balance="0.00"
             status="basic"/>
+
     <user id="101" password_md5="c070202aef2d05077de4a4d16bf26875" email="anhel@gmail.com" role="player"
           registration_date="2017-04-14 14:52:06.0"/>
     <player id="101" fname="OLGA" mname="VASILEVNA" lname="PETROVA" birthdate="1993-09-21"
             passport="KH7588391" question="Maya?" answer_md5="7fa3b767c460b54a2be4d49030b349c7" balance="100.00"
             status="basic"/>
-    <loan player_id="100" amount="150.00" acquire="2017-02-23" expire="2017-03-23" percent="20.00" amount_paid="150.00"/>
+
+    <loan player_id="100" amount="150.00" acquire="2017-02-23" expire="2017-03-23" percent="20.00"
+          amount_paid="150.00"/>
     <loan player_id="100" amount="200.00" acquire="2017-02-24" expire="2017-03-24" percent="20.00" amount_paid="80.00"/>
     <loan player_id="100" amount="500.00" acquire="2017-03-25" expire="2017-04-25" percent="20.00"
           amount_paid="500.00"/>
-    <loan player_id="101" amount="200.00" acquire="2017-02-24" expire="2017-03-24" percent="20.00" amount_paid="200.00"/>
+
+    <loan player_id="101" amount="200.00" acquire="2017-02-24" expire="2017-03-24" percent="20.00"
+          amount_paid="200.00"/>
     <loan player_id="101" amount="500.00" acquire="2017-03-25" expire="2017-04-25" percent="20.00"
           amount_paid="400.00"/>
+
 </dataset>

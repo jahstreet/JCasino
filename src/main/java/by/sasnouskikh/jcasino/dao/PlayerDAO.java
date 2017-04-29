@@ -77,7 +77,7 @@ public abstract class PlayerDAO extends AbstractDAO {
      * Defines {@link Player} id by its e-mail.
      *
      * @param email e-mail of {@link Player} whose id is defining
-     * @return defined id value
+     * @return defined id value or 0
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract int defineIdByEmail(String email) throws DAOException;
@@ -86,7 +86,7 @@ public abstract class PlayerDAO extends AbstractDAO {
      * Defines {@link Player} e-mail by its id.
      *
      * @param id id of {@link Player} whose e-mail is defining
-     * @return defined e-mail value
+     * @return defined e-mail value or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract String defineEmailById(int id) throws DAOException;
@@ -95,7 +95,7 @@ public abstract class PlayerDAO extends AbstractDAO {
      * Defines {@link Player} first name by its e-mail.
      *
      * @param email e-mail of {@link Player} whose first name is defining
-     * @return defined first name value
+     * @return defined first name value or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract String defineNameByEmail(String email) throws DAOException;
@@ -104,7 +104,7 @@ public abstract class PlayerDAO extends AbstractDAO {
      * Takes {@link PlayerProfile} object of definite {@link Player}.
      *
      * @param id id of {@link Player} whose profile is taking
-     * @return {@link PlayerProfile} object of definite {@link Player}
+     * @return {@link PlayerProfile} object of definite {@link Player} or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract PlayerProfile takeProfile(int id) throws DAOException;
@@ -113,7 +113,7 @@ public abstract class PlayerDAO extends AbstractDAO {
      * Takes {@link PlayerVerification} object of definite {@link Player}.
      *
      * @param id id of {@link Player} whose verification is taking
-     * @return {@link PlayerVerification} object of definite {@link Player}
+     * @return {@link PlayerVerification} object of definite {@link Player} or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract PlayerVerification takeVerification(int id) throws DAOException;
@@ -122,8 +122,8 @@ public abstract class PlayerDAO extends AbstractDAO {
      * Takes {@link List} filled by {@link PlayerVerification} objects of players who are ready to be verified
      * by admin.
      *
-     * @return {@link List} filled by {@link PlayerVerification} objects of players who are ready to be verified
-     * by admin
+     * @return {@link List} filled by {@link PlayerVerification} objects of players who are ready to be verified by
+     * admin or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract List<PlayerVerification> takeReadyForVerification() throws DAOException;
@@ -132,27 +132,27 @@ public abstract class PlayerDAO extends AbstractDAO {
      * Takes {@link PlayerAccount} of definite {@link Player}.
      *
      * @param id id of player whose {@link PlayerAccount} is taking
-     * @return taken {@link PlayerAccount}
+     * @return taken {@link PlayerAccount} or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract PlayerAccount takeAccount(int id) throws DAOException;
 
     /**
-     * Takes amount of money definite {@link Player} withdrawn in month due to definite month pattern.
+     * Takes amount of money definite {@link Player} withdrawn in date due to definite pattern.
      *
-     * @param playerId     id of {@link Player} whose month withdrawal is taking
-     * @param monthPattern pattern of month conforming to <code>SQL LIKE</code> operator
-     * @return taken {@link PlayerAccount} or null
+     * @param playerId    id of {@link Player} whose withdrawal sum is taking
+     * @param datePattern pattern of date conforming to <code>SQL LIKE</code> operator
+     * @return taken given date pattern withdrawal sum or {@link BigDecimal#ZERO}
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
-    public abstract BigDecimal takeMonthWithdrawal(int playerId, String monthPattern) throws DAOException;
+    public abstract BigDecimal takeWithdrawalSum(int playerId, String datePattern) throws DAOException;
 
     /**
      * Inserts {@link Player} data into 'user' table on registration.
      *
      * @param email    email of {@link Player} whose user data is inserting
      * @param password password of {@link Player} whose user data is inserting encrypted by MD5 encryptor
-     * @return id of inserted {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser}
+     * @return id of inserted {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser} or 0
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract int insertUserPlayer(String email, String password) throws DAOException;

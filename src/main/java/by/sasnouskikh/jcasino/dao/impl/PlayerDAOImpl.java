@@ -78,15 +78,17 @@ class PlayerDAOImpl extends PlayerDAO {
     /**
      * Selects definite player account data.
      */
-    private static final String SQL_SELECT_ACCOUNT            = "SELECT balance, status, admin_id, commentary, bet_limit, withdrawal_limit, loan_percent, max_loan_amount, ABS(SUM(amount)) AS total " +
-                                                                "FROM player NATURAL JOIN player_status JOIN transaction ON player.id=player_id " +
-                                                                "WHERE player.id=? AND MONTH(date)=MONTH(NOW()) AND YEAR(date)=YEAR(NOW()) AND amount<0";
+    private static final String SQL_SELECT_ACCOUNT            = "SELECT balance, status, admin_id, commentary, bet_limit, withdrawal_limit, loan_percent, max_loan_amount, " +
+                                                                "IFNULL((SELECT ABS(SUM(amount)) FROM transaction " +
+                                                                "WHERE player.id=player_id AND amount < 0 AND MONTH(date)=MONTH(NOW()) AND YEAR(date)=YEAR(NOW())), 0) AS total " +
+                                                                "FROM player NATURAL JOIN player_status " +
+                                                                "WHERE player.id=?;";
     /**
      * Selects definite player this month withdrawal amount.
      */
-    private static final String SQL_SELECT_MONTH_WITHDRAWAL   = "SELECT ABS(SUM(amount)) AS total " +
+    private static final String SQL_SELECT_MONTH_WITHDRAWAL   = "SELECT IFNULL(ABS(SUM(amount)), 0) AS total " +
                                                                 "FROM transaction " +
-                                                                "WHERE player_id=? AND date LIKE ?";
+                                                                "WHERE player_id=? AND date LIKE ? AND amount < 0";
 
     /**
      * Inserts player data into 'user' table  on registration.
@@ -315,8 +317,8 @@ class PlayerDAOImpl extends PlayerDAO {
      * Takes {@link List} filled by {@link PlayerVerification} objects of players who are ready to be verified
      * by admin.
      *
-     * @return {@link List} filled by {@link PlayerVerification} objects of players who are ready to be verified
-     * by admin or null
+     * @return {@link List} filled by {@link PlayerVerification} objects of players who are ready to be verified by
+     * admin or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      * @see WrappedConnection#createStatement()
      * @see PreparedStatement
@@ -356,21 +358,21 @@ class PlayerDAOImpl extends PlayerDAO {
     }
 
     /**
-     * Takes amount of money definite {@link Player} withdrawn in month due to definite month pattern.
+     * Takes amount of money definite {@link Player} withdrawn in date due to definite pattern.
      *
-     * @param playerId     id of {@link Player} whose month withdrawal is taking
-     * @param monthPattern pattern of month conforming to <code>SQL LIKE</code> operator
-     * @return taken {@link PlayerAccount} or null
+     * @param playerId    id of {@link Player} whose withdrawal sum is taking
+     * @param datePattern pattern of date conforming to <code>SQL LIKE</code> operator
+     * @return taken given date pattern withdrawal sum or {@link BigDecimal#ZERO}
      * @throws DAOException if {@link SQLException} occurred while working with database
      * @see WrappedConnection#prepareStatement(String)
      * @see PreparedStatement
      * @see ResultSet
      */
     @Override
-    public BigDecimal takeMonthWithdrawal(int playerId, String monthPattern) throws DAOException {
+    public BigDecimal takeWithdrawalSum(int playerId, String datePattern) throws DAOException {
         try (PreparedStatement statement = connection.prepareStatement(SQL_SELECT_MONTH_WITHDRAWAL)) {
             statement.setInt(1, playerId);
-            statement.setString(2, monthPattern);
+            statement.setString(2, datePattern);
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next() ? resultSet.getBigDecimal(THIS_MONTH_WITHDRAWAL) : BigDecimal.ZERO;
         } catch (SQLException e) {
@@ -802,9 +804,8 @@ class PlayerDAOImpl extends PlayerDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link PlayerProfile} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      */
     private PlayerProfile buildPlayerProfile(ResultSet resultSet) throws SQLException {
         PlayerProfile profile = null;
@@ -825,9 +826,8 @@ class PlayerDAOImpl extends PlayerDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link PlayerVerification} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      */
     private PlayerVerification buildPlayerVerification(ResultSet resultSet) throws SQLException {
         PlayerVerification verification = null;
@@ -859,9 +859,8 @@ class PlayerDAOImpl extends PlayerDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link List} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      * @see #buildPlayerVerification(ResultSet)
      */
     private List<PlayerVerification> buildPlayerVerificationList(ResultSet resultSet) throws SQLException {
@@ -881,9 +880,8 @@ class PlayerDAOImpl extends PlayerDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link PlayerAccount} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      */
     private PlayerAccount buildPlayerAccount(ResultSet resultSet) throws SQLException {
         PlayerAccount account = null;

@@ -1,7 +1,6 @@
 package by.sasnouskikh.jcasino.dao;
 
 import by.sasnouskikh.jcasino.entity.bean.Loan;
-import config.DBUnitConfig;
 import org.dbunit.Assertion;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.IDataSet;
@@ -17,7 +16,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class LoanDAOTest extends DBUnitConfig {
+public class LoanDAOTest extends AbstractDAOTest {
 
     private static final String TABLE_LOAN             = "loan";
     private static final String XML_LOAN_DATA          = "by/sasnouskikh/jcasino/dao/loan_data.xml";
@@ -221,6 +220,17 @@ public class LoanDAOTest extends DBUnitConfig {
                                                                               expectedTable.getTableMetaData().getColumns());
 
         Assertion.assertEquals(expectedTable, filteredActualTable);
+    }
+
+    @Test
+    public void payLoanTrueCheck() throws DatabaseUnitException, DAOException, SQLException {
+        int        loanId    = 2;
+        BigDecimal payAmount = new BigDecimal(50.0);
+
+        boolean actual = daoHelper.getLoanDAO().payLoan(loanId, payAmount);
+
+        Assert.assertTrue(String.format("Method should return true, if it proceeded successfully, but it returns: %s", actual),
+                          actual);
     }
 
     @Test(expected = DAOException.class)

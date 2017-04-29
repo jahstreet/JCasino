@@ -46,7 +46,7 @@ public abstract class NewsDAO extends AbstractDAO {
     /**
      * Takes {@link List} filled by all {@link News} objects.
      *
-     * @return {@link List} filled by all {@link News} objects
+     * @return {@link List} filled by all {@link News} objects or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract List<News> takeNews() throws DAOException;
@@ -55,7 +55,7 @@ public abstract class NewsDAO extends AbstractDAO {
      * Takes {@link News} by its id.
      *
      * @param newsId id of {@link News} object to take
-     * @return {@link News} with definite id
+     * @return {@link News} with definite id or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract News takeNews(int newsId) throws DAOException;
@@ -66,7 +66,7 @@ public abstract class NewsDAO extends AbstractDAO {
      * @param adminId id of admin who inserts {@link News} object
      * @param header  news header
      * @param text    news text
-     * @return int value of inserted news id
+     * @return int value of inserted news id or 0
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract int insertNews(int adminId, String header, String text) throws DAOException;

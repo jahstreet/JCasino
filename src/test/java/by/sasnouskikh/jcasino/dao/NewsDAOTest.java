@@ -1,7 +1,6 @@
 package by.sasnouskikh.jcasino.dao;
 
 import by.sasnouskikh.jcasino.entity.bean.News;
-import config.DBUnitConfig;
 import org.dbunit.Assertion;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.IDataSet;
@@ -16,7 +15,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class NewsDAOTest extends DBUnitConfig {
+public class NewsDAOTest extends AbstractDAOTest {
 
     private static final String TABLE_NEWS                   = "news";
     private static final String XML_NEWS_DATA                = "by/sasnouskikh/jcasino/dao/news_data.xml";
@@ -76,6 +75,16 @@ public class NewsDAOTest extends DBUnitConfig {
         ITable filteredActualTable = DefaultColumnFilter.includedColumnsTable(actualTable,
                                                                               expectedTable.getTableMetaData().getColumns());
         Assertion.assertEquals(expectedTable, filteredActualTable);
+    }
+
+    @Test
+    public void deleteNewsTrueCheck() throws DAOException, DatabaseUnitException, SQLException {
+        int newsId = 1;
+
+        boolean actual = daoHelper.getNewsDAO().deleteNews(newsId);
+
+        Assert.assertTrue(String.format("Method should return true, if it proceeded successfully, but it returns: %s", actual),
+                          actual);
     }
 
     @Test

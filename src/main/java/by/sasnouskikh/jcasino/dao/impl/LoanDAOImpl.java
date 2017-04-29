@@ -103,7 +103,7 @@ class LoanDAOImpl extends LoanDAO {
      * Takes {@link Loan} by its id.
      *
      * @param id loan id
-     * @return taken {@link Loan} objects
+     * @return taken {@link Loan} object or null
      * @throws DAOException if {@link Exception} occurred while working with database
      */
     @Override
@@ -168,7 +168,7 @@ class LoanDAOImpl extends LoanDAO {
      * Takes current unpaid {@link Loan} of definite player.
      *
      * @param playerId id of player whose loan to take
-     * @return current unapid {@link Loan} of definite player
+     * @return current unpaid {@link Loan} of definite player or null
      * @throws DAOException if {@link SQLException} occurred while working with database
      * @see WrappedConnection#prepareStatement(String)
      * @see PreparedStatement

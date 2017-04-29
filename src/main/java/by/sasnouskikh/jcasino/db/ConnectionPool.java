@@ -216,6 +216,9 @@ public class ConnectionPool {
             }
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, e + " DriverManager wasn't found.");
+        } finally {
+            instance = null;
+            created.getAndSet(false);
         }
     }
 }
