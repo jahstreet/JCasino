@@ -1,0 +1,26 @@
+mysqldump -u root -ps-a100500 --routines jcasino > /usr/local/dump/dump.sql
+mysql -u root -ps-a100500 jcasino < /usr/local/dump/dump.sql
+
+
+mysql -u root -ps-a100500
+DROP DATABASE IF EXISTS jcasino;
+CREATE DATABASE jcasino;
+\q
+
+
+
+/Library/apache-tomcat-8.5.9/bin/startup.sh
+/Library/apache-tomcat-8.5.9/bin/shutdown.sh
+
+mvn clean heroku:deploy-war
+heroku login
+heroku create
+git push
+heroku open
+heroku logs / control+C
+
+
+
+touch ~/.bash_profile; open ~/.bash_profile
+source ~/.bash_profile
+echo $PATH
