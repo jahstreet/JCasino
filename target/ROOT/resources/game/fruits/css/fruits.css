@@ -1,0 +1,338 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: fixed url("/resources/game/fruits/img/background.jpg") no-repeat 50% 50% #000;
+    min-width: 1024px;
+    position: relative;
+}
+
+/*clearfix*/
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.title {
+    font-family: comic sans, comic sans ms, cursive, verdana, arial, sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    word-spacing: 2pt;
+    line-height: 1;
+    text-align: center;
+    color: #ff0000;
+    text-shadow: 2px 2px 6px rgba(249, 249, 249, 0.85);
+    margin: .25em;
+}
+
+#canvas {
+    display: block;
+    margin: 0 auto;
+    padding: 0 10px;
+    background-color: lightblue;
+    border: 20px solid #39245d;
+    border-radius: 50px;
+}
+
+section.button-container {
+    margin: 0 auto;
+    padding: .5em;
+    background-color: green;
+    border-radius: 20px;
+    max-width: 80%;
+    min-width: 800px;
+    display: flex;
+    justify-content: space-around;
+}
+
+div#money {
+    font-size: 2em;
+    font-style: oblique;
+    font-weight: bold;
+    color: rgb(0, 40, 162);
+    text-align: center;
+    display: block;
+    width: 3.5em;
+    padding: 1em;
+    position: absolute;
+    top: 3em;
+    background: #fffc00;
+    border-radius: 25%;
+}
+
+div#total-bet-info {
+    font-size: 2em;
+    text-align: center;
+    word-wrap: break-word;
+    color: rgb(0, 40, 162);
+    display: block;
+    width: 3.5em;
+    padding: 1em;
+    position: absolute;
+    top: 8em;
+    /* left: 0; */
+    background: #fffc00;
+    border-radius: 25%;
+}
+
+div#music {
+    font-size: 2em;
+    text-align: center;
+    color: #2c9827;
+    display: block;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    padding: .7em;
+    position: absolute;
+    top: 13em;
+    left: 1em;
+    background: #fffc00;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+div#streak-info {
+    text-align: center;
+    word-wrap: break-word;
+    color: rgb(0, 40, 162);
+    display: block;
+    width: 11vw;
+    padding: 1em;
+    position: absolute;
+    top: 6em;
+    right: 3vw;
+    background: #fffc00;
+    border-radius: 25%;
+}
+
+div#roll-number {
+    text-align: center;
+    word-wrap: break-word;
+    color: rgb(0, 40, 162);
+    display: block;
+    width: 11vw;
+    padding: 1em;
+    position: absolute;
+    top: 19em;
+    right: 3vw;
+    background: #fffc00;
+    border-radius: 25%;
+}
+
+div#back {
+    position: absolute;
+    top: .5em;
+    right: 5%;
+}
+
+div#back > a {
+    font-size: 2em;
+    color: #a00000;
+    text-decoration: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    transition: .7s;
+}
+
+div#back > a:hover {
+    color: #ff0000;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.buttons {
+    display: flex;
+    min-width: 130px;
+    flex-flow: column nowrap;
+}
+
+.button {
+    font: inherit;
+    color: white;
+    text-align: center;
+    padding: .5em;
+    margin: .5em;
+    background-color: #001088;
+    border: none;
+    border-radius: 3em;
+    box-shadow: 3px 2px 6px rgba(0, 0, 0, 0.67);
+    outline: none;
+    cursor: pointer;
+}
+
+#spin {
+    text-align: center;
+    padding: .5em;
+    min-width: 660px;
+}
+
+.line-block {
+    display: flex;
+    justify-content: space-around;
+    color: #fff;
+}
+
+.quantity-block {
+    display: flex;
+    margin: 0 0 .5em;
+}
+
+.quantity {
+    margin: 0 0 .5em;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.quantity input {
+    width: 45px;
+    height: 42px;
+    line-height: 1.65;
+    padding: 0 .5em;
+    float: left;
+    display: block;
+    margin: 0;
+    border: 1px solid #eee;
+    border-radius: 1em;
+}
+
+.quantity label {
+    margin: 0 1em;
+    color: white;
+    background: #410E94;
+    padding: .2em;
+    border-radius: 50%;
+    float: left;
+    width: 4em;
+    text-align: center;
+    line-height: 38px;
+}
+
+.quantity input:focus {
+    outline: 0;
+}
+
+.quantity-nav {
+    float: left;
+    position: relative;
+    height: 42px;
+}
+
+.quantity-button {
+    position: relative;
+    cursor: pointer;
+    border-left: 1px solid #eee;
+    width: 20px;
+    text-align: center;
+    color: #333;
+    font-size: 13px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+    line-height: 1.7;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    transition: .5s;
+}
+
+.quantity-button:active {
+    background: #ccc;
+}
+
+.quantity-button.quantity-up {
+    position: absolute;
+    height: 50%;
+    top: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.quantity-button.quantity-down {
+    position: absolute;
+    bottom: -1px;
+    height: 50%;
+}
+
+/* Cначала обозначаем стили для IE8 и более старых версий
+т.е. здесь мы немного облагораживаем стандартный чекбокс. */
+.checkbox {
+    vertical-align: top;
+    margin: 0 3px 0 0;
+    width: 17px;
+    height: 17px;
+}
+
+/* Это для всех браузеров, кроме совсем старых, которые не поддерживают
+селекторы с плюсом. Показываем, что label кликабелен. */
+.checkbox + label {
+    cursor: pointer;
+}
+
+/* Далее идет оформление чекбокса в современных браузерах, а также IE9 и выше.
+Благодаря тому, что старые браузеры не поддерживают селекторы :not и :checked,
+в них все нижеследующие стили не сработают. */
+
+/* Прячем оригинальный чекбокс. */
+.checkbox:not(checked) {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkbox:not(checked) + label {
+    position: relative; /* будем позиционировать псевдочекбокс относительно label */
+    padding: 0 0 0 60px; /* оставляем слева от label место под псевдочекбокс */
+}
+
+/* Оформление первой части чекбокса в выключенном состоянии (фон). */
+.checkbox:not(checked) + label:before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 50px;
+    height: 26px;
+    border-radius: 13px;
+    background: #CDD1DA;
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, .2);
+}
+
+/* Оформление второй части чекбокса в выключенном состоянии (переключатель). */
+.checkbox:not(checked) + label:after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+    transition: all .2s; /* анимация, чтобы чекбокс переключался плавно */
+}
+
+/* Меняем фон чекбокса, когда он включен. */
+.checkbox:checked + label:before {
+    background: #9FD468;
+}
+
+/* Сдвигаем переключатель чекбокса, когда он включен. */
+.checkbox:checked + label:after {
+    left: 26px;
+}

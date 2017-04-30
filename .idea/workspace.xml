@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e983f2f-bc48-465a-a9b4-edfcca97a100" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/remotedb.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/listener/JCasinoContextListener.class" afterPath="$PROJECT_DIR$/target/classes/by/sasnouskikh/jcasino/listener/JCasinoContextListener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/info/command scripts.txt" afterPath="$PROJECT_DIR$/info/command scripts.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/jcasino.log" afterPath="$PROJECT_DIR$/logs/jcasino.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoContextListener.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/listener/JCasinoContextListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/database.properties" afterPath="$PROJECT_DIR$/target/classes/database.properties" />
     </list>
     <ignored path="JCasino.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,7 +34,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="13">
@@ -49,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="command scripts.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="command scripts.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/info/command scripts.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="10" />
+            <state relative-caret-position="330">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -1287,7 +1282,7 @@
       <workItem from="1493387675723" duration="33872000" />
       <workItem from="1493504735893" duration="55000" />
       <workItem from="1493505473421" duration="260000" />
-      <workItem from="1493505761919" duration="10592000" />
+      <workItem from="1493505761919" duration="10814000" />
     </task>
     <task id="LOCAL-00001" summary="First big redactoring">
       <created>1491502443971</created>
@@ -1345,7 +1340,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493502763642</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="DAO test cases started to come out (Loan + News + Player...) + remote deployment">
+      <created>1493571947504</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1493571947504</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1381,7 +1383,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1091246000" />
+    <option name="totallyTimeSpent" value="1091468000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1483,7 +1485,8 @@
     <MESSAGE value="Bean JavaDoc finished and continues further + JavaDoc compiler warnings fixed" />
     <MESSAGE value="DAO test cases started to come out (Loan + News)" />
     <MESSAGE value="DAO test cases started to come out (Loan + News + Player...)" />
-    <option name="LAST_COMMIT_MESSAGE" value="DAO test cases started to come out (Loan + News + Player...)" />
+    <MESSAGE value="DAO test cases started to come out (Loan + News + Player...) + remote deployment" />
+    <option name="LAST_COMMIT_MESSAGE" value="DAO test cases started to come out (Loan + News + Player...) + remote deployment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1902,18 +1905,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/info/command scripts.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13">
           <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/info/command scripts.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="25" />
           <folding />
         </state>
       </provider>
