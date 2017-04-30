@@ -18,7 +18,8 @@
 
     <context-param>
         <param-name>uploads.dir</param-name>
-        <param-value>/Library/apache-tomcat-8.5.9/uploads</param-value>
+        <!--<param-value>/Library/apache-tomcat-8.5.9/uploads</param-value>-->
+        <param-value>/opt/tomcat/temp/uploads</param-value>
     </context-param>
 
     <error-page>

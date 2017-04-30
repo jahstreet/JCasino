@@ -8,3 +8,14 @@
 2017-04-30 02:16:46 [http-nio-8080-exec-20] INFO  by.sasnouskikh.jcasino.listener.JCasinoContextListener  line:70   : ConnectionPool was destroyed.
 2017-04-30 02:16:48 [http-nio-8080-exec-20] INFO  by.sasnouskikh.jcasino.listener.JCasinoContextListener  line:48   : ConnectionPool was initialized.
 2017-04-30 02:29:38 [http-nio-8080-exec-29] INFO  by.sasnouskikh.jcasino.listener.JCasinoContextListener  line:70   : ConnectionPool was destroyed.
+2017-04-30 03:49:29 [http-nio-8080-exec-52] INFO  by.sasnouskikh.jcasino.listener.JCasinoContextListener  line:48   : ConnectionPool was initialized.
+2017-04-30 03:50:12 [http-nio-8080-exec-48] INFO  by.sasnouskikh.jcasino.manager.QueryManager             line:104  : guest called /controller?command=login&email=jahstreetlove@gmail.com&password=S-a100500
+2017-04-30 03:50:12 [http-nio-8080-exec-50] INFO  by.sasnouskikh.jcasino.manager.QueryManager             line:109  : admin jahstreetlove@gmail.com (id=1) called /controller?command=goto_main
+2017-04-30 03:50:15 [http-nio-8080-exec-54] INFO  by.sasnouskikh.jcasino.manager.QueryManager             line:109  : admin jahstreetlove@gmail.com (id=1) called /controller?command=logout
+2017-04-30 03:50:15 [http-nio-8080-exec-49] INFO  by.sasnouskikh.jcasino.manager.QueryManager             line:104  : guest called /controller?command=goto_index
+2017-04-30 15:26:52 [http-nio-8080-exec-65] INFO  by.sasnouskikh.jcasino.listener.JCasinoContextListener  line:70   : ConnectionPool was destroyed.
+2017-04-30 15:27:05 [http-nio-8080-exec-65] INFO  by.sasnouskikh.jcasino.listener.JCasinoContextListener  line:48   : ConnectionPool was initialized.
+2017-04-30 15:27:41 [http-nio-8080-exec-59] INFO  by.sasnouskikh.jcasino.manager.QueryManager             line:104  : guest called /controller?command=goto_main
+2017-04-30 16:01:16 [http-nio-8080-exec-70] INFO  by.sasnouskikh.jcasino.listener.JCasinoContextListener  line:70   : ConnectionPool was destroyed.
+2017-04-30 16:24:11 [http-nio-8080-exec-70] INFO  by.sasnouskikh.jcasino.listener.JCasinoContextListener  line:48   : ConnectionPool was initialized.
+2017-04-30 16:24:11 [http-nio-8080-exec-70] INFO  by.sasnouskikh.jcasino.listener.JCasinoContextListener  line:70   : ConnectionPool was destroyed.

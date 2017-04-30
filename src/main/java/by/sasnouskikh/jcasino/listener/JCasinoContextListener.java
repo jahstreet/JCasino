@@ -44,7 +44,7 @@ public class JCasinoContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
         try {
             pool = ConnectionPool.getInstance();
-            pool.initPool();
+            pool.initPool("remotedb");
             LOGGER.log(Level.INFO, "ConnectionPool was initialized.");
         } catch (ConnectionPoolException e) {
             LOGGER.log(Level.FATAL, e);

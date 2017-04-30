@@ -15,12 +15,21 @@ CREATE DATABASE jcasino;
 mvn clean heroku:deploy-war
 heroku login
 heroku create
-https://git.heroku.com/glacial-beach-97424.git
-heroku open
+git push https://git.heroku.com/lit-meadow-12597.git
+heroku open https://lit-meadow-12597.herokuapp.com/ --app lit-meadow-12597
 heroku logs / control+C
 
-
+PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/b‌​in
 
 touch ~/.bash_profile; open ~/.bash_profile
 source ~/.bash_profile
 echo $PATH
+
+git remote set-url origin
+
+postgres : s-a10050
+port:5432
+
+
+version: 9.6.1
+postgre db url: postgres://grlfbzwoldljum:36762cf737e133ac2c548a63f5d0192f7759341419beedd39a40f100cd6ccea9@ec2-23-23-222-147.compute-1.amazonaws.com:5432/d374qras0dcffv
