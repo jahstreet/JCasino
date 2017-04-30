@@ -1,0 +1,7 @@
+/info/*
+/logs/*
+/.idea/*
+/target/*
+JCasino.iml
+Procfile
+system.properties
