@@ -15,7 +15,7 @@ CREATE DATABASE jcasino;
 mvn clean heroku:deploy-war
 heroku login
 heroku create
-git push
+https://git.heroku.com/glacial-beach-97424.git
 heroku open
 heroku logs / control+C
 
