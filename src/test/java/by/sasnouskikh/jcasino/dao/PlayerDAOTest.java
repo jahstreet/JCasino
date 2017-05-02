@@ -24,7 +24,6 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
     private static final String TABLE_PLAYER                 = "player";
     private static final String TABLE_VERIFICATION           = "verification";
-    private static final String TABLE_PLAYER_STATUS          = "player_status";
     private static final String TABLE_USER                   = "user";
     private static final String XML_PLAYER_DATA              = "by/sasnouskikh/jcasino/dao/player_data.xml";
     private static final String XML_NO_VERIFY                = "by/sasnouskikh/jcasino/dao/player_data_no_ready_to_verify.xml";
@@ -389,7 +388,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         daoHelper.getPlayerDAO().insertPlayer(playerId, null, null, null, birthDate, passport, null, null);
 
-        Assert.fail("A FK constraint (`jcasino`.`player`, CONSTRAINT `fk_player_user` FOREIGN KEY (`id`) " +
+        Assert.fail("A FK constraint `jcasino`.`player`, CONSTRAINT `fk_player_user` FOREIGN KEY (`id`) " +
                     "REFERENCES `user` (`id`) should exist.");
     }
 
@@ -436,7 +435,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         daoHelper.getPlayerDAO().insertEmptyVerification(playerId);
 
-        Assert.fail("A FK constraint (`jcasino`.`verification`, CONSTRAINT `fk_verification_player` FOREIGN KEY (`id`) " +
+        Assert.fail("A FK constraint `jcasino`.`verification`, CONSTRAINT `fk_verification_player` FOREIGN KEY (`id`) " +
                     "REFERENCES `player` (`id`) should exist.");
     }
 
@@ -949,7 +948,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
     }
 
     @Test(expected = DAOException.class)
-    public void playerStatusFKCheck() throws DAOException {
+    public void playerStatusEnumCheck() throws DAOException {
         int    playerId   = 100;
         int    adminId    = 1;
         String status     = "unknown";

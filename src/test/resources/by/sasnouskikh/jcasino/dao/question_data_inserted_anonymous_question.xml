@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <user id="1" password_md5="5d3c47fddf8cbac13c1687c612f331d7" email="jahstreetlove@gmail.com" role="admin"/>
+    <user id="2" password_md5="5d3c47ffkl8cbac13c1687c612f331d7" email="jahstreet@gmail.com" role="admin"/>
+
+    <user id="100" password_md5="c070202aef2d05077de4a4d16bf26875" email="anhelina@gmail.com" role="player"/>
+    <player id="100" fname="ALIAKSANDER" lname="SASNOUSKIKH" birthdate="1991-09-24"
+            passport="KH1731245" question="Вопрос?" answer_md5="7fa3b767c460b54a2be4d49030b349c7" balance="0.00"
+            status="basic"/>
+
+    <user id="101" password_md5="c070202aef2d05077de4a4d16bf26875" email="anhel@gmail.com" role="player"/>
+    <player id="101" mname="VASILEVNA" lname="PETROVA" birthdate="1993-09-21"
+            passport="KH7588391" question="Maya?" answer_md5="7fa3b767c460b54a2be4d49030b349c7" balance="100.00"
+            status="basic"/>
+
+    <user id="102" password_md5="c070202aef2d05077de4a4d16bf26876" email="bover@json.com" role="player"/>
+    <player id="102" birthdate="1995-05-25" passport="KH1731245" balance="1.11" status="basic"/>
+
+    <question id="1" player_id="100" email="tramp@tramp.tr" topic="other" question="Why are you so bad people?"
+              q_date="2017-02-23 00:00:00.0"/>
+    <question id="2" player_id="100" email="alien_by@tut.by" topic="loan"
+              question="Под какой процент я могу взять 500 долларов и на какой срок?" q_date="2017-02-25 18:14:40.0"
+              admin_id="1" answer="20% на 1 месяц!" a_date="2017-02-25 18:14:50.0"/>
+    <question id="3" player_id="101" email="sasha88@yandex.by" topic="other" question="Lorem ipsum?"
+              q_date="2017-02-27 22:22:15.0" admin_id="2" answer="Dolor sit amet." a_date="2017-03-02 12:15:24.0"/>
+    <question id="4" player_id="101" email="raper@mc.net" topic="rules" question="Где я могу почитать правила игры?"
+              q_date="2017-03-02 17:21:40.0" admin_id="1" answer="На странице «Правила игры»!"
+              a_date="2017-03-03 10:54:07.0" satisfaction="norm"/>
+    <question id="5" player_id="101" email="alien_by@tut.by" topic="ban" question="Can you unban me? Plz…"
+              q_date="2017-03-17 09:10:18.0" admin_id="1" answer="Yes, of course…" a_date="2017-03-17 09:15:22.0"
+              satisfaction="best"/>
+    <question id="6" email="guest@tut.by" topic="other" question="Как дела чуваки?" q_date="2017-03-21 18:10:00.0"/>
+    <question id="7" email="another_guest@tut.by" topic="transaction" question="How to pay?"
+              q_date="2017-04-06 20:58:09.0" admin_id="1" answer="Answer." a_date="2017-03-23 12:11:44.0"/>
+    <question id="8" player_id="101" email="alien_by@tut.by" topic="ban" question="Another one?"
+              q_date="2017-04-06 21:00:30.0"
+              admin_id="2" answer="Answer 2." a_date="2017-05-13 02:13:24.0"/>
+    <question id="9" email="entered@mail.com" topic="other" question="Test question text."/>
+
+</dataset>

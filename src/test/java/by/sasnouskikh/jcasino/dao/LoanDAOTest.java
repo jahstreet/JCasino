@@ -241,7 +241,7 @@ public class LoanDAOTest extends AbstractDAOTest {
 
         daoHelper.getLoanDAO().insertLoan(playerId, amount, percent);
 
-        Assert.fail("A FK constraint (`jcasino`.`loan`, CONSTRAINT `fk_player_loan` FOREIGN KEY (`player_id`) " +
+        Assert.fail("A FK constraint `jcasino`.`loan`, CONSTRAINT `fk_player_loan` FOREIGN KEY (`player_id`) " +
                     "REFERENCES `player` (`id`) should exist.");
 
     }

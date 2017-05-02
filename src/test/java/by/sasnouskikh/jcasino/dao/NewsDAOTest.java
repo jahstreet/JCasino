@@ -180,7 +180,7 @@ public class NewsDAOTest extends AbstractDAOTest {
 
         daoHelper.getNewsDAO().insertNews(adminId, newsHeader, newsText);
 
-        Assert.fail("A FK constraint (`jcasino`.`news`, CONSTRAINT `fk_user_news` FOREIGN KEY (`admin_id`) " +
+        Assert.fail("A FK constraint `jcasino`.`news`, CONSTRAINT `fk_user_news` FOREIGN KEY (`admin_id`) " +
                     "REFERENCES `user` (`id`) should exist.");
     }
 }

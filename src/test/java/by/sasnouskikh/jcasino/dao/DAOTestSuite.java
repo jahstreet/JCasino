@@ -13,7 +13,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({PlayerDAOTest.class})//LoanDAOTest.class, NewsDAOTest.class,
+@Suite.SuiteClasses({QuestionDAOTest.class})//LoanDAOTest.class, NewsDAOTest.class, PlayerDAOTest.class
 public class DAOTestSuite {
 
     private static final String DB_PROPERTIES = "database";

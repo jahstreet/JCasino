@@ -170,6 +170,7 @@ public class ConnectionPool {
                     connection.setAutoCommit(true);
                 }
                 connections.put(connection);
+                LOGGER.log(Level.DEBUG, "Connection was returned to pool. Current pool size: " + connections.size());
             } catch (SQLException e) {
                 throw new ConnectionPoolException("Exception while setting autoCommit to connection.");
             } catch (InterruptedException e) {
