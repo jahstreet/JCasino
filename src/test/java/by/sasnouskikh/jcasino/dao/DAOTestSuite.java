@@ -13,15 +13,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({LoanDAOTest.class, NewsDAOTest.class, PlayerDAOTest.class})
+@Suite.SuiteClasses({PlayerDAOTest.class})//LoanDAOTest.class, NewsDAOTest.class,
 public class DAOTestSuite {
 
+    private static final String DB_PROPERTIES = "database";
     private static ConnectionPool instance;
 
     @BeforeClass
     public static void setUp() throws SQLException, IOException, ConnectionPoolException {
         instance = ConnectionPool.getInstance();
-        instance.initPool();
+        instance.initPool(DB_PROPERTIES);
         resetDatabase();
     }
 

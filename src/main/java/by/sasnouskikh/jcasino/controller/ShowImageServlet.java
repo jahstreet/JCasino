@@ -54,7 +54,7 @@ public class ShowImageServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String filename = request.getPathInfo();
-        File   file     = new File(request.getServletContext().getInitParameter(INIT_PARAM_UPLOADS) + "/", filename);
+        File   file     = new File(getServletContext().getInitParameter(INIT_PARAM_UPLOADS) + "/", filename);
         response.setHeader("Content-Type", getServletContext().getMimeType(filename));
         response.setHeader("Content-Length", String.valueOf(file.length()));
         response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");

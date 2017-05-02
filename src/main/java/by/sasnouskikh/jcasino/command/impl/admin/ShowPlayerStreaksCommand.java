@@ -72,7 +72,7 @@ public class ShowPlayerStreaksCommand implements Command {
             navigator = PageNavigator.FORWARD_PAGE_MANAGE_STREAKS;
         } else {
             QueryManager.logQuery(request);
-            request.setAttribute(ATTR_ERROR_MESSAGE, MESSAGE_PLAYER_NO_STREAKS);
+            request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_NO_STREAKS));
             navigator = PageNavigator.FORWARD_PREV_QUERY;
         }
         return navigator;

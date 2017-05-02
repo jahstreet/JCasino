@@ -431,11 +431,10 @@ class PlayerDAOImpl extends PlayerDAO {
             statement.setString(6, passport);
             statement.setString(7, question);
             statement.setString(8, answer);
-            statement.executeUpdate();
+            return statement.executeUpdate() == 1;
         } catch (SQLException e) {
             throw new DAOException("Database connection error while inserting player. " + e);
         }
-        return true;
     }
 
     /**

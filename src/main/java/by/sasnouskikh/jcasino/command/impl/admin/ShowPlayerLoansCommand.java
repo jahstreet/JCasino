@@ -72,7 +72,7 @@ public class ShowPlayerLoansCommand implements Command {
             navigator = PageNavigator.FORWARD_PAGE_MANAGE_LOANS;
         } else {
             QueryManager.logQuery(request);
-            request.setAttribute(ATTR_ERROR_MESSAGE, MESSAGE_PLAYER_NO_LOANS);
+            request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_NO_LOANS));
             navigator = PageNavigator.FORWARD_PREV_QUERY;
         }
         return navigator;

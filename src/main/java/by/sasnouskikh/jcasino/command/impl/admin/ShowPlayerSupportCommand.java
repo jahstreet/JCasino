@@ -72,7 +72,7 @@ public class ShowPlayerSupportCommand implements Command {
             navigator = PageNavigator.FORWARD_PAGE_MANAGE_SUPPORT;
         } else {
             QueryManager.logQuery(request);
-            request.setAttribute(ATTR_ERROR_MESSAGE, MESSAGE_PLAYER_NO_QUESTIONS);
+            request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_NO_QUESTIONS));
             navigator = PageNavigator.FORWARD_PREV_QUERY;
         }
         return navigator;

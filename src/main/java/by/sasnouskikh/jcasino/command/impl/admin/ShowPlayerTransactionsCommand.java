@@ -72,7 +72,7 @@ public class ShowPlayerTransactionsCommand implements Command {
             navigator = PageNavigator.FORWARD_PAGE_MANAGE_TRANSACTIONS;
         } else {
             QueryManager.logQuery(request);
-            request.setAttribute(ATTR_ERROR_MESSAGE, MESSAGE_PLAYER_NO_TRANSACTIONS);
+            request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_NO_TRANSACTIONS));
             navigator = PageNavigator.FORWARD_PREV_QUERY;
         }
         return navigator;

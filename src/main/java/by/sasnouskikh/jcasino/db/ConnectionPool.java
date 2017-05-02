@@ -26,16 +26,14 @@ public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
     /**
-     * Database property-file path relative to Maven directory 'resources'.
-     */
-    private static final String DB_PROPERTIES = "database";
-    /**
      * Database property-file keys.
      */
-    private static final String JDBC_URL      = "url";
-    private static final String DB_LOGIN      = "user";
-    private static final String DB_PASSWORD   = "password";
-    private static final String POOL_SIZE     = "poolsize";
+    private static final String JDBC_URL           = "url";
+    private static final String DB_LOGIN           = "user";
+    private static final String DB_PASSWORD        = "password";
+    private static final String POOL_SIZE          = "poolsize";
+    private static final int    VALIDATION_TIMEOUT = 10;
+
     /**
      * Class singleton instance.
      */
@@ -52,6 +50,10 @@ public class ConnectionPool {
      * Size of {@link #connections} to initialize and destroy pool.
      */
     private static int poolSize;
+
+    private String url;
+    private String login;
+    private String password;
 
     /**
      * Collection of {@link java.sql.Connection} objects.
@@ -104,9 +106,6 @@ public class ConnectionPool {
      */
     public void initPool(String properties) throws ConnectionPoolException {
         ResourceBundle resourceBundle;
-        String         url;
-        String         login;
-        String         password;
         try {
             resourceBundle = ResourceBundle.getBundle(properties);
         } catch (MissingResourceException e) {
@@ -129,19 +128,6 @@ public class ConnectionPool {
     }
 
     /**
-     * Initializes pool due to default config data. Calls at {@link HttpServlet#init()} or
-     * {@link javax.servlet.ServletContextListener#contextInitialized(ServletContextEvent)}.
-     *
-     * @throws ConnectionPoolException if {@link InterruptedException} occurred while putting {@link WrappedConnection}
-     *                                 to {@link #connections}
-     * @see ResourceBundle
-     * @see #initPool(String)
-     */
-    public void initPool() throws ConnectionPoolException {
-        initPool(DB_PROPERTIES);
-    }
-
-    /**
      * Takes {@link WrappedConnection} from {@link #connections} collection.
      *
      * @return taken {@link WrappedConnection}
@@ -152,7 +138,11 @@ public class ConnectionPool {
         WrappedConnection connection;
         try {
             connection = connections.take();
-        } catch (InterruptedException e) {
+            if (connection.isNull() || connection.isClosed() || !connection.isValid(VALIDATION_TIMEOUT)) {
+                returnConnection(connection);
+                return takeConnection();
+            }
+        } catch (InterruptedException | SQLException e) {
             throw new ConnectionPoolException("Taking-connection process was interrupted.", e);
         }
         return connection;
@@ -169,7 +159,9 @@ public class ConnectionPool {
      */
     public void returnConnection(WrappedConnection connection) throws ConnectionPoolException {
         try {
-            if (connection.isNull() || connection.isClosed()) {
+            if (connection.isNull() || connection.isClosed() || !connection.isValid(VALIDATION_TIMEOUT)) {
+                connections.add(new WrappedConnection(url, login, password));
+                LOGGER.log(Level.ERROR, "Connection was lost but replaced by a new one.");
                 throw new ConnectionPoolException("Connection was lost while returning.");
             }
             try {

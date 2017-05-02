@@ -27,6 +27,10 @@ public class JCasinoContextListener implements ServletContextListener {
     private static final Logger LOGGER = LogManager.getLogger(JCasinoContextListener.class);
 
     /**
+     * Database property-file path relative to Maven directory 'resources' servletContext initParam key.
+     */
+    private static final String DB_PROPERTIES = "db.props";
+    /**
      * Connection pool instance to manage and work with.
      */
     private ConnectionPool pool;
@@ -42,9 +46,10 @@ public class JCasinoContextListener implements ServletContextListener {
      */
     @Override
     public void contextInitialized(ServletContextEvent event) {
+        String databaseProps = event.getServletContext().getInitParameter(DB_PROPERTIES);
         try {
             pool = ConnectionPool.getInstance();
-            pool.initPool("remotedb");
+            pool.initPool(databaseProps);
             LOGGER.log(Level.INFO, "ConnectionPool was initialized.");
         } catch (ConnectionPoolException e) {
             LOGGER.log(Level.FATAL, e);

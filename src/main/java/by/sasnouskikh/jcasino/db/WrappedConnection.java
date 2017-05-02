@@ -2,6 +2,7 @@ package by.sasnouskikh.jcasino.db;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -107,6 +108,24 @@ public class WrappedConnection implements AutoCloseable {
      */
     public boolean isNull() {
         return connection == null;
+    }
+
+    /**
+     * Returns true if the connection has not been closed and is still valid.
+     * The driver shall submit a query on the connection or use some other
+     * mechanism that positively verifies the connection is still valid when
+     * this method is called.
+     *
+     * @param timeout The time in seconds to wait for the database operation used to validate the connection to
+     *                complete.  If the timeout period expires before the operation completes, this method returns
+     *                false.  A value of 0 indicates a timeout is not applied to the database operation.
+     * @return true if the connection is valid, false otherwise
+     * @throws SQLException if the value supplied for <code>timeout</code> is less then 0
+     * @see DatabaseMetaData#getClientInfoProperties
+     * @since 1.6
+     */
+    public boolean isValid(int timeout) throws SQLException {
+        return connection.isValid(timeout);
     }
 
     /**

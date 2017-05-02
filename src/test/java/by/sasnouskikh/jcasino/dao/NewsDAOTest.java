@@ -17,12 +17,12 @@ import java.util.List;
 
 public class NewsDAOTest extends AbstractDAOTest {
 
-    private static final String TABLE_NEWS                   = "news";
-    private static final String XML_NEWS_DATA                = "by/sasnouskikh/jcasino/dao/news_data.xml";
-    private static final String XML_NEWS_DATA_DELETED        = "by/sasnouskikh/jcasino/dao/news_data_deleted.xml";
-    private static final String XML_NEWS_DATA_CHANGED_TEXT   = "by/sasnouskikh/jcasino/dao/news_data_changed_text.xml";
-    private static final String XML_NEWS_DATA_CHANGED_HEADER = "by/sasnouskikh/jcasino/dao/news_data_changed_header.xml";
-    private static final String XML_NEWS_DATA_INSERTED       = "by/sasnouskikh/jcasino/dao/news_data_inserted.xml";
+    private static final String TABLE_NEWS         = "news";
+    private static final String XML_NEWS_DATA      = "by/sasnouskikh/jcasino/dao/news_data.xml";
+    private static final String XML_DELETED        = "by/sasnouskikh/jcasino/dao/news_data_deleted.xml";
+    private static final String XML_CHANGED_TEXT   = "by/sasnouskikh/jcasino/dao/news_data_changed_text.xml";
+    private static final String XML_CHANGED_HEADER = "by/sasnouskikh/jcasino/dao/news_data_changed_header.xml";
+    private static final String XML_INSERTED       = "by/sasnouskikh/jcasino/dao/news_data_inserted.xml";
 
     @Before
     public void setUp() throws Exception {
@@ -67,7 +67,7 @@ public class NewsDAOTest extends AbstractDAOTest {
     public void deleteNewsCheck() throws DAOException, DatabaseUnitException, SQLException {
         int newsId = 1;
 
-        IDataSet expectedDataSet = buildDataSet(XML_NEWS_DATA_DELETED);
+        IDataSet expectedDataSet = buildDataSet(XML_DELETED);
         ITable   expectedTable   = expectedDataSet.getTable(TABLE_NEWS);
 
         daoHelper.getNewsDAO().deleteNews(newsId);
@@ -83,7 +83,7 @@ public class NewsDAOTest extends AbstractDAOTest {
 
         boolean actual = daoHelper.getNewsDAO().deleteNews(newsId);
 
-        Assert.assertTrue(String.format("Method should return true, if it proceeded successfully, but it returns: %s", actual),
+        Assert.assertTrue(String.format("Method should return `true`, if it proceeded successfully, but it returns: %s", actual),
                           actual);
     }
 
@@ -94,7 +94,8 @@ public class NewsDAOTest extends AbstractDAOTest {
         String newText = "текст2";
 
         boolean actual = daoHelper.getNewsDAO().changeNewsText(newsId, newText, adminId);
-        Assert.assertTrue(String.format("Expected - 'true', but returned - '%b'", actual), actual);
+        Assert.assertTrue(String.format("Method should return `true`, if it proceeded successfully, but it returns: %s", actual),
+                          actual);
     }
 
     @Test
@@ -103,7 +104,7 @@ public class NewsDAOTest extends AbstractDAOTest {
         int    adminId = 101;
         String newText = "текст2";
 
-        IDataSet expectedDataSet = buildDataSet(XML_NEWS_DATA_CHANGED_TEXT);
+        IDataSet expectedDataSet = buildDataSet(XML_CHANGED_TEXT);
         ITable   expectedTable   = expectedDataSet.getTable(TABLE_NEWS);
 
         daoHelper.getNewsDAO().changeNewsText(newsId, newText, adminId);
@@ -130,7 +131,7 @@ public class NewsDAOTest extends AbstractDAOTest {
         int    adminId   = 101;
         String newHeader = "header2";
 
-        IDataSet expectedDataSet = buildDataSet(XML_NEWS_DATA_CHANGED_HEADER);
+        IDataSet expectedDataSet = buildDataSet(XML_CHANGED_HEADER);
         ITable   expectedTable   = expectedDataSet.getTable(TABLE_NEWS);
 
         daoHelper.getNewsDAO().changeNewsHeader(newsId, newHeader, adminId);
@@ -162,7 +163,7 @@ public class NewsDAOTest extends AbstractDAOTest {
         String   newsText   = "текст10";
         String[] ignore     = {"id", "date"};
 
-        IDataSet expectedDataSet = buildDataSet(XML_NEWS_DATA_INSERTED);
+        IDataSet expectedDataSet = buildDataSet(XML_INSERTED);
         ITable   expectedTable   = expectedDataSet.getTable(TABLE_NEWS);
 
         daoHelper.getNewsDAO().insertNews(adminId, newsHeader, newsText);

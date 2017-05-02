@@ -149,6 +149,7 @@ public class ConfigConstant {
     public static final String PARAM_QUESTION             = "question";
     public static final String PARAM_SORT_BY_SATISFACTION = "satisfaction";
     public static final String PARAM_SCAN                 = "scan";
+    public static final String PARAM_TARGET               = "target";
     public static final String PARAM_FILTER_MY            = "show_my";
     public static final String PARAM_SORT_BY_AMOUNT       = "sort_by_amount";
     public static final String PARAM_SORT_BY_REST         = "sort_by_rest";
@@ -184,7 +185,7 @@ public class ConfigConstant {
     public static final String MESSAGE_PLAYER_NO_TRANSACTIONS    = "player.no.transactions";
     public static final String MESSAGE_CODE_NOT_SENT_ERROR       = "code.not.sent.error";
     public static final String MESSAGE_ANSWER_SUPPORT_ERROR      = "answer.support.error";
-    public static final String MESSAGE_EDIT_NEWS_ERROR           = "edit.news.error";
+    public static final String MESSAGE_DUMP_ZIP_ERROR            = "dump.zip.error";
     public static final String MESSAGE_VERIFY_SCAN_ERROR         = "verify.scan.error";
     public static final String MESSAGE_NO_MONEY                  = "not.enough.money";
     public static final String MESSAGE_DATABASE_ACCESS_ERROR     = "database.error";

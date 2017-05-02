@@ -18,10 +18,10 @@ import java.util.List;
 
 public class LoanDAOTest extends AbstractDAOTest {
 
-    private static final String TABLE_LOAN             = "loan";
-    private static final String XML_LOAN_DATA          = "by/sasnouskikh/jcasino/dao/loan_data.xml";
-    private static final String XML_LOAN_DATA_PAID     = "by/sasnouskikh/jcasino/dao/loan_data_paid.xml";
-    private static final String XML_LOAN_DATA_INSERTED = "by/sasnouskikh/jcasino/dao/loan_data_inserted.xml";
+    private static final String TABLE_LOAN    = "loan";
+    private static final String XML_LOAN_DATA = "by/sasnouskikh/jcasino/dao/loan_data.xml";
+    private static final String XML_PAID      = "by/sasnouskikh/jcasino/dao/loan_data_paid.xml";
+    private static final String XML_INSERTED  = "by/sasnouskikh/jcasino/dao/loan_data_inserted.xml";
 
     @Before
     public void setUp() throws Exception {
@@ -196,7 +196,7 @@ public class LoanDAOTest extends AbstractDAOTest {
         BigDecimal percent  = new BigDecimal(20);
         String[]   ignore   = {"id", "acquire", "expire"};
 
-        IDataSet expectedDataSet = buildDataSet(XML_LOAN_DATA_INSERTED);
+        IDataSet expectedDataSet = buildDataSet(XML_INSERTED);
         ITable   expectedTable   = expectedDataSet.getTable(TABLE_LOAN);
 
         daoHelper.getLoanDAO().insertLoan(playerId, amount, percent);
@@ -210,7 +210,7 @@ public class LoanDAOTest extends AbstractDAOTest {
         int        loanId    = 2;
         BigDecimal payAmount = new BigDecimal(50.0);
 
-        IDataSet expectedDataSet = buildDataSet(XML_LOAN_DATA_PAID);
+        IDataSet expectedDataSet = buildDataSet(XML_PAID);
         ITable   expectedTable   = expectedDataSet.getTable(TABLE_LOAN);
 
         daoHelper.getLoanDAO().payLoan(loanId, payAmount);
@@ -229,7 +229,7 @@ public class LoanDAOTest extends AbstractDAOTest {
 
         boolean actual = daoHelper.getLoanDAO().payLoan(loanId, payAmount);
 
-        Assert.assertTrue(String.format("Method should return true, if it proceeded successfully, but it returns: %s", actual),
+        Assert.assertTrue(String.format("Method should return `true`, if it proceeded successfully, but it returns: %s", actual),
                           actual);
     }
 
