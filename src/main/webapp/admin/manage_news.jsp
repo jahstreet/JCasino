@@ -26,7 +26,9 @@
 
         <hr/>
         <%--edit--%>
-        <ul>
+        <div class="holder"></div>
+        <hr/>
+        <ul id="itemContainer">
             <c:forEach var="news" items="${newsList}">
                 <li class="edit-news-list">
                         <%--header--%>
@@ -84,23 +86,12 @@
                     </p>
                     <div class="custom-link">
                         <a href="${pageContext.request.contextPath}/controller?command=delete_news&id=${news.id}">
-                                <fmt:message key="manage.change.news.delete"/>
+                            <fmt:message key="manage.change.news.delete"/></a>
                     </div>
-                    </a>
                     <hr/>
                 </li>
             </c:forEach>
         </ul>
     </section>
 </main>
-<script>
-    function changeNewsItem(event) {
-        var button = event.currentTarget,
-                form = button.nextElementSibling,
-                content = button.previousElementSibling;
-        button.style.display = "none";
-        content.style.display = "none";
-        form.style.display = "block";
-        form.elements[1].focus();
-    }
-</script>
+<script src="${pageContext.request.contextPath}/resources/js/manage_news.js"></script>

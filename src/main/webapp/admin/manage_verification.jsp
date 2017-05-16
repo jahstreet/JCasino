@@ -10,6 +10,7 @@
         <section class="table-section">
             <table class="custom-table">
                 <caption><fmt:message key="manage.verification.table.caption"/></caption>
+                <thead>
                 <tr>
                     <th><fmt:message key="manage.verification.table.header.playerid"/></th>
                     <th><fmt:message key="manage.verification.table.header.profole.verification"/></th>
@@ -20,6 +21,8 @@
                     <th><fmt:message key="manage.verification.table.header.commentary"/></th>
                     <th><fmt:message key="manage.verification.table.header.manage"/></th>
                 </tr>
+                </thead>
+                <tbody id="itemContainer">
                 <c:forEach var="verification" items="${verification_list}">
                     <tr>
                         <td>${verification.playerId}</td>
@@ -68,7 +71,10 @@
                         </td>
                     </tr>
                 </c:forEach>
+                </tbody>
             </table>
+            <div class="holder"></div>
         </section>
     </section>
 </main>
+<script src="${pageContext.request.contextPath}/resources/js/manage_verification.js"></script>

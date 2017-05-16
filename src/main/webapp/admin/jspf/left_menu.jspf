@@ -1,7 +1,7 @@
 <nav class="left-menu">
     <ul>
-        <li><a href="${pageContext.request.contextPath}/controller?command=goto_admin">
-            <fmt:message key="leftmenu.admin.tasks"/></a></li>
+        <%--<li><a href="${pageContext.request.contextPath}/controller?command=goto_admin">--%>
+            <%--<fmt:message key="leftmenu.admin.tasks"/></a></li>--%>
         <li><a href="${pageContext.request.contextPath}/controller?command=goto_manage_news">
             <fmt:message key="leftmenu.admin.news"/></a></li>
         <li><a href="${pageContext.request.contextPath}/controller?command=goto_manage_verification">
@@ -14,7 +14,7 @@
             <fmt:message key="leftmenu.admin.streaks"/></a></li>
         <li><a href="${pageContext.request.contextPath}/controller?command=goto_manage_loans">
             <fmt:message key="leftmenu.admin.loans"/></a></li>
-        <li><a href="${pageContext.request.contextPath}/controller?command=goto_stats_report">
-            <fmt:message key="leftmenu.admin.stats"/></a></li>
+        <%--<li><a href="${pageContext.request.contextPath}/controller?command=goto_stats_report">--%>
+            <%--<fmt:message key="leftmenu.admin.stats"/></a></li>--%>
     </ul>
 </nav>

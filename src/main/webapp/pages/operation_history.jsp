@@ -35,11 +35,14 @@
                 <c:when test="${transactions != null}">
                     <table class="custom-table">
                         <caption><fmt:message key="history.table.transactions.caption"/></caption>
+                        <thead>
                         <tr>
                             <th><fmt:message key="history.table.transactions.date"/></th>
                             <th><fmt:message key="history.table.transactions.amount"/></th>
                             <th><fmt:message key="history.table.transactions.type"/></th>
                         </tr>
+                        </thead>
+                        <tbody id="transactionItemContainer">
                         <c:forEach var="transaction" items="${requestScope.transactions}">
                             <tr>
                                 <td>${j:formatDateTime(transaction.date, "dd.MM.yyyy HH:mm")}</td>
@@ -48,11 +51,14 @@
                                         key="transactions.type.${transaction.type.toString().toLowerCase()}"/></td>
                             </tr>
                         </c:forEach>
+                        </tbody>
                     </table>
+                    <div class="transactionHolder"></div>
                 </c:when>
                 <c:when test="${loans != null}">
                     <table class="custom-table">
                         <caption><fmt:message key="history.table.loans.caption"/></caption>
+                        <thead>
                         <tr>
                             <th><fmt:message key="history.table.loans.acquire"/></th>
                             <th><fmt:message key="history.table.loans.expire"/></th>
@@ -60,6 +66,8 @@
                             <th><fmt:message key="history.table.loans.amount"/></th>
                             <th><fmt:message key="history.table.loans.rest"/></th>
                         </tr>
+                        </thead>
+                        <tbody id="itemContainer">
                         <c:forEach var="loan" items="${requestScope.loans}">
                             <tr>
                                 <td>${j:formatDate(loan.acquire, "dd.MM.yyyy")}</td>
@@ -69,11 +77,14 @@
                                 <td>${loan.rest}</td>
                             </tr>
                         </c:forEach>
+                        </tbody>
                     </table>
+                    <div class="holder"></div>
                 </c:when>
                 <c:when test="${streaks != null}">
-                    <table class="custom-table">
+                    <table class="custom-table" id="streakItemContainer">
                         <caption><fmt:message key="history.table.streaks.caption"/></caption>
+                        <thead>
                         <tr>
                             <th class="col-date" rowspan="2"><fmt:message key="history.table.streaks.date"/></th>
                             <th class="col-attr" rowspan="2"></th>
@@ -85,6 +96,7 @@
                                 <th class="col-roll">${i}</th>
                             </c:forEach>
                         </tr>
+                        </thead>
                         <c:forEach var="streak" items="${streaks}">
                             <tbody>
                             <c:choose>
@@ -140,8 +152,10 @@
                             </tbody>
                         </c:forEach>
                     </table>
+                    <div class="streakHolder"></div>
                 </c:when>
             </c:choose>
         </section>
     </section>
 </main>
+<script src="${pageContext.request.contextPath}/resources/js/operation_history.js"></script>

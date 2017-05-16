@@ -125,7 +125,7 @@ public class QuestionService extends AbstractService {
             return null;
         }
         List<Question> questionList = null;
-        String         adminPattern = showMy ? String.valueOf(admin.getId()) : EMPTY_STRING;
+        String         adminPattern = showMy ? String.valueOf(admin.getId()) : PERCENT;
         String         topicPattern = (topic != null ? topic.trim().toLowerCase() : EMPTY_STRING) + PERCENT;
         String         monthPattern = (month != null ? month.trim() : EMPTY_STRING) + PERCENT;
         QuestionDAO    questionDAO  = daoHelper.getQuestionDAO();

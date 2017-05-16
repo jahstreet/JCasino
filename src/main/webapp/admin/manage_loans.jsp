@@ -43,6 +43,7 @@
             <c:if test="${loans != null}">
                 <table class="custom-table">
                     <caption><fmt:message key="history.table.loans.caption"/></caption>
+                    <thead>
                     <tr>
                         <th><fmt:message key="history.table.loans.player.id"/></th>
                         <th><fmt:message key="history.table.loans.acquire"/></th>
@@ -51,6 +52,8 @@
                         <th><fmt:message key="history.table.loans.amount"/></th>
                         <th><fmt:message key="history.table.loans.rest"/></th>
                     </tr>
+                    </thead>
+                    <tbody id="itemContainer">
                     <c:forEach var="loan" items="${requestScope.loans}">
                         <tr>
                             <td>
@@ -67,9 +70,11 @@
                             <td>${loan.rest}</td>
                         </tr>
                     </c:forEach>
+                    </tbody>
                 </table>
+                <div class="holder"></div>
             </c:if>
         </section>
-
     </section>
 </main>
+<script src="${pageContext.request.contextPath}/resources/js/manage_loan.js"></script>

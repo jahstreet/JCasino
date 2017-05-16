@@ -4,7 +4,7 @@
         <%@include file="jspf/user_block.jspf" %>
     </section>
     <section class="admin-tasks cols col-8">
-
-
+        <%--stub--%>
+        <jsp:forward page="${pageContext.request.contextPath}/admin/manage_news.jsp"/>
     </section>
 </main>

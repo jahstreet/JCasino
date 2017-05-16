@@ -25,7 +25,7 @@ class NewsDAOImpl extends NewsDAO {
      * Selects all news.
      */
     private static final String SQL_SELECT_ALL    = "SELECT id, date, header, text, admin_id " +
-                                                    "FROM news";
+                                                    "FROM news ORDER BY date DESC";
     /**
      * Selects definite news by its id.
      */

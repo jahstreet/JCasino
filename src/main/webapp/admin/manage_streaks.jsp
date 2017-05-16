@@ -25,8 +25,9 @@
         </form>
         <section class="table-section">
             <c:if test="${streaks != null}">
-                <table class="custom-table">
+                <table class="custom-table" id="itemContainer">
                     <caption><fmt:message key="history.table.streaks.caption"/></caption>
+                    <thead>
                     <tr>
                         <th class="col-id" rowspan="2"><fmt:message key="history.table.streaks.player.id"/></th>
                         <th class="col-date" rowspan="2"><fmt:message key="history.table.streaks.date"/></th>
@@ -39,6 +40,7 @@
                             <th class="col-roll">${i}</th>
                         </c:forEach>
                     </tr>
+                    </thead>
                     <c:forEach var="streak" items="${streaks}">
                         <tbody>
                         <c:choose>
@@ -61,7 +63,8 @@
                                 <tr>
                                     <td><fmt:message key="history.table.streaks.offset"/></td>
                                     <c:forEach var="roll" items="${streak.rolls}">
-                                        <td><c:forEach var="offset" items="${roll.offset}"> ${offset} </c:forEach></td>
+                                        <td><c:forEach var="offset"
+                                                       items="${roll.offset}"> ${offset} </c:forEach></td>
                                     </c:forEach>
                                 </tr>
                                 <tr>
@@ -106,7 +109,9 @@
                         </tbody>
                     </c:forEach>
                 </table>
+                <div class="holder"></div>
             </c:if>
         </section>
     </section>
 </main>
+<script src="${pageContext.request.contextPath}/resources/js/manage_streak.js"></script>

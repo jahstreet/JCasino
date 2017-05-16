@@ -15,7 +15,8 @@
         </c:choose>
     </section>
     <section class="content cols col-8">
-        <ul>
+        <div class="holder"></div>
+        <ul id="itemContainer">
             <c:forEach var="news" items="${newsList}">
                 <li>
                     <details>
@@ -36,3 +37,4 @@
         </ul>
     </section>
 </main>
+<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>

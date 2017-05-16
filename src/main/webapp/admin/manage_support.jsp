@@ -68,6 +68,7 @@
             <section class="table-section">
                 <table class="custom-table">
                     <caption><fmt:message key="support.table.caption"/></caption>
+                    <thead>
                     <tr>
                         <th><fmt:message key="support.table.header.playerid"/></th>
                         <th><fmt:message key="support.table.header.date"/></th>
@@ -77,6 +78,8 @@
                         <th class="answer-header"><fmt:message key="support.table.header.answer"/></th>
                         <th class="satisfaction-header"><fmt:message key="support.table.header.satisfaction"/></th>
                     </tr>
+                    </thead>
+                    <tbody id="itemContainer">
                     <c:forEach var="question" items="${questionList}">
                         <tr>
                             <td>
@@ -114,8 +117,11 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    </tbody>
                 </table>
+                <div class="holder"></div>
             </section>
         </c:if>
     </section>
 </main>
+<script src="${pageContext.request.contextPath}/resources/js/manage_support.js"></script>

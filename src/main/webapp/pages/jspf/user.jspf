@@ -4,5 +4,4 @@
     <div class="custom-button">
         <a href="${pageContext.request.contextPath}/controller?command=logout"><fmt:message key="user.logout"/></a>
     </div>
-    <hr/>
 </div>

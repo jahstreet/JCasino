@@ -75,13 +75,16 @@ public class TransactionService extends AbstractService {
     public List<Transaction> takeTransactionList(String filterByType, String month, boolean sortByAmount) {
         List<Transaction> transactionList = null;
         String            monthPattern    = (month != null ? month.trim() : EMPTY_STRING) + PERCENT;
-        TransactionDAO    transactionDAO  = daoHelper.getTransactionDAO();
+        if (filterByType == null || filterByType.trim().isEmpty()) {
+            filterByType = ALL;
+        }
+        TransactionDAO transactionDAO = daoHelper.getTransactionDAO();
         try {
             transactionList = transactionDAO.takeTransactionList(monthPattern);
         } catch (DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
         }
-        if (filterByType != null && !ALL.equals(filterByType.trim()) && !filterByType.trim().isEmpty()) {
+        if (!ALL.equals(filterByType.trim())) {
             filterByType(transactionList, Transaction.TransactionType.valueOf(filterByType.trim().toUpperCase()));
         }
         if (sortByAmount) {
