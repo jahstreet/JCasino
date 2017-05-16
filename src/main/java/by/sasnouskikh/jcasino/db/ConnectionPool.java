@@ -153,16 +153,12 @@ public class ConnectionPool {
      * auto-commit of connection to true.
      *
      * @param connection {@link WrappedConnection} to return
-     * @throws ConnectionPoolException if {@link InterruptedException} occurred while putting {@link WrappedConnection}
-     *                                 to {@link #connections} or if {@link WrappedConnection} was lost, closed or
-     *                                 damaged
      */
-    public void returnConnection(WrappedConnection connection) throws ConnectionPoolException {
+    public void returnConnection(WrappedConnection connection) {
         try {
             if (connection.isNull() || connection.isClosed() || !connection.isValid(VALIDATION_TIMEOUT)) {
                 connections.add(new WrappedConnection(url, login, password));
-                LOGGER.log(Level.ERROR, "Connection was lost but replaced by a new one.");
-                throw new ConnectionPoolException("Connection was lost while returning.");
+                LOGGER.log(Level.ERROR, "Connection was lost while returning but replaced by a new one.");
             }
             try {
                 if (!connection.getAutoCommit()) {
@@ -172,9 +168,9 @@ public class ConnectionPool {
                 connections.put(connection);
                 LOGGER.log(Level.DEBUG, "Connection was returned to pool. Current pool size: " + connections.size());
             } catch (SQLException e) {
-                throw new ConnectionPoolException("Exception while setting autoCommit to connection.");
+                LOGGER.log(Level.ERROR, "Exception while setting autoCommit to connection. " + e.getMessage());
             } catch (InterruptedException e) {
-                throw new ConnectionPoolException("Putting connection back into pool was interrupted.");
+                LOGGER.log(Level.ERROR, "Putting connection back into pool was interrupted." + e.getMessage());
             }
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Database access error occurred.", e);

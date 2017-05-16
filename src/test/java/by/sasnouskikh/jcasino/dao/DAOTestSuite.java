@@ -13,7 +13,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({QuestionDAOTest.class})//LoanDAOTest.class, NewsDAOTest.class, PlayerDAOTest.class
+@Suite.SuiteClasses({LoanDAOTest.class, NewsDAOTest.class, PlayerDAOTest.class, QuestionDAOTest.class,
+                     StreakDAOTest.class, TransactionDAOTest.class, UserDAOTest.class})
 public class DAOTestSuite {
 
     private static final String DB_PROPERTIES = "database";
@@ -32,6 +33,7 @@ public class DAOTestSuite {
         instance.destroyPool();
         instance = null;
     }
+
 
     private static void resetDatabase() throws ConnectionPoolException, SQLException {
         try (WrappedConnection conn = instance.takeConnection()) {

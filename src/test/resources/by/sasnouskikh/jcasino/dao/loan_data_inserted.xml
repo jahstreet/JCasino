@@ -23,6 +23,10 @@
           amount_paid="200.00"/>
     <loan player_id="101" amount="500.00" acquire="2017-03-25" expire="2017-04-25" percent="20.00"
           amount_paid="400.00"/>
+
+    <loan player_id="102" amount="500.00" acquire="2017-04-15" expire="2017-05-15" percent="20.00"
+          amount_paid="500.00"/>
+
     <loan player_id="101" amount="200.00" acquire="2017-03-25" expire="2017-04-25" percent="20.00"
           amount_paid="0.00"/>
 

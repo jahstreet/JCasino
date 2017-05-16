@@ -43,27 +43,6 @@ public class WrappedConnection implements AutoCloseable {
     }
 
     /**
-     * Wraps {@link Connection#getAutoCommit()} method.
-     *
-     * @return the current state of wrapped <code>Connection</code> object's auto-commit mode
-     * @throws SQLException if a database access error occurs wrapped connection is closed
-     */
-    boolean getAutoCommit() throws SQLException {
-        return connection.getAutoCommit();
-    }
-
-    /**
-     * Wraps {@link Connection#setAutoCommit(boolean)} method.
-     *
-     * @param autoCommit auto-commit state of connection
-     * @throws SQLException if a database access error occurs, setAutoCommit(true) is called while participating in a
-     *                      distributed transaction, wrapped connection is closed
-     */
-    public void setAutoCommit(boolean autoCommit) throws SQLException {
-        connection.setAutoCommit(autoCommit);
-    }
-
-    /**
      * Wraps {@link Connection#createStatement()} method.
      *
      * @return a new default <code>Statement</code> object
@@ -77,17 +56,6 @@ public class WrappedConnection implements AutoCloseable {
             }
         }
         throw new SQLException("Connection or statement is null.");
-    }
-
-    /**
-     * Wraps {@link Connection#close()} method.
-     *
-     * @throws SQLException if a database access error occurs
-     */
-    void closeConnection() throws SQLException {
-        if (connection != null) {
-            connection.close();
-        }
     }
 
     /**
@@ -196,14 +164,42 @@ public class WrappedConnection implements AutoCloseable {
     }
 
     /**
-     * Returns this {@link WrappedConnection} to {@link ConnectionPool}.
+     * Wraps {@link Connection#getAutoCommit()} method.
      *
-     * @throws ConnectionPoolException if if {@link InterruptedException} occurred while putting {@link
-     *                                 WrappedConnection} to {@link ConnectionPool#connections} or if {@link
-     *                                 WrappedConnection} was lost, closed or damaged
+     * @return the current state of wrapped <code>Connection</code> object's auto-commit mode
+     * @throws SQLException if a database access error occurs wrapped connection is closed
+     */
+    boolean getAutoCommit() throws SQLException {
+        return connection.getAutoCommit();
+    }
+
+    /**
+     * Wraps {@link Connection#setAutoCommit(boolean)} method.
+     *
+     * @param autoCommit auto-commit state of connection
+     * @throws SQLException if a database access error occurs, setAutoCommit(true) is called while participating in a
+     *                      distributed transaction, wrapped connection is closed
+     */
+    public void setAutoCommit(boolean autoCommit) throws SQLException {
+        connection.setAutoCommit(autoCommit);
+    }
+
+    /**
+     * Wraps {@link Connection#close()} method.
+     *
+     * @throws SQLException if a database access error occurs
+     */
+    void closeConnection() throws SQLException {
+        if (connection != null) {
+            connection.close();
+        }
+    }
+
+    /**
+     * Returns this {@link WrappedConnection} to {@link ConnectionPool}.
      */
     @Override
-    public void close() throws ConnectionPoolException {
+    public void close() {
         ConnectionPool.getInstance().returnConnection(this);
     }
 }

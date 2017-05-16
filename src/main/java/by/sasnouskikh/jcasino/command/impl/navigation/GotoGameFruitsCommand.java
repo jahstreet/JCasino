@@ -4,11 +4,11 @@ import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
-import by.sasnouskikh.jcasino.logic.StreakLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.PlayerService;
+import by.sasnouskikh.jcasino.service.StreakService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,57 +27,69 @@ public class GotoGameFruitsCommand implements Command {
     /**
      * <p>Provides navigating to game page.
      * <p>Initializes if it is necessary game-mode, user balance and other attributes of
-     * {@link HttpServletRequest} and {@link HttpSession} due to application logic.</p>
+     * {@link HttpServletRequest} and {@link HttpSession} due to application service.</p>
      * <p>Navigates to {@link PageNavigator#FORWARD_PAGE_GAME_FRUITS}.</p>
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see ConfigConstant
-     * @see PlayerLogic#updateAccountInfo(Player)
-     * @see StreakLogic#generateStreak()
-     * @see StreakLogic#generateStreak(int)
+     * @see PlayerService#updateAccountInfo(Player)
+     * @see StreakService#generateStreak()
+     * @see StreakService#generateStreak(int)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         QueryManager.logQuery(request);
-        HttpSession session = request.getSession();
-        Player      player  = (Player) session.getAttribute(ATTR_PLAYER);
-        Streak      streak  = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
-        BigDecimal  money   = BigDecimal.ZERO;
-        boolean     demo    = session.getAttribute(ATTR_DEMO_PLAY) != null;
-        if (player != null) {
-            PlayerLogic.updateAccountInfo(player);
-            if (player.getAccount() != null) {
-                BigDecimal balance = player.getAccount().getBalance();
-                if (balance != null) {
-                    money = balance;
+        HttpSession    session        = request.getSession();
+        String         locale         = (String) session.getAttribute(ATTR_LOCALE);
+        MessageManager messageManager = MessageManager.getMessageManager(locale);
+        Player         player         = (Player) session.getAttribute(ATTR_PLAYER);
+        Streak         streak         = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
+        BigDecimal     money;
+        boolean demo = request.getAttribute(ATTR_DEMO_PLAY) != null || player == null
+                       || session.getAttribute(ATTR_DEMO_PLAY) != null;
+
+        if (!demo) {
+            try (PlayerService playerService = new PlayerService();
+                 StreakService streakService = new StreakService()) {
+                if (playerService.updateAccountInfo(player)) {
+                    money = player.getAccount().getBalance();
+                } else {
+                    request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
+                    return PageNavigator.FORWARD_PREV_QUERY;
                 }
-            }
-            if (demo || streak == null) {
-                streak = StreakLogic.generateStreak(player.getId());
-                session.setAttribute(ATTR_DEMO_PLAY, null);
+                if (streak == null) {
+                    streak = streakService.generateStreak(player.getId());
+                    if (streak == null) {
+                        request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
+                        return PageNavigator.FORWARD_PREV_QUERY;
+                    }
+                }
             }
         } else {
             money = DEMO_START_MONEY;
             if (streak == null) {
-                streak = StreakLogic.generateStreak();
-            }
-            if (!demo) {
-                session.setAttribute(ATTR_DEMO_PLAY, ATTR_DEMO_PLAY);
+                streak = StreakService.generateStreak();
             }
         }
+
         String streakInfo;
         if (streak.getRolls().size() < BETS_IN_STREAK) {
             streakInfo = streak.getRollMD5();
         } else {
             streakInfo = streak.getRoll();
         }
+
         request.setAttribute(ATTR_STREAK_INFO, streakInfo);
         request.setAttribute(ATTR_MONEY_INPUT, money.toPlainString());
+        if (demo) {
+            session.setAttribute(ATTR_DEMO_PLAY, true);
+        }
         session.setAttribute(ATTR_CURRENT_STREAK, streak);
         return PageNavigator.FORWARD_PAGE_GAME_FRUITS;
+
     }
 }

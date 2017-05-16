@@ -51,6 +51,7 @@ public abstract class AbstractDAOTest {
         DatabaseConfig config = connection.getConfig();
         config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
         config.setProperty(DatabaseConfig.PROPERTY_METADATA_HANDLER, new MySqlMetadataHandler());
+        config.setProperty(DatabaseConfig.PROPERTY_ESCAPE_PATTERN, "`");
 
         builder = new FlatXmlDataSetBuilder();
         builder.setColumnSensing(true);

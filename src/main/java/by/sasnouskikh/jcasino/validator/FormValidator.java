@@ -1,17 +1,19 @@
 package by.sasnouskikh.jcasino.validator;
 
+import by.sasnouskikh.jcasino.entity.bean.PlayerStatus;
 import by.sasnouskikh.jcasino.entity.bean.Question;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
 import org.apache.commons.lang.StringUtils;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.ALL;
 
 /**
- * The class provides form input parameters sent with requests and other values validation logic.
+ * The class provides form input parameters sent with requests and other values validation service.
  *
  * @author Sasnouskikh Aliaksandr
  */
@@ -126,8 +128,14 @@ public class FormValidator {
         if (birthdate == null || birthdate.trim().isEmpty()) {
             return false;
         }
-        LocalDate date = LocalDate.parse(birthdate);
-        LocalDate now  = LocalDate.now();
+
+        LocalDate date;
+        try {
+            date = LocalDate.parse(birthdate);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        LocalDate now = LocalDate.now();
         return date.plusYears(18).isBefore(now) || date.plusYears(18).isEqual(now);
 
     }
@@ -153,21 +161,6 @@ public class FormValidator {
     }
 
     /**
-     * Checks if given string matches regular expression pattern.
-     *
-     * @param string string value
-     * @param regex  string regular expression
-     * @return true if string matches pattern is valid
-     * @see Pattern
-     * @see Matcher
-     */
-    private static boolean matchPattern(String string, String regex) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(string);
-        return matcher.matches();
-    }
-
-    /**
      * Validates string representation of support question topic.
      *
      * @param topic string representation of support question topic
@@ -176,7 +169,7 @@ public class FormValidator {
      */
     public static boolean validateTopic(String topic) {
         if (topic == null || topic.trim().isEmpty()) {
-            return false;
+            return true;
         }
         topic = topic.trim();
         for (Question.QuestionTopic questionTopic : Question.QuestionTopic.values()) {
@@ -205,8 +198,8 @@ public class FormValidator {
      * @return true if month is valid
      */
     public static boolean validateDateMonth(String month) {
-        return !(month == null || month.trim().isEmpty())
-               && matchPattern(month, DATE_MONTH_REGEX);
+        return month == null || month.trim().isEmpty()
+               || matchPattern(month, DATE_MONTH_REGEX);
     }
 
     /**
@@ -239,11 +232,30 @@ public class FormValidator {
      */
     public static boolean validateTransactionType(String type) {
         if (type == null || type.trim().isEmpty()) {
-            return false;
+            return true;
         }
         type = type.trim();
         for (Transaction.TransactionType t : Transaction.TransactionType.values()) {
             if (type.equalsIgnoreCase(t.toString()) || type.equals(ALL)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Validates string representation of {@link by.sasnouskikh.jcasino.entity.bean.PlayerStatus.StatusEnum} value.
+     *
+     * @param status string representation of {@link by.sasnouskikh.jcasino.entity.bean.PlayerStatus.StatusEnum} value
+     * @return true if value is valid
+     */
+    public static boolean validateAccountStatus(String status) {
+        if (status == null || status.trim().isEmpty()) {
+            return false;
+        }
+        status = status.trim();
+        for (PlayerStatus.StatusEnum s : PlayerStatus.StatusEnum.values()) {
+            if (status.equalsIgnoreCase(s.toString())) {
                 return true;
             }
         }
@@ -289,7 +301,22 @@ public class FormValidator {
      * @param source string representation of float number
      * @return true if source is valid
      */
-    public static boolean isFloat(String source) {
+    public static boolean validateFloatAmount(String source) {
         return source != null && matchPattern(source, AMOUNT_REGEX);
+    }
+
+    /**
+     * Checks if given string matches regular expression pattern.
+     *
+     * @param string string value
+     * @param regex  string regular expression
+     * @return true if string matches pattern is valid
+     * @see Pattern
+     * @see Matcher
+     */
+    private static boolean matchPattern(String string, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
     }
 }

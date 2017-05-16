@@ -3,10 +3,10 @@ package by.sasnouskikh.jcasino.command.impl.admin;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
-import by.sasnouskikh.jcasino.logic.TransactionLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.TransactionService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,12 +35,12 @@ public class ShowTransactionsCommand implements Command {
      * {@link PageNavigator#FORWARD_PAGE_MANAGE_TRANSACTIONS}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see TransactionLogic#takeTransactionList(String, String, boolean)
+     * @see TransactionService#takeTransactionList(String, String, boolean)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -55,11 +55,11 @@ public class ShowTransactionsCommand implements Command {
         String  month        = request.getParameter(PARAM_MONTH);
         boolean sortByAmount = request.getParameter(PARAM_SORT_BY_AMOUNT) != null;
 
-        if (type != null && !FormValidator.validateTransactionType(type)) {
+        if (!FormValidator.validateTransactionType(type)) {
             valid = false;
         }
 
-        if (month == null || month.trim().isEmpty() || FormValidator.validateDateMonth(month)) {
+        if (FormValidator.validateDateMonth(month)) {
             request.setAttribute(ATTR_MONTH_INPUT, month);
         } else {
             valid = false;
@@ -67,7 +67,10 @@ public class ShowTransactionsCommand implements Command {
 
         if (valid) {
             QueryManager.saveQueryToSession(request);
-            List<Transaction> transactionList = TransactionLogic.takeTransactionList(type, month, sortByAmount);
+            List<Transaction> transactionList;
+            try (TransactionService transactionService = new TransactionService()) {
+                transactionList = transactionService.takeTransactionList(type, month, sortByAmount);
+            }
             request.setAttribute(ATTR_TRANSACTIONS, transactionList);
             navigator = PageNavigator.FORWARD_PAGE_MANAGE_TRANSACTIONS;
         } else {

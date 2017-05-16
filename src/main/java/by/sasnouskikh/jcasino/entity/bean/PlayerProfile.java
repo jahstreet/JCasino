@@ -209,7 +209,7 @@ public class PlayerProfile extends Entity {
      * @see Cloneable
      */
     @Override
-    protected PlayerProfile clone() throws CloneNotSupportedException {
+    public PlayerProfile clone() throws CloneNotSupportedException {
         return (PlayerProfile) super.clone();
     }
 }

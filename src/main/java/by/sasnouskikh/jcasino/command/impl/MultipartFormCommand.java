@@ -5,11 +5,11 @@ import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.News;
 import by.sasnouskikh.jcasino.entity.bean.Player;
-import by.sasnouskikh.jcasino.logic.LogicException;
-import by.sasnouskikh.jcasino.logic.NewsLogic;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.NewsService;
+import by.sasnouskikh.jcasino.service.PlayerService;
+import by.sasnouskikh.jcasino.service.ServiceException;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -54,14 +54,14 @@ public class MultipartFormCommand implements Command {
      * documentation, validates them and passes further to Logic layer.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see NewsLogic#addNews(String, String, FileItem, Admin, String)
-     * @see NewsLogic#editNews(int, String, FileItem, String, Admin, String)
-     * @see PlayerLogic#uploadPassportScan(Player, FileItem, String)
+     * @see NewsService#addNews(String, String, FileItem, Admin, String)
+     * @see NewsService#editNews(int, String, FileItem, String, Admin, String)
+     * @see PlayerService#uploadPassportScan(Player, FileItem, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -110,14 +110,16 @@ public class MultipartFormCommand implements Command {
                         news = editNews(formItems, admin, uploadDir);
                     }
                     if (news != null) {
-                        request.getServletContext().setAttribute(CONTEXT_NEWSLIST, NewsLogic.takeNewsList());
+                        try (NewsService newsService = new NewsService()) {
+                            request.getServletContext().setAttribute(CONTEXT_NEWSLIST, newsService.takeNewsList());
+                        }
                         return PageNavigator.REDIRECT_GOTO_MANAGE_NEWS;
                     }
                 }
             }
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_MULTIPART_UPLOAD_ERROR));
             return PageNavigator.FORWARD_PREV_QUERY;
-        } catch (FileUploadException | LogicException e) {
+        } catch (FileUploadException | ServiceException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_MULTIPART_UPLOAD_ERROR));
             return PageNavigator.FORWARD_PREV_QUERY;
@@ -128,13 +130,15 @@ public class MultipartFormCommand implements Command {
         }
     }
 
-    private boolean uploadPassportScan(List<FileItem> formItems, Player player, String uploadDir) throws LogicException {
+    private boolean uploadPassportScan(List<FileItem> formItems, Player player, String uploadDir) throws ServiceException {
         boolean uploaded = false;
         for (FileItem item : formItems) {
             String fieldName = item.getFieldName();
             if (!item.isFormField()) {
                 if (PARAM_SCAN.equals(fieldName)) {
-                    uploaded = PlayerLogic.uploadPassportScan(player, item, uploadDir);
+                    try (PlayerService playerService = new PlayerService()) {
+                        uploaded = playerService.uploadPassportScan(player, item, uploadDir);
+                    }
                     break;
                 }
             }
@@ -142,7 +146,7 @@ public class MultipartFormCommand implements Command {
         return uploaded;
     }
 
-    private News addNews(List<FileItem> formItems, Admin admin, String uploadDir) throws LogicException, UnsupportedEncodingException {
+    private News addNews(List<FileItem> formItems, Admin admin, String uploadDir) throws ServiceException, UnsupportedEncodingException {
         String   header    = null;
         String   text      = null;
         FileItem newsImage = null;
@@ -168,10 +172,12 @@ public class MultipartFormCommand implements Command {
                 }
             }
         }
-        return valid ? NewsLogic.addNews(header, text, newsImage, admin, uploadDir) : null;
+        try (NewsService newsService = new NewsService()) {
+            return valid ? newsService.addNews(header, text, newsImage, admin, uploadDir) : null;
+        }
     }
 
-    private News editNews(List<FileItem> formItems, Admin admin, String uploadDir) throws UnsupportedEncodingException, LogicException {
+    private News editNews(List<FileItem> formItems, Admin admin, String uploadDir) throws UnsupportedEncodingException, ServiceException {
         String   header    = null;
         String   text      = null;
         FileItem newsImage = null;
@@ -206,6 +212,8 @@ public class MultipartFormCommand implements Command {
                 }
             }
         }
-        return valid ? NewsLogic.editNews(newsId, header, newsImage, text, admin, uploadDir) : null;
+        try (NewsService newsService = new NewsService()) {
+            return valid ? newsService.editNews(newsId, header, newsImage, text, admin, uploadDir) : null;
+        }
     }
 }

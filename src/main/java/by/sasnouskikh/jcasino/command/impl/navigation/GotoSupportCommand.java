@@ -4,10 +4,10 @@ import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.Question;
-import by.sasnouskikh.jcasino.logic.QuestionLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.QuestionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,11 +30,11 @@ public class GotoSupportCommand implements Command {
      * {@link HttpServletRequest#setAttribute(String, Object)}. Navigates to {@link PageNavigator#FORWARD_PAGE_SUPPORT}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
-     * @see QuestionLogic#takePlayerQuestions(int)
+     * @see QuestionService#takePlayerQuestions(int)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -44,7 +44,10 @@ public class GotoSupportCommand implements Command {
         Player player = (Player) session.getAttribute(ATTR_PLAYER);
 
         if (player != null) {
-            List<Question> questionList = QuestionLogic.takePlayerQuestions(player.getId());
+            List<Question> questionList;
+            try (QuestionService questionService = new QuestionService()) {
+                questionList = questionService.takePlayerQuestions(player.getId());
+            }
             request.setAttribute(ATTR_EMAIL_INPUT, player.getEmail());
             request.setAttribute(ATTR_QUESTION_LIST, questionList);
         }

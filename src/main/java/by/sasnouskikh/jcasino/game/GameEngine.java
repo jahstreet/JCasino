@@ -7,8 +7,8 @@ import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Roll;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
-import by.sasnouskikh.jcasino.logic.LogicException;
-import by.sasnouskikh.jcasino.logic.StreakLogic;
+import by.sasnouskikh.jcasino.service.ServiceException;
+import by.sasnouskikh.jcasino.service.StreakService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
 /**
- * The class provides main game logic and interface features support for slot-machine.
+ * The class provides main game service and interface features support for slot-machine.
  *
  * @author Sasnouskikh Aliaksandr
  */
@@ -52,7 +52,7 @@ public class GameEngine {
     }
 
     /**
-     * Provides logic of 'Spin' button of slot-machine while real money play mode is chosen. Builds next {@link Roll}
+     * Provides service of 'Spin' button of slot-machine while real money play mode is chosen. Builds next {@link Roll}
      * object of current streak due to input data and adds it to given {@link Streak} roll collection. Changes player
      * balance value at database due to roll result.
      *
@@ -61,33 +61,33 @@ public class GameEngine {
      * @param lines  current roll played lines state
      * @param bet    current roll 1 line bet
      * @return current roll result
-     * @throws LogicException if database connection error occurred during changing player balance
+     * @throws ServiceException if database connection error occurred during changing player balance
      * @see DAOHelper
      * @see PlayerDAO#changeBalance(int, BigDecimal, Transaction.TransactionType)
      * @see #countTotalBet(BigDecimal, boolean[])
      * @see #buildRoll(int[], int[], boolean[], BigDecimal)
-     * @see StreakLogic#parseCurrentRollArray(String, int)
+     * @see StreakService#parseCurrentRollArray(String, int)
      */
-    public static BigDecimal spin(Streak streak, int[] offset, boolean[] lines, BigDecimal bet) throws LogicException {
+    public static BigDecimal spin(Streak streak, int[] offset, boolean[] lines, BigDecimal bet) throws ServiceException {
         int        playerId = streak.getPlayerId();
         BigDecimal totalBet = countTotalBet(bet, lines);
-        Roll       roll     = buildRoll(StreakLogic.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet);
+        Roll       roll     = buildRoll(StreakService.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet);
         BigDecimal result   = roll.getResult();
         BigDecimal total    = result.subtract(totalBet);
         try (DAOHelper daoHelper = new DAOHelper()) {
             PlayerDAO playerDAO = daoHelper.getPlayerDAO();
             if (!playerDAO.changeBalance(playerId, total, Transaction.TransactionType.REPLENISH)) {
-                throw new LogicException("Database connection error while spinning.");
+                throw new ServiceException("Database connection error while spinning.");
             }
             streak.getRolls().add(roll);
-        } catch (ConnectionPoolException | DAOException e) {
+        } catch (DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
         }
         return total;
     }
 
     /**
-     * Provides logic of 'Spin' button of slot-machine while demo play mode is chosen. Builds next {@link Roll}
+     * Provides service of 'Spin' button of slot-machine while demo play mode is chosen. Builds next {@link Roll}
      * object of current streak due to input data and adds it to given {@link Streak} roll collection.
      *
      * @param streak current streak object
@@ -97,11 +97,11 @@ public class GameEngine {
      * @return current roll result
      * @see #countTotalBet(BigDecimal, boolean[])
      * @see #buildRoll(int[], int[], boolean[], BigDecimal)
-     * @see StreakLogic#parseCurrentRollArray(String, int)
+     * @see StreakService#parseCurrentRollArray(String, int)
      */
     public static BigDecimal spinDemo(Streak streak, int[] offset, boolean[] lines, BigDecimal bet) {
         BigDecimal totalBet = countTotalBet(bet, lines);
-        Roll       roll     = buildRoll(StreakLogic.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet);
+        Roll       roll     = buildRoll(StreakService.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet);
         BigDecimal result   = roll.getResult();
         BigDecimal total    = result.subtract(totalBet);
         streak.getRolls().add(roll);

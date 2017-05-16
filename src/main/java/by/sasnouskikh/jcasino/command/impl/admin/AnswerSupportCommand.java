@@ -4,10 +4,10 @@ import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.Question;
-import by.sasnouskikh.jcasino.logic.QuestionLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.QuestionService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,13 +37,13 @@ public class AnswerSupportCommand implements Command {
      * {@link PageNavigator#FORWARD_PAGE_ANSWER_SUPPORT}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see QuestionLogic#takeQuestion(int)
-     * @see QuestionLogic#answerSupport(Question, String, Admin, String)
+     * @see QuestionService#takeQuestion(int)
+     * @see QuestionService#answerSupport(Question, String, Admin, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -57,14 +57,12 @@ public class AnswerSupportCommand implements Command {
         boolean valid = true;
         Admin   admin = (Admin) session.getAttribute(ATTR_ADMIN);
 
-        String   questionIdString = request.getParameter(PARAM_ID);
-        String   answer           = request.getParameter(PARAM_ANSWER);
-        Question question         = null;
-        int      questionId;
+        String questionIdString = request.getParameter(PARAM_ID);
+        String answer           = request.getParameter(PARAM_ANSWER);
+        int    questionId       = 0;
 
         if (FormValidator.validateId(questionIdString)) {
             questionId = Integer.parseInt(questionIdString);
-            question = QuestionLogic.takeQuestion(questionId);
         } else {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_JSP)).append(MESSAGE_SEPARATOR);
             valid = false;
@@ -77,13 +75,16 @@ public class AnswerSupportCommand implements Command {
             valid = false;
         }
 
-        if (valid && question != null) {
-            if (QuestionLogic.answerSupport(question, answer, admin, locale)) {
-                navigator = PageNavigator.REDIRECT_GOTO_MANAGE_SUPPORT;
-            } else {
-                request.setAttribute(ATTR_QUESTION, question);
-                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_ANSWER_SUPPORT_ERROR));
-                navigator = PageNavigator.FORWARD_PAGE_ANSWER_SUPPORT;
+        if (valid) {
+            try (QuestionService questionService = new QuestionService()) {
+                Question question = questionService.takeQuestion(questionId);
+                if (questionService.answerSupport(question, answer, admin, locale)) {
+                    navigator = PageNavigator.REDIRECT_GOTO_MANAGE_SUPPORT;
+                } else {
+                    request.setAttribute(ATTR_QUESTION, question);
+                    request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_ANSWER_SUPPORT_ERROR));
+                    navigator = PageNavigator.FORWARD_PAGE_ANSWER_SUPPORT;
+                }
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());

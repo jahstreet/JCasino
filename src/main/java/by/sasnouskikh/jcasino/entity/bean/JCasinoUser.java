@@ -18,10 +18,6 @@ public class JCasinoUser extends Entity {
      */
     private int       id;
     /**
-     * User password encrypted with MD5 encryptor to login the system.
-     */
-    private String    password;
-    /**
      * User e-mail used to login the system and other features.
      */
     private String    email;
@@ -82,17 +78,6 @@ public class JCasinoUser extends Entity {
     }
 
     /**
-     * Instance constructor.
-     *
-     * @param password user password encrypted by MD5 encryptor
-     * @param email    user e-mail
-     */
-    public JCasinoUser(String password, String email) {
-        this.password = password;
-        this.email = email;
-    }
-
-    /**
      * {@link #id} getter.
      *
      * @return {@link #id} value
@@ -108,24 +93,6 @@ public class JCasinoUser extends Entity {
      */
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     * {@link #password} getter.
-     *
-     * @return {@link #password} value
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * {@link #password} setter.
-     *
-     * @param password user password encrypted by MD5 encryptor
-     */
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     /**
@@ -198,7 +165,6 @@ public class JCasinoUser extends Entity {
         }
         JCasinoUser user = (JCasinoUser) o;
         return id == user.id &&
-               Objects.equals(password, user.password) &&
                Objects.equals(email, user.email) &&
                role == user.role &&
                Objects.equals(registrationDate, user.registrationDate);
@@ -212,7 +178,7 @@ public class JCasinoUser extends Entity {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(id, password, email, role, registrationDate);
+        return Objects.hash(id, email, role, registrationDate);
     }
 
     /**
@@ -223,7 +189,6 @@ public class JCasinoUser extends Entity {
     @Override
     public String toString() {
         return "JCasinoUser{" + "id=" + id +
-               ", password='" + password + '\'' +
                ", email='" + email + '\'' +
                ", role=" + role +
                ", registrationDate=" + registrationDate +

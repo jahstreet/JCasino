@@ -128,45 +128,4 @@ public class DumpServerDataServlet extends HttpServlet {
             fis.close();
         }
     }
-
-//    private void unZip(String zipFilePath) throws IOException {
-//        File   zipFile     = new File(zipFilePath);
-//        String zipFileName = zipFile.getName();
-//        String folderName = zipFileName.contains(DOT) ?
-//                            zipFile.getParent() + File.separator + zipFileName.split("\\.")[0] :
-//                            zipFile.getParent() + File.separator + zipFileName;
-//        File folder          = new File(folderName);
-//        int  folderNameIndex = 0;
-//        while (folder.exists()) {
-//            folder = new File(folderName + folderNameIndex);
-//            folderNameIndex++;
-//        }
-//        ZipInputStream zis      = new ZipInputStream(new FileInputStream(zipFile));
-//        ZipEntry       zipEntry = zis.getNextEntry();
-//        while (zipEntry != null) {
-//            String fileName = zipEntry.getName();
-//            File   newFile  = new File(folder.getAbsolutePath() + File.separator + fileName);
-////            if (newFile.isDirectory()) {
-////                System.out.println("dir unzip : " + newFile.getAbsolutePath());
-////                unZip(newFile.getAbsolutePath());
-////                continue;
-////            }
-//            System.out.println("file unzip : " + newFile.getAbsolutePath());
-//            File parentFolder = new File(newFile.getParent());
-//            if (!parentFolder.exists()) {
-//                parentFolder.mkdirs();
-//            }
-//            FileOutputStream fos    = new FileOutputStream(newFile);
-//            byte[]           buffer = new byte[1024];
-//            int              bytesIn;
-//            while (zis.available() == 1 && (bytesIn = zis.read(buffer)) > 0) {
-//                fos.write(buffer, 0, bytesIn);
-//            }
-//            fos.flush();
-//            fos.close();
-//            zipEntry = zis.getNextEntry();
-//        }
-//        zis.closeEntry();
-//        zis.close();
-//    }
 }

@@ -30,7 +30,7 @@ public class Admin extends JCasinoUser {
      * @see Cloneable
      */
     @Override
-    protected Admin clone() throws CloneNotSupportedException {
+    public Admin clone() throws CloneNotSupportedException {
         return (Admin) super.clone();
     }
 

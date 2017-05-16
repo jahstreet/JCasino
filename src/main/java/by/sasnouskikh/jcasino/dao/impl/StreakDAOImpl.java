@@ -8,7 +8,7 @@ import by.sasnouskikh.jcasino.db.WrappedConnection;
 import by.sasnouskikh.jcasino.entity.bean.Roll;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.manager.JCasinoEncryptor;
-import by.sasnouskikh.jcasino.logic.StreakLogic;
+import by.sasnouskikh.jcasino.service.StreakService;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -254,9 +254,9 @@ class StreakDAOImpl extends StreakDAO {
             streak.setLines(resultSet.getString(LINES));
             streak.setBet(resultSet.getString(BET));
             streak.setResult(resultSet.getString(RESULT));
-            ArrayDeque<Roll> rolls = StreakLogic.buildRollList(streak);
+            ArrayDeque<Roll> rolls = StreakService.buildRollList(streak);
             streak.setRolls(rolls);
-            streak.setTotal(StreakLogic.countStreakTotal(rolls));
+            streak.setTotal(StreakService.countStreakTotal(rolls));
         }
         return streak;
     }

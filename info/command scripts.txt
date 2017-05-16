@@ -33,3 +33,9 @@ port:5432
 
 version: 9.6.1
 postgre db url: postgres://grlfbzwoldljum:36762cf737e133ac2c548a63f5d0192f7759341419beedd39a40f100cd6ccea9@ec2-23-23-222-147.compute-1.amazonaws.com:5432/d374qras0dcffv
+
+
+
+lsof -n -i:8080 | grep LISTEN
+sudo lsof -i :8080
+sudo kill -9 440(440 - PID number)

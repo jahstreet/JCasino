@@ -3,7 +3,7 @@ package by.sasnouskikh.jcasino.command.impl;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
+import by.sasnouskikh.jcasino.service.PlayerService;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
@@ -35,7 +35,7 @@ public class SendEmailCodeCommand implements Command {
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see PlayerLogic#sendEmailCode(Player, String)
+     * @see PlayerService#sendEmailCode(Player, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -47,7 +47,7 @@ public class SendEmailCodeCommand implements Command {
 
         Player player = (Player) session.getAttribute(ATTR_PLAYER);
 
-        if (PlayerLogic.sendEmailCode(player, locale)) {
+        if (PlayerService.sendEmailCode(player, locale)) {
             navigator = PageNavigator.REDIRECT_GOTO_EMAIL_VERIFICATION;
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_EMAILCODE_SEND_ERROR));

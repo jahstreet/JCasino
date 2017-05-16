@@ -33,6 +33,41 @@ public class DAOHelper implements AutoCloseable {
     private WrappedConnection connection;
 
     /**
+     * LoanDAO instance.
+     */
+    private LoanDAO loanDAO;
+
+    /**
+     * NewsDAO instance.
+     */
+    private NewsDAO newsDAO;
+
+    /**
+     * PlayerDAO instance.
+     */
+    private PlayerDAO playerDAO;
+
+    /**
+     * QuestionDAO instance.
+     */
+    private QuestionDAO questionDAO;
+
+    /**
+     * StreakDAO instance.
+     */
+    private StreakDAO streakDAO;
+
+    /**
+     * TransactionDAO instance.
+     */
+    private TransactionDAO transactionDAO;
+
+    /**
+     * UserDAO instance.
+     */
+    private UserDAO userDAO;
+
+    /**
      * Constructs DAOHelper object by taking {@link WrappedConnection} object from {@link ConnectionPool} collection.
      *
      * @see ConnectionPool
@@ -61,7 +96,10 @@ public class DAOHelper implements AutoCloseable {
      * @see by.sasnouskikh.jcasino.dao.AbstractDAO#AbstractDAO(WrappedConnection)
      */
     public PlayerDAO getPlayerDAO() {
-        return new PlayerDAOImpl(connection);
+        if (playerDAO == null) {
+            playerDAO = new PlayerDAOImpl(connection);
+        }
+        return playerDAO;
     }
 
     /**
@@ -71,65 +109,82 @@ public class DAOHelper implements AutoCloseable {
      * @see by.sasnouskikh.jcasino.dao.AbstractDAO#AbstractDAO(WrappedConnection)
      */
     public UserDAO getUserDAO() {
-        return new UserDAOImpl(connection);
+        if (userDAO == null) {
+            userDAO = new UserDAOImpl(connection);
+        }
+        return userDAO;
     }
 
     /**
-     * Simple factory method to create {@link NewsDAO} object.
+     * Getter of {@link #newsDAO} object with lazy initialization.
      *
      * @return {@link NewsDAO} object initialized with {@link DAOHelper#connection} field.
      * @see by.sasnouskikh.jcasino.dao.AbstractDAO#AbstractDAO(WrappedConnection)
      */
     public NewsDAO getNewsDAO() {
-        return new NewsDAOImpl(connection);
+        if (newsDAO == null) {
+            newsDAO = new NewsDAOImpl(connection);
+        }
+        return newsDAO;
     }
 
     /**
-     * Simple factory method to create {@link TransactionDAO} object.
+     * Getter of {@link #transactionDAO} object with lazy initialization.
      *
      * @return {@link TransactionDAO} object initialized with {@link DAOHelper#connection} field.
      * @see by.sasnouskikh.jcasino.dao.AbstractDAO#AbstractDAO(WrappedConnection)
      */
     public TransactionDAO getTransactionDAO() {
-        return new TransactionDAOImpl(connection);
+        if (transactionDAO == null) {
+            transactionDAO = new TransactionDAOImpl(connection);
+        }
+        return transactionDAO;
     }
 
     /**
-     * Simple factory method to create {@link StreakDAO} object.
+     * Getter of {@link #streakDAO} object with lazy initialization.
      *
      * @return {@link StreakDAO} object initialized with {@link DAOHelper#connection} field.
      * @see by.sasnouskikh.jcasino.dao.AbstractDAO#AbstractDAO(WrappedConnection)
      */
     public StreakDAO getStreakDAO() {
-        return new StreakDAOImpl(connection);
+        if (streakDAO == null) {
+            streakDAO = new StreakDAOImpl(connection);
+        }
+        return streakDAO;
     }
 
     /**
-     * Simple factory method to create {@link LoanDAO} object.
+     * Getter of {@link #loanDAO} object with lazy initialization.
      *
      * @return {@link LoanDAO} object initialized with {@link DAOHelper#connection} field.
      * @see by.sasnouskikh.jcasino.dao.AbstractDAO#AbstractDAO(WrappedConnection)
      */
     public LoanDAO getLoanDAO() {
-        return new LoanDAOImpl(connection);
+        if (loanDAO == null) {
+            loanDAO = new LoanDAOImpl(connection);
+        }
+        return loanDAO;
     }
 
     /**
-     * Simple factory method to create {@link QuestionDAO} object.
+     * Getter of {@link #questionDAO} object with lazy initialization.
      *
      * @return {@link QuestionDAO} object initialized with {@link DAOHelper#connection} field.
      * @see by.sasnouskikh.jcasino.dao.AbstractDAO#AbstractDAO(WrappedConnection)
      */
     public QuestionDAO getQuestionDAO() {
-        return new QuestionDAOImpl(connection);
+        if (questionDAO == null) {
+            questionDAO = new QuestionDAOImpl(connection);
+        }
+        return questionDAO;
     }
 
     /**
      * Starts transaction for multiple SQL queries.
      *
-     * @throws SQLException if a database access error occurs,
-     *                      setAutoCommit(true) is called while participating in a distributed transaction,
-     *                      or this method is called on a closed connection
+     * @throws SQLException if a database access error occurs, setAutoCommit(true) is called while participating in a
+     *                      distributed transaction, or this method is called on a closed connection
      * @see WrappedConnection#setAutoCommit(boolean)
      */
     public void beginTransaction() throws SQLException {
@@ -139,9 +194,8 @@ public class DAOHelper implements AutoCloseable {
     /**
      * Commits database changes made during transaction.
      *
-     * @throws SQLException if a database access error occurs,
-     *                      this method is called while participating in a distributed transaction,
-     *                      if this method is called on a closed connection or this
+     * @throws SQLException if a database access error occurs, this method is called while participating in a
+     *                      distributed transaction, if this method is called on a closed connection or this
      *                      <code>Connection</code> object is in auto-commit mode
      * @see WrappedConnection#commit()
      */
@@ -152,9 +206,8 @@ public class DAOHelper implements AutoCloseable {
     /**
      * Rollbacks database changes made during transaction.
      *
-     * @throws SQLException if a database access error occurs,
-     *                      this method is called while participating in a distributed transaction,
-     *                      this method is called on a closed connection or this
+     * @throws SQLException if a database access error occurs, this method is called while participating in a
+     *                      distributed transaction, this method is called on a closed connection or this
      *                      <code>Connection</code> object is in auto-commit mode
      * @see WrappedConnection#rollback()
      */
@@ -164,13 +217,9 @@ public class DAOHelper implements AutoCloseable {
 
     /**
      * Returns {@link #connection} to {@link ConnectionPool}.
-     *
-     * @throws ConnectionPoolException if if {@link InterruptedException} occurred while putting
-     *                                 {@link WrappedConnection} to {@link ConnectionPool#connections} or
-     *                                 if {@link WrappedConnection} was lost, closed or damaged
      */
     @Override
-    public void close() throws ConnectionPoolException {
+    public void close() {
         ConnectionPool.getInstance().returnConnection(connection);
         connection = null;
     }

@@ -162,7 +162,7 @@ public class Player extends JCasinoUser {
      * @see Cloneable
      */
     @Override
-    protected Player clone() throws CloneNotSupportedException {
+    public Player clone() throws CloneNotSupportedException {
         Player clone = (Player) super.clone();
         clone.setProfile(profile.clone());
         clone.setAccount(account.clone());

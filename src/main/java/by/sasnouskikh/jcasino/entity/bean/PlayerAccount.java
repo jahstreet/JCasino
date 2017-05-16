@@ -160,7 +160,7 @@ public class PlayerAccount extends Entity {
      * @see Cloneable
      */
     @Override
-    protected PlayerAccount clone() throws CloneNotSupportedException {
+    public PlayerAccount clone() throws CloneNotSupportedException {
         PlayerAccount clone = (PlayerAccount) super.clone();
         clone.setStatus(status.clone());
         clone.setCurrentLoan(currentLoan.clone());

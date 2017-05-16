@@ -321,7 +321,7 @@ public class Question extends Entity {
      * @see Cloneable
      */
     @Override
-    protected Question clone() throws CloneNotSupportedException {
+    public Question clone() throws CloneNotSupportedException {
         return (Question) super.clone();
     }
 }

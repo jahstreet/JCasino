@@ -2,10 +2,10 @@ package by.sasnouskikh.jcasino.command.impl;
 
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.PlayerService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,12 +35,12 @@ public class RegisterCommand implements Command {
      * and navigates to {@link PageNavigator#FORWARD_PAGE_REGISTER}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see PlayerLogic#registerPlayer(String, String, String, String, String, String, String, String, String)
+     * @see PlayerService#registerPlayer(String, String, String, String, String, String, String, String, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -126,11 +126,13 @@ public class RegisterCommand implements Command {
         }
 
         if (valid) {
-            if (PlayerLogic.registerPlayer(email, password, fName, mName, lName, birthDate, passport, question, answer)) {
-                navigator = PageNavigator.REDIRECT_GOTO_INDEX;
-            } else {
-                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_EMAIL_EXIST));
-                navigator = PageNavigator.FORWARD_PAGE_REGISTER;
+            try (PlayerService playerService = new PlayerService()) {
+                if (playerService.registerPlayer(email, password, fName, mName, lName, birthDate, passport, question, answer)) {
+                    navigator = PageNavigator.REDIRECT_GOTO_INDEX;
+                } else {
+                    request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_EMAIL_EXIST));
+                    navigator = PageNavigator.FORWARD_PAGE_REGISTER;
+                }
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());

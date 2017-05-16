@@ -54,7 +54,7 @@ class LoanDAOImpl extends LoanDAO {
                                                                  "WHERE player_id=? AND acquire LIKE ? " +
                                                                  "ORDER BY expire DESC";
     /**
-     * Selects current unpaid loans of definite player. Application logic implies that result should be 1 loan.
+     * Selects current unpaid loans of definite player. Application service implies that result should be 1 loan.
      */
     private static final String SQL_SELECT_PLAYER_CURRENT      = "SELECT id, player_id, amount, acquire, expire, percent, amount-amount_paid AS rest " +
                                                                  "FROM loan " +

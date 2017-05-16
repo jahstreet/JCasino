@@ -2,6 +2,7 @@ package by.sasnouskikh.jcasino.controller;
 
 import by.sasnouskikh.jcasino.command.ajax.AjaxCommand;
 import by.sasnouskikh.jcasino.command.ajax.AjaxCommandFactory;
+import by.sasnouskikh.jcasino.manager.MessageManager;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -12,9 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
 
-import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_ERROR_MESSAGE;
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
 /**
  * The class provides controller for AJAX requests at MVC pattern of application.
@@ -25,21 +25,6 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_ERROR_MESSAGE;
  */
 @WebServlet(name = "AjaxController", urlPatterns = {"/ajax"})
 public class AjaxController extends HttpServlet {
-
-    /**
-     * Processes request sent by POST method.
-     *
-     * @param request  request from client to get parameters to work with
-     * @param response response to client with parameters to work with on client side
-     * @throws IOException      if an input or output error is detected when the servlet handles the request
-     * @throws ServletException if the request could not be handled
-     * @see HttpServletRequest
-     * @see HttpServletResponse
-     * @see #processRequest(HttpServletRequest, HttpServletResponse)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
 
     /**
      * Processes request sent by GET method.
@@ -53,6 +38,20 @@ public class AjaxController extends HttpServlet {
      * @see #processRequest(HttpServletRequest, HttpServletResponse)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
+
+    /**
+     * Processes request sent by POST method.
+     *
+     * @param request  request from client to get parameters to work with
+     * @param response response to client with parameters to work with on client side
+     * @throws IOException      if an input or output error is detected when the servlet handles the request
+     * @throws ServletException if the request could not be handled
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see #processRequest(HttpServletRequest, HttpServletResponse)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -79,8 +78,9 @@ public class AjaxController extends HttpServlet {
         if (command != null) {
             map = command.execute(request);
         } else {
-            //TODO message manager to message
-            map.put(ATTR_ERROR_MESSAGE, "Unknown AJAX command.");
+            map.put(ATTR_ERROR_MESSAGE,
+                    MessageManager.getMessageManager((String) request.getSession().getAttribute(ATTR_LOCALE))
+                                  .getMessage(MESSAGE_UNKNOWN_COMMAND));
         }
         write(response, map);
     }

@@ -2,10 +2,10 @@ package by.sasnouskikh.jcasino.command.impl;
 
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.PlayerService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +39,7 @@ public class RecoverPasswordCommand implements Command {
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see PlayerLogic#recoverPassword(String, String)
+     * @see PlayerService#recoverPassword(String, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -53,11 +53,13 @@ public class RecoverPasswordCommand implements Command {
 
         if (FormValidator.validateEmail(email)) {
             request.setAttribute(ATTR_EMAIL_INPUT, email);
-            if (PlayerLogic.recoverPassword(email, locale)) {
-                navigator = PageNavigator.REDIRECT_GOTO_INDEX;
-            } else {
-                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_RECOVER_PASSWORD_ERROR));
-                navigator = PageNavigator.FORWARD_PAGE_RECOVER_PASSWORD;
+            try (PlayerService playerService = new PlayerService()) {
+                if (playerService.recoverPassword(email, locale)) {
+                    navigator = PageNavigator.REDIRECT_GOTO_INDEX;
+                } else {
+                    request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_RECOVER_PASSWORD_ERROR));
+                    navigator = PageNavigator.FORWARD_PAGE_RECOVER_PASSWORD;
+                }
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_INVALID_EMAIL));

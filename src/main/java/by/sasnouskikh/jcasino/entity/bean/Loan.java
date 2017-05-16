@@ -232,7 +232,7 @@ public class Loan extends Entity {
      * @see Cloneable
      */
     @Override
-    protected Loan clone() throws CloneNotSupportedException {
+    public Loan clone() throws CloneNotSupportedException {
         return (Loan) super.clone();
     }
 }

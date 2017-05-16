@@ -140,12 +140,12 @@ public class Roll extends Entity {
         if (!(o instanceof Roll)) {
             return false;
         }
-        Roll roll1 = (Roll) o;
-        return Arrays.equals(roll, roll1.roll) &&
-               Arrays.equals(offset, roll1.offset) &&
-               Arrays.equals(lines, roll1.lines) &&
-               Objects.equals(bet, roll1.bet) &&
-               Objects.equals(result, roll1.result);
+        Roll other = (Roll) o;
+        return Arrays.equals(roll, other.roll) &&
+               Arrays.equals(offset, other.offset) &&
+               Arrays.equals(lines, other.lines) &&
+               (Objects.equals(bet, other.bet) || bet.compareTo(other.bet) == 0) &&
+               (Objects.equals(result, other.result) || result.compareTo(other.result) == 0);
     }
 
     /**
@@ -173,15 +173,13 @@ public class Roll extends Entity {
      * Clones instance of this object.
      *
      * @return a clone of this instance.
-     * @throws CloneNotSupportedException if the object's class does not
-     *                                    support the {@code Cloneable} interface. Subclasses
-     *                                    that override the {@code clone} method can also
-     *                                    throw this exception to indicate that an instance cannot
-     *                                    be cloned.
+     * @throws CloneNotSupportedException if the object's class does not support the {@code Cloneable} interface.
+     *                                    Subclasses that override the {@code clone} method can also throw this
+     *                                    exception to indicate that an instance cannot be cloned.
      * @see Cloneable
      */
     @Override
-    protected Roll clone() throws CloneNotSupportedException {
+    public Roll clone() throws CloneNotSupportedException {
         return (Roll) super.clone();
     }
 }

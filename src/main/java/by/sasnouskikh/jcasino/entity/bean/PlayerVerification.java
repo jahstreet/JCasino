@@ -315,7 +315,7 @@ public class PlayerVerification extends Entity {
      * @see Cloneable
      */
     @Override
-    protected PlayerVerification clone() throws CloneNotSupportedException {
+    public PlayerVerification clone() throws CloneNotSupportedException {
         return (PlayerVerification) super.clone();
     }
 }

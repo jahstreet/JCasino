@@ -3,10 +3,10 @@ package by.sasnouskikh.jcasino.command.impl.navigation.admin;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
-import by.sasnouskikh.jcasino.logic.AdminLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.AdminService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,12 +37,12 @@ public class GotoManagePlayerCommand implements Command {
      * and navigates to {@link PageNavigator#FORWARD_PREV_QUERY}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see AdminLogic#takePlayer(int)
+     * @see AdminService#takePlayer(int)
      */
     @SuppressWarnings("Duplicates")
     @Override
@@ -65,7 +65,10 @@ public class GotoManagePlayerCommand implements Command {
             return PageNavigator.FORWARD_PREV_QUERY;
         }
 
-        Player player = AdminLogic.takePlayer(playerId);
+        Player player;
+        try (AdminService adminService = new AdminService()) {
+            player = adminService.takePlayer(playerId);
+        }
         if (player != null) {
             QueryManager.saveQueryToSession(request);
             request.setAttribute(ATTR_PLAYER, player);

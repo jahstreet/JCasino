@@ -2,10 +2,10 @@ package by.sasnouskikh.jcasino.command.impl;
 
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
-import by.sasnouskikh.jcasino.logic.QuestionLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.QuestionService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +34,12 @@ public class RateSupportAnswerCommand implements Command {
      * and navigates to {@link PageNavigator#FORWARD_PAGE_SUPPORT}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see QuestionLogic#rateAnswer(int, String)
+     * @see QuestionService#rateAnswer(int, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -65,12 +65,14 @@ public class RateSupportAnswerCommand implements Command {
             valid = false;
         }
 
-        if (valid && questionId > 0) {
-            if (QuestionLogic.rateAnswer(questionId, sortBySatisfaction)) {
-                navigator = PageNavigator.REDIRECT_GOTO_SUPPORT;
-            } else {
-                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_RATE_SUPPORT_INTERRUPTED));
-                navigator = PageNavigator.FORWARD_PAGE_SUPPORT;
+        if (valid) {
+            try (QuestionService questionService = new QuestionService()) {
+                if (questionService.rateAnswer(questionId, sortBySatisfaction)) {
+                    navigator = PageNavigator.REDIRECT_GOTO_SUPPORT;
+                } else {
+                    request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_RATE_SUPPORT_INTERRUPTED));
+                    navigator = PageNavigator.FORWARD_PAGE_SUPPORT;
+                }
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_INVALID_JSP));

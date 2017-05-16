@@ -179,7 +179,7 @@ public class News extends Entity {
      * @see Cloneable
      */
     @Override
-    protected News clone() throws CloneNotSupportedException {
+    public News clone() throws CloneNotSupportedException {
         return (News) super.clone();
     }
 }

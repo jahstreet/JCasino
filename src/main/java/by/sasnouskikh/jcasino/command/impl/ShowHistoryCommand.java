@@ -6,12 +6,12 @@ import by.sasnouskikh.jcasino.entity.bean.Loan;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
-import by.sasnouskikh.jcasino.logic.LoanLogic;
-import by.sasnouskikh.jcasino.logic.StreakLogic;
-import by.sasnouskikh.jcasino.logic.TransactionLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.LoanService;
+import by.sasnouskikh.jcasino.service.StreakService;
+import by.sasnouskikh.jcasino.service.TransactionService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,14 +37,14 @@ public class ShowHistoryCommand implements Command {
      * and navigates to {@link PageNavigator#FORWARD_PAGE_OPERATION_HISTORY}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see TransactionLogic#takePlayerTransactions(int, String)
-     * @see LoanLogic#takePlayerLoans(int, String)
-     * @see StreakLogic#takePlayerStreaks(int, String)
+     * @see TransactionService#takePlayerTransactions(int, String)
+     * @see LoanService#takePlayerLoans(int, String)
+     * @see StreakService#takePlayerStreaks(int, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -60,8 +60,6 @@ public class ShowHistoryCommand implements Command {
 
         String type  = request.getParameter(PARAM_TYPE);
         String month = request.getParameter(PARAM_MONTH);
-
-        //TODO PAGINATION SUPPORT
 
         List<Transaction> transactions = null;
         List<Loan>        loans        = null;
@@ -81,13 +79,19 @@ public class ShowHistoryCommand implements Command {
         if (valid) {
             switch (type) {
                 case ATTR_TRANSACTIONS:
-                    transactions = TransactionLogic.takePlayerTransactions(id, month);
+                    try (TransactionService transactionService = new TransactionService()) {
+                        transactions = transactionService.takePlayerTransactions(id, month);
+                    }
                     break;
                 case ATTR_LOANS:
-                    loans = LoanLogic.takePlayerLoans(id, month);
+                    try (LoanService loanService = new LoanService()) {
+                        loans = loanService.takePlayerLoans(id, month);
+                    }
                     break;
                 case ATTR_STREAKS:
-                    streaks = StreakLogic.takePlayerStreaks(id, month);
+                    try (StreakService streakService = new StreakService()) {
+                        streaks = streakService.takePlayerStreaks(id, month);
+                    }
                     break;
                 default:
                     request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_INVALID_HISTORY_TYPE));

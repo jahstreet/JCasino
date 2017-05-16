@@ -4,11 +4,11 @@ import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.News;
-import by.sasnouskikh.jcasino.logic.LogicException;
-import by.sasnouskikh.jcasino.logic.NewsLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.NewsService;
+import by.sasnouskikh.jcasino.service.ServiceException;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.logging.log4j.Level;
@@ -45,13 +45,13 @@ public class EditNewsCommand implements Command {
      * {@link PageNavigator#FORWARD_PAGE_MANAGE_NEWS}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see NewsLogic#editNews(int, String, FileItem, String, Admin, String)
-     * @see NewsLogic#takeNewsList()
+     * @see NewsService#editNews(int, String, FileItem, String, Admin, String)
+     * @see NewsService#takeNewsList()
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -86,17 +86,17 @@ public class EditNewsCommand implements Command {
             valid = false;
         }
 
-        if (valid && newsId > 0) {
-            try {
-                if (NewsLogic.editNews(newsId, header, null, text, admin, null) != null) {
-                    List<News> newsList = NewsLogic.takeNewsList();
+        if (valid) {
+            try (NewsService newsService = new NewsService()) {
+                if (newsService.editNews(newsId, header, null, text, admin, null) != null) {
+                    List<News> newsList = newsService.takeNewsList();
                     if (newsList != null) {
                         request.getServletContext().setAttribute(CONTEXT_NEWSLIST, newsList);
                         return PageNavigator.REDIRECT_GOTO_MANAGE_NEWS;
                     }
                 }
                 errorMessage.append(messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
-            } catch (LogicException e) {
+            } catch (ServiceException e) {
                 LOGGER.log(Level.ERROR, e.getMessage());
                 errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_FILE_EXTENSION));
             }

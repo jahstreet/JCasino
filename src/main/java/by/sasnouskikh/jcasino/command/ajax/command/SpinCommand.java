@@ -6,11 +6,11 @@ import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
 import by.sasnouskikh.jcasino.entity.bean.Roll;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.game.GameEngine;
-import by.sasnouskikh.jcasino.logic.LogicException;
-import by.sasnouskikh.jcasino.logic.StreakLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.ServiceException;
+import by.sasnouskikh.jcasino.service.StreakService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,8 +53,8 @@ public class SpinCommand implements AjaxCommand {
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see StreakLogic#generateStreak(int)
-     * @see StreakLogic#generateStreak()
+     * @see StreakService#generateStreak(int)
+     * @see StreakService#generateStreak()
      * @see GameEngine#spin(Streak, int[], boolean[], BigDecimal)
      * @see GameEngine#spinDemo(Streak, int[], boolean[], BigDecimal)
      */
@@ -70,35 +70,27 @@ public class SpinCommand implements AjaxCommand {
 
         Player  player = (Player) session.getAttribute(ATTR_PLAYER);
         Streak  streak = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
-        boolean demo   = player == null || request.getParameter(PARAM_DEMO) != null;
+        boolean demo   = session.getAttribute(PARAM_DEMO) == null;
 
         //validate/generate streak
-        if (streak != null) {
-            if (StreakLogic.isComplete(streak)) {
-                if (!demo) {
-                    if (StreakLogic.updateStreak(streak)) {
-                        streak = StreakLogic.generateStreak(player.getId());
+        if (!demo) {
+            if (streak == null || StreakService.isComplete(streak)) {
+                try (StreakService streakService = new StreakService()) {
+                    if (streakService.updateStreak(streak)) {
+                        streak = streakService.generateStreak(player.getId());
+                        session.setAttribute(ATTR_CURRENT_STREAK, streak);
                     } else {
                         errorMessage.append(messageManager.getMessage(MESSAGE_STREAK_GENERATION_ERROR))
                                     .append(MESSAGE_SEPARATOR);
                         valid = false;
                     }
-                } else {
-                    streak = StreakLogic.generateStreak();
                 }
-                session.setAttribute(ATTR_CURRENT_STREAK, streak);
             }
         } else {
-            if (!demo) {
-                streak = StreakLogic.generateStreak(player.getId());
-            } else {
-                streak = StreakLogic.generateStreak();
+            if (streak == null || StreakService.isComplete(streak)) {
+                streak = StreakService.generateStreak();
+                session.setAttribute(ATTR_CURRENT_STREAK, streak);
             }
-            session.setAttribute(ATTR_CURRENT_STREAK, streak);
-        }
-        if (streak == null) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_STREAK_GENERATION_ERROR)).append(MESSAGE_SEPARATOR);
-            valid = false;
         }
 
         String betString     = request.getParameter(PARAM_BET);
@@ -112,10 +104,10 @@ public class SpinCommand implements AjaxCommand {
         boolean line4 = request.getParameter(PARAM_LINE4) != null;
         boolean line5 = request.getParameter(PARAM_LINE5) != null;
 
-        if (!FormValidator.isFloat(betString)
-            || !FormValidator.isFloat(offset1String)
-            || !FormValidator.isFloat(offset2String)
-            || !FormValidator.isFloat(offset3String)) {
+        if (!FormValidator.validateFloatAmount(betString)
+            || !FormValidator.validateFloatAmount(offset1String)
+            || !FormValidator.validateFloatAmount(offset2String)
+            || !FormValidator.validateFloatAmount(offset3String)) {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_JSP));
             valid = false;
         }
@@ -132,7 +124,7 @@ public class SpinCommand implements AjaxCommand {
 
             //check balance
             BigDecimal totalBet = GameEngine.countTotalBet(bet, lines);
-            if (!demo && player.getAccount().getBalance().compareTo(totalBet) < 0) {
+            if (!demo && player!=null && player.getAccount().getBalance().compareTo(totalBet) < 0) {
                 errorMessage.append(messageManager.getMessage(MESSAGE_NO_MONEY));
                 responseMap.put(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
                 return responseMap;
@@ -167,7 +159,7 @@ public class SpinCommand implements AjaxCommand {
                 responseMap.put(AJAX_OFFSETS, reelPos);
                 responseMap.put(AJAX_LINES, winLines);
 
-            } catch (LogicException e) {
+            } catch (ServiceException e) {
                 responseMap.put(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
             }
         } else {

@@ -5,10 +5,10 @@ import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
 import by.sasnouskikh.jcasino.entity.bean.Player;
-import by.sasnouskikh.jcasino.logic.UserLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.UserService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,12 +39,12 @@ public class LoginCommand implements Command {
      * {@link PageNavigator#FORWARD_PAGE_PROFILE}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see UserLogic#authorizeUser(String, String)
+     * @see UserService#authorizeUser(String, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -69,7 +69,10 @@ public class LoginCommand implements Command {
         }
 
         if (valid) {
-            JCasinoUser user = UserLogic.authorizeUser(email, password);
+            JCasinoUser user;
+            try (UserService userService = new UserService()) {
+                user = userService.authorizeUser(email, password);
+            }
             if (user != null) {
                 if (user.getClass() == Player.class) {
                     Player player = (Player) user;

@@ -28,21 +28,6 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 public class MainController extends HttpServlet {
 
     /**
-     * Processes request sent by POST method.
-     *
-     * @param request  request from client to get parameters to work with
-     * @param response response to client with parameters to work with on client side
-     * @throws IOException      if an input or output error is detected when the servlet handles the request
-     * @throws ServletException if the request could not be handled
-     * @see HttpServletRequest
-     * @see HttpServletResponse
-     * @see #processRequest(HttpServletRequest, HttpServletResponse)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
      * Processes request sent by GET method.
      *
      * @param request  request from client to get parameters to work with
@@ -54,6 +39,21 @@ public class MainController extends HttpServlet {
      * @see #processRequest(HttpServletRequest, HttpServletResponse)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Processes request sent by POST method.
+     *
+     * @param request  request from client to get parameters to work with
+     * @param response response to client with parameters to work with on client side
+     * @throws IOException      if an input or output error is detected when the servlet handles the request
+     * @throws ServletException if the request could not be handled
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see #processRequest(HttpServletRequest, HttpServletResponse)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -104,10 +104,9 @@ public class MainController extends HttpServlet {
                     } else {
                         errorMessage = errorMessage.trim() + MESSAGE_SEPARATOR;
                     }
-                    session.setAttribute(ATTR_ERROR_MESSAGE,
-                                         errorMessage +
-                                         "MainController error. No such responseType: " +
-                                         responseType);
+                    session.setAttribute(ATTR_ERROR_MESSAGE, errorMessage +
+                                                             "MainController error. No such responseType: " +
+                                                             responseType);
                     response.sendRedirect(request.getContextPath() + query);
             }
         } else {

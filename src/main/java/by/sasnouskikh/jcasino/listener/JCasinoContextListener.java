@@ -3,7 +3,7 @@ package by.sasnouskikh.jcasino.listener;
 import by.sasnouskikh.jcasino.db.ConnectionPool;
 import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.News;
-import by.sasnouskikh.jcasino.logic.NewsLogic;
+import by.sasnouskikh.jcasino.service.NewsService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,7 +55,10 @@ public class JCasinoContextListener implements ServletContextListener {
             LOGGER.log(Level.FATAL, e);
             throw new RuntimeException(e);
         }
-        List<News> news = NewsLogic.takeNewsList();
+        List<News> news;
+        try (NewsService newsService = new NewsService()) {
+            news = newsService.takeNewsList();
+        }
         event.getServletContext().setAttribute(CONTEXT_NEWSLIST, news);
     }
 

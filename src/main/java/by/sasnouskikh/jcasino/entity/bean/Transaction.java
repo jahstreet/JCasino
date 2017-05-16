@@ -154,7 +154,7 @@ public class Transaction extends Entity {
         return id == that.id &&
                playerId == that.playerId &&
                Objects.equals(date, that.date) &&
-               Objects.equals(amount, that.amount) &&
+               (Objects.equals(amount, that.amount) || amount.compareTo(that.amount) == 0) &&
                type == that.type;
     }
 
@@ -188,15 +188,13 @@ public class Transaction extends Entity {
      * Clones instance of this object.
      *
      * @return a clone of this instance.
-     * @throws CloneNotSupportedException if the object's class does not
-     *                                    support the {@code Cloneable} interface. Subclasses
-     *                                    that override the {@code clone} method can also
-     *                                    throw this exception to indicate that an instance cannot
-     *                                    be cloned.
+     * @throws CloneNotSupportedException if the object's class does not support the {@code Cloneable} interface.
+     *                                    Subclasses that override the {@code clone} method can also throw this
+     *                                    exception to indicate that an instance cannot be cloned.
      * @see Cloneable
      */
     @Override
-    protected Transaction clone() throws CloneNotSupportedException {
+    public Transaction clone() throws CloneNotSupportedException {
         return (Transaction) super.clone();
     }
 }

@@ -1,13 +1,6 @@
 package by.sasnouskikh.jcasino.manager;
 
-import by.sasnouskikh.jcasino.entity.bean.Roll;
-import by.sasnouskikh.jcasino.logic.StreakLogic;
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
 
 public class StreakLogicTest {
     private static final String ROLL_STRING = "24-15-88_32-19-18_77-11-10_1-2-3_3-2-1_" +
@@ -42,35 +35,35 @@ public class StreakLogicTest {
 
 //    @Test
 //    public void buildRollStringCheck() {
-//        String actual = StreakLogic.buildRollString(ROLL);
+//        String actual = StreakService.buildRollString(ROLL);
 //        Assert.assertEquals(String.format("Expected: %s\nActual: %s\n", ROLL_STRING, actual),
 //                            ROLL_STRING, actual);
 //    }
 //
 //    @Test
 //    public void buildBetStringCheck() {
-//        String actual = StreakLogic.buildBetString(BET);
+//        String actual = StreakService.buildBetString(BET);
 //        Assert.assertEquals(String.format("Expected: %s\nActual: %s\n", BET_STRING, actual),
 //                            BET_STRING, actual);
 //    }
 //
 //    @Test
 //    public void buildLineString() {
-//        String actual = StreakLogic.buildLineString(LINE);
+//        String actual = StreakService.buildLineString(LINE);
 //        Assert.assertEquals(String.format("Expected: %s\nActual: %s\n", LINE_STRING, actual),
 //                            LINE_STRING, actual);
 //    }
 //
 //    @Test
 //    public void parseRollArrayCheck() {
-//        int[] actual = StreakLogic.parseRollArray(ROLL_STRING);
+//        int[] actual = StreakService.parseRollArray(ROLL_STRING);
 //        Assert.assertTrue(String.format("Expected: %s\nActual: %s\n", Arrays.toString(ROLL), Arrays.toString(actual)),
 //                          Arrays.equals(ROLL, actual));
 //    }
 //
 //    @Test
 //    public void parseBetArrayCheck() {
-//        BigDecimal[] actual = StreakLogic.parseBetArray(BET_STRING);
+//        BigDecimal[] actual = StreakService.parseBetArray(BET_STRING);
 //        System.out.println(Arrays.toString(actual));
 //        Assert.assertTrue(String.format("Expected: %s\nActual: %s\n", Arrays.toString(BET), Arrays.toString(actual)),
 //                          Arrays.equals(BET, actual));
@@ -78,26 +71,26 @@ public class StreakLogicTest {
 //
 //    @Test
 //    public void parseLineArrayCheck() {
-//        boolean[] actual = StreakLogic.parseLineArray(LINE_STRING);
+//        boolean[] actual = StreakService.parseLineArray(LINE_STRING);
 //        Assert.assertTrue(String.format("Expected: %s\nActual: %s\n", Arrays.toString(LINE), Arrays.toString(actual)),
 //                          Arrays.equals(LINE, actual));
 //    }
 //
 //    @Test
 //    public void buildRollListCheck() {
-//        List<Roll> actual = StreakLogic.buildRollList(ROLL_STRING, ROLL_STRING, LINE_STRING, BET_STRING, BET_STRING);
+//        List<Roll> actual = StreakService.buildRollList(ROLL_STRING, ROLL_STRING, LINE_STRING, BET_STRING, BET_STRING);
 //        actual.forEach(System.out::println);
 //    }
 //
 //    @Test
 //    public void generateStreakStringTest() {
-//        System.out.println(Arrays.toString(StreakLogic.generateRollArray()));
+//        System.out.println(Arrays.toString(StreakService.generateRollArray()));
 //    }
 //
 //    @Test
 //    public void buildRollStringTest() {
-//        List<Roll> actual = StreakLogic.buildRollList(ROLL_STRING, ROLL_STRING, LINE_STRING, BET_STRING, BET_STRING);
-//        System.out.println(StreakLogic.buildRollString(actual));
+//        List<Roll> actual = StreakService.buildRollList(ROLL_STRING, ROLL_STRING, LINE_STRING, BET_STRING, BET_STRING);
+//        System.out.println(StreakService.buildRollString(actual));
 //    }
 
 

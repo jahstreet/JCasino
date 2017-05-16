@@ -5,11 +5,11 @@ import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
-import by.sasnouskikh.jcasino.logic.UserLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.PlayerService;
+import by.sasnouskikh.jcasino.service.UserService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +44,7 @@ public class WithdrawMoneyCommand implements Command {
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see PlayerLogic#makeTransaction(Player, BigDecimal, Transaction.TransactionType)
+     * @see PlayerService#makeTransaction(Player, BigDecimal, Transaction.TransactionType)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -92,17 +92,21 @@ public class WithdrawMoneyCommand implements Command {
             valid = false;
         }
 
-        if (!UserLogic.checkPassword(player, password)) {
-            errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(MESSAGE_SEPARATOR);
-            valid = false;
+        try (UserService userService = new UserService()) {
+            if (!userService.checkPassword(player, password)) {
+                errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(MESSAGE_SEPARATOR);
+                valid = false;
+            }
         }
 
         if (valid) {
-            if (PlayerLogic.makeTransaction(player, amount, Transaction.TransactionType.WITHDRAW)) {
-                navigator = PageNavigator.REDIRECT_GOTO_ACCOUNT;
-            } else {
-                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_WITHDRAWAL_INTERRUPTED));
-                navigator = PageNavigator.FORWARD_PAGE_WITHDRAW_MONEY;
+            try (PlayerService playerService = new PlayerService()) {
+                if (playerService.makeTransaction(player, amount, Transaction.TransactionType.WITHDRAW)) {
+                    navigator = PageNavigator.REDIRECT_GOTO_ACCOUNT;
+                } else {
+                    request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_WITHDRAWAL_INTERRUPTED));
+                    navigator = PageNavigator.FORWARD_PAGE_WITHDRAW_MONEY;
+                }
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());

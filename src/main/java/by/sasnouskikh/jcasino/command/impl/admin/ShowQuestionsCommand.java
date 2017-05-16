@@ -3,10 +3,10 @@ package by.sasnouskikh.jcasino.command.impl.admin;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Question;
-import by.sasnouskikh.jcasino.logic.QuestionLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.QuestionService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,12 +35,12 @@ public class ShowQuestionsCommand implements Command {
      * {@link PageNavigator#FORWARD_PAGE_MANAGE_SUPPORT}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see QuestionLogic#takeUnanswered(String)
+     * @see QuestionService#takeUnanswered(String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -53,13 +53,16 @@ public class ShowQuestionsCommand implements Command {
 
         String topic = request.getParameter(PARAM_TOPIC);
 
-        if (topic != null && !topic.trim().isEmpty() && !FormValidator.validateTopic(topic)) {
+        if (!FormValidator.validateTopic(topic)) {
             valid = false;
         }
 
         if (valid) {
             QueryManager.saveQueryToSession(request);
-            List<Question> questionList = QuestionLogic.takeUnanswered(topic);
+            List<Question> questionList;
+            try (QuestionService questionService = new QuestionService()) {
+                questionList = questionService.takeUnanswered(topic);
+            }
             request.setAttribute(ATTR_QUESTION_LIST, questionList);
             navigator = PageNavigator.FORWARD_PAGE_MANAGE_SUPPORT;
         } else {

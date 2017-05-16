@@ -50,7 +50,7 @@ public class QuestionDAOTest extends AbstractDAOTest {
 
         Question actual = daoHelper.getQuestionDAO().takeQuestion(questionId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", expected, actual),
+        Assert.assertEquals(String.format("\nExpected:\t%s\nActual:\t%s", expected, actual),
                             expected, actual);
     }
 
@@ -60,8 +60,7 @@ public class QuestionDAOTest extends AbstractDAOTest {
 
         Question actual = daoHelper.getQuestionDAO().takeQuestion(questionId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken question value expected to be null.", actual);
     }
 
     @Test
@@ -82,8 +81,7 @@ public class QuestionDAOTest extends AbstractDAOTest {
 
         List<Question> actual = daoHelper.getQuestionDAO().takePlayerQuestions(playerId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken list value expected to be null.", actual);
     }
 
     @Test
@@ -92,8 +90,7 @@ public class QuestionDAOTest extends AbstractDAOTest {
 
         List<Question> actual = daoHelper.getQuestionDAO().takePlayerQuestions(playerId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken list value expected to be null.", actual);
     }
 
     @Test
@@ -126,8 +123,7 @@ public class QuestionDAOTest extends AbstractDAOTest {
 
         List<Question> actual = daoHelper.getQuestionDAO().takeUnanswered(topicPattern);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken list value expected to be null.", actual);
     }
 
     @Test
@@ -166,8 +162,7 @@ public class QuestionDAOTest extends AbstractDAOTest {
 
         List<Question> actual = daoHelper.getQuestionDAO().takeAnswered(topicPattern, monthPattern, adminPattern);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken list value expected to be null.", actual);
     }
 
     @Test
@@ -353,6 +348,4 @@ public class QuestionDAOTest extends AbstractDAOTest {
         Assert.fail("A FK constraint `jcasino`.`question`, CONSTRAINT `fk_question_user` FOREIGN KEY (`admin_id`) " +
                     "REFERENCES `user` (`id`) should exist.");
     }
-
-
 }

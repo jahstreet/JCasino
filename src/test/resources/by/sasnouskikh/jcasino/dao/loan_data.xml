@@ -13,6 +13,12 @@
             passport="KH7588391" question="Maya?" answer_md5="7fa3b767c460b54a2be4d49030b349c7" balance="100.00"
             status="basic"/>
 
+    <user id="102" password_md5="c070202aef2d05077de4a4d16bf26875" email="lola@rend.com" role="player"
+          registration_date="2017-02-12 11:22:36.0"/>
+    <player id="102" fname="NATA" mname="IGOREVNA" lname="ZHUDRO" birthdate="1991-01-11"
+            passport="MB2774821" question="Question." answer_md5="7fa3b767c460b54a2be4249030b349c7" balance="120.00"
+            status="vip"/>
+
     <loan player_id="100" amount="150.00" acquire="2017-02-23" expire="2017-03-23" percent="20.00"
           amount_paid="150.00"/>
     <loan player_id="100" amount="200.00" acquire="2017-02-24" expire="2017-03-24" percent="20.00"
@@ -24,5 +30,8 @@
           amount_paid="200.00"/>
     <loan player_id="101" amount="500.00" acquire="2017-03-25" expire="2017-04-25" percent="20.00"
           amount_paid="400.00"/>
+
+    <loan player_id="102" amount="500.00" acquire="2017-04-15" expire="2017-05-15" percent="20.00"
+          amount_paid="500.00"/>
 
 </dataset>

@@ -3,10 +3,10 @@ package by.sasnouskikh.jcasino.command.impl.admin;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
-import by.sasnouskikh.jcasino.logic.StreakLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.StreakService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,12 +38,12 @@ public class ShowPlayerStreaksCommand implements Command {
      * and navigates to {@link PageNavigator#FORWARD_PREV_QUERY}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see StreakLogic#takePlayerStreaks(int, String)
+     * @see StreakService#takePlayerStreaks(int, String)
      */
     @SuppressWarnings("Duplicates")
     @Override
@@ -65,7 +65,10 @@ public class ShowPlayerStreaksCommand implements Command {
             return PageNavigator.FORWARD_PREV_QUERY;
         }
 
-        List<Streak> streaks = StreakLogic.takePlayerStreaks(playerId, null);
+        List<Streak> streaks;
+        try (StreakService streakService = new StreakService()) {
+            streaks = streakService.takePlayerStreaks(playerId, null);
+        }
         if (streaks != null) {
             QueryManager.saveQueryToSession(request);
             request.setAttribute(ATTR_STREAKS, streaks);

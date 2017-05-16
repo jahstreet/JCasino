@@ -3,10 +3,10 @@ package by.sasnouskikh.jcasino.command.impl.admin;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Question;
-import by.sasnouskikh.jcasino.logic.QuestionLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.QuestionService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,12 +38,12 @@ public class ShowPlayerSupportCommand implements Command {
      * and navigates to {@link PageNavigator#FORWARD_PREV_QUERY}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see QuestionLogic#takePlayerQuestions(int)
+     * @see QuestionService#takePlayerQuestions(int)
      */
     @SuppressWarnings("Duplicates")
     @Override
@@ -65,7 +65,10 @@ public class ShowPlayerSupportCommand implements Command {
             return PageNavigator.FORWARD_PREV_QUERY;
         }
 
-        List<Question> questions = QuestionLogic.takePlayerQuestions(playerId);
+        List<Question> questions;
+        try (QuestionService questionService = new QuestionService()) {
+            questions = questionService.takePlayerQuestions(playerId);
+        }
         if (questions != null) {
             QueryManager.saveQueryToSession(request);
             request.setAttribute(ATTR_QUESTION_LIST, questions);

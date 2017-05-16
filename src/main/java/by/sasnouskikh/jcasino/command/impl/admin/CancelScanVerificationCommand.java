@@ -3,10 +3,10 @@ package by.sasnouskikh.jcasino.command.impl.admin;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
-import by.sasnouskikh.jcasino.logic.VerificationLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.VerificationService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,12 +36,12 @@ public class CancelScanVerificationCommand implements Command {
      * {@link PageNavigator#FORWARD_PREV_QUERY}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see VerificationLogic#cancelScanVerification(int, Admin, String)
+     * @see VerificationService#cancelScanVerification(int, Admin, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -73,12 +73,14 @@ public class CancelScanVerificationCommand implements Command {
             valid = false;
         }
 
-        if (valid && playerId > 0) {
-            if (VerificationLogic.cancelScanVerification(playerId, admin, commentary)) {
-                navigator = PageNavigator.REDIRECT_PREV_QUERY;
-            } else {
-                request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
-                navigator = PageNavigator.FORWARD_PREV_QUERY;
+        if (valid) {
+            try (VerificationService verificationService = new VerificationService()) {
+                if (verificationService.cancelScanVerification(playerId, admin, commentary)) {
+                    navigator = PageNavigator.REDIRECT_PREV_QUERY;
+                } else {
+                    request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
+                    navigator = PageNavigator.FORWARD_PREV_QUERY;
+                }
             }
         } else {
             request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());

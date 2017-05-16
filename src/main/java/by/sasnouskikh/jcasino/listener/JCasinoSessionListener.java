@@ -2,7 +2,7 @@ package by.sasnouskikh.jcasino.listener;
 
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
-import by.sasnouskikh.jcasino.logic.StreakLogic;
+import by.sasnouskikh.jcasino.service.StreakService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -54,9 +54,11 @@ public class JCasinoSessionListener implements HttpSessionListener {
         Player      player        = (Player) session.getAttribute(ATTR_PLAYER);
         Streak      currentStreak = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
         if (player != null && currentStreak != null) {
-            StreakLogic.completeStreak(currentStreak);
-            if (!StreakLogic.updateStreak(currentStreak)) {
-                LOGGER.log(Level.ERROR, "Streak wasn't saved to database: \n" + currentStreak);
+            StreakService.completeStreak(currentStreak);
+            try (StreakService streakService = new StreakService()) {
+                if (!streakService.updateStreak(currentStreak)) {
+                    LOGGER.log(Level.ERROR, "Streak wasn't saved to database: \n" + currentStreak);
+                }
             }
         }
     }

@@ -3,8 +3,8 @@ package by.sasnouskikh.jcasino.command.impl.navigation.admin;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.PlayerVerification;
-import by.sasnouskikh.jcasino.logic.AdminLogic;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.AdminService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -26,15 +26,18 @@ public class GotoManageVerificationCommand implements Command {
      * {@link PageNavigator#FORWARD_PAGE_MANAGE_VERIFICATION}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
-     * @see AdminLogic#takeReadyForVerification()
+     * @see AdminService#takeReadyForVerification()
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         QueryManager.saveQueryToSession(request);
-        List<PlayerVerification> verificationList = AdminLogic.takeReadyForVerification();
+        List<PlayerVerification> verificationList;
+        try (AdminService adminService = new AdminService()) {
+            verificationList = adminService.takeReadyForVerification();
+        }
         if (verificationList != null) {
             request.setAttribute(ATTR_VERIFICATION_LIST, verificationList);
         }

@@ -246,7 +246,7 @@ public class PlayerStatus extends Entity {
      * @see Cloneable
      */
     @Override
-    protected PlayerStatus clone() throws CloneNotSupportedException {
+    public PlayerStatus clone() throws CloneNotSupportedException {
         return (PlayerStatus) super.clone();
     }
 }

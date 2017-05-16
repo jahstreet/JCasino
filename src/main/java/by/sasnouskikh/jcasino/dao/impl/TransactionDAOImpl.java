@@ -171,9 +171,8 @@ class TransactionDAOImpl extends TransactionDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link Transaction} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      */
     private Transaction buildTransaction(ResultSet resultSet) throws SQLException {
         Transaction transaction = null;
@@ -183,12 +182,10 @@ class TransactionDAOImpl extends TransactionDAO {
             transaction.setPlayerId(resultSet.getInt(PLAYER_ID));
             transaction.setDate(resultSet.getTimestamp(DATE).toLocalDateTime());
             BigDecimal amount = resultSet.getBigDecimal(AMOUNT);
+            transaction.setType(amount.signum() == -1 ?
+                                Transaction.TransactionType.WITHDRAW :
+                                Transaction.TransactionType.REPLENISH);
             transaction.setAmount(amount.abs());
-            if (amount.signum() == -1) {
-                transaction.setType(Transaction.TransactionType.WITHDRAW);
-            } else {
-                transaction.setType(Transaction.TransactionType.REPLENISH);
-            }
         }
         return transaction;
     }
@@ -198,9 +195,8 @@ class TransactionDAOImpl extends TransactionDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link List} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      * @see #buildTransaction(ResultSet)
      */
     private List<Transaction> buildTransactionList(ResultSet resultSet) throws SQLException {

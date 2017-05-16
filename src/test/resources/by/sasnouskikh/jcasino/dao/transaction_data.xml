@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <user id="100" password_md5="c070202aef2d05077de4a4d16bf26875" email="anhelina@gmail.com" role="player"/>
+    <player id="100" fname="ALIAKSANDER" lname="SASNOUSKIKH" birthdate="1991-09-24"
+            passport="KH1731245" question="Вопрос?" answer_md5="7fa3b767c460b54a2be4d49030b349c7" balance="0.00"
+            status="basic"/>
+
+    <user id="101" password_md5="c070202aef2d05077de4a4d16bf26875" email="anhel@gmail.com" role="player"/>
+    <player id="101" mname="VASILEVNA" lname="PETROVA" birthdate="1993-09-21"
+            passport="KH7588391" question="Maya?" answer_md5="7fa3b767c460b54a2be4d49030b349c7" balance="100.00"
+            status="basic"/>
+
+    <user id="102" password_md5="c070202aef2d05077de4a4d16bf26876" email="bover@json.com" role="player"/>
+    <player id="102" birthdate="1995-05-25" passport="KH1731245" balance="1.11" status="basic"/>
+
+    <transaction id="10" player_id="100" date="2017-02-11 01:22:02.0" amount="50.00"/>
+    <transaction id="11" player_id="100" date="2017-04-12 12:42:16.0" amount="500.00"/>
+    <transaction id="12" player_id="100" date="2017-04-13 13:32:03.0" amount="-35.00"/>
+    <transaction id="13" player_id="101" date="2017-04-13 13:32:03.0" amount="-5.00"/>
+    <transaction id="14" player_id="100" date="2017-05-14 14:52:22.0" amount="-85.00"/>
+    <transaction id="15" player_id="101" date="2017-06-15 15:12:33.0" amount="20.00"/>
+
+</dataset>

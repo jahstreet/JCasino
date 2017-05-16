@@ -3,7 +3,7 @@ package by.sasnouskikh.jcasino.command.impl.navigation;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
+import by.sasnouskikh.jcasino.service.PlayerService;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
@@ -37,7 +37,7 @@ public class GotoEmailVerificationCommand implements Command {
      * {@link by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
-     * @see PlayerLogic#sendEmailCode(Player, String)
+     * @see PlayerService#sendEmailCode(Player, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -53,7 +53,7 @@ public class GotoEmailVerificationCommand implements Command {
             QueryManager.saveQueryToSession(request);
             navigator = PageNavigator.FORWARD_PAGE_EMAIL_VERIFICATION;
         } else {
-            if (PlayerLogic.sendEmailCode(player, locale)) {
+            if (PlayerService.sendEmailCode(player, locale)) {
                 QueryManager.saveQueryToSession(request);
                 navigator = PageNavigator.FORWARD_PAGE_EMAIL_VERIFICATION;
             } else {

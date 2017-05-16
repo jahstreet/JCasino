@@ -77,19 +77,13 @@ We have defined this table apart from basic table «user» because we plan to pr
     <routine id="23" parent="1" name="truncate_all">
       <routine-kind>PROCEDURE</routine-kind>
     </routine>
-    <routine id="24" parent="1" name="off_fk_check()">
+    <routine id="24" parent="1" name="off_fk_check">
       <routine-kind>PROCEDURE</routine-kind>
     </routine>
-    <routine id="25" parent="1" name="set_fk_check()">
+    <routine id="25" parent="1" name="set_fk_check">
       <routine-kind>PROCEDURE</routine-kind>
     </routine>
-    <routine id="26" parent="1" name="off_fk_check">
-      <routine-kind>PROCEDURE</routine-kind>
-    </routine>
-    <routine id="27" parent="1" name="set_fk_check">
-      <routine-kind>PROCEDURE</routine-kind>
-    </routine>
-    <column id="28" parent="6" name="id">
+    <column id="26" parent="6" name="id">
       <comment>Порядковый номер займа.
 
 Index number of loan.</comment>
@@ -97,115 +91,115 @@ Index number of loan.</comment>
       <data-type>int(11) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="29" parent="6" name="player_id">
+    <column id="27" parent="6" name="player_id">
       <comment>ID игрока. Игрок не может взять займ, если у него не погашен предыдущий (контролируется на уровне клиент-серверной части).
 
 Player’s id.</comment>
       <mandatory>1</mandatory>
       <data-type>int(11) unsigned|0</data-type>
     </column>
-    <column id="30" parent="6" name="amount">
+    <column id="28" parent="6" name="amount">
       <comment>Количество занимаемых средств.
 
 Amount of credits loaned.</comment>
       <mandatory>1</mandatory>
       <data-type>decimal(9,2) unsigned|0</data-type>
     </column>
-    <column id="31" parent="6" name="acquire">
+    <column id="29" parent="6" name="acquire">
       <comment>Дата получения займа.
 
 Date of acquiring the loan.</comment>
       <mandatory>1</mandatory>
       <data-type>date|0</data-type>
     </column>
-    <column id="32" parent="6" name="expire">
+    <column id="30" parent="6" name="expire">
       <mandatory>1</mandatory>
       <data-type>date|0</data-type>
     </column>
-    <column id="33" parent="6" name="percent">
+    <column id="31" parent="6" name="percent">
       <comment>Месячный процент по займу.
 
 Loan’s month’s percentage.</comment>
       <mandatory>1</mandatory>
       <data-type>decimal(4,2) unsigned|0</data-type>
     </column>
-    <column id="34" parent="6" name="amount_paid">
+    <column id="32" parent="6" name="amount_paid">
       <comment>Сколько уже оплачено (можно погашать долг частями).</comment>
       <data-type>decimal(9,2)|0</data-type>
       <default-expression>'0.00'</default-expression>
     </column>
-    <index id="35" parent="6" name="fk_loan_player_idx">
+    <index id="33" parent="6" name="fk_loan_player_idx">
       <columns>player_id</columns>
       <desc-columns />
     </index>
-    <key id="36" parent="6" name="PRIMARY">
+    <key id="34" parent="6" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="37" parent="6" name="fk_loan_player">
+    <foreign-key id="35" parent="6" name="fk_loan_player">
       <columns>player_id</columns>
       <ref-key>~.player.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <column id="38" parent="7" name="id">
+    <column id="36" parent="7" name="id">
       <comment>ID игрока.
 
 Player’s id.</comment>
       <mandatory>1</mandatory>
       <data-type>int(11) unsigned|0</data-type>
     </column>
-    <column id="39" parent="7" name="fname">
+    <column id="37" parent="7" name="fname">
       <comment>Имя игрока (не обязательно, т. к. позже мы получим скан его паспорта и запросим дополнительно при верификации).
 
 Player’s first name (is not necessary to have it, because we will receive player’s passport scan in future).</comment>
       <data-type>varchar(70)|0</data-type>
     </column>
-    <column id="40" parent="7" name="mname">
+    <column id="38" parent="7" name="mname">
       <comment>Отчество игрока (не обязательно, т. к. позже мы получим скан его паспорта).
 
 Player’s middle name (is not necessary to have it, because we will receive player’s passport scan in future).</comment>
       <data-type>varchar(70)|0</data-type>
     </column>
-    <column id="41" parent="7" name="lname">
+    <column id="39" parent="7" name="lname">
       <comment>Фамилия игрока (не обязательно, т. к. позже мы получим скан его паспорта).
 
 Player’s last name (is not necessary to have it, because we will receive player’s passport scan in future).</comment>
       <data-type>varchar(70)|0</data-type>
     </column>
-    <column id="42" parent="7" name="birthdate">
+    <column id="40" parent="7" name="birthdate">
       <comment>Дата рождения игрока (обязательно, чтобы удостовериться что игроку есть 18).
 
 Player’s birthday date (is necessary to be sure that player is 18 years old).</comment>
       <mandatory>1</mandatory>
       <data-type>date|0</data-type>
     </column>
-    <column id="43" parent="7" name="passport">
+    <column id="41" parent="7" name="passport">
       <comment>Номер паспорта игрока (не обязательно, т. к. позже мы получим скан его паспорта и запросим дополнительно при верификации).
 
 Player’s passport number (is not necessary to have it, because we will receive player’s passport scan in future and will request it during verification).</comment>
       <data-type>varchar(30)|0</data-type>
     </column>
-    <column id="44" parent="7" name="question">
+    <column id="42" parent="7" name="question">
       <comment>Секретный вопрос для восстановления забытого пароля.
 
 Player’s secret-question to recover forgotten password.</comment>
       <data-type>varchar(64)|0</data-type>
     </column>
-    <column id="45" parent="7" name="answer_md5">
+    <column id="43" parent="7" name="answer_md5">
       <comment>Ответ на секретный вопрос для восстановления забытого пароля (ввода нового). Шифруется MD5.
 
 Player’s answer on secret-question to recover forgotten password (set new). Encrypts by MD5.</comment>
       <data-type>varchar(32)|0</data-type>
     </column>
-    <column id="46" parent="7" name="balance">
+    <column id="44" parent="7" name="balance">
       <comment>Количество денег.
 
 Amount of credits available to player.</comment>
       <data-type>decimal(12,2)|0</data-type>
       <default-expression>'0.00'</default-expression>
     </column>
-    <column id="47" parent="7" name="status">
+    <column id="45" parent="7" name="status">
       <comment>Статус игрока.
 
 Player’s status.</comment>
@@ -213,49 +207,49 @@ Player’s status.</comment>
       <data-type>enum('basic', 'vip', 'ban', 'unactive')|0</data-type>
       <default-expression>'basic'</default-expression>
     </column>
-    <column id="48" parent="7" name="admin_id">
+    <column id="46" parent="7" name="admin_id">
       <comment>ID админа.
 
 Admin’s id.</comment>
       <data-type>int(11) unsigned|0</data-type>
     </column>
-    <column id="49" parent="7" name="commentary">
+    <column id="47" parent="7" name="commentary">
       <comment>Комментарии админа (прошлый статус, причина изменения статуса и т. п).
 
 Admin comments.</comment>
       <data-type>varchar(700)|0</data-type>
     </column>
-    <index id="50" parent="7" name="fk_player_admin_idx">
+    <index id="48" parent="7" name="fk_player_admin_idx">
       <columns>admin_id</columns>
       <desc-columns />
     </index>
-    <index id="51" parent="7" name="fk_player_status_idx">
+    <index id="49" parent="7" name="fk_player_status_idx">
       <columns>status</columns>
       <desc-columns />
     </index>
-    <key id="52" parent="7" name="PRIMARY">
+    <key id="50" parent="7" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="53" parent="7" name="fk_player_user">
+    <foreign-key id="51" parent="7" name="fk_player_user">
       <columns>id</columns>
       <ref-key>~.user.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="54" parent="7" name="fk_player_player_status">
+    <foreign-key id="52" parent="7" name="fk_player_player_status">
       <columns>status</columns>
       <ref-key>~.player_status.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>no_action</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="55" parent="7" name="fk_player_admin">
+    <foreign-key id="53" parent="7" name="fk_player_admin">
       <columns>admin_id</columns>
       <ref-key>~.user.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>set_null</cascade-delete-rule>
     </foreign-key>
-    <column id="56" parent="8" name="status">
+    <column id="54" parent="8" name="status">
       <comment>Статусы:
 - ‘simple’ - присваивается при регистрации;
 - ‘vip’ - имеет более высокие лимиты и низкие проценты на займ;
@@ -270,36 +264,36 @@ Statuses:
       <mandatory>1</mandatory>
       <data-type>enum('basic', 'vip', 'ban', 'unactive')|0</data-type>
     </column>
-    <column id="57" parent="8" name="bet_limit">
+    <column id="55" parent="8" name="bet_limit">
       <comment>Максимально возможная ставка на один спин.
 
 Max bet available for player for one spin.</comment>
       <mandatory>1</mandatory>
       <data-type>decimal(5,2) unsigned|0</data-type>
     </column>
-    <column id="58" parent="8" name="withdrawal_limit">
+    <column id="56" parent="8" name="withdrawal_limit">
       <comment>Ограничение на вывод средств в месяц.
 
 Month’s withdrawal limit for player.</comment>
       <mandatory>1</mandatory>
       <data-type>decimal(9,2) unsigned|0</data-type>
     </column>
-    <column id="59" parent="8" name="loan_percent">
+    <column id="57" parent="8" name="loan_percent">
       <comment>Процент по займу.
 
 Loan’s percent.</comment>
       <mandatory>1</mandatory>
       <data-type>decimal(4,2) unsigned|0</data-type>
     </column>
-    <column id="60" parent="8" name="max_loan_amount">
+    <column id="58" parent="8" name="max_loan_amount">
       <mandatory>1</mandatory>
       <data-type>decimal(9,2) unsigned|0</data-type>
     </column>
-    <key id="61" parent="8" name="PRIMARY">
+    <key id="59" parent="8" name="PRIMARY">
       <columns>status</columns>
       <primary>1</primary>
     </key>
-    <column id="62" parent="9" name="id">
+    <column id="60" parent="9" name="id">
       <comment>Порядковый номер вопроса.
 
 Index number of question.</comment>
@@ -307,50 +301,51 @@ Index number of question.</comment>
       <data-type>int(11) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="63" parent="9" name="player_id">
+    <column id="61" parent="9" name="player_id">
       <data-type>int(11) unsigned|0</data-type>
     </column>
-    <column id="64" parent="9" name="email">
+    <column id="62" parent="9" name="email">
       <comment>ID игрока.
 
 Player’s id.</comment>
       <mandatory>1</mandatory>
       <data-type>varchar(320)|0</data-type>
     </column>
-    <column id="65" parent="9" name="topic">
+    <column id="63" parent="9" name="topic">
       <comment>Тема вопроса.
 
 Topic of the question.</comment>
       <mandatory>1</mandatory>
       <data-type>enum('transaction', 'loan', 'rules', 'verification', 'ban', 'other')|0</data-type>
     </column>
-    <column id="66" parent="9" name="question">
+    <column id="64" parent="9" name="question">
       <comment>Текст вопроса.
 
 Text of the question.</comment>
       <mandatory>1</mandatory>
       <data-type>varchar(700)|0</data-type>
     </column>
-    <column id="67" parent="9" name="q_date">
+    <column id="65" parent="9" name="q_date">
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
     </column>
-    <column id="68" parent="9" name="admin_id">
+    <column id="66" parent="9" name="admin_id">
       <comment>ID администратора.
 
 Admin’s id.</comment>
       <data-type>int(11) unsigned|0</data-type>
     </column>
-    <column id="69" parent="9" name="answer">
+    <column id="67" parent="9" name="answer">
       <comment>Текст ответа администратора.
 
 Text of admin’s answer.</comment>
       <data-type>varchar(700)|0</data-type>
     </column>
-    <column id="70" parent="9" name="a_date">
+    <column id="68" parent="9" name="a_date">
       <data-type>datetime|0</data-type>
     </column>
-    <column id="71" parent="9" name="satisfaction">
+    <column id="69" parent="9" name="satisfaction">
       <comment>Уровень удовлетворенности игрока ответом администратора.
 
 *Может быть NULL - игрок не захотел оценивать ответ.
@@ -360,43 +355,43 @@ The degree of user’s satisfaction with the admin’s answer.
 *Can be NULL - player didn’t want to evaluate admin’s answer.</comment>
       <data-type>enum('best', 'good', 'norm', 'bad', 'worst')|0</data-type>
     </column>
-    <index id="72" parent="9" name="fk_question_player_idx">
+    <index id="70" parent="9" name="fk_question_player_idx">
       <columns>email</columns>
       <desc-columns />
     </index>
-    <index id="73" parent="9" name="fk_question_player_idx1">
+    <index id="71" parent="9" name="fk_question_player_idx1">
       <columns>player_id</columns>
       <desc-columns />
     </index>
-    <index id="74" parent="9" name="fk_question_user_idx">
+    <index id="72" parent="9" name="fk_question_user_idx">
       <columns>admin_id</columns>
       <desc-columns />
     </index>
-    <index id="75" parent="9" name="satisfaction_idx">
+    <index id="73" parent="9" name="satisfaction_idx">
       <columns>satisfaction</columns>
       <desc-columns />
     </index>
-    <index id="76" parent="9" name="topic_idx">
+    <index id="74" parent="9" name="topic_idx">
       <columns>topic</columns>
       <desc-columns />
     </index>
-    <key id="77" parent="9" name="PRIMARY">
+    <key id="75" parent="9" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="78" parent="9" name="fk_question_player">
+    <foreign-key id="76" parent="9" name="fk_question_player">
       <columns>player_id</columns>
       <ref-key>~.player.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="79" parent="9" name="fk_question_user">
+    <foreign-key id="77" parent="9" name="fk_question_user">
       <columns>admin_id</columns>
       <ref-key>~.user.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <column id="80" parent="10" name="id">
+    <column id="78" parent="10" name="id">
       <comment>Порядковый номер серии.
 
 Index number of streak.</comment>
@@ -404,71 +399,72 @@ Index number of streak.</comment>
       <data-type>int(11) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="81" parent="10" name="player_id">
+    <column id="79" parent="10" name="player_id">
       <comment>ID игрока.
 
 Player’s id.</comment>
       <mandatory>1</mandatory>
       <data-type>int(11) unsigned|0</data-type>
     </column>
-    <column id="82" parent="10" name="date">
+    <column id="80" parent="10" name="date">
       <comment>Время и дата генерации серии.
 
 Date and time when streak was generated.</comment>
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
     </column>
-    <column id="83" parent="10" name="roll">
+    <column id="81" parent="10" name="roll">
       <comment>Случайно генерированная строка определенного формата, содержащая информацию о серии из 20 спинов. Возвращается игроку по окончании серии для реализации контроля честности.
 
 Randomly-generated string line in a special format which contains info about next 20 spins.</comment>
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="84" parent="10" name="offset">
+    <column id="82" parent="10" name="offset">
       <comment>Строка определенного формата, содержащая информацию смещениях барабана слот-машины, сделанных игроком на протяжении серии. Хранится для подсчета результатов и статистики (в кабинете пользователя игрок может просматривать информацию о проведенных им сериях, возможно с фильтрами).
 
 String line in a special format which contains info about offsets made by player during the streak.</comment>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="85" parent="10" name="lines">
+    <column id="83" parent="10" name="lines">
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="86" parent="10" name="bet">
+    <column id="84" parent="10" name="bet">
       <comment>Строка определенного формата, которая содержит информацию о ставках, сделанных игроком на протяжении серии. Хранится для подсчета результатов и статистики (в кабинете пользователя игрок может просматривать информацию о проведенных им сериях, возможно с фильтрами).
 
 String line in a special format which contains info about bets made by player during the streak.</comment>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="87" parent="10" name="result">
+    <column id="85" parent="10" name="result">
       <comment>Результат серии. Хранится для подсчета результатов и статистики (в кабинете пользователя игрок может просматривать информацию о проведенных им сериях, возможно с фильтрами). Хранится в отдельной ячейке для того, чтобы не пересчитывать его, извлекая данные из форматированных строк.
 
 Streak result.</comment>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <index id="88" parent="10" name="date_idx">
+    <index id="86" parent="10" name="date_idx">
       <columns>date</columns>
       <desc-columns />
     </index>
-    <index id="89" parent="10" name="fk_streak_player_idx">
+    <index id="87" parent="10" name="fk_streak_player_idx">
       <columns>player_id</columns>
       <desc-columns />
     </index>
-    <index id="90" parent="10" name="result_idx">
+    <index id="88" parent="10" name="result_idx">
       <columns>result</columns>
       <desc-columns />
     </index>
-    <key id="91" parent="10" name="PRIMARY">
+    <key id="89" parent="10" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="92" parent="10" name="fk_streak_player">
+    <foreign-key id="90" parent="10" name="fk_streak_player">
       <columns>player_id</columns>
       <ref-key>~.player.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <column id="93" parent="11" name="id">
+    <column id="91" parent="11" name="id">
       <comment>Порядковый номер транзакции.
 
 Index number of the transaction.</comment>
@@ -476,21 +472,22 @@ Index number of the transaction.</comment>
       <data-type>int(11) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="94" parent="11" name="player_id">
+    <column id="92" parent="11" name="player_id">
       <comment>ID игрока.
 
 Player’s id.</comment>
       <mandatory>1</mandatory>
       <data-type>int(11) unsigned|0</data-type>
     </column>
-    <column id="95" parent="11" name="date">
+    <column id="93" parent="11" name="date">
       <comment>Дата и время транзакции.
 
 Date and time of the transaction.</comment>
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
     </column>
-    <column id="96" parent="11" name="amount">
+    <column id="94" parent="11" name="amount">
       <comment>Количество средств.
 Ограничение на транзакцию - [+/-] 9’999’999.99.
 Не может быть меньше определенной величины (проверяется на стороне клиент-серверной части).
@@ -501,21 +498,21 @@ Can’t be less than specified value (that value is not contained in database).<
       <mandatory>1</mandatory>
       <data-type>decimal(9,2)|0</data-type>
     </column>
-    <index id="97" parent="11" name="fk_transaction_player1_idx">
+    <index id="95" parent="11" name="fk_transaction_player1_idx">
       <columns>player_id</columns>
       <desc-columns />
     </index>
-    <key id="98" parent="11" name="PRIMARY">
+    <key id="96" parent="11" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="99" parent="11" name="fk_transaction_player">
+    <foreign-key id="97" parent="11" name="fk_transaction_player">
       <columns>player_id</columns>
       <ref-key>~.player.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <column id="100" parent="12" name="id">
+    <column id="98" parent="12" name="id">
       <comment>ID пользователя.
 
 User’s id.</comment>
@@ -523,7 +520,7 @@ User’s id.</comment>
       <data-type>int(11) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="101" parent="12" name="password_md5">
+    <column id="99" parent="12" name="password_md5">
       <comment>Пароль, зашифрованный MD5.
 
 Password encrypted by MD5.
@@ -539,7 +536,7 @@ Why? - We want it that way!</comment>
       <mandatory>1</mandatory>
       <data-type>varchar(32)|0</data-type>
     </column>
-    <column id="102" parent="12" name="email">
+    <column id="100" parent="12" name="email">
       <comment>E-mail пользователя, используемый как login для входа в систему.
 
 User’s email which is used as login too to sing-in system.
@@ -551,7 +548,7 @@ or
       <mandatory>1</mandatory>
       <data-type>varchar(320)|0</data-type>
     </column>
-    <column id="103" parent="12" name="role">
+    <column id="101" parent="12" name="role">
       <comment>Игрок или администратор?
 
 Player or admin?</comment>
@@ -559,38 +556,39 @@ Player or admin?</comment>
       <data-type>enum('player', 'admin')|0</data-type>
       <default-expression>'player'</default-expression>
     </column>
-    <column id="104" parent="12" name="registration_date">
+    <column id="102" parent="12" name="registration_date">
       <comment>Для того, чтобы следить как долго пользователь зарегистрирован в системе (может применятся в будущем для разработки системы персональных бонусов).
 
 To monitor how long user is registered in days. Fills automatically after registration.</comment>
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
     </column>
-    <index id="105" parent="12" name="role_idx">
+    <index id="103" parent="12" name="role_idx">
       <columns>role</columns>
       <desc-columns />
     </index>
-    <index id="106" parent="12" name="user_email_UNIQUE">
+    <index id="104" parent="12" name="user_email_UNIQUE">
       <columns>email</columns>
       <desc-columns />
       <unique>1</unique>
     </index>
-    <key id="107" parent="12" name="PRIMARY">
+    <key id="105" parent="12" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <key id="108" parent="12" name="user_email_UNIQUE">
+    <key id="106" parent="12" name="user_email_UNIQUE">
       <columns>email</columns>
       <underlying-index>user_email_UNIQUE</underlying-index>
     </key>
-    <column id="109" parent="13" name="id">
+    <column id="107" parent="13" name="id">
       <comment>ID игрока.
 
 Player’s id.</comment>
       <mandatory>1</mandatory>
       <data-type>int(11) unsigned|0</data-type>
     </column>
-    <column id="110" parent="13" name="status">
+    <column id="108" parent="13" name="status">
       <comment>Bit-mask with verification information about player: [abc]
 c - all necessary fields in table «player» are filled;
 b - e-mail is verified;
@@ -608,87 +606,87 @@ If it’s ok (a = 1) - player can withdraw money.
       <data-type>bit(3)|0</data-type>
       <default-expression>b'0'</default-expression>
     </column>
-    <column id="111" parent="13" name="admin_id">
+    <column id="109" parent="13" name="admin_id">
       <comment>Администратор, который верифицировал игрока.
 
 Admin who verified player.</comment>
       <data-type>int(11) unsigned|0</data-type>
     </column>
-    <column id="112" parent="13" name="commentary">
+    <column id="110" parent="13" name="commentary">
       <data-type>varchar(700)|0</data-type>
     </column>
-    <column id="113" parent="13" name="date">
+    <column id="111" parent="13" name="date">
       <comment>Дата верификации игрока.
 
 Date player was verified by specified admin (admin_id).</comment>
       <data-type>datetime|0</data-type>
     </column>
-    <column id="114" parent="13" name="passport">
+    <column id="112" parent="13" name="passport">
       <data-type>varchar(255)|0</data-type>
     </column>
-    <index id="115" parent="13" name="fk_verification_admin_idx">
+    <index id="113" parent="13" name="fk_verification_admin_idx">
       <columns>admin_id</columns>
       <desc-columns />
     </index>
-    <index id="116" parent="13" name="passport_UNIQUE">
+    <index id="114" parent="13" name="passport_UNIQUE">
       <columns>passport</columns>
       <desc-columns />
       <unique>1</unique>
     </index>
-    <index id="117" parent="13" name="status_idx">
+    <index id="115" parent="13" name="status_idx">
       <columns>status</columns>
       <desc-columns />
     </index>
-    <key id="118" parent="13" name="PRIMARY">
+    <key id="116" parent="13" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <key id="119" parent="13" name="passport_UNIQUE">
+    <key id="117" parent="13" name="passport_UNIQUE">
       <columns>passport</columns>
       <underlying-index>passport_UNIQUE</underlying-index>
     </key>
-    <foreign-key id="120" parent="13" name="fk_verification_player">
+    <foreign-key id="118" parent="13" name="fk_verification_player">
       <columns>id</columns>
       <ref-key>~.player.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="121" parent="13" name="fk_verification_user_admin">
+    <foreign-key id="119" parent="13" name="fk_verification_user_admin">
       <columns>admin_id</columns>
       <ref-key>~.user.PRIMARY</ref-key>
       <cascade-update-rule>update</cascade-update-rule>
       <cascade-delete-rule>no_action</cascade-delete-rule>
     </foreign-key>
-    <column id="122" parent="14" name="id">
+    <column id="120" parent="14" name="id">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="123" parent="14" name="date">
+    <column id="121" parent="14" name="date">
       <mandatory>1</mandatory>
       <data-type>date|0</data-type>
     </column>
-    <column id="124" parent="14" name="header">
+    <column id="122" parent="14" name="header">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <column id="125" parent="14" name="text">
+    <column id="123" parent="14" name="text">
       <mandatory>1</mandatory>
       <data-type>varchar(700)|0</data-type>
     </column>
-    <column id="126" parent="14" name="admin_id">
+    <column id="124" parent="14" name="admin_id">
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
     </column>
-    <index id="127" parent="14" name="fk_user_news_idx">
+    <index id="125" parent="14" name="fk_user_news_idx">
       <columns>admin_id</columns>
       <desc-columns />
     </index>
-    <key id="128" parent="14" name="PRIMARY">
+    <key id="126" parent="14" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="129" parent="14" name="fk_user_news">
+    <foreign-key id="127" parent="14" name="fk_user_news">
       <columns>admin_id</columns>
       <ref-key>~.user.PRIMARY</ref-key>
       <cascade-update-rule>no_action</cascade-update-rule>

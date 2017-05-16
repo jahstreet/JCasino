@@ -262,6 +262,17 @@ public class Streak extends Entity {
     }
 
     /**
+     * Counts this instance hash code.
+     *
+     * @return counted hash code
+     * @see Objects#hash
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, playerId, date, rolls, roll, rollMD5, offset, lines, bet, result, total);
+    }
+
+    /**
      * Checks if this instance equals given object.
      *
      * @param o object to compare with
@@ -280,25 +291,15 @@ public class Streak extends Entity {
         return id == streak.id &&
                playerId == streak.playerId &&
                Objects.equals(date, streak.date) &&
-               Objects.equals(rolls, streak.rolls) &&
+               (Objects.equals(rolls, streak.rolls)
+                || (rolls.containsAll(streak.rolls) && rolls.size() == streak.rolls.size())) &&
                Objects.equals(roll, streak.roll) &&
                Objects.equals(rollMD5, streak.rollMD5) &&
                Objects.equals(offset, streak.offset) &&
                Objects.equals(lines, streak.lines) &&
                Objects.equals(bet, streak.bet) &&
                Objects.equals(result, streak.result) &&
-               Objects.equals(total, streak.total);
-    }
-
-    /**
-     * Counts this instance hash code.
-     *
-     * @return counted hash code
-     * @see Objects#hash
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, playerId, date, rolls, roll, rollMD5, offset, lines, bet, result, total);
+               (Objects.equals(total, streak.total) || (total != null && streak.total != null && total.compareTo(streak.total) == 0));
     }
 
     @Override
@@ -321,15 +322,13 @@ public class Streak extends Entity {
      * Clones instance of this object.
      *
      * @return a clone of this instance.
-     * @throws CloneNotSupportedException if the object's class does not
-     *                                    support the {@code Cloneable} interface. Subclasses
-     *                                    that override the {@code clone} method can also
-     *                                    throw this exception to indicate that an instance cannot
-     *                                    be cloned.
+     * @throws CloneNotSupportedException if the object's class does not support the {@code Cloneable} interface.
+     *                                    Subclasses that override the {@code clone} method can also throw this
+     *                                    exception to indicate that an instance cannot be cloned.
      * @see Cloneable
      */
     @Override
-    protected Streak clone() throws CloneNotSupportedException {
+    public Streak clone() throws CloneNotSupportedException {
         Streak           clone       = (Streak) super.clone();
         ArrayDeque<Roll> clonedRolls = new ArrayDeque<>();
         for (Roll roll : rolls) {

@@ -2,7 +2,6 @@ package by.sasnouskikh.jcasino.command.impl.navigation;
 
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
-import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.manager.QueryManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,22 +25,17 @@ public class BackFromGameCommand implements Command {
      * current game-mode is 'Demo' and navigates to {@link PageNavigator#REDIRECT_GOTO_INDEX}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         QueryManager.saveQueryToSession(request);
-        HttpSession session       = request.getSession();
-        boolean     demo          = session.getAttribute(ATTR_DEMO_PLAY) != null;
-        Streak      currentStreak = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
-
-        if (demo) {
-            session.setAttribute(ATTR_DEMO_PLAY, null);
-            if (currentStreak != null) {
-                session.setAttribute(ATTR_CURRENT_STREAK, null);
-            }
+        HttpSession session = request.getSession();
+        if (session.getAttribute(ATTR_DEMO_PLAY) != null){
+            session.removeAttribute(ATTR_DEMO_PLAY);
+            session.removeAttribute(ATTR_CURRENT_STREAK);
         }
         return PageNavigator.REDIRECT_GOTO_INDEX;
     }

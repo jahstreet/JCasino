@@ -48,7 +48,7 @@ public class NewsDAOTest extends AbstractDAOTest {
 
         News actual = daoHelper.getNewsDAO().takeNews(newsId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", expected, actual),
+        Assert.assertEquals(String.format("\nExpected:\t%s\nActual:\t%s", expected, actual),
                             expected, actual);
     }
 
@@ -83,8 +83,8 @@ public class NewsDAOTest extends AbstractDAOTest {
 
         boolean actual = daoHelper.getNewsDAO().deleteNews(newsId);
 
-        Assert.assertTrue(String.format("Method should return `true`, if it proceeded successfully, but it returns: %s", actual),
-                          actual);
+        Assert.assertTrue(String.format("Method should return `true`, if it proceeded successfully, " +
+                                        "but it returns: %s", actual), actual);
     }
 
     @Test
@@ -94,8 +94,8 @@ public class NewsDAOTest extends AbstractDAOTest {
         String newText = "текст2";
 
         boolean actual = daoHelper.getNewsDAO().changeNewsText(newsId, newText, adminId);
-        Assert.assertTrue(String.format("Method should return `true`, if it proceeded successfully, but it returns: %s", actual),
-                          actual);
+        Assert.assertTrue(String.format("Method should return `true`, if it proceeded successfully, " +
+                                        "but it returns: %s", actual), actual);
     }
 
     @Test
@@ -122,7 +122,8 @@ public class NewsDAOTest extends AbstractDAOTest {
         String newHeader = "header2";
 
         boolean actual = daoHelper.getNewsDAO().changeNewsText(newsId, newHeader, adminId);
-        Assert.assertTrue(String.format("Expected - 'true', but returned - '%b'", actual), actual);
+        Assert.assertTrue(String.format("Method should return `true`, if it proceeded successfully, " +
+                                        "but it returns: %s", actual), actual);
     }
 
     @Test

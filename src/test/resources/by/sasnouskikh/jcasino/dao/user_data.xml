@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <user id="1" password_md5="5d3c47fddf8cbac13c1687c612f331d7" email="jahstreetlove@gmail.com" role="admin"/>
+    <user id="2" password_md5="5d3c47fddf8cbac17sy387c612f331d7" email="jahstreet@gmail.com" role="admin"/>
+    <user id="100" password_md5="c070202aef2d05077de4a4d16bf26875" email="anhelina@gmail.com" role="player"/>
+    <user id="101" password_md5="c070202aef2d05077de4a4d16bf26875" email="anhel@gmail.com" role="player"/>
+    <user id="102" password_md5="c070202aef2d05077de4a4d16bf26876" email="bover@json.com" role="player"/>
+
+</dataset>

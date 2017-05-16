@@ -3,11 +3,11 @@ package by.sasnouskikh.jcasino.command.impl;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
-import by.sasnouskikh.jcasino.logic.LogicException;
-import by.sasnouskikh.jcasino.logic.PlayerLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.PlayerService;
+import by.sasnouskikh.jcasino.service.ServiceException;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -41,16 +41,16 @@ public class EditProfileCommand implements Command {
      * and navigates to {@link PageNavigator#FORWARD_PAGE_PROFILE}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see PlayerLogic#changeEmail(Player, String)
-     * @see PlayerLogic#changePassword(Player, String, String)
-     * @see PlayerLogic#changeBirthDate(Player, String)
-     * @see PlayerLogic#changeProfileTextItem(Player, String, PlayerLogic.ProfileTextField)
-     * @see PlayerLogic#changeSecretQuestion(Player, String, String)
+     * @see PlayerService#changeEmail(Player, String)
+     * @see PlayerService#changePassword(Player, String, String)
+     * @see PlayerService#changeBirthDate(Player, String)
+     * @see PlayerService#changeProfileTextItem(Player, String, PlayerService.ProfileTextField)
+     * @see PlayerService#changeSecretQuestion(Player, String, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -88,103 +88,104 @@ public class EditProfileCommand implements Command {
             return PageNavigator.FORWARD_PREV_QUERY;
         }
 
-        if (email != null) {
-            String currentEmail = player.getEmail();
-            if (email.equals(currentEmail)) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL_EDIT)).append(MESSAGE_SEPARATOR);
-                valid = false;
-            } else {
-                if (validateEmail(email)) {
-                    if (!PlayerLogic.changeEmail(player, email)) {
-                        errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL_INUSE)).append(MESSAGE_SEPARATOR);
+        try (PlayerService playerService = new PlayerService()) {
+            if (email != null) {
+                String currentEmail = player.getEmail();
+                if (email.equals(currentEmail)) {
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL_EDIT)).append(MESSAGE_SEPARATOR);
+                    valid = false;
+                } else {
+                    if (validateEmail(email)) {
+                        if (!playerService.changeEmail(player, email)) {
+                            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL_INUSE)).append(MESSAGE_SEPARATOR);
+                            valid = false;
+                        }
+                    } else {
+                        errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(MESSAGE_SEPARATOR);
                         valid = false;
                     }
-                } else {
-                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(MESSAGE_SEPARATOR);
-                    valid = false;
                 }
             }
-        }
 
-        if (password != null && passwordAgain != null && passwordOld != null) {
-            if (!validatePassword(passwordOld)) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(MESSAGE_SEPARATOR);
-                valid = false;
-            }
-            if (!validatePassword(password, passwordAgain)) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(WHITESPACE)
-                            .append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH)).append(MESSAGE_SEPARATOR);
-                valid = false;
-            }
-            if (valid && !PlayerLogic.changePassword(player, passwordOld, password)) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(MESSAGE_SEPARATOR);
-                valid = false;
-            }
-        }
-
-        try {
-            if (fname != null) {
-                if (validateName(fname)) {
-                    PlayerLogic.changeProfileTextItem(player, fname, PlayerLogic.ProfileTextField.FIRST_NAME);
-                } else {
-                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
+            if (password != null && passwordAgain != null && passwordOld != null) {
+                if (!validatePassword(passwordOld)) {
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(MESSAGE_SEPARATOR);
+                    valid = false;
+                }
+                if (!validatePassword(password, passwordAgain)) {
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(WHITESPACE)
+                                .append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH)).append(MESSAGE_SEPARATOR);
+                    valid = false;
+                }
+                if (valid && !playerService.changePassword(player, passwordOld, password)) {
+                    errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(MESSAGE_SEPARATOR);
                     valid = false;
                 }
             }
 
-            if (mname != null) {
-                if (validateName(mname)) {
-                    PlayerLogic.changeProfileTextItem(player, mname, PlayerLogic.ProfileTextField.MIDDLE_NAME);
+            try {
+                if (fname != null) {
+                    if (validateName(fname)) {
+                        playerService.changeProfileTextItem(player, fname, PlayerService.ProfileTextField.FIRST_NAME);
+                    } else {
+                        errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
+                        valid = false;
+                    }
+                }
+
+                if (mname != null) {
+                    if (validateName(mname)) {
+                        playerService.changeProfileTextItem(player, mname, PlayerService.ProfileTextField.MIDDLE_NAME);
+                    } else {
+                        errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
+                        valid = false;
+                    }
+                }
+
+                if (lname != null) {
+                    if (validateName(lname)) {
+                        playerService.changeProfileTextItem(player, lname, PlayerService.ProfileTextField.LAST_NAME);
+                    } else {
+                        errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
+                        valid = false;
+                    }
+                }
+
+                if (passport != null) {
+                    if (validatePassport(passport)) {
+                        playerService.changeProfileTextItem(player, passport, PlayerService.ProfileTextField.PASSPORT);
+                    } else {
+                        errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSPORT)).append(MESSAGE_SEPARATOR);
+                        valid = false;
+                    }
+                }
+            } catch (ServiceException e) {
+                LOGGER.log(Level.ERROR, e.getMessage());
+                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_JSP)).append(MESSAGE_SEPARATOR);
+                valid = false;
+            }
+
+            if (birthDate != null) {
+                if (validateBirthdate(birthDate)) {
+                    playerService.changeBirthDate(player, birthDate);
                 } else {
-                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_BIRTHDATE)).append(MESSAGE_SEPARATOR);
                     valid = false;
                 }
             }
 
-            if (lname != null) {
-                if (validateName(lname)) {
-                    PlayerLogic.changeProfileTextItem(player, lname, PlayerLogic.ProfileTextField.LAST_NAME);
-                } else {
-                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
+            if (question != null && answer != null) {
+                if (!validateQuestion(question)) {
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_QUESTION)).append(MESSAGE_SEPARATOR);
                     valid = false;
                 }
-            }
-
-            if (passport != null) {
-                if (validatePassport(passport)) {
-                    PlayerLogic.changeProfileTextItem(player, passport, PlayerLogic.ProfileTextField.PASSPORT);
-                } else {
-                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSPORT)).append(MESSAGE_SEPARATOR);
+                if (!validateAnswer(answer)) {
+                    errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_ANSWER)).append(MESSAGE_SEPARATOR);
                     valid = false;
                 }
-            }
-        } catch (LogicException e) {
-            LOGGER.log(Level.ERROR, e.getMessage());
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_JSP)).append(MESSAGE_SEPARATOR);
-            valid = false;
-        }
-
-        if (birthDate != null) {
-            if (validateBirthdate(birthDate)) {
-                PlayerLogic.changeBirthDate(player, birthDate);
-            } else {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_BIRTHDATE)).append(MESSAGE_SEPARATOR);
-                valid = false;
-            }
-        }
-
-        if (question != null && answer != null) {
-            if (!validateQuestion(question)) {
-
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_QUESTION)).append(MESSAGE_SEPARATOR);
-                valid = false;
-            }
-            if (!validateAnswer(answer)) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_ANSWER)).append(MESSAGE_SEPARATOR);
-                valid = false;
-            }
-            if (valid) {
-                PlayerLogic.changeSecretQuestion(player, question, answer);
+                if (valid) {
+                    playerService.changeSecretQuestion(player, question, answer);
+                }
             }
         }
 

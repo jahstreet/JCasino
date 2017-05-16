@@ -61,7 +61,7 @@ public class ConfigConstant {
     public static final int        BETS_IN_STREAK   = 10;
     public static final int        REEL_NUMBER      = 3;
     public static final int        LINE_NUMBER      = 5;
-    public static final BigDecimal DEMO_START_MONEY = BigDecimal.valueOf(50);
+    public static final BigDecimal DEMO_START_MONEY = BigDecimal.valueOf(200);
 
     /**
      * AJAX response parameter names
@@ -196,7 +196,7 @@ public class ConfigConstant {
     public static final String MESSAGE_INVALID_TOPIC             = "invalid.topic";
     public static final String MESSAGE_INVALID_DATE_OR_ALL       = "invalid.date.or.all";
     public static final String MESSAGE_INVALID_HISTORY_TYPE      = "invalid.history.type";
-    public static final String MESSAGE_INVALID_MULTIPART_FORM    = "invalid.multipart.form";
+    public static final String MESSAGE_UNKNOWN_COMMAND    = "unknown.command";
     public static final String MESSAGE_INVALID_FILE_EXTENSION    = "invalid.file.ext";
     public static final String MESSAGE_LOGIN_MISMATCH            = "login.mismatch";
     public static final String MESSAGE_PASSWORD_MISMATCH         = "password.mismatch";

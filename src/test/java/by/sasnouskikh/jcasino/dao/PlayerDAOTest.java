@@ -97,8 +97,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         String actual = daoHelper.getPlayerDAO().defineEmailById(playerId);
 
-        Assert.assertEquals(String.format("Defined e-mail expected: %s, actual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken string value expected to be null.", actual);
     }
 
     @Test
@@ -119,8 +118,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         String actual = daoHelper.getPlayerDAO().defineNameByEmail(email);
 
-        Assert.assertEquals(String.format("Defined name expected: %s, actual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken string value expected to be null.", actual);;
     }
 
     @Test
@@ -129,8 +127,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         String actual = daoHelper.getPlayerDAO().defineNameByEmail(email);
 
-        Assert.assertEquals(String.format("Defined name expected: %s, actual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken string value expected to be null.", actual);
     }
 
     @Test
@@ -152,7 +149,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         PlayerProfile actual = daoHelper.getPlayerDAO().takeProfile(playerId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", expected, actual),
+        Assert.assertEquals(String.format("\nExpected:\t%s\nActual:\t%s", expected, actual),
                             expected, actual);
     }
 
@@ -162,8 +159,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         PlayerProfile actual = daoHelper.getPlayerDAO().takeProfile(playerId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken player profile value expected to be null.", actual);
     }
 
     @Test
@@ -187,7 +183,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         PlayerVerification actual = daoHelper.getPlayerDAO().takeVerification(playerId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", expected, actual),
+        Assert.assertEquals(String.format("\nExpected:\t%s\nActual:\t%s", expected, actual),
                             expected, actual);
     }
 
@@ -197,8 +193,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         PlayerVerification actual = daoHelper.getPlayerDAO().takeVerification(playerId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken player verification value expected to be null.", actual);
     }
 
     @Test
@@ -217,8 +212,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
         DatabaseOperation.CLEAN_INSERT.execute(connection, buildDataSet(XML_NO_VERIFY));
         List<PlayerVerification> actual = daoHelper.getPlayerDAO().takeReadyForVerification();
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken list value expected to be null.", actual);
     }
 
     @Test
@@ -246,7 +240,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         PlayerAccount actual = daoHelper.getPlayerDAO().takeAccount(playerId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", expected, actual),
+        Assert.assertEquals(String.format("\nExpected:\t%s\nActual:\t%s", expected, actual),
                             expected, actual);
     }
 
@@ -256,8 +250,7 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         PlayerAccount actual = daoHelper.getPlayerDAO().takeAccount(playerId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual: %s", null, actual),
-                            null, actual);
+        Assert.assertNull("Taken player account value expected to be null.", actual);
     }
 
     @Test
@@ -416,8 +409,8 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         boolean actual = daoHelper.getPlayerDAO().insertEmptyVerification(playerId);
 
-        Assert.assertTrue(String.format("Method should return `true`, if it proceeded successfully, but it returns: %s", actual),
-                          actual);
+        Assert.assertTrue(String.format("Method should return `true`, if it proceeded successfully, " +
+                                        "but it returns: %s", actual), actual);
     }
 
     @Test(expected = DAOException.class)
@@ -958,6 +951,4 @@ public class PlayerDAOTest extends AbstractDAOTest {
 
         Assert.fail("Value of `status` should match definite status-enum values.");
     }
-
-
 }

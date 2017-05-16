@@ -3,10 +3,10 @@ package by.sasnouskikh.jcasino.command.impl.navigation.admin;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Question;
-import by.sasnouskikh.jcasino.logic.QuestionLogic;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.QuestionService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,12 +36,12 @@ public class GotoAnswerSupportCommand implements Command {
      * {@link PageNavigator#FORWARD_PREV_QUERY}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see QuestionLogic#takeQuestion(int)
+     * @see QuestionService#takeQuestion(int)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
@@ -63,7 +63,10 @@ public class GotoAnswerSupportCommand implements Command {
             return PageNavigator.FORWARD_PREV_QUERY;
         }
 
-        Question question = QuestionLogic.takeQuestion(questionId);
+        Question question;
+        try (QuestionService questionService = new QuestionService()) {
+            question = questionService.takeQuestion(questionId);
+        }
         if (question != null) {
             request.setAttribute(ATTR_QUESTION, question);
             navigator = PageNavigator.FORWARD_PAGE_ANSWER_SUPPORT;

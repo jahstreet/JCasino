@@ -51,8 +51,17 @@ public class LoanDAOTest extends AbstractDAOTest {
 
         Loan actual = daoHelper.getLoanDAO().takeLoan(loanId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual :%s", expected, actual),
+        Assert.assertEquals(String.format("\nExpected:\t%s\nActual:\t%s", expected, actual),
                             expected, actual);
+    }
+
+    @Test
+    public void takeLoanNoSuchCheck() throws DAOException {
+        int loanId = 7;
+
+        Loan actual = daoHelper.getLoanDAO().takeLoan(loanId);
+
+        Assert.assertNull("Taken loan object value expected to be null.", actual);
     }
 
     @Test
@@ -76,8 +85,26 @@ public class LoanDAOTest extends AbstractDAOTest {
 
         Loan actual = daoHelper.getLoanDAO().takeCurrentLoan(playerId);
 
-        Assert.assertEquals(String.format("Expected: %s\nActual :%s", expected, actual),
+        Assert.assertEquals(String.format("\nExpected:\t%s\nActual:\t%s", expected, actual),
                             expected, actual);
+    }
+
+    @Test
+    public void takeCurrentLoanNoIdCheck() throws DAOException {
+        int playerId = 103;
+
+        Loan actual = daoHelper.getLoanDAO().takeCurrentLoan(playerId);
+
+        Assert.assertNull("Taken loan object value expected to be null.", actual);
+    }
+
+    @Test
+    public void takeCurrentLoanNoSuchCheck() throws DAOException {
+        int playerId = 102;
+
+        Loan actual = daoHelper.getLoanDAO().takeCurrentLoan(playerId);
+
+        Assert.assertNull("Taken loan object value expected to be null.", actual);
     }
 
     @Test
@@ -94,7 +121,16 @@ public class LoanDAOTest extends AbstractDAOTest {
     }
 
     @Test
-    public void takePlayerLoansAcquireCheck() throws DAOException {
+    public void takePlayerLoansNoIdCheck() throws DAOException {
+        int playerId = 103;
+
+        List<Loan> actual = daoHelper.getLoanDAO().takePlayerLoans(playerId);
+
+        Assert.assertNull("Taken list value expected to be null.", actual);
+    }
+
+    @Test
+    public void takePlayerLoansAcquirePatternCheck() throws DAOException {
         int    playerId       = 100;
         String acquirePattern = "2017-02%";
 
@@ -122,7 +158,7 @@ public class LoanDAOTest extends AbstractDAOTest {
     }
 
     @Test
-    public void takeLoanListAcquireExpireCheck() throws DAOException {
+    public void takeLoanListAcquireExpirePatternCheck() throws DAOException {
         String acquirePattern = "2017-03%";
         String expirePattern  = "2017-04%";
 
@@ -168,7 +204,7 @@ public class LoanDAOTest extends AbstractDAOTest {
         String acquirePattern = "%";
         String expirePattern  = "%";
 
-        int expectedSize = 5;
+        int expectedSize = 6;
 
         List<Loan> loanList   = daoHelper.getLoanDAO().takeLoanList(acquirePattern, expirePattern);
         int        actualSize = loanList.size();
@@ -181,7 +217,7 @@ public class LoanDAOTest extends AbstractDAOTest {
     public void insertLoanIdCheck() throws DAOException {
         int playerId = 100;
 
-        int expectedLoanId = 6;
+        int expectedLoanId = 7;
 
         int actualLoanId = daoHelper.getLoanDAO().insertLoan(playerId, new BigDecimal(200), new BigDecimal(20));
 
@@ -235,7 +271,7 @@ public class LoanDAOTest extends AbstractDAOTest {
 
     @Test(expected = DAOException.class)
     public void playerIdFkConstraintCheck() throws DAOException {
-        int        playerId = 102;
+        int        playerId = 103;
         BigDecimal amount   = new BigDecimal(200);
         BigDecimal percent  = new BigDecimal(20);
 
