@@ -334,9 +334,12 @@ public class PlayerService extends AbstractService {
         PlayerDAO      playerDAO      = daoHelper.getPlayerDAO();
         try {
             if (userDAO.checkEmailExist(email)) {
-                JCasinoUser user        = userDAO.takeUser(email);
-                int         id          = user.getId();
-                String      newPassword = RandomGenerator.generatePassword();
+                JCasinoUser user = userDAO.takeUser(email);
+                if (user == null) {
+                    return false;
+                }
+                int    id          = user.getId();
+                String newPassword = RandomGenerator.generatePassword();
                 daoHelper.beginTransaction();
                 if (!playerDAO.changePassword(id, JCasinoEncryptor.encryptMD5(newPassword))) {
                     return false;
@@ -379,11 +382,7 @@ public class PlayerService extends AbstractService {
      */
     public boolean changeProfileTextItem(Player player, String text, ProfileTextField field) throws ServiceException {
         int id = player.getId();
-        if (text != null) {
-            text = text.trim().toUpperCase();
-        } else {
-            text = EMPTY_STRING;
-        }
+        text = text != null ? text.trim().toUpperCase() : EMPTY_STRING;
         PlayerDAO playerDAO = daoHelper.getPlayerDAO();
         try {
             daoHelper.beginTransaction();
@@ -432,7 +431,7 @@ public class PlayerService extends AbstractService {
      * @see VerificationService#buildNewStatus(PlayerVerification, byte, VerificationService.MaskOperation)
      * @see PlayerDAO#changeVerificationStatus(int, byte)
      */
-    public boolean changeBirthDate(Player player, String birthDate) {
+    public boolean changeBirthdate(Player player, String birthDate) {
         int                id           = player.getId();
         PlayerVerification verification = player.getVerification();
         PlayerDAO          playerDAO    = daoHelper.getPlayerDAO();

@@ -48,7 +48,7 @@ public class EditProfileCommand implements Command {
      * @see FormValidator
      * @see PlayerService#changeEmail(Player, String)
      * @see PlayerService#changePassword(Player, String, String)
-     * @see PlayerService#changeBirthDate(Player, String)
+     * @see PlayerService#changeBirthdate(Player, String)
      * @see PlayerService#changeProfileTextItem(Player, String, PlayerService.ProfileTextField)
      * @see PlayerService#changeSecretQuestion(Player, String, String)
      */
@@ -167,7 +167,7 @@ public class EditProfileCommand implements Command {
 
             if (birthDate != null) {
                 if (validateBirthdate(birthDate)) {
-                    playerService.changeBirthDate(player, birthDate);
+                    playerService.changeBirthdate(player, birthDate);
                 } else {
                     errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_BIRTHDATE)).append(MESSAGE_SEPARATOR);
                     valid = false;
