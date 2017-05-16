@@ -32,17 +32,22 @@ public class FormValidator {
     private static final int    MAX_SUPPORT_LENGTH      = 700;
     private static final int    MAX_NEWS_HEADER_LENGTH  = 45;
     private static final int    MAX_NEWS_TEXT_LENGTH    = 700;
-
     /**
      * Validation regular expressions.
      */
-    private static final String EMAIL_REGEX      = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*" +
-                                                   "@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-    private static final String PASSWORD_REGEX   = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[\\w_-]{8,}$";
-    private static final String NAME_REGEX       = "[A-Za-z ]{1,70}";
-    private static final String PASSPORT_REGEX   = "\\w{1,30}";
-    private static final String AMOUNT_REGEX     = "^[0-9]{1,7}\\.?[0-9]{0,2}$";
-    private static final String DATE_MONTH_REGEX = "^[12][0-9]{3}\\-((0[1-9])|(1[0-2]))$";
+    private static final String EMAIL_REGEX             = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*" +
+                                                          "@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+    private static final String PASSWORD_REGEX          = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[\\w_-]{8,}$";
+    private static final String NAME_REGEX              = "[A-Za-z ]{1,70}";
+    private static final String PASSPORT_REGEX          = "\\w{1,30}";
+    private static final String AMOUNT_REGEX            = "^[0-9]{1,7}\\.?[0-9]{0,2}$";
+    private static final String DATE_MONTH_REGEX        = "^[12][0-9]{3}\\-((0[1-9])|(1[0-2]))$";
+
+    /**
+     * Private constructor to forbid create {@link FormValidator} instances.
+     */
+    private FormValidator() {
+    }
 
     /**
      * Validates user e-mail.

@@ -57,22 +57,24 @@ public class PlayerServiceTest {
     private static final PlayerStats        STATS            = new PlayerStats();
     private static final PlayerVerification VERIFICATION     = new PlayerVerification();
 
-    private static final int    LOAN_ID          = 24;
-    private static final int    STREAK_ID        = 12;
-    private static final int    TRANSACTION_ID   = 45;
-    private static final int    PLAYER_ID        = 7;
-    private static final String EMAIL            = "any@MAil.net";
-    private static final String PASSWORD         = "anyPa55w0rd";
-    private static final String PASSWORD_MD5     = "1d79d14d00506d66f0ec1ea9847776a0";
-    private static final String OLD_PASSWORD     = "anyOldPa55w0rd";
-    private static final String OLD_PASSWORD_MD5 = "4c19d7c3aaac6afd04b0b586585a9315";
-    private static final String NAME             = "anyName";
-    private static final String BIRTHDATE        = "1991-24-09";
-    private static final String PASSPORT         = "KH1731245";
-    private static final String QUESTION         = "anyQuestion";
-    private static final String ANSWER           = "anyAnswer";
-    private static final String ANSWER_MD5       = "947ce5aa67c9b59556a70ac5ac4fee1d";
-    private static final String LOCALE           = "anyLocale";
+    private static final int    LOAN_ID            = 24;
+    private static final int    STREAK_ID          = 12;
+    private static final int    TRANSACTION_ID     = 45;
+    private static final int    PLAYER_ID          = 7;
+    private static final String EMAIL              = "any@MAil.net";
+    private static final String PASSWORD           = "anyPa55w0rd";
+    private static final String PASSWORD_MD5       = "1d79d14d00506d66f0ec1ea9847776a0";
+    private static final String OLD_PASSWORD       = "anyOldPa55w0rd";
+    private static final String OLD_PASSWORD_MD5   = "4c19d7c3aaac6afd04b0b586585a9315";
+    private static final String NAME               = "anyName";
+    private static final String BIRTHDATE          = "1991-24-09";
+    private static final String PASSPORT           = "KH1731245";
+    private static final String QUESTION           = "anyQuestion";
+    private static final String ANSWER             = "anyAnswer";
+    private static final String ANSWER_MD5         = "947ce5aa67c9b59556a70ac5ac4fee1d";
+    private static final String LOCALE             = "anyLocale";
+    private static final String EMAIL_CODE         = "anyCode";
+    private static final String EMAIL_CODE_INVALID = "anyInvalidCode";
 
 
     static {
@@ -1322,9 +1324,7 @@ public class PlayerServiceTest {
         profile.setlName(NAME);
         profile.setBirthDate(LocalDate.now().minusYears(19));
         profile.setPassport(PASSPORT);
-        PlayerVerification verification = new PlayerVerification();
-        verification.setPlayerId(PLAYER_ID);
-        player.setVerification(verification);
+        player.setVerification(VERIFICATION);
         player.setProfile(profile);
 
         when(playerDAO.changeVerificationStatus(anyInt(), anyByte())).thenReturn(true);
@@ -1339,9 +1339,7 @@ public class PlayerServiceTest {
         profile.setfName(NAME);
         profile.setlName(NAME);
         profile.setPassport(PASSPORT);
-        PlayerVerification verification = new PlayerVerification();
-        verification.setPlayerId(PLAYER_ID);
-        player.setVerification(verification);
+        player.setVerification(VERIFICATION);
         player.setProfile(profile);
 
         when(playerDAO.changeVerificationStatus(anyInt(), anyByte())).thenReturn(true);
@@ -1356,9 +1354,7 @@ public class PlayerServiceTest {
         profile.setmName(NAME);
         profile.setlName(NAME);
         profile.setPassport(PASSPORT);
-        PlayerVerification verification = new PlayerVerification();
-        verification.setPlayerId(PLAYER_ID);
-        player.setVerification(verification);
+        player.setVerification(VERIFICATION);
         player.setProfile(profile);
 
         when(playerDAO.changeVerificationStatus(anyInt(), anyByte())).thenReturn(false);
@@ -1371,9 +1367,7 @@ public class PlayerServiceTest {
         PlayerProfile profile = new PlayerProfile();
         profile.setfName(NAME);
         profile.setlName(NAME);
-        PlayerVerification verification = new PlayerVerification();
-        verification.setPlayerId(PLAYER_ID);
-        player.setVerification(verification);
+        player.setVerification(VERIFICATION);
         player.setProfile(profile);
 
         when(playerDAO.changeVerificationStatus(anyInt(), anyByte())).thenReturn(false);
@@ -1387,15 +1381,155 @@ public class PlayerServiceTest {
         profile.setfName(NAME);
         profile.setlName(NAME);
         profile.setPassport(PASSPORT);
-        PlayerVerification verification = new PlayerVerification();
-        verification.setPlayerId(PLAYER_ID);
-        player.setVerification(verification);
+        player.setVerification(VERIFICATION);
         player.setProfile(profile);
 
         when(playerDAO.changeVerificationStatus(anyInt(), anyByte()))
         .thenThrow(new DAOException("Database connection error."));
 
         Assert.assertFalse(playerService.verifyProfile(player));
+    }
+
+    @Test
+    public void verifyEmailPlayerDAOChangeVerificationStatusCallCheck() throws DAOException {
+        player.setVerification(VERIFICATION);
+
+        when(playerDAO.changeVerificationStatus(anyInt(), anyByte())).thenReturn(true);
+        playerService.verifyEmail(player, EMAIL_CODE, EMAIL_CODE);
+
+        verify(playerDAO).changeVerificationStatus(PLAYER_ID, (byte) 0b010);
+    }
+
+    @Test
+    public void verifyEmailPlayerDAOChangeVerificationStatusReturnTrueCheck() throws DAOException {
+        player.setVerification(VERIFICATION);
+
+        when(playerDAO.changeVerificationStatus(anyInt(), anyByte())).thenReturn(true);
+
+        Assert.assertTrue(playerService.verifyEmail(player, EMAIL_CODE, EMAIL_CODE));
+    }
+
+    @Test
+    public void verifyEmailPlayerDAOInvalidCodeReturnFalseCheck() throws DAOException {
+        player.setVerification(VERIFICATION);
+
+        when(playerDAO.changeVerificationStatus(anyInt(), anyByte())).thenReturn(true);
+
+        Assert.assertFalse(playerService.verifyEmail(player, EMAIL_CODE, EMAIL_CODE_INVALID));
+    }
+
+    @Test
+    public void verifyEmailPlayerDAOChangeVerificationStatusReturnFalseCheck() throws DAOException {
+        player.setVerification(VERIFICATION);
+
+        when(playerDAO.changeVerificationStatus(anyInt(), anyByte())).thenReturn(false);
+
+        Assert.assertFalse(playerService.verifyEmail(player, EMAIL_CODE, EMAIL_CODE));
+    }
+
+    @Test
+    public void verifyEmailDAOExceptionThrownReturnFalseCheck() throws DAOException {
+        player.setVerification(VERIFICATION);
+
+        when(playerDAO.changeVerificationStatus(anyInt(), anyByte()))
+        .thenThrow(new DAOException("Database connection error."));
+
+        Assert.assertFalse(playerService.verifyEmail(player, EMAIL_CODE, EMAIL_CODE));
+    }
+
+    @Test
+    public void makeTransactionTransactionDAOInsertTransactionCallCheck() throws DAOException {
+        when(transactionDAO.insertTransaction(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(TRANSACTION_ID);
+        when(playerDAO.changeBalance(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(true);
+        playerService.makeTransaction(player, BigDecimal.TEN, Transaction.TransactionType.REPLENISH);
+
+        verify(transactionDAO).insertTransaction(PLAYER_ID, BigDecimal.TEN, Transaction.TransactionType.REPLENISH);
+    }
+
+    @Test
+    public void makeTransactionPlayerDAOChangeBalanceCallCheck() throws DAOException {
+        when(transactionDAO.insertTransaction(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(TRANSACTION_ID);
+        when(playerDAO.changeBalance(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(true);
+        playerService.makeTransaction(player, BigDecimal.TEN, Transaction.TransactionType.REPLENISH);
+
+        verify(playerDAO).changeBalance(PLAYER_ID, BigDecimal.TEN, Transaction.TransactionType.REPLENISH);
+    }
+
+    @Test
+    public void makeTransactionReturnTrueCheck() throws DAOException {
+        when(transactionDAO.insertTransaction(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(TRANSACTION_ID);
+        when(playerDAO.changeBalance(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(true);
+
+        Assert.assertTrue(playerService.makeTransaction(player, BigDecimal.TEN, Transaction.TransactionType.REPLENISH));
+    }
+
+    @Test
+    public void makeTransactionTransactionDAOInsertTransactionReturnZeroCheck() throws DAOException {
+        when(transactionDAO.insertTransaction(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(0);
+        when(playerDAO.changeBalance(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(true);
+
+        Assert.assertFalse(playerService.makeTransaction(player, BigDecimal.TEN, Transaction.TransactionType.REPLENISH));
+    }
+
+    @Test
+    public void makeTransactionPlayerDAOChangeBalanceReturnFalseCheck() throws DAOException {
+        when(transactionDAO.insertTransaction(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(TRANSACTION_ID);
+        when(playerDAO.changeBalance(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(false);
+
+        Assert.assertFalse(playerService.makeTransaction(player, BigDecimal.TEN, Transaction.TransactionType.REPLENISH));
+    }
+
+    @Test
+    public void makeTransactionDAOExceptionThrownOnInsertTransactionReturnFalseCheck() throws DAOException {
+        when(transactionDAO.insertTransaction(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenThrow(new DAOException("Database connection error."));
+        when(playerDAO.changeBalance(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(true);
+
+        Assert.assertFalse(playerService.makeTransaction(player, BigDecimal.TEN, Transaction.TransactionType.REPLENISH));
+    }
+
+    @Test
+    public void makeTransactionDAOExceptionThrownOnChangeBalanceReturnFalseCheck() throws DAOException {
+        when(transactionDAO.insertTransaction(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(TRANSACTION_ID);
+        when(playerDAO.changeBalance(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenThrow(new DAOException("Database connection error."));
+
+        Assert.assertFalse(playerService.makeTransaction(player, BigDecimal.TEN, Transaction.TransactionType.REPLENISH));
+    }
+
+    @Test
+    public void makeTransactionSQLExceptionThrownOnDAOHelperBeginTransactionReturnFalseCheck()
+    throws DAOException, SQLException {
+        doThrow(new SQLException("Database connection error.")).when(daoHelper).beginTransaction();
+        when(transactionDAO.insertTransaction(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(TRANSACTION_ID);
+        when(playerDAO.changeBalance(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(true);
+
+        Assert.assertFalse(playerService.makeTransaction(player, BigDecimal.TEN, Transaction.TransactionType.REPLENISH));
+    }
+
+    @Test
+    public void makeTransactionSQLExceptionThrownOnDAOHelperCommitReturnFalseCheck() throws DAOException, SQLException {
+        doThrow(new SQLException("Database connection error.")).when(daoHelper).commit();
+        when(transactionDAO.insertTransaction(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(TRANSACTION_ID);
+        when(playerDAO.changeBalance(anyInt(), any(BigDecimal.class), any(Transaction.TransactionType.class)))
+        .thenReturn(true);
+
+        Assert.assertFalse(playerService.makeTransaction(player, BigDecimal.TEN, Transaction.TransactionType.REPLENISH));
     }
 
 

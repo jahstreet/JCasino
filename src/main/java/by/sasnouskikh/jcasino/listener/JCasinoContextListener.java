@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.util.Arrays;
 import java.util.List;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.CONTEXT_NEWSLIST;
