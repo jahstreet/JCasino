@@ -10,9 +10,11 @@ Used technologies:
   - Other: Tomcat, Maven, local and remote deployment support (used Jelastic platform), some fail-safe and scalability features.
     
 Application architecture:
+
   - Client <-> Server ( [WebFilter, WebListener] [Controller <-> Command <-> Service <-> {DAO]) <-> MySQL RDMS}
   
 Used design patterns:
+
   - Singleton;
   - Builder/Factory;
   - Lazy initialization;
