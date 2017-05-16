@@ -2,13 +2,11 @@
 EPAM Java WEB Development Training final-task project "Slot Casino".
 
 Used technologies:
-  * - Front-end: HTML5, CSS3, JavaScript (jQuery, AJAX, some libraries), Canvas animation (for game), responsive design
-*     without front-end frameworks;
-*   - Back-end: Java 8, Servlet, WebFilter, WebListener, JSP, JSTL, Java Mail;
-*   - Database: JDBC, MySQL (with some stored procedures), self-written connection-pool;
-*   - Tests: JUnit 4, DBUnit, Mockito, PowerMockito;
-*   - Other: Tomcat, Maven, local and remote deployment support (used Jelastic platform), some fail-safe and scalability
-*     features.
+  - Front-end: HTML5, CSS3, JavaScript (jQuery, AJAX, some libraries), Canvas animation (for game), responsive design without front-end frameworks;
+  - Back-end: Java 8, Servlet, WebFilter, WebListener, JSP, JSTL, Java Mail;
+  - Database: JDBC, MySQL (with some stored procedures), self-written connection-pool;
+  - Tests: JUnit 4, DBUnit, Mockito, PowerMockito;
+  - Other: Tomcat, Maven, local and remote deployment support (used Jelastic platform), some fail-safe and scalability features.
     
 Application architecture:
   - Client <-> Server ( [WebFilter, WebListener] [Controller <-> Command <-> Service <-> {DAO]) <-> MySQL RDMS}
