@@ -23,7 +23,7 @@ public class NewsDAOTest extends AbstractDAOTest {
     private static final String XML_CHANGED_TEXT   = "by/sasnouskikh/jcasino/dao/news_data_changed_text.xml";
     private static final String XML_CHANGED_HEADER = "by/sasnouskikh/jcasino/dao/news_data_changed_header.xml";
     private static final String XML_INSERTED       = "by/sasnouskikh/jcasino/dao/news_data_inserted.xml";
-    private static final String LOCALE             = "ru_RU";
+    private static final String LOCALE             = "ru";
 
     @Test
     public void takeNewsCheck() throws DAOException {
@@ -39,6 +39,7 @@ public class NewsDAOTest extends AbstractDAOTest {
         expected.setHeader(newsHeader);
         expected.setText(newsText);
         expected.setAdminId(adminId);
+        expected.setLocale(News.NewsLocale.RU);
 
         News actual = daoHelper.getNewsDAO().takeNews(newsId);
 

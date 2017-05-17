@@ -38,7 +38,7 @@ public class NewsServiceAddEditNewsTest {
     private static final String UPLOAD_DIR = "UPLOAD_DIR";
     private static final int    ADMIN_ID   = 100;
     private static final int    NEWS_ID    = 15;
-    private static final String LOCALE     = "ru_RU";
+    private static final String LOCALE     = "ru";
 
     static {
         NEWS.setId(NEWS_ID);

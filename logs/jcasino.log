@@ -1,451 +1,186 @@
-2017-05-16 13:05:16 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:05:16 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:05:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:05:22 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:05:23 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:05:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:05:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:05:34 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:05:34 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:05:35 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 13:05:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:05:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:08:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:08:56 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:08:56 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:09:05 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:09:06 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:09:07 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:09:07 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:09:08 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 13:09:09 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:09:09 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:11:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:11:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
-2017-05-16 13:11:07 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:11:08 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:11:16 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:11:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:11:18 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:11:19 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:11:20 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 13:11:20 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:11:21 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:16:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 13:16:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 13:16:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:16:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:16:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 13:16:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:16:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:16:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:16:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:16:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:16:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
-2017-05-16 13:16:48 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:16:48 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:16:59 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:17:00 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:17:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:17:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:17:03 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 13:17:04 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:17:05 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:19:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 13:19:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 13:19:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:19:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:19:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 13:19:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:19:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:19:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:19:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:19:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
-2017-05-16 13:19:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:505  : Database connection error.
-2017-05-16 13:19:38 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:19:38 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:19:47 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:19:48 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:19:49 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:19:49 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:19:50 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 13:19:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:19:52 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
-2017-05-16 13:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:505  : Database connection error.
-2017-05-16 13:33:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 13:33:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 13:33:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:33:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 13:33:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 13:33:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:33:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:33:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 13:33:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:33:43 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:33:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:33:55 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:33:56 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:33:57 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 13:33:58 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 13:33:58 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:33:59 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 13:34:04 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 13:34:05 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 15:03:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 15:03:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 15:03:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 15:03:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:03:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:03:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 15:03:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 15:03:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:03:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:03:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
-2017-05-16 15:03:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:505  : Database connection error.
-2017-05-16 15:03:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 15:03:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 15:03:29 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:03:30 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:03:30 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:03:31 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:03:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 15:03:32 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:03:33 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:05:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 15:05:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 15:05:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 15:05:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 15:05:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 15:05:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:05:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:05:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:05:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:05:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:505  : Database connection error.
-2017-05-16 15:05:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:532  : Database connection error.
-2017-05-16 15:05:59 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 15:05:59 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 15:06:09 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:06:09 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:06:10 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:06:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:06:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 15:06:13 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:06:13 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:505  : Database connection error.
-2017-05-16 15:20:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:532  : Database connection error.
-2017-05-16 15:21:01 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 15:21:02 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 15:21:14 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:21:15 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:21:15 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:21:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:21:17 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 15:21:18 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:21:19 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:35 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 15:25:35 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 15:25:35 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 15:25:35 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:505  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:532  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:611  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:611  : Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:613  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:613  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:25:41 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 15:25:41 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 15:25:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:25:55 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:25:56 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:25:57 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 15:25:58 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 15:25:59 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 15:26:00 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:30 [main] ERROR by.sasnouskikh.jcasino.service.AdminService             line:98   : Database connection error.
-2017-05-16 16:14:30 [main] ERROR by.sasnouskikh.jcasino.service.AdminService             line:75   : Database connection error.
-2017-05-16 16:14:32 [main] ERROR by.sasnouskikh.jcasino.service.AdminService             line:53   : Database connection error.
-2017-05-16 16:14:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:68   : Database connection error.
-2017-05-16 16:14:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:97   : Database connection error.
-2017-05-16 16:14:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:137  : Database connection error.
-2017-05-16 16:14:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:137  : Database connection error.
-2017-05-16 16:14:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:139  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:139  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:168  : Database connection error.
-2017-05-16 16:14:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:168  : Database connection error.
-2017-05-16 16:14:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:170  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:170  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:34 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:157  : Database connection error.
-2017-05-16 16:14:34 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:56   : Database connection error.
-2017-05-16 16:14:34 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:157  : Database connection error.
-2017-05-16 16:14:34 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:90   : Database connection error.
-2017-05-16 16:14:34 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:90   : Database connection error.
-2017-05-16 16:14:35 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:92   : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:35 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:92   : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:35 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:135  : Database connection error.
-2017-05-16 16:14:35 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:135  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:505  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:532  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:611  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:611  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:613  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:613  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
-2017-05-16 16:14:41 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 16:14:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
-2017-05-16 16:14:51 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 16:14:52 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 16:14:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 16:14:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
-2017-05-16 16:14:55 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
-2017-05-16 16:14:55 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:56 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:60   : Database connection error.
-2017-05-16 16:14:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:79   : Database connection error.
-2017-05-16 16:14:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:105  : Database connection error.
-2017-05-16 16:14:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:138  : Database connection error.
-2017-05-16 16:14:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:173  : Database connection error.
-2017-05-16 16:14:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:173  : Database connection error.
-2017-05-16 16:14:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:256  : Database connection error.
-2017-05-16 16:14:59 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:229  : Database connection error.
-2017-05-16 16:14:59 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:229  : Database connection error.
-2017-05-16 16:14:59 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:233  : Sending e-mail answering support error. E-mail sending error.
-2017-05-16 16:14:59 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:231  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:59 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:231  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:14:59 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:183  : Database connection error.
-2017-05-16 16:15:00 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:204  : Database connection error.
-2017-05-16 16:15:00 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:238  : Database connection error.
-2017-05-16 16:15:04 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:264  : Database connection error.
-2017-05-16 16:15:05 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:264  : Database connection error.
-2017-05-16 16:15:06 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:267  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:15:06 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:267  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:15:08 [main] ERROR by.sasnouskikh.jcasino.service.TransactionService       line:57   : Database connection error.
-2017-05-16 16:15:08 [main] ERROR by.sasnouskikh.jcasino.service.TransactionService       line:82   : Database connection error.
-2017-05-16 16:15:15 [main] ERROR by.sasnouskikh.jcasino.service.UserService              line:56   : Database connection error.
-2017-05-16 16:15:15 [main] ERROR by.sasnouskikh.jcasino.service.UserService              line:85   : Database connection error.
-2017-05-16 16:15:18 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:67   : Database connection error.
-2017-05-16 16:15:18 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:67   : Database connection error.
-2017-05-16 16:15:18 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:98   : Database connection error.
-2017-05-16 16:15:18 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:98   : Database connection error.
-2017-05-16 16:15:18 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:98   : Database connection error.
-2017-05-16 16:15:18 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:100  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
-2017-05-16 16:15:18 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:100  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:29 [main] ERROR by.sasnouskikh.jcasino.service.AdminService             line:98   : Database connection error.
+2017-05-17 18:33:29 [main] ERROR by.sasnouskikh.jcasino.service.AdminService             line:75   : Database connection error.
+2017-05-17 18:33:32 [main] ERROR by.sasnouskikh.jcasino.service.AdminService             line:53   : Database connection error.
+2017-05-17 18:33:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:68   : Database connection error.
+2017-05-17 18:33:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:97   : Database connection error.
+2017-05-17 18:33:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:137  : Database connection error.
+2017-05-17 18:33:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:137  : Database connection error.
+2017-05-17 18:33:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:139  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:139  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:168  : Database connection error.
+2017-05-17 18:33:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:168  : Database connection error.
+2017-05-17 18:33:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:170  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:33 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:170  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:34 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:159  : Database connection error.
+2017-05-17 18:33:34 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:55   : Database connection error.
+2017-05-17 18:33:34 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:159  : Database connection error.
+2017-05-17 18:33:35 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:92   : Database connection error.
+2017-05-17 18:33:35 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:92   : Database connection error.
+2017-05-17 18:33:35 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:94   : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:35 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:94   : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:35 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:137  : Database connection error.
+2017-05-17 18:33:35 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:137  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
+2017-05-17 18:33:36 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:505  : Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:532  : Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:611  : Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:611  : Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:613  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:37 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:613  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:41 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
+2017-05-17 18:33:42 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
+2017-05-17 18:33:52 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
+2017-05-17 18:33:52 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
+2017-05-17 18:33:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
+2017-05-17 18:33:54 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
+2017-05-17 18:33:55 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
+2017-05-17 18:33:56 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:56 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:79   : Database connection error.
+2017-05-17 18:33:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:105  : Database connection error.
+2017-05-17 18:33:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:138  : Database connection error.
+2017-05-17 18:33:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:60   : Database connection error.
+2017-05-17 18:33:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:173  : Database connection error.
+2017-05-17 18:33:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:173  : Database connection error.
+2017-05-17 18:33:57 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:256  : Database connection error.
+2017-05-17 18:33:59 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:229  : Database connection error.
+2017-05-17 18:33:59 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:229  : Database connection error.
+2017-05-17 18:33:59 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:233  : Sending e-mail answering support error. E-mail sending error.
+2017-05-17 18:33:59 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:231  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:33:59 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:231  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:34:00 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:183  : Database connection error.
+2017-05-17 18:34:00 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:204  : Database connection error.
+2017-05-17 18:34:00 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:238  : Database connection error.
+2017-05-17 18:34:04 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:264  : Database connection error.
+2017-05-17 18:34:05 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:264  : Database connection error.
+2017-05-17 18:34:06 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:267  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:34:07 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:267  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:34:10 [main] ERROR by.sasnouskikh.jcasino.service.TransactionService       line:57   : Database connection error.
+2017-05-17 18:34:10 [main] ERROR by.sasnouskikh.jcasino.service.TransactionService       line:85   : Database connection error.
+2017-05-17 18:34:17 [main] ERROR by.sasnouskikh.jcasino.service.UserService              line:56   : Database connection error.
+2017-05-17 18:34:17 [main] ERROR by.sasnouskikh.jcasino.service.UserService              line:85   : Database connection error.
+2017-05-17 18:34:20 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:67   : Database connection error.
+2017-05-17 18:34:20 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:67   : Database connection error.
+2017-05-17 18:34:20 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:98   : Database connection error.
+2017-05-17 18:34:20 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:98   : Database connection error.
+2017-05-17 18:34:20 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:98   : Database connection error.
+2017-05-17 18:34:20 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:100  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:34:20 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:100  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:47 [main] ERROR by.sasnouskikh.jcasino.service.AdminService             line:98   : Database connection error.
+2017-05-17 18:37:47 [main] ERROR by.sasnouskikh.jcasino.service.AdminService             line:75   : Database connection error.
+2017-05-17 18:37:49 [main] ERROR by.sasnouskikh.jcasino.service.AdminService             line:53   : Database connection error.
+2017-05-17 18:37:50 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:68   : Database connection error.
+2017-05-17 18:37:50 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:97   : Database connection error.
+2017-05-17 18:37:50 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:137  : Database connection error.
+2017-05-17 18:37:50 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:137  : Database connection error.
+2017-05-17 18:37:50 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:139  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:50 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:139  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:50 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:168  : Database connection error.
+2017-05-17 18:37:50 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:168  : Database connection error.
+2017-05-17 18:37:50 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:170  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:50 [main] ERROR by.sasnouskikh.jcasino.service.LoanService              line:170  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:51 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:159  : Database connection error.
+2017-05-17 18:37:51 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:55   : Database connection error.
+2017-05-17 18:37:51 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:159  : Database connection error.
+2017-05-17 18:37:52 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:92   : Database connection error.
+2017-05-17 18:37:52 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:92   : Database connection error.
+2017-05-17 18:37:52 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:94   : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:52 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:94   : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:52 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:137  : Database connection error.
+2017-05-17 18:37:52 [main] ERROR by.sasnouskikh.jcasino.service.NewsService              line:137  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:116  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:141  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:188  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:241  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:243  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:281  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:283  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:310  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:416  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:418  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:449  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:451  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:475  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:505  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:532  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:611  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:611  : Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:613  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:53 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:613  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:37:58 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
+2017-05-17 18:37:58 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:167  : Database connection error.
+2017-05-17 18:38:08 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
+2017-05-17 18:38:09 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
+2017-05-17 18:38:10 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
+2017-05-17 18:38:10 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:358  : Database connection error.
+2017-05-17 18:38:11 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:360  : E-mail wasn't sent while recovering password. by.sasnouskikh.jcasino.mailer.MailerException: Error occurred while sending e-mail.
+2017-05-17 18:38:12 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:38:13 [main] ERROR by.sasnouskikh.jcasino.service.PlayerService            line:362  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:38:14 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:60   : Database connection error.
+2017-05-17 18:38:14 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:79   : Database connection error.
+2017-05-17 18:38:14 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:105  : Database connection error.
+2017-05-17 18:38:14 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:138  : Database connection error.
+2017-05-17 18:38:14 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:173  : Database connection error.
+2017-05-17 18:38:14 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:173  : Database connection error.
+2017-05-17 18:38:14 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:256  : Database connection error.
+2017-05-17 18:38:15 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:229  : Database connection error.
+2017-05-17 18:38:15 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:229  : Database connection error.
+2017-05-17 18:38:15 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:233  : Sending e-mail answering support error. E-mail sending error.
+2017-05-17 18:38:15 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:231  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:38:15 [main] ERROR by.sasnouskikh.jcasino.service.QuestionService          line:231  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:38:16 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:183  : Database connection error.
+2017-05-17 18:38:16 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:204  : Database connection error.
+2017-05-17 18:38:16 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:238  : Database connection error.
+2017-05-17 18:38:21 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:264  : Database connection error.
+2017-05-17 18:38:22 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:264  : Database connection error.
+2017-05-17 18:38:23 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:267  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:38:23 [main] ERROR by.sasnouskikh.jcasino.service.StreakService            line:267  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:38:25 [main] ERROR by.sasnouskikh.jcasino.service.TransactionService       line:57   : Database connection error.
+2017-05-17 18:38:25 [main] ERROR by.sasnouskikh.jcasino.service.TransactionService       line:85   : Database connection error.
+2017-05-17 18:38:32 [main] ERROR by.sasnouskikh.jcasino.service.UserService              line:56   : Database connection error.
+2017-05-17 18:38:32 [main] ERROR by.sasnouskikh.jcasino.service.UserService              line:85   : Database connection error.
+2017-05-17 18:38:34 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:67   : Database connection error.
+2017-05-17 18:38:34 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:67   : Database connection error.
+2017-05-17 18:38:34 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:98   : Database connection error.
+2017-05-17 18:38:34 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:98   : Database connection error.
+2017-05-17 18:38:34 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:98   : Database connection error.
+2017-05-17 18:38:34 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:100  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.
+2017-05-17 18:38:34 [main] ERROR by.sasnouskikh.jcasino.service.VerificationService      line:100  : Database connection error while doing sql transaction. java.sql.SQLException: Database connection error.

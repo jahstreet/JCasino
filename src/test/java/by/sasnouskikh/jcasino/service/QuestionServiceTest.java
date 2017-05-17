@@ -255,7 +255,7 @@ public class QuestionServiceTest {
     public void takeAnsweredAdminIdPatternNotShowMyCheck() throws DAOException {
         String topicPattern = "anyTopicPattern";
         String datePattern  = "anyDatePattern";
-        String adminPattern = "";
+        String adminPattern = "%";
 
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         when(questionDAO.takeAnswered(anyString(), anyString(), anyString())).thenReturn(questionList);
