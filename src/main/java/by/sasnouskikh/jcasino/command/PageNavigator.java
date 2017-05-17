@@ -139,6 +139,10 @@ public enum PageNavigator {
     FORWARD_GOTO_GAME_FRUITS(GOTO_GAME_FRUITS, FORWARD),
     REDIRECT_GOTO_GAME_FRUITS(GOTO_GAME_FRUITS, REDIRECT),
 
+    FORWARD_PAGE_GAME_FRUITS_SETUP(PAGE_GAME_FRUITS_SETUP, FORWARD),
+    FORWARD_GOTO_GAME_FRUITS_SETUP(GOTO_GAME_FRUITS_SETUP, FORWARD),
+    REDIRECT_GOTO_GAME_FRUITS_SETUP(GOTO_GAME_FRUITS_SETUP, REDIRECT),
+
     /**
      * Used to order {@link by.sasnouskikh.jcasino.controller.MainController} to take previous query from
      * {@link by.sasnouskikh.jcasino.manager.QueryManager#takePreviousQuery(HttpServletRequest)} and process it using

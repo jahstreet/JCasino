@@ -22,7 +22,12 @@
 <div id="money"><fmt:message key="fruits.info.balance"/><br/>
     <span id="money-info">${money_input}</span>
 </div>
-<div id="music">&#9835;</div>
+<div id="music" class="jsButton">&#9835;</div>
+<c:if test="${player != null}">
+    <div id="switchToDemo" class="switchDemo jsButton">DEMO</div>
+    <div id="switchToReal" class="switchDemo jsButton">REAL</div>
+</c:if>
+<div id="finishStreak" class="jsButton">END</div>
 <div id="total-bet-info"><fmt:message key="fruits.info.total.bet"/><br/>
     <span id="total-bet">0</span>
 </div>
@@ -63,7 +68,7 @@
         <%--Lines--%>
         <div class="line-block">
             <c:forEach var="i" begin="1" end="5" step="1">
-                <input id="line${i}" name="line${i}" type="checkbox" class="checkbox">
+                <input id="line${i}" name="line${i}" type="checkbox" class="checkbox" checked>
                 <label for="line${i}"><fmt:message key="fruits.line.label"/> ${i}</label>
             </c:forEach>
         </div>
@@ -71,5 +76,8 @@
 </section>
 <script src="${pageContext.request.contextPath}/resources/game/fruits/js/slot.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/resources/game/fruits/js/quantity.js" type="text/javascript"></script>
+<script>
+    var demo = Boolean(${demo_play});
+</script>
 </body>
 </html>

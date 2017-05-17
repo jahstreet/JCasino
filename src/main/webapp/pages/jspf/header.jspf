@@ -45,7 +45,7 @@
                     <fmt:message key="header.topmenu.rules"/></a></li>
                 <li><a href="${pageContext.request.contextPath}/controller?command=goto_support">
                     <fmt:message key="header.topmenu.support"/></a></li>
-                <li><a href="${pageContext.request.contextPath}/controller?command=goto_game_fruits">
+                <li><a href="${pageContext.request.contextPath}/controller?command=goto_game_fruits_setup">
                     <fmt:message key="header.topmenu.play"/></a></li>
             </ul>
         </div>

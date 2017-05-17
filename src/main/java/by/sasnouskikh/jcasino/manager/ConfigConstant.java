@@ -71,6 +71,7 @@ public class ConfigConstant {
     public static final String AJAX_WIN_RESULT  = "winResult";
     public static final String AJAX_OFFSETS     = "offsets";
     public static final String AJAX_LINES       = "lines";
+    public static final String AJAX_MONEY       = "money";
 
     /**
      * {@link javax.servlet.http.HttpServletRequest} and {@link javax.servlet.http.HttpSession} attribute common names
@@ -196,7 +197,7 @@ public class ConfigConstant {
     public static final String MESSAGE_INVALID_TOPIC             = "invalid.topic";
     public static final String MESSAGE_INVALID_DATE_OR_ALL       = "invalid.date.or.all";
     public static final String MESSAGE_INVALID_HISTORY_TYPE      = "invalid.history.type";
-    public static final String MESSAGE_UNKNOWN_COMMAND    = "unknown.command";
+    public static final String MESSAGE_UNKNOWN_COMMAND           = "unknown.command";
     public static final String MESSAGE_INVALID_FILE_EXTENSION    = "invalid.file.ext";
     public static final String MESSAGE_LOGIN_MISMATCH            = "login.mismatch";
     public static final String MESSAGE_PASSWORD_MISMATCH         = "password.mismatch";
@@ -307,8 +308,10 @@ public class ConfigConstant {
     /**
      * Game navigation constants
      */
-    public static final String GOTO_GAME_FRUITS = "/controller?command=goto_game_fruits";
-    public static final String PAGE_GAME_FRUITS = "/game/fruits.jsp";
+    public static final String GOTO_GAME_FRUITS       = "/controller?command=goto_game_fruits";
+    public static final String PAGE_GAME_FRUITS       = "/game/fruits.jsp";
+    public static final String GOTO_GAME_FRUITS_SETUP = "/controller?command=goto_game_fruits_setup";
+    public static final String PAGE_GAME_FRUITS_SETUP = "/pages/setup_fruits.jsp";
 
     /**
      * Private constructor to forbid create {@link ConfigConstant} instances.

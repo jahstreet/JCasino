@@ -1,6 +1,9 @@
 package by.sasnouskikh.jcasino.command.ajax;
 
+import by.sasnouskikh.jcasino.command.ajax.command.FinishStreakCommand;
 import by.sasnouskikh.jcasino.command.ajax.command.SpinCommand;
+import by.sasnouskikh.jcasino.command.ajax.command.SwitchToDemoCommand;
+import by.sasnouskikh.jcasino.command.ajax.command.SwitchToRealCommand;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -35,14 +38,21 @@ public class AjaxCommandFactory {
 
     static {
         guestCommands.put(CommandType.SPIN, new SpinCommand());
+        guestCommands.put(CommandType.FINISH_STREAK, new FinishStreakCommand());
+
         playerCommands.putAll(guestCommands);
+        playerCommands.put(CommandType.SWITCH_TO_REAL, new SwitchToRealCommand());
+        playerCommands.put(CommandType.SWITCH_TO_DEMO, new SwitchToDemoCommand());
     }
 
     /**
      * Enumeration of Commands suitable to use with {@link by.sasnouskikh.jcasino.controller.AjaxController}.
      */
     private enum CommandType {
-        SPIN
+        SPIN,
+        SWITCH_TO_REAL,
+        SWITCH_TO_DEMO,
+        FINISH_STREAK
     }
 
     /**

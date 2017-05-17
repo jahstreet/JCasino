@@ -27,8 +27,8 @@ public class GotoGameFruitsCommand implements Command {
     /**
      * <p>Provides navigating to game page.
      * <p>Initializes if it is necessary game-mode, user balance and other attributes of
-     * {@link HttpServletRequest} and {@link HttpSession} due to application service.</p>
-     * <p>Navigates to {@link PageNavigator#FORWARD_PAGE_GAME_FRUITS}.</p>
+     * {@link HttpServletRequest} and {@link HttpSession} due to application service.
+     * <p>Navigates to {@link PageNavigator#FORWARD_PAGE_GAME_FRUITS}.
      *
      * @param request request from client to get parameters to work with
      * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
@@ -49,8 +49,7 @@ public class GotoGameFruitsCommand implements Command {
         Player         player         = (Player) session.getAttribute(ATTR_PLAYER);
         Streak         streak         = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
         BigDecimal     money;
-        boolean demo = request.getAttribute(ATTR_DEMO_PLAY) != null || player == null
-                       || session.getAttribute(ATTR_DEMO_PLAY) != null;
+        boolean demo = request.getParameter(ATTR_DEMO_PLAY) != null || player == null;
 
         if (!demo) {
             try (PlayerService playerService = new PlayerService();
@@ -61,7 +60,7 @@ public class GotoGameFruitsCommand implements Command {
                     request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
                     return PageNavigator.FORWARD_PREV_QUERY;
                 }
-                if (streak == null) {
+                if (streak == null || streak.getPlayerId() == 0) {
                     streak = streakService.generateStreak(player.getId());
                     if (streak == null) {
                         request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
@@ -71,6 +70,13 @@ public class GotoGameFruitsCommand implements Command {
             }
         } else {
             money = DEMO_START_MONEY;
+            if (streak != null && streak.getPlayerId() != 0) {
+                StreakService.completeStreak(streak);
+                try (StreakService streakService = new StreakService()){
+                    streakService.updateStreak(streak);
+                }
+                streak = null;
+            }
             if (streak == null) {
                 streak = StreakService.generateStreak();
             }
@@ -87,9 +93,10 @@ public class GotoGameFruitsCommand implements Command {
         request.setAttribute(ATTR_MONEY_INPUT, money.toPlainString());
         if (demo) {
             session.setAttribute(ATTR_DEMO_PLAY, true);
+        } else {
+            session.removeAttribute(ATTR_DEMO_PLAY);
         }
         session.setAttribute(ATTR_CURRENT_STREAK, streak);
         return PageNavigator.FORWARD_PAGE_GAME_FRUITS;
-
     }
 }

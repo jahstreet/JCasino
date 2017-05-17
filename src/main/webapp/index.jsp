@@ -6,8 +6,8 @@
 </head>
 <body>
 <c:if test="${admin != null}">
-    <jsp:forward page="/admin/jcasino_admin.jsp"/>
+    <jsp:forward page="${pageContext.request.contextPath}/admin/jcasino_admin.jsp"/>
 </c:if>
-<jsp:forward page="/pages/main.jsp"/>
+<jsp:forward page="${pageContext.request.contextPath}/pages/main.jsp"/>
 </body>
 </html>

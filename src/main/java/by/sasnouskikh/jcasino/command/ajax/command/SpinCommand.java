@@ -70,7 +70,7 @@ public class SpinCommand implements AjaxCommand {
 
         Player  player = (Player) session.getAttribute(ATTR_PLAYER);
         Streak  streak = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
-        boolean demo   = session.getAttribute(PARAM_DEMO) == null;
+        boolean demo   = session.getAttribute(ATTR_DEMO_PLAY) != null;
 
         //validate/generate streak
         if (!demo) {
@@ -124,7 +124,7 @@ public class SpinCommand implements AjaxCommand {
 
             //check balance
             BigDecimal totalBet = GameEngine.countTotalBet(bet, lines);
-            if (!demo && player!=null && player.getAccount().getBalance().compareTo(totalBet) < 0) {
+            if (!demo && player != null && player.getAccount().getBalance().compareTo(totalBet) < 0) {
                 errorMessage.append(messageManager.getMessage(MESSAGE_NO_MONEY));
                 responseMap.put(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
                 return responseMap;
@@ -133,9 +133,7 @@ public class SpinCommand implements AjaxCommand {
             try {
                 //pass to Logic layer
                 if (!demo) {
-                    BigDecimal total   = GameEngine.spin(streak, offset, lines, bet);
-                    BigDecimal balance = player.getAccount().getBalance();
-                    player.getAccount().setBalance(balance.add(total));
+                    BigDecimal total = GameEngine.spin(streak, offset, lines, bet);
                 } else {
                     GameEngine.spinDemo(streak, offset, lines, bet);
                 }

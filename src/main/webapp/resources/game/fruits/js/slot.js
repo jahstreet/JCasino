@@ -18,7 +18,11 @@ var context = $('#canvas')[0].getContext('2d'),
     rollNumber = $('#roll-number-text'),
     winTimeout = 2000,
     musicDiv = $('#music')[0],
-    totalBetWindow = $('#total-bet');
+    switchToDemoDiv = $('#switchToDemo')[0],
+    switchToRealDiv = $('#switchToReal')[0],
+    finishStreakDiv = $('#finishStreak')[0],
+    totalBetWindow = $('#total-bet'),
+    ajaxProcessing = false;
 
 sprite.src = "/resources/game/fruits/img/reel.png";
 sprite.onload = function () {
@@ -60,6 +64,108 @@ $(document).ready(function () {
     $('#line3').change(updateTotalBet);
     $('#line4').change(updateTotalBet);
     $('#line5').change(updateTotalBet);
+    updateTotalBet();
+
+    if (switchToRealDiv && switchToDemoDiv) {
+        if (demo) {
+            switchToRealDiv.style.display = "block";
+            switchToDemoDiv.style.display = "none";
+        } else {
+            switchToRealDiv.style.display = "none";
+            switchToDemoDiv.style.display = "block";
+        }
+
+        switchToRealDiv.onclick = function () {
+            if (!ajaxProcessing) {
+                ajaxProcessing = true;
+                $.ajax({
+                    url: "/ajax?command=switch_to_real",
+                    type: "POST",
+                    dataType: "json",
+                    cache: false,
+                    error: function () {
+                        alert('Internet connection error.');
+                        ajaxProcessing = false;
+                    },
+                    success: function (data) {
+                        //noinspection JSUnresolvedVariable
+                        var error = data.errorMessage;
+                        if (!error) {
+                            switchToRealDiv.style.display = "none";
+                            switchToDemoDiv.style.display = "block";
+                            //noinspection JSUnresolvedVariable
+                            money.html(data.money);
+                            //noinspection JSUnresolvedVariable
+                            streakInfo.html(data.streakInfo);
+                            rollNumber.html(0);
+                        } else {
+                            alert(error);
+                        }
+                        ajaxProcessing = false;
+                    }
+                });
+            }
+        };
+
+        switchToDemoDiv.onclick = function () {
+            if (!ajaxProcessing) {
+                ajaxProcessing = true;
+                $.ajax({
+                    url: "/ajax?command=switch_to_demo",
+                    type: "POST",
+                    dataType: "json",
+                    cache: false,
+                    error: function () {
+                        alert('Internet connection error.');
+                        ajaxProcessing = false;
+                    },
+                    success: function (data) {
+                        //noinspection JSUnresolvedVariable
+                        var error = data.errorMessage;
+                        if (!error) {
+                            switchToRealDiv.style.display = "block";
+                            switchToDemoDiv.style.display = "none";
+                            //noinspection JSUnresolvedVariable
+                            money.html(data.money);
+                            //noinspection JSUnresolvedVariable
+                            streakInfo.html(data.streakInfo);
+                            rollNumber.html(0);
+                        } else {
+                            alert(error);
+                        }
+                        ajaxProcessing = false;
+                    }
+                });
+            }
+        };
+    }
+
+    finishStreakDiv.onclick = function () {
+        if (!ajaxProcessing) {
+            ajaxProcessing = true;
+            $.ajax({
+                url: "/ajax?command=finish_streak",
+                type: "POST",
+                dataType: "json",
+                cache: false,
+                error: function () {
+                    alert('Internet connection error.');
+                    ajaxProcessing = false;
+                },
+                success: function (data) {
+                    //noinspection JSUnresolvedVariable
+                    var error = data.errorMessage;
+                    if (!error) {
+                        streakInfo.html(data.streakInfo);
+                        rollNumber.html(10);
+                    } else {
+                        alert(error);
+                    }
+                    ajaxProcessing = false;
+                }
+            });
+        }
+    };
 });
 
 function updateTotalBet() {
@@ -238,20 +344,7 @@ function spin() {
         offset2,
         offset3,
         lineResult;
-    //     bet = parseFloat($('#bet').val()),
-    //     l1 = $('#line1')[0].checked,
-    //     l2 = $('#line2')[0].checked,
-    //     l3 = $('#line3')[0].checked,
-    //     l4 = $('#line4')[0].checked,
-    //     l5 = $('#line5')[0].checked;
-    //
-    // var l = [l1, l2, l3, l4, l5],
-    //     counter = 0;
-    // l.forEach(function (item) {
-    //     if (item) {
-    //         counter++;
-    //     }
-    // });
+
     var totalBet = parseFloat(totalBetWindow.text());
 
     if (totalBet > parseFloat(money.text())) {
@@ -259,7 +352,8 @@ function spin() {
         return;
     }
 
-    if (!isSpinning) {
+    if (!isSpinning && !ajaxProcessing) {
+        ajaxProcessing = true;
         isSpinning = true;
         spin_sound.play();
         changeMoney(-totalBet, winTimeout / 4);
@@ -315,18 +409,25 @@ function spin() {
                 offset3 = -Math.ceil(Math.random() * 59) * 150;
                 changeMoney(totalBet, winTimeout / 4);
                 alert('Internet connection error.');
+                ajaxProcessing = false;
             },
             success: function (data) {
+                //noinspection JSUnresolvedVariable
                 var error = data.errorMessage;
                 if (!error) {
+                    //noinspection JSUnresolvedVariable
                     var offset = data.offsets;
                     offset1 = -(offset[0] - 1) * 150;
                     offset2 = -(offset[1] - 1) * 150;
                     offset3 = -(offset[2] - 1) * 150;
+                    //noinspection JSUnresolvedVariable
                     result = parseFloat(data.winResult);
                     console.log(result);
+                    //noinspection JSUnresolvedVariable
                     lineResult = data.lines;
+                    //noinspection JSUnresolvedVariable
                     streakInfo.html(data.streakInfo);
+                    //noinspection JSUnresolvedVariable
                     rollNumber.html(data.rollNumber);
                 } else {
                     offset1 = -(Math.ceil(Math.random() * 60) - 1) * 150;
@@ -336,6 +437,7 @@ function spin() {
                     lineResult = null;
                     alert(error);
                 }
+                ajaxProcessing = false;
             }
         });
     }
@@ -372,8 +474,7 @@ function spin() {
             var r = Math.floor(Math.random() * (256));
             var g = Math.floor(Math.random() * (256));
             var b = Math.floor(Math.random() * (256));
-            var c = '#' + r.toString(16) + g.toString(16) + b.toString(16);
-            $('#canvas')[0].style.borderColor = c;
+            $('#canvas')[0].style.borderColor = '#' + r.toString(16) + g.toString(16) + b.toString(16);
         }, 400);
 
         changeMoney(result, winTimeout * numberLinesWin - winTimeout / 8);

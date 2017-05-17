@@ -7,17 +7,8 @@ DROP DATABASE IF EXISTS jcasino;
 CREATE DATABASE jcasino;
 \q
 
-
-
 /Library/apache-tomcat-8.5.9/bin/startup.sh
 /Library/apache-tomcat-8.5.9/bin/shutdown.sh
-
-mvn clean heroku:deploy-war
-heroku login
-heroku create
-git push https://git.heroku.com/lit-meadow-12597.git
-heroku open https://lit-meadow-12597.herokuapp.com/ --app lit-meadow-12597
-heroku logs / control+C
 
 PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/b‌​in
 
@@ -26,15 +17,6 @@ source ~/.bash_profile
 echo $PATH
 
 git remote set-url origin
-
-postgres : s-a10050
-port:5432
-
-
-version: 9.6.1
-postgre db url: postgres://grlfbzwoldljum:36762cf737e133ac2c548a63f5d0192f7759341419beedd39a40f100cd6ccea9@ec2-23-23-222-147.compute-1.amazonaws.com:5432/d374qras0dcffv
-
-
 
 lsof -n -i:8080 | grep LISTEN
 sudo lsof -i :8080

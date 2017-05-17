@@ -65,6 +65,7 @@ public class CommandFactory {
         guestCommands.put(CommandType.GOTO_ERROR_500, new GotoError500Command());
         guestCommands.put(CommandType.BACK_FROM_ERROR, new BackFromErrorCommand());
         guestCommands.put(CommandType.GOTO_GAME_FRUITS, new GotoGameFruitsCommand());
+        guestCommands.put(CommandType.GOTO_GAME_FRUITS_SETUP, new GotoGameFruitsSetupCommand());
         guestCommands.put(CommandType.BACK_FROM_GAME, new BackFromGameCommand());
 
         playerCommands.putAll(guestCommands);
@@ -94,7 +95,10 @@ public class CommandFactory {
         playerCommands.put(CommandType.GOTO_EMAIL_VERIFICATION, new GotoEmailVerificationCommand());
         playerCommands.put(CommandType.GOTO_UPLOAD_PASSPORT, new GotoUploadPassportCommand());
 
-        adminCommands.putAll(guestCommands);
+        adminCommands.put(CommandType.GOTO_INDEX, new GotoIndexCommand());
+        adminCommands.put(CommandType.GOTO_ERROR_500, new GotoError500Command());
+        adminCommands.put(CommandType.BACK_FROM_ERROR, new BackFromErrorCommand());
+        adminCommands.put(CommandType.CHANGE_LOCALE, new ChangeLocaleCommand());
         adminCommands.put(CommandType.MULTIPART, multipart);
         adminCommands.put(CommandType.LOGOUT, logout);
         adminCommands.put(CommandType.EDIT_NEWS, new EditNewsCommand());
@@ -191,6 +195,7 @@ public class CommandFactory {
         GOTO_MANAGE_STREAKS,
         GOTO_STATS_REPORT,
         GOTO_GAME_FRUITS,
+        GOTO_GAME_FRUITS_SETUP,
         BACK_FROM_GAME
     }
 

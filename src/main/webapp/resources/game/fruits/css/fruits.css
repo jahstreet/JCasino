@@ -50,10 +50,10 @@ section.button-container {
 
 div#money {
     font-size: 2em;
+    text-align: center;
     font-style: oblique;
     font-weight: bold;
     color: rgb(0, 40, 162);
-    text-align: center;
     display: block;
     width: 3.5em;
     padding: 1em;
@@ -78,11 +78,41 @@ div#total-bet-info {
     border-radius: 25%;
 }
 
+div#streak-info,
+div#roll-number,
+div#switchToDemo,
+div#switchToReal,
+div#finishStreak {
+    text-align: center;
+    word-wrap: break-word;
+    display: block;
+    width: 11vw;
+    padding: 1em;
+    position: absolute;
+    right: 3vw;
+    background: #fffc00;
+    border-radius: 25%;
+}
+
+div#streak-info {
+    color: rgb(0, 40, 162);
+    top: 6em;
+}
+
+div#roll-number {
+    color: rgb(0, 40, 162);
+    top: 19em;
+}
+
+div.jsButton {
+    color: #2c9827;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 div#music {
     font-size: 2em;
     text-align: center;
-    color: #2c9827;
-    display: block;
     width: 2em;
     height: 2em;
     line-height: 2em;
@@ -90,37 +120,17 @@ div#music {
     position: absolute;
     top: 13em;
     left: 1em;
-    background: #fffc00;
     border-radius: 50%;
-    cursor: pointer;
+    background: #fffc00;
 }
 
-div#streak-info {
-    text-align: center;
-    word-wrap: break-word;
-    color: rgb(0, 40, 162);
-    display: block;
-    width: 11vw;
-    padding: 1em;
-    position: absolute;
-    top: 6em;
-    right: 3vw;
-    background: #fffc00;
-    border-radius: 25%;
+div#finishStreak {
+    top: 23em;
 }
 
-div#roll-number {
-    text-align: center;
-    word-wrap: break-word;
-    color: rgb(0, 40, 162);
-    display: block;
-    width: 11vw;
-    padding: 1em;
-    position: absolute;
-    top: 19em;
-    right: 3vw;
-    background: #fffc00;
-    border-radius: 25%;
+div#switchToDemo,
+div#switchToReal {
+    top: 27em;
 }
 
 div#back {
