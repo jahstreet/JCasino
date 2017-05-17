@@ -18,21 +18,23 @@
         <div class="holder"></div>
         <ul id="itemContainer">
             <c:forEach var="news" items="${newsList}">
-                <li>
-                    <details>
-                        <summary>
-                            <h3>${news.header}</h3>
-                            <img src="${pageContext.request.contextPath}/image/news/news-image${news.id}.jpg"
-                                 alt="news-image${news.id}">
-                            <span><fmt:message key="news.summary"/>...</span>
-                        </summary>
-                        <p class="news-text">${news.text}</p>
-                        <a href="#"><fmt:message key="news.more"/>...</a>
-                    </details>
-                    <p>
-                        <time>${news.date}</time>
-                    </p>
-                </li>
+                <c:if test="${news.locale.locale.equals(locale) || ((locale == null || locale.equals('default')) && news.locale.locale.equals('ru_RU'))}">
+                    <li>
+                        <details>
+                            <summary>
+                                <h3>${news.header}</h3>
+                                <img src="${pageContext.request.contextPath}/image/news/news-image${news.id}.jpg"
+                                     alt="news-image${news.id}">
+                                <span><fmt:message key="news.summary"/>...</span>
+                            </summary>
+                            <p class="news-text">${news.text}</p>
+                            <a href="#"><fmt:message key="news.more"/>...</a>
+                        </details>
+                        <p>
+                            <time>${news.date}</time>
+                        </p>
+                    </li>
+                </c:if>
             </c:forEach>
         </ul>
     </section>

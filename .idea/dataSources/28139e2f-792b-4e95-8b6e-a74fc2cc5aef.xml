@@ -412,7 +412,6 @@ Player’s id.</comment>
 Date and time when streak was generated.</comment>
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
-      <default-expression>CURRENT_TIMESTAMP</default-expression>
     </column>
     <column id="81" parent="10" name="roll">
       <comment>Случайно генерированная строка определенного формата, содержащая информацию о серии из 20 спинов. Возвращается игроку по окончании серии для реализации контроля честности.
@@ -678,15 +677,20 @@ Date player was verified by specified admin (admin_id).</comment>
       <mandatory>1</mandatory>
       <data-type>int(10) unsigned|0</data-type>
     </column>
-    <index id="125" parent="14" name="fk_user_news_idx">
+    <column id="125" parent="14" name="locale">
+      <comment>News content locale for news i18n.</comment>
+      <data-type>enum('ru_RU', 'en_US')|0</data-type>
+      <default-expression>'ru_RU'</default-expression>
+    </column>
+    <index id="126" parent="14" name="fk_user_news_idx">
       <columns>admin_id</columns>
       <desc-columns />
     </index>
-    <key id="126" parent="14" name="PRIMARY">
+    <key id="127" parent="14" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="127" parent="14" name="fk_user_news">
+    <foreign-key id="128" parent="14" name="fk_user_news">
       <columns>admin_id</columns>
       <ref-key>~.user.PRIMARY</ref-key>
       <cascade-update-rule>no_action</cascade-update-rule>

@@ -30,10 +30,6 @@
                    required autofocus/>
             <input type="submit" value="<fmt:message key="payloan.submit"/>">
         </form>
-        <script>
-            var input = document.payLoan.elements[1],
-                    value = input.value;
-            input.value = value.trim();
-        </script>
     </section>
 </main>
+<script src="${pageContext.request.contextPath}/resources/js/pay_loan.js"></script>

@@ -7,7 +7,6 @@ import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.News;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -69,16 +68,19 @@ public class NewsService extends AbstractService {
      * @return added {@link News} object
      * @throws ServiceException if image file has unsupported file extension
      * @see DAOHelper
-     * @see NewsDAO#insertNews(int, String, String)
+     * @see NewsDAO#insertNews(int, String, String, String)
      * @see NewsDAO#takeNews(int)
      * @see #updateNewsImage(int, FileItem, String)
      */
-    public News addNews(String header, String text, FileItem newsImage, Admin admin, String uploadDir) throws ServiceException {
+    public News addNews(String header, String text, FileItem newsImage, String locale, Admin admin, String uploadDir) throws ServiceException {
         int     adminId = admin.getId();
         NewsDAO newsDAO = daoHelper.getNewsDAO();
+        locale = locale != null && !locale.trim().isEmpty() ?
+                 locale.trim().toLowerCase() :
+                 News.NewsLocale.RU.toString().toLowerCase();
         try {
             daoHelper.beginTransaction();
-            int newsId = newsDAO.insertNews(adminId, header, text);
+            int newsId = newsDAO.insertNews(adminId, header, text, locale);
             if (newsId != 0) {
                 News news = newsDAO.takeNews(newsId);
                 if (news != null && updateNewsImage(newsId, newsImage, uploadDir)) {
@@ -112,7 +114,7 @@ public class NewsService extends AbstractService {
      * @see #updateNewsImage(int, FileItem, String)
      */
     public News editNews(int newsId, String header, FileItem newsImage, String text, Admin admin, String uploadDir) throws ServiceException {
-        News news = null;
+        News    news          = null;
         int     adminId       = admin.getId();
         boolean changedText   = true;
         boolean changedHeader = true;

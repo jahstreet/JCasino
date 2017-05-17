@@ -74,10 +74,8 @@
         </div>
     </form>
 </section>
+<script>var demo = Boolean(${demo_play});</script>
 <script src="${pageContext.request.contextPath}/resources/game/fruits/js/slot.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/resources/game/fruits/js/quantity.js" type="text/javascript"></script>
-<script>
-    var demo = Boolean(${demo_play});
-</script>
 </body>
 </html>

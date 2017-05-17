@@ -16,10 +16,18 @@ import java.util.Map;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides switch to Real money play mode operation of slot-machine.
+ * Is suitable to use with {@link by.sasnouskikh.jcasino.controller.AjaxController}.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see AjaxCommand
+ * @see by.sasnouskikh.jcasino.command.ajax.AjaxCommandFactory
+ */
 public class SwitchToRealCommand implements AjaxCommand {
     /**
-     * Executes definite operation with data parsed from request, puts processed data and messages into
-     * {@link HashMap} responseMap and returns it.
+     * Executes switch to Real money play mode operation, puts processed data and messages into {@link HashMap}
+     * responseMap and returns it.
      *
      * @param request request from client to get parameters to work with
      * @return {@link HashMap} with response parameters
@@ -34,9 +42,9 @@ public class SwitchToRealCommand implements AjaxCommand {
 
         Player     player   = (Player) session.getAttribute(ATTR_PLAYER);
         int        playerId = player.getId();
-        BigDecimal money = BigDecimal.ZERO;
+        BigDecimal money    = BigDecimal.ZERO;
         Streak     streak;
-        boolean success = true;
+        boolean    success  = true;
 
         //define data for real money play
         try (PlayerService playerService = new PlayerService();

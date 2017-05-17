@@ -290,6 +290,19 @@ public class FormValidatorTest {
 
         Assert.assertFalse(FormValidator.validateFloatAmount(invalidAmount));
     }
+    @Test
+    public void validateNewsLocaleValidCheck() {
+        String validLocale = "rU";
+
+        Assert.assertTrue(FormValidator.validateNewsLocale(validLocale));
+    }
+
+    @Test
+    public void validateNewsLocaleInvalidCheck() {
+        String invalidLocale = "rus";
+
+        Assert.assertFalse(FormValidator.validateNewsLocale(invalidLocale));
+    }
 
 
 }

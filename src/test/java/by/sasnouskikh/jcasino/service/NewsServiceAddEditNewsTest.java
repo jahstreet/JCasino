@@ -38,6 +38,7 @@ public class NewsServiceAddEditNewsTest {
     private static final String UPLOAD_DIR = "UPLOAD_DIR";
     private static final int    ADMIN_ID   = 100;
     private static final int    NEWS_ID    = 15;
+    private static final String LOCALE     = "ru_RU";
 
     static {
         NEWS.setId(NEWS_ID);
@@ -69,46 +70,46 @@ public class NewsServiceAddEditNewsTest {
 
     @Test
     public void addNewsNewsDAOCallInsertCheck() throws Exception {
-        when(newsDAO.insertNews(anyInt(), anyString(), anyString())).thenReturn(NEWS_ID);
+        when(newsDAO.insertNews(anyInt(), anyString(), anyString(), anyString())).thenReturn(NEWS_ID);
         when(newsDAO.takeNews(NEWS_ID)).thenReturn(NEWS);
-        newsService.addNews(HEADER, TEXT, fileItem, ADMIN, UPLOAD_DIR);
+        newsService.addNews(HEADER, TEXT, fileItem, LOCALE, ADMIN, UPLOAD_DIR);
 
-        verify(newsDAO).insertNews(ADMIN_ID, HEADER, TEXT);
+        verify(newsDAO).insertNews(ADMIN_ID, HEADER, TEXT, LOCALE);
     }
 
     @Test
     public void addNewsNewsDAOCallTakeCheck() throws Exception {
-        when(newsDAO.insertNews(anyInt(), anyString(), anyString())).thenReturn(NEWS_ID);
+        when(newsDAO.insertNews(anyInt(), anyString(), anyString(), anyString())).thenReturn(NEWS_ID);
         when(newsDAO.takeNews(NEWS_ID)).thenReturn(NEWS);
-        newsService.addNews(HEADER, TEXT, fileItem, ADMIN, UPLOAD_DIR);
+        newsService.addNews(HEADER, TEXT, fileItem, LOCALE, ADMIN, UPLOAD_DIR);
 
         verify(newsDAO).takeNews(NEWS_ID);
     }
 
     @Test
     public void addNewsNewsCallUpdateImageCheck() throws Exception {
-        when(newsDAO.insertNews(anyInt(), anyString(), anyString())).thenReturn(NEWS_ID);
+        when(newsDAO.insertNews(anyInt(), anyString(), anyString(), anyString())).thenReturn(NEWS_ID);
         when(newsDAO.takeNews(NEWS_ID)).thenReturn(NEWS);
-        newsService.addNews(HEADER, TEXT, fileItem, ADMIN, UPLOAD_DIR);
+        newsService.addNews(HEADER, TEXT, fileItem, LOCALE, ADMIN, UPLOAD_DIR);
 
         PowerMockito.verifyPrivate(NewsService.class).invoke("updateNewsImage", NEWS_ID, fileItem, UPLOAD_DIR);
     }
 
     @Test
     public void addNewsDAOExceptionThrownOnInsertReturnNullCheck() throws Exception {
-        when(newsDAO.insertNews(anyInt(), anyString(), anyString()))
+        when(newsDAO.insertNews(anyInt(), anyString(), anyString(), anyString()))
         .thenThrow(new DAOException("Database connection error."));
         when(newsDAO.takeNews(NEWS_ID)).thenReturn(NEWS);
 
-        Assert.assertNull(newsService.addNews(HEADER, TEXT, fileItem, ADMIN, UPLOAD_DIR));
+        Assert.assertNull(newsService.addNews(HEADER, TEXT, fileItem, LOCALE, ADMIN, UPLOAD_DIR));
     }
 
     @Test
     public void addNewsDAOExceptionThrownOnTakeReturnNullCheck() throws Exception {
-        when(newsDAO.insertNews(anyInt(), anyString(), anyString())).thenReturn(NEWS_ID);
+        when(newsDAO.insertNews(anyInt(), anyString(), anyString(), anyString())).thenReturn(NEWS_ID);
         when(newsDAO.takeNews(NEWS_ID)).thenThrow(new DAOException("Database connection error."));
 
-        Assert.assertNull(newsService.addNews(HEADER, TEXT, fileItem, ADMIN, UPLOAD_DIR));
+        Assert.assertNull(newsService.addNews(HEADER, TEXT, fileItem, LOCALE, ADMIN, UPLOAD_DIR));
     }
 
     @Test(expected = ServiceException.class)
@@ -116,37 +117,37 @@ public class NewsServiceAddEditNewsTest {
         PowerMockito.doThrow(new ServiceException("Update NEWS image error."))
                     .when(NewsService.class, "updateNewsImage", anyInt(), any(FileItem.class), anyString());
 
-        when(newsDAO.insertNews(anyInt(), anyString(), anyString())).thenReturn(NEWS_ID);
+        when(newsDAO.insertNews(anyInt(), anyString(), anyString(), anyString())).thenReturn(NEWS_ID);
         when(newsDAO.takeNews(NEWS_ID)).thenReturn(NEWS);
-        newsService.addNews(HEADER, TEXT, fileItem, ADMIN, UPLOAD_DIR);
+        newsService.addNews(HEADER, TEXT, fileItem, LOCALE, ADMIN, UPLOAD_DIR);
 
         Assert.fail("ServiceException expected to be thrown.");
     }
 
     @Test
     public void addNewsBeginTransactionSQLExceptionThrownReturnNullCheck() throws Exception {
-        when(newsDAO.insertNews(anyInt(), anyString(), anyString())).thenReturn(NEWS_ID);
+        when(newsDAO.insertNews(anyInt(), anyString(), anyString(), anyString())).thenReturn(NEWS_ID);
         when(newsDAO.takeNews(NEWS_ID)).thenReturn(NEWS);
         doThrow(new SQLException("Database connection error.")).when(daoHelper).beginTransaction();
 
-        Assert.assertNull(newsService.addNews(HEADER, TEXT, fileItem, ADMIN, UPLOAD_DIR));
+        Assert.assertNull(newsService.addNews(HEADER, TEXT, fileItem, LOCALE, ADMIN, UPLOAD_DIR));
     }
 
     @Test
     public void addNewsCommitSQLExceptionThrownReturnNullCheck() throws Exception {
-        when(newsDAO.insertNews(anyInt(), anyString(), anyString())).thenReturn(NEWS_ID);
+        when(newsDAO.insertNews(anyInt(), anyString(), anyString(), anyString())).thenReturn(NEWS_ID);
         when(newsDAO.takeNews(NEWS_ID)).thenReturn(NEWS);
         doThrow(new SQLException("Database connection error.")).when(daoHelper).commit();
 
-        Assert.assertNull(newsService.addNews(HEADER, TEXT, fileItem, ADMIN, UPLOAD_DIR));
+        Assert.assertNull(newsService.addNews(HEADER, TEXT, fileItem, LOCALE, ADMIN, UPLOAD_DIR));
     }
 
     @Test
     public void addNewsReturnCheck() throws Exception {
-        when(newsDAO.insertNews(anyInt(), anyString(), anyString())).thenReturn(NEWS_ID);
+        when(newsDAO.insertNews(anyInt(), anyString(), anyString(), anyString())).thenReturn(NEWS_ID);
         when(newsDAO.takeNews(NEWS_ID)).thenReturn(NEWS);
 
-        Assert.assertEquals(NEWS, newsService.addNews(HEADER, TEXT, fileItem, ADMIN, UPLOAD_DIR));
+        Assert.assertEquals(NEWS, newsService.addNews(HEADER, TEXT, fileItem, LOCALE, ADMIN, UPLOAD_DIR));
     }
 
     @Test

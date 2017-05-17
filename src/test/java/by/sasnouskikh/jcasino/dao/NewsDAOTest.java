@@ -23,13 +23,7 @@ public class NewsDAOTest extends AbstractDAOTest {
     private static final String XML_CHANGED_TEXT   = "by/sasnouskikh/jcasino/dao/news_data_changed_text.xml";
     private static final String XML_CHANGED_HEADER = "by/sasnouskikh/jcasino/dao/news_data_changed_header.xml";
     private static final String XML_INSERTED       = "by/sasnouskikh/jcasino/dao/news_data_inserted.xml";
-
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-        beforeData = buildDataSet(XML_NEWS_DATA);
-        DatabaseOperation.CLEAN_INSERT.execute(connection, beforeData);
-    }
+    private static final String LOCALE             = "ru_RU";
 
     @Test
     public void takeNewsCheck() throws DAOException {
@@ -151,7 +145,7 @@ public class NewsDAOTest extends AbstractDAOTest {
 
         int expectedId = 6;
 
-        int actualId = daoHelper.getNewsDAO().insertNews(adminId, newsHeader, newsText);
+        int actualId = daoHelper.getNewsDAO().insertNews(adminId, newsHeader, newsText, LOCALE);
         Assert.assertEquals(String.format("Inserted news id expected: %d, actual: %d", expectedId, actualId),
                             expectedId, actualId);
 
@@ -162,12 +156,12 @@ public class NewsDAOTest extends AbstractDAOTest {
         int      adminId    = 100;
         String   newsHeader = "header10";
         String   newsText   = "текст10";
-        String[] ignore     = {"id", "date"};
+        String[] ignore     = {"id", "date", "locale"};
 
         IDataSet expectedDataSet = buildDataSet(XML_INSERTED);
         ITable   expectedTable   = expectedDataSet.getTable(TABLE_NEWS);
 
-        daoHelper.getNewsDAO().insertNews(adminId, newsHeader, newsText);
+        daoHelper.getNewsDAO().insertNews(adminId, newsHeader, newsText, LOCALE);
         ITable actualTable = connection.createTable(TABLE_NEWS);
 
         Assertion.assertEqualsIgnoreCols(expectedTable, actualTable, ignore);
@@ -179,9 +173,16 @@ public class NewsDAOTest extends AbstractDAOTest {
         String newsHeader = "header10";
         String newsText   = "текст10";
 
-        daoHelper.getNewsDAO().insertNews(adminId, newsHeader, newsText);
+        daoHelper.getNewsDAO().insertNews(adminId, newsHeader, newsText, LOCALE);
 
         Assert.fail("A FK constraint `jcasino`.`news`, CONSTRAINT `fk_user_news` FOREIGN KEY (`admin_id`) " +
                     "REFERENCES `user` (`id`) should exist.");
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+        beforeData = buildDataSet(XML_NEWS_DATA);
+        DatabaseOperation.CLEAN_INSERT.execute(connection, beforeData);
     }
 }

@@ -149,6 +149,7 @@ public class MultipartFormCommand implements Command {
     private News addNews(List<FileItem> formItems, Admin admin, String uploadDir) throws ServiceException, UnsupportedEncodingException {
         String   header    = null;
         String   text      = null;
+        String   locale    = null;
         FileItem newsImage = null;
         boolean  valid     = true;
         for (FileItem item : formItems) {
@@ -166,6 +167,12 @@ public class MultipartFormCommand implements Command {
                         valid = false;
                     }
                 }
+                if (PARAM_LOCALE.equals(fieldName)) {
+                    locale = item.getString(UTF_8_ENCODING);
+                    if (!FormValidator.validateNewsLocale(locale)) {
+                        valid = false;
+                    }
+                }
             } else {
                 if (PARAM_NEWS_IMAGE.equals(fieldName)) {
                     newsImage = item;
@@ -173,7 +180,7 @@ public class MultipartFormCommand implements Command {
             }
         }
         try (NewsService newsService = new NewsService()) {
-            return valid ? newsService.addNews(header, text, newsImage, admin, uploadDir) : null;
+            return valid ? newsService.addNews(header, text, newsImage, locale, admin, uploadDir) : null;
         }
     }
 

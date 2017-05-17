@@ -15,23 +15,44 @@ public class News extends Entity {
     /**
      * News unique id.
      */
-    private int       id;
+    private int        id;
     /**
      * Admin id who made latest change to this news.
      */
-    private int       adminId;
+    private int        adminId;
     /**
      * Latest news change date.
      */
-    private LocalDate date;
+    private LocalDate  date;
     /**
      * News header.
      */
-    private String    header;
+    private String     header;
     /**
      * News text.
      */
-    private String    text;
+    private String     text;
+    /**
+     * News locale.
+     */
+    private NewsLocale locale;
+
+    /**
+     * News locale enumeration.
+     */
+    public enum NewsLocale {
+        RU("ru_RU"), EN("en_US");
+
+        private String locale;
+
+        NewsLocale(String locale) {
+            this.locale = locale;
+        }
+
+        public String getLocale() {
+            return locale;
+        }
+    }
 
     /**
      * {@link #id} getter.
@@ -124,6 +145,35 @@ public class News extends Entity {
     }
 
     /**
+     * {@link #locale} getter.
+     *
+     * @return {@link #locale}
+     */
+    public NewsLocale getLocale() {
+        return locale;
+    }
+
+    /**
+     * {@link #locale} setter.
+     *
+     * @param locale news locale
+     */
+    public void setLocale(NewsLocale locale) {
+        this.locale = locale;
+    }
+
+    /**
+     * Counts this instance hash code.
+     *
+     * @return counted hash code
+     * @see Objects#hash
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, adminId, date, header, text, locale);
+    }
+
+    /**
      * Checks if this instance equals given object.
      *
      * @param o object to compare with
@@ -143,18 +193,8 @@ public class News extends Entity {
                adminId == news.adminId &&
                Objects.equals(date, news.date) &&
                Objects.equals(header, news.header) &&
-               Objects.equals(text, news.text);
-    }
-
-    /**
-     * Counts this instance hash code.
-     *
-     * @return counted hash code
-     * @see Objects#hash
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, adminId, date, header, text);
+               Objects.equals(text, news.text) &&
+               Objects.equals(locale, news.locale);
     }
 
     @Override
@@ -164,6 +204,7 @@ public class News extends Entity {
                ", date=" + date +
                ", header='" + header + '\'' +
                ", text='" + text + '\'' +
+               ", locale='" + locale + '\'' +
                '}';
     }
 
@@ -171,11 +212,9 @@ public class News extends Entity {
      * Clones instance of this object.
      *
      * @return a clone of this instance.
-     * @throws CloneNotSupportedException if the object's class does not
-     *                                    support the {@code Cloneable} interface. Subclasses
-     *                                    that override the {@code clone} method can also
-     *                                    throw this exception to indicate that an instance cannot
-     *                                    be cloned.
+     * @throws CloneNotSupportedException if the object's class does not support the {@code Cloneable} interface.
+     *                                    Subclasses that override the {@code clone} method can also throw this
+     *                                    exception to indicate that an instance cannot be cloned.
      * @see Cloneable
      */
     @Override

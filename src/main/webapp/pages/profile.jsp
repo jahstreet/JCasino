@@ -121,6 +121,6 @@
         <div class="custom-link">
             <a href="${pageContext.request.contextPath}/controller?command=goto_recover_password"><fmt:message key="profile.forgotpass"/></a>
         </div>
-        <script src="${pageContext.request.contextPath}/resources/js/edit_profile.js"></script>
     </section>
 </main>
+<script src="${pageContext.request.contextPath}/resources/js/edit_profile.js"></script>

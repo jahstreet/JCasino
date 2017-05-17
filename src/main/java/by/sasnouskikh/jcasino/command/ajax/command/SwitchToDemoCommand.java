@@ -1,7 +1,6 @@
 package by.sasnouskikh.jcasino.command.ajax.command;
 
 import by.sasnouskikh.jcasino.command.ajax.AjaxCommand;
-import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
@@ -14,10 +13,18 @@ import java.util.Map;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
+/**
+ * The class provides switch to Demo-play mode operation of slot-machine.
+ * Is suitable to use with {@link by.sasnouskikh.jcasino.controller.AjaxController}.
+ *
+ * @author Sasnouskikh Aliaksandr
+ * @see AjaxCommand
+ * @see by.sasnouskikh.jcasino.command.ajax.AjaxCommandFactory
+ */
 public class SwitchToDemoCommand implements AjaxCommand {
     /**
-     * Executes definite operation with data parsed from request, puts processed data and messages into
-     * {@link HashMap} responseMap and returns it.
+     * Executes switch to Demo-play mode operation, puts processed data and messages into {@link HashMap} responseMap
+     * and returns it.
      *
      * @param request request from client to get parameters to work with
      * @return {@link HashMap} with response parameters

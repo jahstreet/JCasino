@@ -23,6 +23,7 @@ public abstract class NewsDAO extends AbstractDAO {
     protected static final String HEADER   = "header";
     protected static final String TEXT     = "text";
     protected static final String ADMIN_ID = "admin_id";
+    protected static final String LOCALE   = "locale";
 
     /**
      * Constructs DAO object by taking {@link WrappedConnection} object from {@link ConnectionPool} collection.
@@ -66,10 +67,11 @@ public abstract class NewsDAO extends AbstractDAO {
      * @param adminId id of admin who inserts {@link News} object
      * @param header  news header
      * @param text    news text
+     * @param locale  news locale
      * @return int value of inserted news id or 0
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
-    public abstract int insertNews(int adminId, String header, String text) throws DAOException;
+    public abstract int insertNews(int adminId, String header, String text, String locale) throws DAOException;
 
     /**
      * Updates definite {@link News} 'header' and fixes admin who proceeded it.

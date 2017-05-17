@@ -1,5 +1,6 @@
 package by.sasnouskikh.jcasino.validator;
 
+import by.sasnouskikh.jcasino.entity.bean.News;
 import by.sasnouskikh.jcasino.entity.bean.PlayerStatus;
 import by.sasnouskikh.jcasino.entity.bean.Question;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
@@ -308,6 +309,25 @@ public class FormValidator {
      */
     public static boolean validateFloatAmount(String source) {
         return source != null && matchPattern(source, AMOUNT_REGEX);
+    }
+
+    /**
+     * Validates string representation of news locale.
+     *
+     * @param locale string representation of news locale
+     * @return true if locale is valid
+     */
+    public static boolean validateNewsLocale(String locale) {
+        if (locale == null || locale.trim().isEmpty()) {
+            return true;
+        }
+        locale = locale.trim().toUpperCase();
+        for (News.NewsLocale l : News.NewsLocale.values()) {
+            if (locale.equals(l.toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

@@ -24,19 +24,19 @@ class NewsDAOImpl extends NewsDAO {
     /**
      * Selects all news.
      */
-    private static final String SQL_SELECT_ALL    = "SELECT id, date, header, text, admin_id " +
+    private static final String SQL_SELECT_ALL    = "SELECT id, date, header, text, admin_id, locale " +
                                                     "FROM news ORDER BY date DESC";
     /**
      * Selects definite news by its id.
      */
-    private static final String SQL_SELECT_BY_ID  = "SELECT id, date, header, text, admin_id " +
+    private static final String SQL_SELECT_BY_ID  = "SELECT id, date, header, text, admin_id, locale " +
                                                     "FROM news " +
                                                     "WHERE id=?";
     /**
      * Inserts news to database.
      */
-    private static final String SQL_INSERT        = "INSERT INTO news(date, header, text, admin_id) " +
-                                                    "VALUES(NOW(), ?, ?, ?)";
+    private static final String SQL_INSERT        = "INSERT INTO news(date, header, text, admin_id, locale) " +
+                                                    "VALUES(NOW(), ?, ?, ?, ?)";
     /**
      * Updates definite news header and fixes admin who proceeded it.
      */
@@ -124,6 +124,7 @@ class NewsDAOImpl extends NewsDAO {
      * @param adminId id of admin who inserts {@link News} object
      * @param header  news header
      * @param text    news text
+     * @param locale  news locale
      * @return int value of inserted news generated id or 0
      * @throws DAOException if {@link SQLException} occurred while working with database
      * @see WrappedConnection#prepareStatement(String, int)
@@ -131,11 +132,12 @@ class NewsDAOImpl extends NewsDAO {
      * @see ResultSet
      */
     @Override
-    public int insertNews(int adminId, String header, String text) throws DAOException {
+    public int insertNews(int adminId, String header, String text, String locale) throws DAOException {
         try (PreparedStatement statement = connection.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, header);
             statement.setString(2, text);
             statement.setInt(3, adminId);
+            statement.setString(4, locale);
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             return resultSet.next() ? resultSet.getInt(1) : 0;
@@ -238,6 +240,7 @@ class NewsDAOImpl extends NewsDAO {
             news.setHeader(resultSet.getString(HEADER));
             news.setText(resultSet.getString(TEXT));
             news.setAdminId(resultSet.getInt(ADMIN_ID));
+            news.setLocale(News.NewsLocale.valueOf(resultSet.getString(LOCALE).toUpperCase()));
         }
         return news;
     }

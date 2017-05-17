@@ -11,6 +11,11 @@
         <form class="add-news custom-form clearfix" name="addNews" method="POST" enctype="multipart/form-data"
               action="${pageContext.request.contextPath}/controller" accept-charset="UTF-8">
             <input type="hidden" name="command" value="add_news">
+            <select name="locale" title="<fmt:message key="manage.news.add.locale.title"/>" required>
+                <option selected disabled value=""><fmt:message key="manage.news.add.locale.title"/></option>
+                <option name="ru" value="ru"><fmt:message key="manage.news.add.locale.ru"/></option>
+                <option name="en" value="en"><fmt:message key="manage.news.add.locale.en"/></option>
+            </select>
             <input type="text" name="header" maxlength="45"
                    title="<fmt:message key="manage.news.add.header.title"/>"
                    placeholder="<fmt:message key="manage.news.add.header.holder"/>"
@@ -83,6 +88,10 @@
                     </div>
                     <p>
                         <time>${news.date}</time>
+                    <div class="locale-data">
+                        <fmt:message key="manage.news.language"/>: <fmt:message
+                            key="manage.news.add.locale.${news.locale.toString().toLowerCase()}"/>
+                    </div>
                     </p>
                     <div class="custom-link">
                         <a href="${pageContext.request.contextPath}/controller?command=delete_news&id=${news.id}">
