@@ -24,10 +24,10 @@
 </div>
 <div id="music" class="jsButton">&#9835;</div>
 <c:if test="${player != null}">
-    <div id="switchToDemo" class="switchDemo jsButton">DEMO</div>
-    <div id="switchToReal" class="switchDemo jsButton">REAL</div>
+    <div id="switchToDemo" class="switchDemo jsButton"><fmt:message key="fruits.switch.demo"/></div>
+    <div id="switchToReal" class="switchDemo jsButton"><fmt:message key="fruits.switch.real"/></div>
 </c:if>
-<div id="finishStreak" class="jsButton">END</div>
+<div id="finishStreak" class="jsButton"><fmt:message key="fruits.finish.streak"/></div>
 <div id="total-bet-info"><fmt:message key="fruits.info.total.bet"/><br/>
     <span id="total-bet">0</span>
 </div>
