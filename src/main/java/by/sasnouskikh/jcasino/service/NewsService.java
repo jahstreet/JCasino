@@ -180,6 +180,7 @@ public class NewsService extends AbstractService {
         }
         String fileSourceName = newsImage.getName();
         String fileExt        = FilenameUtils.getExtension(fileSourceName);
+        System.out.println(fileExt);
         if (fileExt == null || fileExt.isEmpty()
             || Arrays.binarySearch(AVAILABLE_NEWS_IMAGE_EXT, fileExt.toLowerCase()) == -1) {
             throw new ServiceException("Invalid file extension.");

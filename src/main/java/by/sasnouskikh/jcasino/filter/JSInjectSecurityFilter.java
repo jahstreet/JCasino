@@ -1,9 +1,5 @@
 package by.sasnouskikh.jcasino.filter;
 
-import by.sasnouskikh.jcasino.controller.DumpServerDataServlet;
-import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
-import by.sasnouskikh.jcasino.manager.ConfigConstant;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,28 +7,21 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The class provides security filter for servlet container which prevents application users access to {@link
- * DumpServerDataServlet}.
+ * The class provides security filter for servlet container which bans user who tries to make js injection attack and
+ * notifies casino administration about it via e-mail messages and logs.
  *
  * @author Sasnouskikh Aliaksandr
  * @see Filter
  * @see WebFilter
  */
-@WebFilter(filterName = "DumpRedirectFilter",
-servletNames = {"DumpServerDataServlet"},
-initParams = {@WebInitParam(name = "PAGE_INDEX", value = ConfigConstant.PAGE_INDEX)})
-public class DumpRedirectFilter implements Filter {
-
-    /**
-     * Path to index page.
-     */
-    private String indexPath;
+@WebFilter(
+filterName = "JSInjectSecurityFilter",
+urlPatterns = {"/*"}
+)
+public class JSInjectSecurityFilter implements Filter {
 
     /**
      * <p>The servlet container calls the init
@@ -45,7 +34,6 @@ public class DumpRedirectFilter implements Filter {
      * <li>Throws pressedKey ServletException
      * <li>Does not return within pressedKey time period defined by the web container
      * </ol>
-     * <p>Inits {@link #indexPath} field using init parameters.
      *
      * @param config a filter configuration object used by a servlet container to pass information to a filter during
      *               initialization
@@ -53,7 +41,6 @@ public class DumpRedirectFilter implements Filter {
      */
     @Override
     public void init(FilterConfig config) throws ServletException {
-        indexPath = config.getInitParameter("PAGE_INDEX");
     }
 
     /**
@@ -92,12 +79,6 @@ public class DumpRedirectFilter implements Filter {
      */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest   httpRequest = (HttpServletRequest) request;
-        JCasinoUser.UserRole role        = (JCasinoUser.UserRole) httpRequest.getSession().getAttribute(ConfigConstant.ATTR_ROLE);
-        if (role != JCasinoUser.UserRole.ADMIN) {
-            HttpServletResponse httpResponse = (HttpServletResponse) response;
-            httpResponse.sendRedirect(httpRequest.getContextPath() + indexPath);
-        }
         chain.doFilter(request, response);
     }
 
@@ -115,6 +96,5 @@ public class DumpRedirectFilter implements Filter {
      */
     @Override
     public void destroy() {
-        indexPath = null;
     }
 }

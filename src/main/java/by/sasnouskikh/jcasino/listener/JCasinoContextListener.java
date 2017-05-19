@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.util.Arrays;
 import java.util.List;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.CONTEXT_NEWSLIST;
@@ -50,8 +49,8 @@ public class JCasinoContextListener implements ServletContextListener {
         String databaseProps = event.getServletContext().getInitParameter(DB_PROPERTIES);
         try {
             pool = ConnectionPool.getInstance();
-            pool.initPool(databaseProps);
-            LOGGER.log(Level.INFO, "ConnectionPool was initialized.");
+            int createdConnectionsNumber = pool.initPool(databaseProps);
+            LOGGER.log(Level.INFO, "ConnectionPool was initialized with " + createdConnectionsNumber + " connections.");
         } catch (ConnectionPoolException e) {
             LOGGER.log(Level.FATAL, e);
             throw new RuntimeException(e);
@@ -75,8 +74,8 @@ public class JCasinoContextListener implements ServletContextListener {
      */
     @Override
     public void contextDestroyed(ServletContextEvent event) {
-        pool.destroyPool();
-        LOGGER.log(Level.INFO, "ConnectionPool was destroyed.");
+        int closedConnectionsNumber = pool.destroyPool();
+        LOGGER.log(Level.INFO, "ConnectionPool was destroyed. " + closedConnectionsNumber + " connections was closed.");
         LogManager.shutdown(); //to prevent exceptions and warnings on server shutdown
     }
 }

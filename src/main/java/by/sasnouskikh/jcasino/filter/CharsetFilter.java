@@ -1,5 +1,7 @@
 package by.sasnouskikh.jcasino.filter;
 
+import by.sasnouskikh.jcasino.manager.ConfigConstant;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;

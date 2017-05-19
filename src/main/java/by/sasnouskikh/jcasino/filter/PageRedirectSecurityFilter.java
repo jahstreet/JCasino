@@ -1,5 +1,7 @@
 package by.sasnouskikh.jcasino.filter;
 
+import by.sasnouskikh.jcasino.manager.ConfigConstant;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -23,7 +25,7 @@ import java.io.IOException;
 @WebFilter(
 filterName = "PageRedirectFilter",
 urlPatterns = {"/pages/*", "/game/*", "/admin/*"},
-initParams = {@WebInitParam(name = "PAGE_INDEX", value = "/index.jsp")}
+initParams = {@WebInitParam(name = "PAGE_INDEX", value = ConfigConstant.PAGE_INDEX)}
 )
 public class PageRedirectSecurityFilter implements Filter {
 

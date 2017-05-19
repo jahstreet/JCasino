@@ -100,11 +100,12 @@ public class ConnectionPool {
      * Initializes pool due to given config data. Calls at {@link HttpServlet#init()} or
      * {@link javax.servlet.ServletContextListener#contextInitialized(ServletContextEvent)}.
      *
+     * @return number of created connections
      * @throws ConnectionPoolException if {@link InterruptedException} occurred while putting {@link WrappedConnection}
      *                                 to {@link #connections}
      * @see ResourceBundle
      */
-    public void initPool(String properties) throws ConnectionPoolException {
+    public int initPool(String properties) throws ConnectionPoolException {
         ResourceBundle resourceBundle;
         try {
             resourceBundle = ResourceBundle.getBundle(properties);
@@ -125,6 +126,7 @@ public class ConnectionPool {
                 throw new ConnectionPoolException("ConnectionPool initializing was interrupted.", e);
             }
         }
+        return connections.size();
     }
 
     /**
@@ -157,8 +159,9 @@ public class ConnectionPool {
     public void returnConnection(WrappedConnection connection) {
         try {
             if (connection.isNull() || connection.isClosed() || !connection.isValid(VALIDATION_TIMEOUT)) {
-                connections.add(new WrappedConnection(url, login, password));
+                connections.put(new WrappedConnection(url, login, password));
                 LOGGER.log(Level.ERROR, "Connection was lost while returning but replaced by a new one.");
+                return;
             }
             try {
                 if (!connection.getAutoCommit()) {
@@ -169,11 +172,11 @@ public class ConnectionPool {
                 LOGGER.log(Level.DEBUG, "Connection was returned to pool. Current pool size: " + connections.size());
             } catch (SQLException e) {
                 LOGGER.log(Level.ERROR, "Exception while setting autoCommit to connection. " + e.getMessage());
-            } catch (InterruptedException e) {
-                LOGGER.log(Level.ERROR, "Putting connection back into pool was interrupted." + e.getMessage());
             }
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Database access error occurred.", e);
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.ERROR, "Putting connection back into pool was interrupted." + e.getMessage());
         }
     }
 
@@ -181,15 +184,18 @@ public class ConnectionPool {
      * Destroys pool. Calls at {@link HttpServlet#destroy()} or
      * {@link javax.servlet.ServletContextListener#contextDestroyed(ServletContextEvent)}.
      *
+     * @return number of closed connections
      * @see WrappedConnection
      * @see DriverManager
      */
-    public void destroyPool() {
+    public int destroyPool() {
+        int counter = 0;
         for (int i = 0; i < poolSize; i++) {
             try {
                 WrappedConnection connection = connections.poll(10, TimeUnit.SECONDS);
                 if (connection != null) {
                     connection.closeConnection();
+                    counter++;
                 }
             } catch (SQLException e) {
                 LOGGER.log(Level.ERROR, "Database access error occurred.", e);
@@ -209,5 +215,6 @@ public class ConnectionPool {
             instance = null;
             created.getAndSet(false);
         }
+        return counter;
     }
 }

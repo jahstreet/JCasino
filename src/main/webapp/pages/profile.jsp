@@ -10,7 +10,7 @@
             <dt><fmt:message key="profile.id"/></dt>
             <dd><span>${player.id}</span></dd>
             <dt><fmt:message key="profile.email"/></dt>
-            <dd><span>${player.email}</span>
+            <dd><span><c:out value="${player.email}"/></span>
                 <button id="change-email" type="button" class="change" onclick="changeProfileItem(event)">...</button>
                 <form name="change-email" action="${pageContext.request.contextPath}/controller" class="hidden" method="GET">
                     <input type="hidden" name="command" value="edit_profile">
@@ -26,7 +26,7 @@
             <dd><span>${player.registrationDate}</span></dd>
 
             <dt><fmt:message key="profile.fName"/></dt>
-            <dd><span>${player.profile.fName}</span>
+            <dd><span><c:out value="${player.profile.fName}"/></span>
                 <button id="change-fname" type="button" class="change" onclick="changeProfileItem(event)">...</button>
                 <form name="change-fname" action="${pageContext.request.contextPath}/controller" class="hidden" method="GET">
                     <input type="hidden" name="command" value="edit_profile">
@@ -37,7 +37,7 @@
             </dd>
 
             <dt><fmt:message key="profile.mName"/></dt>
-            <dd><span>${player.profile.mName}</span>
+            <dd><span><c:out value="${player.profile.mName}"/></span>
                 <button id="change-mname" type="button" class="change" onclick="changeProfileItem(event)">...</button>
                 <form name="change-mname" action="${pageContext.request.contextPath}/controller" class="hidden" method="GET">
                     <input type="hidden" name="command" value="edit_profile">
@@ -48,7 +48,7 @@
             </dd>
 
             <dt><fmt:message key="profile.lName"/></dt>
-            <dd><span>${player.profile.lName}</span>
+            <dd><span><c:out value="${player.profile.lName}"/></span>
                 <button id="change-lname" type="button" class="change" onclick="changeProfileItem(event)">...</button>
                 <form name="change-fname" action="${pageContext.request.contextPath}/controller" class="hidden" method="GET">
                     <input type="hidden" name="command" value="edit_profile">
@@ -59,7 +59,7 @@
             </dd>
 
             <dt><fmt:message key="profile.birthdate"/></dt>
-            <dd><span>${player.profile.birthDate}</span>
+            <dd><span><c:out value="${player.profile.birthDate}"/></span>
                 <button id="change-bdate" type="button" class="change" onclick="changeProfileItem(event)">...</button>
                 <form onsubmit="return validateBdate()" name="change-bdate"
                       action="${pageContext.request.contextPath}/controller" class="hidden" method="GET">
@@ -71,7 +71,7 @@
             </dd>
 
             <dt><fmt:message key="profile.passport"/></dt>
-            <dd><span>${player.profile.passport}</span>
+            <dd><span><c:out value="${player.profile.passport}"/></span>
                 <button id="change-passport" type="button" class="change" onclick="changeProfileItem(event)">...</button>
                 <form name="change-passport" action="${pageContext.request.contextPath}/controller" class="hidden" method="GET">
                     <input type="hidden" name="command" value="edit_profile">
@@ -83,7 +83,7 @@
             </dd>
 
             <dt><fmt:message key="profile.question"/></dt>
-            <dd><span>${player.profile.question}</span>
+            <dd><span><c:out value="${player.profile.question}"/></span>
                 <button id="change-question" type="button" class="change" onclick="changeProfileItem(event)">...</button>
                 <form name="change-question" action="${pageContext.request.contextPath}/controller" class="hidden" method="GET">
                     <input type="hidden" name="command" value="edit_profile">

@@ -22,6 +22,9 @@ public class JCasinoEncryptor {
      * @return encrypted {@link String} value
      */
     public static String encryptMD5(String source) {
+        if (source == null) {
+            return null;
+        }
         return DigestUtils.md5Hex(source);
     }
 }

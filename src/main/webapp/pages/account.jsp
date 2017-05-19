@@ -55,27 +55,30 @@
                 <fmt:message key="account.payment"/>
             </a>
         </div>
-        <c:choose>
-            <c:when test="${player.account.currentLoan == null}">
-                <div class="custom-button">
-                    <a href="${pageContext.request.contextPath}/controller?command=goto_take_loan">
-                        <fmt:message key="account.takeloan"/>
-                    </a>
-                </div>
-            </c:when>
-            <c:otherwise>
-                <div class="custom-button">
-                    <a href="${pageContext.request.contextPath}/controller?command=goto_pay_loan">
-                        <fmt:message key="account.payloan"/>
-                    </a>
-                </div>
-            </c:otherwise>
-        </c:choose>
-        <c:if test="${!player.account.status.status.toString().equals('BAN')
-                && !player.account.status.status.toString().equals('UNACTIVE')
-                && player.account.status.withdrawalLimit.compareTo(player.account.thisMonthWithdrawal) > 0
-                && player.account.currentLoan == null
-                && player.verification.status.toString().equals('VERIFIED')}">
+        <c:if test="${!player.account.status.status.toString().equals('BAN') &&
+            !player.account.status.status.toString().equals('UNACTIVE')}">
+            <c:choose>
+                <c:when test="${player.account.currentLoan == null}">
+                    <div class="custom-button">
+                        <a href="${pageContext.request.contextPath}/controller?command=goto_take_loan">
+                            <fmt:message key="account.takeloan"/>
+                        </a>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="custom-button">
+                        <a href="${pageContext.request.contextPath}/controller?command=goto_pay_loan">
+                            <fmt:message key="account.payloan"/>
+                        </a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </c:if>
+        <c:if test="${!player.account.status.status.toString().equals('BAN') &&
+                 !player.account.status.status.toString().equals('UNACTIVE') &&
+                 player.account.status.withdrawalLimit.compareTo(player.account.thisMonthWithdrawal) > 0 &&
+                 player.account.currentLoan == null &&
+                 player.verification.status.toString().equals('VERIFIED')}">
             <div class="custom-button">
                 <a href="${pageContext.request.contextPath}/controller?command=goto_withdraw_money">
                     <fmt:message key="account.withdraw"/>

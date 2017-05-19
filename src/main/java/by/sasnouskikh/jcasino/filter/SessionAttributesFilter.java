@@ -28,12 +28,9 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_ROLE;
  */
 @WebFilter(
 filterName = "SecurityFilter",
-urlPatterns = {"/controller", "/ajax"},
 servletNames = {"MainController", "AjaxController"},
-initParams = {
-             @WebInitParam(name = "ATTR_ROLE", value = ATTR_ROLE),
-             @WebInitParam(name = "ATTR_LOCALE", value = ATTR_LOCALE)
-}
+initParams = {@WebInitParam(name = "ATTR_ROLE", value = ATTR_ROLE),
+              @WebInitParam(name = "ATTR_LOCALE", value = ATTR_LOCALE)}
 )
 public class SessionAttributesFilter implements Filter {
 

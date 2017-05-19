@@ -48,7 +48,7 @@ public class AjaxCommandFactory {
     /**
      * Enumeration of Commands suitable to use with {@link by.sasnouskikh.jcasino.controller.AjaxController}.
      */
-    private enum CommandType {
+    public enum CommandType {
         SPIN,
         SWITCH_TO_REAL,
         SWITCH_TO_DEMO,
@@ -97,6 +97,9 @@ public class AjaxCommandFactory {
         AjaxCommand command;
         if (role == JCasinoUser.UserRole.PLAYER) {
             command = playerCommands.get(commandType);
+        } else if (role == JCasinoUser.UserRole.ADMIN) {
+            //stub
+            command = null;
         } else {
             command = guestCommands.get(commandType);
         }

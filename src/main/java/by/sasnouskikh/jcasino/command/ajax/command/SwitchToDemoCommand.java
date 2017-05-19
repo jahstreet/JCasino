@@ -41,9 +41,14 @@ public class SwitchToDemoCommand implements AjaxCommand {
         boolean success;
 
         //try to finish current streak
-        try (StreakService streakService = new StreakService()) {
-            StreakService.completeStreak(currentStreak);
-            success = streakService.updateStreak(currentStreak);
+        if (currentStreak != null) {
+            try (StreakService streakService = new StreakService()) {
+                StreakService.completeStreak(currentStreak);
+                success = streakService.updateStreak(currentStreak);
+            }
+        } else {
+            responseMap.put(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_NULL_STREAK_COMPLETE_ERROR));
+            return responseMap;
         }
 
         if (success) {

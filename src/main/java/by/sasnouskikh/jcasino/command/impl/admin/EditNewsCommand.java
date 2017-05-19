@@ -76,12 +76,12 @@ public class EditNewsCommand implements Command {
             valid = false;
         }
 
-        if (!FormValidator.validateNewsHeader(header)) {
+        if (header != null && !FormValidator.validateNewsHeader(header)) {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NEWS_HEADER)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
 
-        if (!FormValidator.validateNewsText(text)) {
+        if (text != null && !FormValidator.validateNewsText(text)) {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NEWS_TEXT)).append(MESSAGE_SEPARATOR);
             valid = false;
         }

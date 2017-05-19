@@ -75,16 +75,16 @@ public class TakeLoanCommand implements Command {
             valid = false;
         }
 
-        if (!FormValidator.validatePassword(password)) {
+        if (FormValidator.validatePassword(password)) {
+            try (UserService userService = new UserService()) {
+                if (!userService.checkPassword(player, password)) {
+                    errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(MESSAGE_SEPARATOR);
+                    valid = false;
+                }
+            }
+        } else {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(MESSAGE_SEPARATOR);
             valid = false;
-        }
-
-        try (UserService userService = new UserService()) {
-            if (!userService.checkPassword(player, password)) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(MESSAGE_SEPARATOR);
-                valid = false;
-            }
         }
 
         if (valid) {

@@ -29,78 +29,82 @@
             <input type="submit" value="<fmt:message key="manage.news.add.submit"/>"/>
         </form>
 
-        <hr/>
+
         <%--edit--%>
-        <div class="holder"></div>
-        <hr/>
-        <ul id="itemContainer">
-            <c:forEach var="news" items="${newsList}">
-                <li class="edit-news-list">
-                        <%--header--%>
-                    <div class="edit-block">
-                        <h3>${news.header}</h3>
-                        <button id="change-header" type="button" class="change" onclick="changeNewsItem(event)">
-                            ...
-                        </button>
-                        <form name="change-header" action="${pageContext.request.contextPath}/controller"
-                              class="hidden edit-news" method="GET">
-                            <input type="hidden" name="command" value="edit_news">
-                            <input type="hidden" name="id" value="${news.id}">
-                            <input type="text" name="header" value="${news.header}"
-                                   placeholder="<fmt:message key="manage.news.change.header.holder"/>"
-                                   title="<fmt:message key="manage.news.change.header.title"/>"
-                                   maxlength="45" required>
-                            <input type="submit" value="<fmt:message key="manage.news.change.submit"/>">
-                        </form>
-                    </div>
-                        <%--image--%>
-                    <div class="edit-block">
-                        <img src="${pageContext.request.contextPath}/image/news/news-image${news.id}.jpg"
-                             alt="news-image${news.id}">
-                        <button id="change-image" type="button" class="change" onclick="changeNewsItem(event)">
-                            ...
-                        </button>
-                        <form name="change-image" action="${pageContext.request.contextPath}/controller"
-                              class="hidden edit-news" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="command" value="edit_news">
-                            <input type="hidden" name="id" value="${news.id}">
-                            <input type="file" name="news_image"
-                                   title="<fmt:message key="manage.news.change.image.title"/>" required>
-                            <input type="submit" value="<fmt:message key="manage.news.change.submit"/>">
-                        </form>
-                    </div>
-                        <%--text--%>
-                    <div class="edit-block">
-                        <p class="news-text">${news.text}</p>
-                        <button id="change-text" type="button" class="change" onclick="changeNewsItem(event)">
-                            ...
-                        </button>
-                        <form name="change-text" action="${pageContext.request.contextPath}/controller"
-                              class="hidden edit-news" method="GET">
-                            <input type="hidden" name="command" value="edit_news">
-                            <input type="hidden" name="id" value="${news.id}">
-                            <textarea name="text" rows="8" maxlength="700" wrap="soft"
-                                      title="<fmt:message key="manage.news.change.textarea.title"/>"
-                                      placeholder="<fmt:message key="manage.news.change.textarea.holder"/>"
-                                      required>${news.text}</textarea>
-                            <input type="submit" value="<fmt:message key="manage.news.change.submit"/>">
-                        </form>
-                    </div>
-                    <p>
-                        <time>${news.date}</time>
-                    <div class="locale-data">
-                        <fmt:message key="manage.news.language"/>: <fmt:message
-                            key="manage.news.add.locale.${news.locale.toString().toLowerCase()}"/>
-                    </div>
-                    </p>
-                    <div class="custom-link">
-                        <a href="${pageContext.request.contextPath}/controller?command=delete_news&id=${news.id}">
-                            <fmt:message key="manage.change.news.delete"/></a>
-                    </div>
-                    <hr/>
-                </li>
-            </c:forEach>
-        </ul>
+        <c:if test="${newsList!=null && !newsList.isEmpty()}">
+            <hr/>
+            <div class="holder"></div>
+            <hr/>
+            <ul id="itemContainer">
+                <c:forEach var="news" items="${newsList}">
+                    <li class="edit-news-list">
+                            <%--header--%>
+                        <div class="edit-block">
+                            <h3><c:out value="${news.header}"/></h3>
+                            <button id="change-header" type="button" class="change" onclick="changeNewsItem(event)">
+                                ...
+                            </button>
+                            <form name="change-header" action="${pageContext.request.contextPath}/controller"
+                                  class="hidden edit-news" method="GET">
+                                <input type="hidden" name="command" value="edit_news">
+                                <input type="hidden" name="id" value="${news.id}">
+                                <input type="text" name="header" value="${news.header}"
+                                       placeholder="<fmt:message key="manage.news.change.header.holder"/>"
+                                       title="<fmt:message key="manage.news.change.header.title"/>"
+                                       maxlength="45" required>
+                                <input type="submit" value="<fmt:message key="manage.news.change.submit"/>">
+                            </form>
+                        </div>
+                            <%--image--%>
+                        <div class="edit-block">
+                            <img src="${pageContext.request.contextPath}/image/news/news-image${news.id}.jpg"
+                                 alt="news-image${news.id}">
+                            <button id="change-image" type="button" class="change" onclick="changeNewsItem(event)">
+                                ...
+                            </button>
+                            <form name="change-image" action="${pageContext.request.contextPath}/controller"
+                                  class="hidden edit-news" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="command" value="edit_news">
+                                <input type="hidden" name="id" value="${news.id}">
+                                <input type="file" name="news_image"
+                                       title="<fmt:message key="manage.news.change.image.title"/>" required>
+                                <input type="submit" value="<fmt:message key="manage.news.change.submit"/>">
+                            </form>
+                        </div>
+                            <%--text--%>
+                        <div class="edit-block">
+                            <p class="news-text"><c:out value="${news.text}"/></p>
+                            <button id="change-text" type="button" class="change" onclick="changeNewsItem(event)">
+                                ...
+                            </button>
+                            <form name="change-text" action="${pageContext.request.contextPath}/controller"
+                                  class="hidden edit-news" method="GET">
+                                <input type="hidden" name="command" value="edit_news">
+                                <input type="hidden" name="id" value="${news.id}">
+                                <textarea name="text" rows="8" maxlength="700" wrap="soft"
+                                          title="<fmt:message key="manage.news.change.textarea.title"/>"
+                                          placeholder="<fmt:message key="manage.news.change.textarea.holder"/>"
+                                          required>${news.text}</textarea>
+                                <input type="submit" value="<fmt:message key="manage.news.change.submit"/>">
+                            </form>
+                        </div>
+                        <div class="edit-block">
+                            <time>${news.date}</time>
+                            <div class="locale-data">
+                                <fmt:message key="manage.news.language"/>: <fmt:message
+                                    key="manage.news.add.locale.${news.locale.toString().toLowerCase()}"/>
+                            </div>
+                        </div>
+                        <div class="custom-link">
+                            <a href="${pageContext.request.contextPath}/controller?command=delete_news&id=${news.id}">
+                                <fmt:message key="manage.change.news.delete"/></a>
+                        </div>
+                        <hr/>
+                    </li>
+                </c:forEach>
+            </ul>
+            <div class="holder"></div>
+        </c:if>
     </section>
 </main>
 <script src="${pageContext.request.contextPath}/resources/js/manage_news.js"></script>

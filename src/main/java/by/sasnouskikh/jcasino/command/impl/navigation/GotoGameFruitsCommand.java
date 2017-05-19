@@ -3,6 +3,8 @@ package by.sasnouskikh.jcasino.command.impl.navigation;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
+import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
+import by.sasnouskikh.jcasino.entity.bean.PlayerStatus;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;

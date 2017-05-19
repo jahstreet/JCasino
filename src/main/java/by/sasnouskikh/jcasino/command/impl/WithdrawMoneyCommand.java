@@ -4,6 +4,8 @@ import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
+import by.sasnouskikh.jcasino.entity.bean.PlayerStatus;
+import by.sasnouskikh.jcasino.entity.bean.PlayerVerification;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
@@ -55,17 +57,17 @@ public class WithdrawMoneyCommand implements Command {
         StringBuilder  errorMessage   = new StringBuilder();
         PageNavigator  navigator;
 
-        boolean       valid                  = true;
-        Player        player                 = (Player) session.getAttribute(ATTR_PLAYER);
-        PlayerAccount account                = player.getAccount();
-        BigDecimal    balance                = account.getBalance();
-        BigDecimal    currentMonthWithdrawal = account.getThisMonthWithdrawal();
-        BigDecimal    withdrawalLimit        = account.getStatus().getWithdrawalLimit();
-        BigDecimal    maxWithdrawal          = withdrawalLimit.subtract(currentMonthWithdrawal);
-
+        boolean    valid        = true;
+        Player     player       = (Player) session.getAttribute(ATTR_PLAYER);
         String     stringAmount = request.getParameter(PARAM_AMOUNT);
         String     password     = request.getParameter(PARAM_PASSWORD);
         BigDecimal amount       = null;
+
+        PlayerAccount           account                = player.getAccount();
+        BigDecimal              balance                = account.getBalance();
+        BigDecimal              currentMonthWithdrawal = account.getThisMonthWithdrawal();
+        BigDecimal              withdrawalLimit        = account.getStatus().getWithdrawalLimit();
+        BigDecimal              maxWithdrawal          = withdrawalLimit.subtract(currentMonthWithdrawal);
 
         if (FormValidator.validateAmount(stringAmount)) {
             amount = BigDecimal.valueOf(Double.parseDouble(stringAmount));
@@ -85,7 +87,6 @@ public class WithdrawMoneyCommand implements Command {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_AMOUNT)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
-        //TODO check if user validation status allows to withdraw money
 
         if (!FormValidator.validatePassword(password)) {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(MESSAGE_SEPARATOR);

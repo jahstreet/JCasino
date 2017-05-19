@@ -93,7 +93,7 @@
                             </td>
                             <td>${j:formatDateTime(question.questionDate, "dd-MM-yyyy HH:mm")}</td>
                             <td><fmt:message key="support.topic.${question.topic.toString().toLowerCase()}"/></td>
-                            <td>${question.question}</td>
+                            <td><c:out value="${question.question}"/></td>
                             <td>${j:formatDateTime(question.answerDate, "dd-MM-yyyy HH:mm")}</td>
                             <td>
                                 <c:choose>
@@ -104,9 +104,7 @@
                                             </a>
                                         </div>
                                     </c:when>
-                                    <c:otherwise>
-                                        ${question.answer}
-                                    </c:otherwise>
+                                    <c:otherwise><c:out value="${question.answer}"/></c:otherwise>
                                 </c:choose>
                             </td>
                             <td>

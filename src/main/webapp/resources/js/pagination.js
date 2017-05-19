@@ -32,7 +32,7 @@
         direction: "forward", // backwards || auto || random ||
         animation: "", // http://daneden.me/animate/ - any entrance animations
         fallback: 400,
-        minHeight: true,
+        minHeight: false,
         callback: undefined // function( pages, items ) { }
       };
 

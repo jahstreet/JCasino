@@ -3,9 +3,17 @@ package by.sasnouskikh.jcasino.command.impl.navigation;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.controller.MainController;
+import by.sasnouskikh.jcasino.entity.bean.Player;
+import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
+import by.sasnouskikh.jcasino.entity.bean.PlayerStatus;
+import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.PlayerService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
 /**
  * The class provides navigating to game setup page.

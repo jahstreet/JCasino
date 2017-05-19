@@ -79,7 +79,7 @@ public class FormValidator {
      * @return true if password valid
      */
     public static boolean validatePassword(String password) {
-        return !(password == null || password.trim().isEmpty()) && matchPattern(password, PASSWORD_REGEX);
+        return password != null && !password.trim().isEmpty() && matchPattern(password, PASSWORD_REGEX);
     }
 
     /**

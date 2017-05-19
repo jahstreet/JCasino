@@ -43,19 +43,17 @@ public class SwitchToRealCommand implements AjaxCommand {
         Player     player   = (Player) session.getAttribute(ATTR_PLAYER);
         int        playerId = player.getId();
         BigDecimal money    = BigDecimal.ZERO;
-        Streak     streak;
-        boolean    success  = true;
+        Streak     streak   = null;
+        boolean    success;
 
         //define data for real money play
         try (PlayerService playerService = new PlayerService();
              StreakService streakService = new StreakService()) {
             if (playerService.updateAccountInfo(player)) {
                 money = player.getAccount().getBalance();
+                streak = streakService.generateStreak(playerId);
+                success = (streak) != null;
             } else {
-                success = false;
-            }
-            streak = streakService.generateStreak(playerId);
-            if (streak == null) {
                 success = false;
             }
         }

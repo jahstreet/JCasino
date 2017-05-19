@@ -42,13 +42,18 @@ public class FinishStreakCommand implements AjaxCommand {
         boolean success       = true;
 
         //try to finish current streak
-        if (!demo) {
-            try (StreakService streakService = new StreakService()) {
+        if (currentStreak != null) {
+            if (!demo) {
+                try (StreakService streakService = new StreakService()) {
+                    StreakService.completeStreak(currentStreak);
+                    success = streakService.updateStreak(currentStreak);
+                }
+            } else {
                 StreakService.completeStreak(currentStreak);
-                success = streakService.updateStreak(currentStreak);
             }
         } else {
-            StreakService.completeStreak(currentStreak);
+            responseMap.put(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_NULL_STREAK_COMPLETE_ERROR));
+            return responseMap;
         }
 
         if (success) {

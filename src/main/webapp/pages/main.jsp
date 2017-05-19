@@ -18,17 +18,18 @@
         <div class="holder"></div>
         <ul id="itemContainer">
             <c:forEach var="news" items="${newsList}">
-                <c:if test="${news.locale.locale.equals(locale) || ((locale == null || locale.equals('default')) && news.locale.locale.equals('ru_RU'))}">
+                <c:if test="${news.locale.locale.equals(locale) ||
+                ((locale == null || locale.equals('default')) && news.locale.locale.equals('ru_RU'))}">
                     <li>
                         <details>
                             <summary>
-                                <h3>${news.header}</h3>
+                                <h3><c:out value="${news.header}"/></h3>
                                 <img src="${pageContext.request.contextPath}/image/news/news-image${news.id}.jpg"
                                      alt="news-image${news.id}">
                                 <span><fmt:message key="news.summary"/>...</span>
                             </summary>
-                            <p class="news-text">${news.text}</p>
-                            <a href="#"><fmt:message key="news.more"/>...</a>
+                            <p class="news-text"><c:out value="${news.text}"/></p>
+                            <%--<a href="#"><fmt:message key="news.more"/>...</a>--%>
                         </details>
                         <p>
                             <time>${news.date}</time>

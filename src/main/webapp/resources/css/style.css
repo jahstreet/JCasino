@@ -820,6 +820,10 @@ div.custom-button:focus {
     color: #000;
 }
 
+.edit-block time {
+    width: 100%;
+}
+
 .edit-block > *:not([class="hidden edit-news"]) {
     display: inline-block;
 }

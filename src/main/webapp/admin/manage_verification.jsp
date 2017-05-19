@@ -61,7 +61,7 @@
                         </td>
                         <td>${verification.adminId}</td>
                         <td>${j:formatDateTime(verification.verificationDate, "dd.MM.yyyy HH:mm")}</td>
-                        <td>${verification.commentary}</td>
+                        <td><c:out value="${verification.commentary}"/></td>
                         <td>
                             <div class="custom-link">
                                 <a href="${pageContext.request.contextPath}/controller?command=goto_manage_player&id=${verification.playerId}">

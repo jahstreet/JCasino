@@ -16,9 +16,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
@@ -37,18 +35,7 @@ public class DumpServerDataServlet extends HttpServlet {
     private static final String TARGET_NEWS   = "news";
     private static final String TARGET_LOGS   = "logs";
     private static final String ZIP_FILE_NAME = "dump.zip";
-    private static final String LOGS_DIR = "/opt/tomcat/temp/logs";
-
-    /**
-     * Processes request sent by POST method. Is unsupported in this {@link HttpServlet}.
-     *
-     * @param request  request from client to get parameters to work with
-     * @param response response to client with parameters to work with on client side
-     * @see HttpServletRequest
-     * @see HttpServletResponse
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
+    private static final String LOGS_DIR      = "/opt/tomcat/temp/logs";
 
     /**
      * Processes request sent by GET method. Writes to {@link HttpServletResponse} zip-archive found by taken path.
@@ -95,6 +82,17 @@ public class DumpServerDataServlet extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(QueryManager.takePreviousQuery(request));
             dispatcher.forward(request, response);
         }
+    }
+
+    /**
+     * Processes request sent by POST method. Is unsupported in this {@link HttpServlet}.
+     *
+     * @param request  request from client to get parameters to work with
+     * @param response response to client with parameters to work with on client side
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     private void writeZipFile(File file, HttpServletResponse response) throws IOException {

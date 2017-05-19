@@ -131,7 +131,7 @@ public class CommandFactory {
     /**
      * Enumeration of Commands suitable to use with {@link by.sasnouskikh.jcasino.controller.MainController}.
      */
-    private enum CommandType {
+    public enum CommandType {
         LOGIN,
         LOGOUT,
         REGISTER,
