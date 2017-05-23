@@ -99,7 +99,16 @@
             </c:if>
 
             <dt><fmt:message key="verification.status"/></dt>
-            <dd>${player.verification.status.toString().replaceAll("_", " ")}</dd>
+            <dd>
+                <c:choose>
+                    <c:when test="${player.verification.status.toString().equals('VERIFIED')}">
+                        <fmt:message key="verification.ok"/>
+                    </c:when>
+                    <c:otherwise>
+                        <fmt:message key="verification.no"/>
+                    </c:otherwise>
+                </c:choose>
+            </dd>
 
             <c:if test="${player.verification.profileVerified
                 && player.verification.emailVerified

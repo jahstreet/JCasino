@@ -11,14 +11,14 @@
               action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="command" value="show_loans">
             <div class="input-block">
-                <label for="operation-month_acquire"><fmt:message key="manage.loans.input.month.aquire.label"/></label>
-                <input id="operation-month_acquire" type="month" name="month_acquire" value="${month_acquire_input}"
+                <label for="operation-month-acquire"><fmt:message key="manage.loans.input.month.aquire.label"/></label>
+                <input id="operation-month-acquire" type="month" name="month_acquire" value="${month_acquire_input}"
                        title="<fmt:message key="manage.transactions.input.month.title"/>"
                        min="2017-01">
             </div>
             <div class="input-block">
-                <label for="operation-month_expire"><fmt:message key="manage.loans.input.month.expire.label"/></label>
-                <input id="operation-month_expire" type="month" name="month_expire" value="${month_expire_input}"
+                <label for="operation-month-expire"><fmt:message key="manage.loans.input.month.expire.label"/></label>
+                <input id="operation-month-expire" type="month" name="month_expire" value="${month_expire_input}"
                        title="<fmt:message key="manage.transactions.input.month.title"/>"
                        min="2017-01">
             </div>

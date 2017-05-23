@@ -939,6 +939,57 @@ div.rules-table-container {
     content: '*';
 }
 
+[id^=slider-range] {
+    width: 80%;
+    align-self: center;
+}
+
+.range-input {
+    text-align: center;
+}
+
+.ui-widget.ui-widget-content {
+    border: none;
+}
+
+.ui-widget-content {
+    background: rgba(255, 0, 0, 0.8);
+}
+
+.ui-widget-header {
+    background: #ab0000;
+}
+
+.ui-slider .ui-slider-handle {
+    cursor: pointer;
+}
+
+.ui-slider-handle {
+    outline: none;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active {
+    border: none;
+    background: #ff0000;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
+    border: none;
+    background: #ff0000;
+}
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover {
+    border: none;
+    background: rgba(220, 0, 0, 1);
+}
+
 /*tablets and big landscape mobiles*/
 @media only screen and (min-width: 640px) {
     body {

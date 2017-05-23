@@ -52,9 +52,9 @@
                         <tr>
                             <td>${j:formatDateTime(question.questionDate, "dd-MM-yyyy HH:mm")}</td>
                             <td><fmt:message key="support.topic.${question.topic.toString().toLowerCase()}"/></td>
-                            <td>${question.question}</td>
+                            <td><c:out value="${question.question}"/></td>
                             <td>${j:formatDateTime(question.answerDate, "dd-MM-yyyy HH:mm")}</td>
-                            <td>${question.answer}</td>
+                            <td><c:out value="${question.answer}"/></td>
                             <td>
                                 <c:choose>
                                     <c:when test="${question.satisfaction != null}">

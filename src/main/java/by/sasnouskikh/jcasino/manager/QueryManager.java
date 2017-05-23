@@ -20,6 +20,8 @@ public class QueryManager {
 
     private static final Logger LOGGER = LogManager.getLogger(QueryManager.class);
 
+    private static final String STUB = "********";
+
     /**
      * Outer forbidding to create this class instances.
      */
@@ -57,13 +59,10 @@ public class QueryManager {
      *
      * @param request {@link HttpServletRequest} object
      * @see #buildQueryString(HttpServletRequest)
-     * @see #buildLog(String, JCasinoUser)
+     * @see #buildLog(HttpServletRequest)
      */
     public static void logQuery(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        JCasinoUser user    = (JCasinoUser) session.getAttribute(ATTR_USER);
-        String      query   = buildQueryString(request);
-        LOGGER.log(Level.INFO, buildLog(query, user));
+        LOGGER.log(Level.INFO, buildLog(request));
     }
 
     /**
@@ -78,6 +77,20 @@ public class QueryManager {
         HttpSession session = request.getSession();
         JCasinoUser user    = (JCasinoUser) session.getAttribute(ATTR_USER);
         LOGGER.log(Level.INFO, buildLog(query, user));
+    }
+
+    /**
+     * Builds log due to query and user role.
+     *
+     * @param request {@link HttpServletRequest} object
+     * @return built log value
+     * @see #buildLog(String, JCasinoUser)
+     */
+    public static String buildLog(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        JCasinoUser user    = (JCasinoUser) session.getAttribute(ATTR_USER);
+        String      query   = buildQueryString(request);
+        return buildLog(query, user);
     }
 
     /**
@@ -117,6 +130,12 @@ public class QueryManager {
         while (params.hasMoreElements()) {
             key = params.nextElement();
             value = request.getParameter(key);
+            if (key.equalsIgnoreCase(PARAM_PASSWORD) ||
+                key.equalsIgnoreCase(PARAM_PASSWORD_AGAIN) ||
+                key.equalsIgnoreCase(PARAM_PASSWORD_OLD) ||
+                key.equalsIgnoreCase(PARAM_SECRET_ANSWER)) {
+                value = STUB;
+            }
             query = query.append(PARAMETER_SEPARATOR).append(key).append(VALUE_SEPARATOR).append(value);
         }
 
@@ -129,4 +148,5 @@ public class QueryManager {
         }
         return result;
     }
+
 }

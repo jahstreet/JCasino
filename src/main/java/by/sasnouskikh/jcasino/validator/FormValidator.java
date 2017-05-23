@@ -2,6 +2,7 @@ package by.sasnouskikh.jcasino.validator;
 
 import by.sasnouskikh.jcasino.entity.bean.News;
 import by.sasnouskikh.jcasino.entity.bean.PlayerStatus;
+import by.sasnouskikh.jcasino.entity.bean.PlayerVerification;
 import by.sasnouskikh.jcasino.entity.bean.Question;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
 import org.apache.commons.lang.StringUtils;
@@ -43,6 +44,7 @@ public class FormValidator {
     private static final String PASSPORT_REGEX          = "\\w{1,30}";
     private static final String AMOUNT_REGEX            = "^[0-9]{1,7}\\.?[0-9]{0,2}$";
     private static final String DATE_MONTH_REGEX        = "^[12][0-9]{3}\\-((0[1-9])|(1[0-2]))$";
+    private static final String NUMBER_RANGE_REGEX      = "^\\d+\\D+\\d+$";
 
     /**
      * Private constructor to forbid create {@link FormValidator} instances.
@@ -328,6 +330,35 @@ public class FormValidator {
             }
         }
         return false;
+    }
+
+    /**
+     * Validates string representation of verification status.
+     *
+     * @param status string representation of verification status
+     * @return true if status is valid
+     */
+    public static boolean validateVerificationStatus(String status) {
+        if (status == null || status.trim().isEmpty()) {
+            return false;
+        }
+        status = status.trim().toUpperCase();
+        for (PlayerVerification.VerificationStatus s : PlayerVerification.VerificationStatus.values()) {
+            if (status.equals(s.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Validates string representation of number range.
+     *
+     * @param range string representation of number range
+     * @return true if number range is valid
+     */
+    public static boolean validateNumberRange(String range) {
+        return range != null && matchPattern(range, NUMBER_RANGE_REGEX);
     }
 
     /**

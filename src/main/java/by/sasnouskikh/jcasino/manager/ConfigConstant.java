@@ -40,6 +40,7 @@ public class ConfigConstant {
     public static final String WHITESPACE            = " ";
     public static final String DOT                   = ".";
     public static final String ALL                   = "all";
+    public static final String RANGE_SPLITERATOR     = "\\D+";
 
     /**
      * Profile verification byte masks
@@ -103,6 +104,7 @@ public class ConfigConstant {
     public static final String ATTR_MONTH_ACQUIRE_INPUT = "month_acquire_input";
     public static final String ATTR_MONTH_EXPIRE_INPUT  = "month_expire_input";
     public static final String ATTR_PASSPORT_INPUT      = "passport_input";
+    public static final String ATTR_PLAYERS             = "players";
     public static final String ATTR_QUESTION            = "question";
     public static final String ATTR_QUESTION_INPUT      = "question_input";
     public static final String ATTR_QUESTION_LIST       = "questionList";
@@ -116,11 +118,13 @@ public class ConfigConstant {
      */
     public static final String PARAM_AMOUNT               = "amount";
     public static final String PARAM_ANSWER               = "answer";
+    public static final String PARAM_BALANCE              = "balance";
     public static final String PARAM_BET                  = "bet";
     public static final String PARAM_BIRTHDATE            = "birthdate";
     public static final String PARAM_COMMAND              = "command";
     public static final String PARAM_COMMENTARY           = "commentary";
     public static final String PARAM_DEMO                 = "demo";
+    public static final String PARAM_DISABLE_RANGES       = "disable_ranges";
     public static final String PARAM_EMAIL                = "email";
     public static final String PARAM_EMAIL_CODE           = "email_code";
     public static final String PARAM_FILTER_NOT_PAID      = "filter_not_paid";
@@ -149,6 +153,7 @@ public class ConfigConstant {
     public static final String PARAM_PASSWORD_OLD         = "old_password";
     public static final String PARAM_QUESTION             = "question";
     public static final String PARAM_SORT_BY_SATISFACTION = "satisfaction";
+    public static final String PARAM_SECRET_ANSWER        = "secret_answer";
     public static final String PARAM_SCAN                 = "scan";
     public static final String PARAM_TARGET               = "target";
     public static final String PARAM_FILTER_MY            = "show_my";
@@ -159,6 +164,8 @@ public class ConfigConstant {
     public static final String PARAM_TEXT                 = "text";
     public static final String PARAM_TOPIC                = "topic";
     public static final String PARAM_TYPE                 = "type";
+    public static final String PARAM_VERIFICATION         = "verification";
+    public static final String PARAM_WITHDRAWAL           = "withdrawal";
 
     /**
      * Server message property keys
@@ -181,6 +188,7 @@ public class ConfigConstant {
     public static final String MESSAGE_PLAYER_NOT_EXIST           = "player.not.exist";
     public static final String MESSAGE_PLAYER_EMAIL_EXIST         = "player.email.exist";
     public static final String MESSAGE_PLAYER_NO_LOANS            = "player.no.loans";
+    public static final String MESSAGE_NO_PLAYERS                 = "no.players";
     public static final String MESSAGE_PLAYER_NO_STREAKS          = "player.no.streaks";
     public static final String MESSAGE_PLAYER_NO_QUESTIONS        = "player.no.questions";
     public static final String MESSAGE_PLAYER_NO_TRANSACTIONS     = "player.no.transactions";
@@ -286,6 +294,7 @@ public class ConfigConstant {
      */
     public static final String PAGE_ADMIN               = "/admin/jcasino_admin.jsp";
     public static final String PAGE_MANAGE_NEWS         = "/admin/manage_news.jsp";
+    public static final String PAGE_MANAGE_PLAYERS      = "/admin/manage_players.jsp";
     public static final String PAGE_MANAGE_SUPPORT      = "/admin/manage_support.jsp";
     public static final String PAGE_ANSWER_SUPPORT      = "/admin/answer_support.jsp";
     public static final String PAGE_MANAGE_VERIFICATION = "/admin/manage_verification.jsp";
@@ -305,6 +314,7 @@ public class ConfigConstant {
     public static final String GOTO_MANAGE_VERIFICATION = "/controller?command=goto_manage_verification";
     public static final String GOTO_MANAGE_LOANS        = "/controller?command=goto_manage_loans";
     public static final String GOTO_MANAGE_PLAYER       = "/controller?command=goto_manage_player";
+    public static final String GOTO_MANAGE_PLAYERS      = "/controller?command=goto_manage_players";
     public static final String GOTO_MANAGE_TRANSACTIONS = "/controller?command=goto_manage_transactions";
     public static final String GOTO_MANAGE_STREAKS      = "/controller?command=goto_manage_streaks";
     public static final String GOTO_STATS_REPORT        = "/controller?command=goto_manage_report";

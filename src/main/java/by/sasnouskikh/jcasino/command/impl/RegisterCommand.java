@@ -59,7 +59,7 @@ public class RegisterCommand implements Command {
                 String lName     = request.getParameter(PARAM_LNAME);
                 String passport  = request.getParameter(PARAM_PASSPORT);
                 String question  = request.getParameter(PARAM_QUESTION);
-                String answer    = request.getParameter(PARAM_ANSWER);
+                String answer    = request.getParameter(PARAM_SECRET_ANSWER);
                 if (playerService.registerPlayer(email, password, fName, mName, lName, birthDate, passport,
                                                  question, answer)) {
                     navigator = PageNavigator.REDIRECT_GOTO_INDEX;
@@ -96,7 +96,7 @@ public class RegisterCommand implements Command {
         String lName         = request.getParameter(PARAM_LNAME);
         String passport      = request.getParameter(PARAM_PASSPORT);
         String question      = request.getParameter(PARAM_QUESTION);
-        String answer        = request.getParameter(PARAM_ANSWER);
+        String answer        = request.getParameter(PARAM_SECRET_ANSWER);
 
         if (validateEmail(email)) {
             request.setAttribute(ATTR_EMAIL_INPUT, email);

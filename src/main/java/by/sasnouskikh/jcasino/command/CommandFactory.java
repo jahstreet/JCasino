@@ -34,7 +34,7 @@ public class CommandFactory {
      * {@link HashMap} collection of commands available to
      * {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole#GUEST}.
      */
-    private static HashMap<CommandType, Command> guestCommands  = new HashMap<>();
+    private static HashMap<CommandType, Command> guestCommands = new HashMap<>();
 
     /**
      * {@link HashMap} collection of commands available to
@@ -46,7 +46,7 @@ public class CommandFactory {
      * {@link HashMap} collection of commands available to
      * {@link by.sasnouskikh.jcasino.entity.bean.JCasinoUser.UserRole#ADMIN}.
      */
-    private static HashMap<CommandType, Command> adminCommands  = new HashMap<>();
+    private static HashMap<CommandType, Command> adminCommands = new HashMap<>();
 
     static {
         Command logout    = new LogoutCommand();
@@ -103,6 +103,7 @@ public class CommandFactory {
         adminCommands.put(CommandType.LOGOUT, logout);
         adminCommands.put(CommandType.EDIT_NEWS, new EditNewsCommand());
         adminCommands.put(CommandType.DELETE_NEWS, new DeleteNewsCommand());
+        adminCommands.put(CommandType.SHOW_PLAYERS, new ShowPlayersCommand());
         adminCommands.put(CommandType.SHOW_QUESTIONS, new ShowQuestionsCommand());
         adminCommands.put(CommandType.SHOW_ANSWERS, new ShowAnswersCommand());
         adminCommands.put(CommandType.SHOW_TRANSACTIONS, new ShowTransactionsCommand());
@@ -118,6 +119,7 @@ public class CommandFactory {
         adminCommands.put(CommandType.SHOW_PLAYER_LOANS, new ShowPlayerLoansCommand());
         adminCommands.put(CommandType.GOTO_ADMIN, new GotoAdminCommand());
         adminCommands.put(CommandType.GOTO_MANAGE_NEWS, new GotoManageNewsCommand());
+        adminCommands.put(CommandType.GOTO_MANAGE_PLAYERS, new GotoManagePlayersCommand());
         adminCommands.put(CommandType.GOTO_MANAGE_SUPPORT, new GotoManageSupportCommand());
         adminCommands.put(CommandType.GOTO_ANSWER_SUPPORT, new GotoAnswerSupportCommand());
         adminCommands.put(CommandType.GOTO_MANAGE_VERIFICATION, new GotoManageVerificationCommand());
@@ -131,7 +133,7 @@ public class CommandFactory {
     /**
      * Enumeration of Commands suitable to use with {@link by.sasnouskikh.jcasino.controller.MainController}.
      */
-    public enum CommandType {
+    private enum CommandType {
         LOGIN,
         LOGOUT,
         REGISTER,
@@ -181,6 +183,7 @@ public class CommandFactory {
         VERIFY_SCAN,
         CANCEL_SCAN_VERIFICATION,
         CHANGE_ACCOUNT_STATUS,
+        SHOW_PLAYERS,
         SHOW_PLAYER_SUPPORT,
         SHOW_PLAYER_TRANSACTIONS,
         SHOW_PLAYER_STREAKS,
@@ -191,6 +194,7 @@ public class CommandFactory {
         GOTO_MANAGE_VERIFICATION,
         GOTO_MANAGE_LOANS,
         GOTO_MANAGE_PLAYER,
+        GOTO_MANAGE_PLAYERS,
         GOTO_MANAGE_TRANSACTIONS,
         GOTO_MANAGE_STREAKS,
         GOTO_STATS_REPORT,

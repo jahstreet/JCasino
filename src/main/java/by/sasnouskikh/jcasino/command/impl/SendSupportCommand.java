@@ -84,7 +84,7 @@ public class SendSupportCommand implements Command {
         if (valid) {
             try (QuestionService questionService = new QuestionService()) {
                 if (questionService.sendSupport(player, email, topic, question)) {
-                    navigator = PageNavigator.REDIRECT_GOTO_MAIN;
+                    navigator = PageNavigator.REDIRECT_GOTO_SUPPORT;
                 } else {
                     request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_SEND_SUPPORT_INTERRUPTED));
                     navigator = PageNavigator.FORWARD_PAGE_SUPPORT;

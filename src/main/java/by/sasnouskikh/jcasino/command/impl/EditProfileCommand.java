@@ -68,7 +68,7 @@ public class EditProfileCommand implements Command {
         String birthDate     = request.getParameter(PARAM_BIRTHDATE);
         String passport      = request.getParameter(PARAM_PASSPORT);
         String question      = request.getParameter(PARAM_QUESTION);
-        String answer        = request.getParameter(PARAM_ANSWER);
+        String answer        = request.getParameter(PARAM_SECRET_ANSWER);
         String passwordOld   = request.getParameter(PARAM_PASSWORD_OLD);
         String password      = request.getParameter(PARAM_PASSWORD);
         String passwordAgain = request.getParameter(PARAM_PASSWORD_AGAIN);

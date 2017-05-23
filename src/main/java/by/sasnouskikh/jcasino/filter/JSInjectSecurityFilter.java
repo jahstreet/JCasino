@@ -1,5 +1,13 @@
 package by.sasnouskikh.jcasino.filter;
 
+import by.sasnouskikh.jcasino.mailer.MailerException;
+import by.sasnouskikh.jcasino.mailer.MailerSSL;
+import by.sasnouskikh.jcasino.manager.QueryManager;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -7,10 +15,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Map;
 
 /**
- * The class provides security filter for servlet container which bans user who tries to make js injection attack and
+ * The class provides security filter for servlet container which bans users who try to make js injection attack and
  * notifies casino administration about it via e-mail messages and logs.
  *
  * @author Sasnouskikh Aliaksandr
@@ -19,9 +29,15 @@ import java.io.IOException;
  */
 @WebFilter(
 filterName = "JSInjectSecurityFilter",
-urlPatterns = {"/*"}
+servletNames = {"MainController"}
 )
 public class JSInjectSecurityFilter implements Filter {
+
+    private static final Logger LOGGER = LogManager.getLogger(JSInjectSecurityFilter.class);
+
+    private static final String[] warnValues           = new String[]{"<script>"};
+    private static final String   securityEmailSubject = "JS injection attempt";
+    private static final String   rootAdminEmail       = "jahstreetlove@gmail.com";
 
     /**
      * <p>The servlet container calls the init
@@ -79,6 +95,29 @@ public class JSInjectSecurityFilter implements Filter {
      */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        if (!ServletFileUpload.isMultipartContent(httpRequest)) {
+            Map<String, String[]> parameterMap = httpRequest.getParameterMap();
+            for (Map.Entry<String, String[]> pair : parameterMap.entrySet()) {
+                String[] values = pair.getValue();
+                for (String value : values) {
+                    for (String warnValue : warnValues) {
+                        if (value != null && value.toLowerCase().contains(warnValue)) {
+                            String log = QueryManager.buildLog(httpRequest);
+                            new Thread(() -> {
+                                String text = "User tried to inject JS script. Log data: " + log;
+                                try {
+                                    MailerSSL.sendEmail(securityEmailSubject, text, rootAdminEmail);
+                                } catch (MailerException e) {
+                                    LOGGER.log(Level.WARN, "Root admin e-mail sending error occurred. E-mail text: "
+                                                           + text + ". Thrown exception details: " + e.getMessage());
+                                }
+                            }).start();
+                        }
+                    }
+                }
+            }
+        }
         chain.doFilter(request, response);
     }
 

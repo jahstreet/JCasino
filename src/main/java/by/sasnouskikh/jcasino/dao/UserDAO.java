@@ -5,6 +5,7 @@ import by.sasnouskikh.jcasino.db.WrappedConnection;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * The class provides DAO abstraction for {@link JCasinoUser} objects.
@@ -78,6 +79,15 @@ public abstract class UserDAO extends AbstractDAO {
      * @throws DAOException if {@link SQLException} occurred while working with database
      */
     public abstract JCasinoUser takeUser(String email) throws DAOException;
+
+    /**
+     * Takes list of {@link JCasinoUser} object due to given patterns.
+     *
+     * @param idPattern pattern of user id conforming to <code>SQL LIKE</code> operator
+     * @return taken list of {@link JCasinoUser} objects or null
+     * @throws DAOException if {@link SQLException} occurred while working with database
+     */
+    public abstract List<JCasinoUser> takeUserList(String idPattern) throws DAOException;
 
     /**
      * Checks if definite {@link JCasinoUser} password matches to given password. Passwords are encrypted by MD5

@@ -90,7 +90,7 @@
                     <input type="text" name="question" value=""
                            placeholder="<fmt:message key="profile.question.change.holder"/>"
                            maxlength="64" title="<fmt:message key="register.question.title"/>">
-                    <input type="text" name="answer" value="" placeholder="<fmt:message key="profile.answer.change.holder"/>"
+                    <input type="text" name="secret_answer" value="" placeholder="<fmt:message key="profile.answer.change.holder"/>"
                            maxlength="32" title="<fmt:message key="register.answer.title"/>">
                     <input type="submit" value="<fmt:message key="profile.change.submit"/>">
                 </form>

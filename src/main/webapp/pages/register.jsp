@@ -63,7 +63,7 @@
             </div>
             <div class="input-block">
                 <label for="answer-input"><fmt:message key="register.answer"/></label>
-                <input id="answer-input" type="text" name="answer" value="${answer_input}" maxlength="32"
+                <input id="answer-input" type="text" name="secret_answer" value="${answer_input}" maxlength="32"
                        title="<fmt:message key="register.answer.title"/>"/>
             </div>
             <div class="input-block">

@@ -10,6 +10,8 @@ import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class provides {@link UserDAO} implementation for MySQL database.
@@ -38,6 +40,12 @@ class UserDAOImpl extends UserDAO {
     private static final String SQL_SELECT_BY_ID    = "SELECT id, email, role, registration_date " +
                                                       "FROM user " +
                                                       "WHERE id=?";
+    /**
+     * Select users due to given patterns.
+     */
+    private static final String SQL_SELECT_USERS    = "SELECT id, email, role, registration_date " +
+                                                      "FROM user " +
+                                                      "WHERE id LIKE ?";
     /**
      * Select user by its e-mail.
      */
@@ -159,6 +167,24 @@ class UserDAOImpl extends UserDAO {
     }
 
     /**
+     * Takes list of {@link JCasinoUser} object due to given patterns.
+     *
+     * @param idPattern pattern of user id conforming to <code>SQL LIKE</code> operator
+     * @return taken list of {@link JCasinoUser} objects or null
+     * @throws DAOException if {@link SQLException} occurred while working with database
+     */
+    @Override
+    public List<JCasinoUser> takeUserList(String idPattern) throws DAOException {
+        try (PreparedStatement statement = connection.prepareStatement(SQL_SELECT_USERS)) {
+            statement.setString(1, idPattern);
+            ResultSet resultSet = statement.executeQuery();
+            return buildUserList(resultSet);
+        } catch (SQLException e) {
+            throw new DAOException("Database connection error. " + e);
+        }
+    }
+
+    /**
      * Checks if definite {@link JCasinoUser} password matches to given password. Passwords are encrypted by MD5
      * encryptor.
      *
@@ -186,9 +212,8 @@ class UserDAOImpl extends UserDAO {
      *
      * @param resultSet {@link ResultSet} object to parse
      * @return parsed {@link JCasinoUser} object or null
-     * @throws SQLException if the columnLabel is not valid;
-     *                      if a database access error occurs or this method is
-     *                      called on a closed result set
+     * @throws SQLException if the columnLabel is not valid; if a database access error occurs or this method is called
+     *                      on a closed result set
      */
     private JCasinoUser buildUser(ResultSet resultSet) throws SQLException {
         JCasinoUser user = null;
@@ -200,5 +225,17 @@ class UserDAOImpl extends UserDAO {
             user.setRegistrationDate(resultSet.getDate(REGISTRATION_DATE).toLocalDate());
         }
         return user;
+    }
+
+    private List<JCasinoUser> buildUserList(ResultSet resultSet) throws SQLException {
+        List<JCasinoUser> userList = new ArrayList<>();
+        JCasinoUser       user;
+        do {
+            user = buildUser(resultSet);
+            if (user != null) {
+                userList.add(user);
+            }
+        } while (user != null);
+        return !userList.isEmpty() ? userList : null;
     }
 }
