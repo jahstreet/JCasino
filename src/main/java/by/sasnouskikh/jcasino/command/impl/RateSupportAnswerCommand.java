@@ -4,7 +4,6 @@ import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
-import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.service.QuestionService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
@@ -36,14 +35,12 @@ public class RateSupportAnswerCommand implements Command {
      * @param request request from client to get parameters to work with
      * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
      * by.sasnouskikh.jcasino.controller.MainController})
-     * @see QueryManager
      * @see MessageManager
      * @see FormValidator
      * @see QuestionService#rateAnswer(int, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
-        QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
         MessageManager messageManager = MessageManager.getMessageManager(locale);

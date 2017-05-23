@@ -4,7 +4,6 @@ import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
-import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.service.PlayerService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
@@ -37,21 +36,56 @@ public class RegisterCommand implements Command {
      * @param request request from client to get parameters to work with
      * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
      * by.sasnouskikh.jcasino.controller.MainController})
-     * @see QueryManager
      * @see MessageManager
      * @see FormValidator
      * @see PlayerService#registerPlayer(String, String, String, String, String, String, String, String, String)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
-        QueryManager.logQuery(request);
+        HttpSession    session        = request.getSession();
+        String         locale         = (String) session.getAttribute(ATTR_LOCALE);
+        MessageManager messageManager = MessageManager.getMessageManager(locale);
+        PageNavigator  navigator;
+
+        String errorMessage = validateRequestParams(request);
+
+        if (errorMessage.isEmpty()) {
+            try (PlayerService playerService = new PlayerService()) {
+                String email     = request.getParameter(PARAM_EMAIL);
+                String password  = request.getParameter(PARAM_PASSWORD);
+                String birthDate = request.getParameter(PARAM_BIRTHDATE);
+                String fName     = request.getParameter(PARAM_FNAME);
+                String mName     = request.getParameter(PARAM_MNAME);
+                String lName     = request.getParameter(PARAM_LNAME);
+                String passport  = request.getParameter(PARAM_PASSPORT);
+                String question  = request.getParameter(PARAM_QUESTION);
+                String answer    = request.getParameter(PARAM_ANSWER);
+                if (playerService.registerPlayer(email, password, fName, mName, lName, birthDate, passport,
+                                                 question, answer)) {
+                    navigator = PageNavigator.REDIRECT_GOTO_INDEX;
+                } else {
+                    request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_EMAIL_EXIST));
+                    navigator = PageNavigator.FORWARD_PAGE_REGISTER;
+                }
+            }
+        } else {
+            request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage);
+            navigator = PageNavigator.FORWARD_PAGE_REGISTER;
+        }
+        return navigator;
+    }
+
+    /**
+     * Provides request parameters validation
+     *
+     * @param request request from client to get parameters to validate
+     * @return error message built while validating or empty string
+     */
+    private static String validateRequestParams(HttpServletRequest request) {
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
         MessageManager messageManager = MessageManager.getMessageManager(locale);
         StringBuilder  errorMessage   = new StringBuilder();
-        PageNavigator  navigator;
-
-        boolean valid = true;
 
         String email         = request.getParameter(PARAM_EMAIL);
         String password      = request.getParameter(PARAM_PASSWORD);
@@ -68,76 +102,53 @@ public class RegisterCommand implements Command {
             request.setAttribute(ATTR_EMAIL_INPUT, email);
         } else {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_EMAIL)).append(MESSAGE_SEPARATOR);
-            valid = false;
         }
 
         if (!validatePassword(password, passwordAgain)) {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(WHITESPACE)
                         .append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH)).append(MESSAGE_SEPARATOR);
-            valid = false;
         }
 
         if (validateBirthdate(birthDate)) {
             request.setAttribute(ATTR_BIRTHDATE_INPUT, birthDate);
         } else {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_BIRTHDATE)).append(MESSAGE_SEPARATOR);
-            valid = false;
         }
 
-        boolean fNameValid = validateName(fName);
-        boolean mNameValid = validateName(mName);
-        boolean lNameValid = validateName(lName);
-        if (fNameValid) {
+        if (validateName(fName)) {
             request.setAttribute(ATTR_FNAME_INPUT, fName);
+        } else {
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
         }
-        if (mNameValid) {
+        if (validateName(mName)) {
             request.setAttribute(ATTR_MNAME_INPUT, mName);
+        } else {
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
         }
-        if (lNameValid) {
+        if (validateName(lName)) {
             request.setAttribute(ATTR_LNAME_INPUT, lName);
-        }
-        for (boolean nameValid : new boolean[]{fNameValid, mNameValid, lNameValid}) {
-            if (!nameValid) {
-                errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
-                valid = false;
-                break;
-            }
+        } else {
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_NAME)).append(MESSAGE_SEPARATOR);
         }
 
         if (validatePassport(passport)) {
             request.setAttribute(ATTR_PASSPORT_INPUT, passport);
         } else {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSPORT)).append(MESSAGE_SEPARATOR);
-            valid = false;
         }
 
         if (validateQuestion(question)) {
             request.setAttribute(ATTR_QUESTION_INPUT, question);
         } else {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_QUESTION)).append(MESSAGE_SEPARATOR);
-            valid = false;
         }
 
         if (validateAnswer(answer)) {
             request.setAttribute(ATTR_ANSWER_INPUT, answer);
         } else {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_ANSWER)).append(MESSAGE_SEPARATOR);
-            valid = false;
         }
 
-        if (valid) {
-            try (PlayerService playerService = new PlayerService()) {
-                if (playerService.registerPlayer(email, password, fName, mName, lName, birthDate, passport, question, answer)) {
-                    navigator = PageNavigator.REDIRECT_GOTO_INDEX;
-                } else {
-                    request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_EMAIL_EXIST));
-                    navigator = PageNavigator.FORWARD_PAGE_REGISTER;
-                }
-            }
-        } else {
-            request.setAttribute(ATTR_ERROR_MESSAGE, errorMessage.toString().trim());
-            navigator = PageNavigator.FORWARD_PAGE_REGISTER;
-        }
-        return navigator;
+        return errorMessage.toString().trim();
     }
 }

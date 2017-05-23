@@ -33,7 +33,7 @@ public class BackFromGameCommand implements Command {
     public PageNavigator execute(HttpServletRequest request) {
         QueryManager.saveQueryToSession(request);
         HttpSession session = request.getSession();
-        if (session.getAttribute(ATTR_DEMO_PLAY) != null){
+        if (session.getAttribute(ATTR_DEMO_PLAY) != null) {
             session.removeAttribute(ATTR_DEMO_PLAY);
             session.removeAttribute(ATTR_CURRENT_STREAK);
         }

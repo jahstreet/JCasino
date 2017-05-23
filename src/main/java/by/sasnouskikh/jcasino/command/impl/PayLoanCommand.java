@@ -6,7 +6,6 @@ import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.PlayerAccount;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
-import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.service.LoanService;
 import by.sasnouskikh.jcasino.service.UserService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
@@ -40,14 +39,12 @@ public class PayLoanCommand implements Command {
      * @param request request from client to get parameters to work with
      * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
      * by.sasnouskikh.jcasino.controller.MainController})
-     * @see QueryManager
      * @see MessageManager
      * @see FormValidator
      * @see LoanService#payLoan(Player, BigDecimal)
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
-        QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
         MessageManager messageManager = MessageManager.getMessageManager(locale);
@@ -81,6 +78,7 @@ public class PayLoanCommand implements Command {
             errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_PASSWORD)).append(MESSAGE_SEPARATOR);
             valid = false;
         }
+
         try (UserService userService = new UserService()) {
             if (!userService.checkPassword(player, password)) {
                 errorMessage.append(messageManager.getMessage(MESSAGE_PASSWORD_MISMATCH_CURRENT)).append(MESSAGE_SEPARATOR);

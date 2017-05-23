@@ -27,24 +27,14 @@ public class QueryManager {
     }
 
     /**
-     * Saves query to {@link HttpSession} as {@link ConfigConstant#ATTR_PREV_QUERY} attribute with logging.
+     * Saves query to {@link HttpSession} as {@link ConfigConstant#ATTR_PREV_QUERY} attribute.
      *
      * @param request {@link HttpServletRequest} object
      * @see #logQuery(HttpServletRequest)
      */
     public static void saveQueryToSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        String      query   = logQuery(request);
-        session.setAttribute(ATTR_PREV_QUERY, query);
-    }
-
-    /**
-     * Saves query to {@link HttpSession} as {@link ConfigConstant#ATTR_PREV_QUERY} attribute without logging.
-     *
-     * @param session {@link HttpSession} object
-     * @param query   query to save
-     */
-    public static void saveQueryToSession(HttpSession session, String query) {
+        String      query   = buildQueryString(request);
         session.setAttribute(ATTR_PREV_QUERY, query);
     }
 
@@ -63,18 +53,17 @@ public class QueryManager {
     }
 
     /**
-     * Logs query built from given request and returns it.
+     * Logs query built from given request.
      *
      * @param request {@link HttpServletRequest} object
-     * @return built query value
      * @see #buildQueryString(HttpServletRequest)
      * @see #buildLog(String, JCasinoUser)
      */
-    public static String logQuery(HttpServletRequest request) {
-        String      query   = buildQueryString(request);
+    public static void logQuery(HttpServletRequest request) {
         HttpSession session = request.getSession();
         JCasinoUser user    = (JCasinoUser) session.getAttribute(ATTR_USER);
-        return buildLog(query, user);
+        String      query   = buildQueryString(request);
+        LOGGER.log(Level.INFO, buildLog(query, user));
     }
 
     /**
@@ -82,14 +71,13 @@ public class QueryManager {
      *
      * @param request {@link HttpServletRequest} object
      * @param query   query to log
-     * @return built query value
      * @see #buildQueryString(HttpServletRequest)
      * @see #buildLog(String, JCasinoUser)
      */
-    public static String logMultipartQuery(HttpServletRequest request, String query) {
+    public static void logMultipartQuery(HttpServletRequest request, String query) {
         HttpSession session = request.getSession();
         JCasinoUser user    = (JCasinoUser) session.getAttribute(ATTR_USER);
-        return buildLog(query, user);
+        LOGGER.log(Level.INFO, buildLog(query, user));
     }
 
     /**
@@ -100,15 +88,16 @@ public class QueryManager {
      * @return built log value
      */
     private static String buildLog(String query, JCasinoUser user) {
+        String log;
         if (user == null) {
-            LOGGER.log(Level.INFO, "guest called " + query);
+            log = "guest called " + query;
         } else {
-            String login = user.getEmail();
+            String email = user.getEmail();
             String role  = user.getRole().getRole();
             int    id    = user.getId();
-            LOGGER.log(Level.INFO, role + " " + login + " (id=" + id + ") called " + query);
+            log = role + " " + email + " (id=" + id + ") called " + query;
         }
-        return query;
+        return log;
     }
 
     /**

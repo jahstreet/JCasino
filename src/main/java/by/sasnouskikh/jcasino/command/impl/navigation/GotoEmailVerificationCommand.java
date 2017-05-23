@@ -3,10 +3,10 @@ package by.sasnouskikh.jcasino.command.impl.navigation;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Player;
-import by.sasnouskikh.jcasino.service.PlayerService;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.PlayerService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,8 +33,8 @@ public class GotoEmailVerificationCommand implements Command {
      * and navigates to {@link PageNavigator#FORWARD_PAGE_VERIFICATION}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      * @see MessageManager
      * @see PlayerService#sendEmailCode(Player, String)
@@ -57,7 +57,6 @@ public class GotoEmailVerificationCommand implements Command {
                 QueryManager.saveQueryToSession(request);
                 navigator = PageNavigator.FORWARD_PAGE_EMAIL_VERIFICATION;
             } else {
-                QueryManager.logQuery(request);
                 request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_CODE_NOT_SENT_ERROR));
                 navigator = PageNavigator.FORWARD_PAGE_VERIFICATION;
             }

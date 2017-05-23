@@ -1,7 +1,7 @@
 package by.sasnouskikh.jcasino.filter;
 
-import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
-import by.sasnouskikh.jcasino.manager.ConfigConstant;
+import by.sasnouskikh.jcasino.manager.QueryManager;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -11,39 +11,23 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_LOCALE;
-import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_ROLE;
-
 /**
- * The class provides security filter for servlet container which monitors each session to have locale and role
- * attributes set.
+ * The class provides filter for servlet container which logs every client not multipart-form request query to
+ * controllers.
  *
  * @author Sasnouskikh Aliaksandr
  * @see Filter
  * @see WebFilter
  */
 @WebFilter(
-filterName = "SecurityFilter",
-servletNames = {"MainController", "AjaxController"},
-initParams = {@WebInitParam(name = "ATTR_ROLE", value = ATTR_ROLE),
-              @WebInitParam(name = "ATTR_LOCALE", value = ATTR_LOCALE)},
-dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD}
+filterName = "LogFilter",
+servletNames = {"MainController", "AjaxController", "DumpServerDataServlet"},
+dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC}
 )
-public class SessionAttributesFilter implements Filter {
-
-    /**
-     * Role attribute name.
-     */
-    private String role;
-    /**
-     * Locale attribute name.
-     */
-    private String locale;
+public class LogFilter implements Filter {
 
     /**
      * <p>The servlet container calls the init
@@ -56,16 +40,13 @@ public class SessionAttributesFilter implements Filter {
      * <li>Throws pressedKey ServletException
      * <li>Does not return within pressedKey time period defined by the web container
      * </ol>
-     * <p>Inits {@link #role} and {@link #locale} fields using init parameters.
      *
      * @param config a filter configuration object used by a servlet container to pass information to a filter during
      *               initialization
      * @see FilterConfig#getInitParameter(String)
      */
-    @Override
     public void init(FilterConfig config) throws ServletException {
-        role = config.getInitParameter("ATTR_ROLE");
-        locale = config.getInitParameter("ATTR_LOCALE");
+
     }
 
     /**
@@ -102,19 +83,9 @@ public class SessionAttributesFilter implements Filter {
      *                 in the chain, or if the calling filter is the last filter in the chain, to invoke the resource at
      *                 the end of the chain
      */
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req        = (HttpServletRequest) request;
-        HttpSession        session    = req.getSession();
-        Object             userRole   = session.getAttribute(role);
-        Object             userLocale = session.getAttribute(locale);
-        if (userRole == null) {
-            userRole = JCasinoUser.UserRole.GUEST;
-            session.setAttribute(role, userRole);
-        }
-        if (userLocale == null) {
-            userLocale = ConfigConstant.DEFAULT_LOCALE;
-            session.setAttribute(locale, userLocale);
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+        if (!ServletFileUpload.isMultipartContent((HttpServletRequest) request)) {
+            QueryManager.logQuery((HttpServletRequest) request);
         }
         chain.doFilter(request, response);
     }
@@ -131,9 +102,7 @@ public class SessionAttributesFilter implements Filter {
      * threads) and make sure that any persistent state is synchronized
      * with the filter's current state in memory.
      */
-    @Override
     public void destroy() {
-        role = null;
-        locale = null;
     }
+
 }

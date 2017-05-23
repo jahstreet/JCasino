@@ -24,8 +24,8 @@ public class GotoTakeLoanCommand implements Command {
      * Saves current query to session and navigates to take loan page for player.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      */
     @Override
@@ -42,7 +42,6 @@ public class GotoTakeLoanCommand implements Command {
                 QueryManager.saveQueryToSession(request);
                 navigator = PageNavigator.FORWARD_PAGE_TAKE_LOAN;
             } else {
-                QueryManager.logQuery(request);
                 request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
                 navigator = PageNavigator.FORWARD_PREV_QUERY;
             }

@@ -8,7 +8,6 @@ import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.game.GameEngine;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
-import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.service.ServiceException;
 import by.sasnouskikh.jcasino.service.StreakService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
@@ -50,7 +49,6 @@ public class SpinCommand implements AjaxCommand {
      *
      * @param request request from client to get parameters to work with
      * @return {@link HashMap} with response parameters
-     * @see QueryManager
      * @see MessageManager
      * @see FormValidator
      * @see StreakService#generateStreak(int)
@@ -60,7 +58,6 @@ public class SpinCommand implements AjaxCommand {
      */
     @Override
     public Map<String, Object> execute(HttpServletRequest request) {
-        QueryManager.logQuery(request);
         HttpSession         session        = request.getSession();
         String              locale         = (String) session.getAttribute(ATTR_LOCALE);
         MessageManager      messageManager = MessageManager.getMessageManager(locale);
@@ -133,7 +130,7 @@ public class SpinCommand implements AjaxCommand {
             try {
                 //pass to Logic layer
                 if (!demo) {
-                    BigDecimal total = GameEngine.spin(streak, offset, lines, bet);
+                    GameEngine.spin(streak, offset, lines, bet);
                 } else {
                     GameEngine.spinDemo(streak, offset, lines, bet);
                 }

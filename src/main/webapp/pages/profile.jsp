@@ -61,7 +61,7 @@
             <dt><fmt:message key="profile.birthdate"/></dt>
             <dd><span><c:out value="${player.profile.birthDate}"/></span>
                 <button id="change-bdate" type="button" class="change" onclick="changeProfileItem(event)">...</button>
-                <form onsubmit="return validateBdate()" name="change-bdate"
+                <form onsubmit="return validateBirthdate()" name="change-bdate"
                       action="${pageContext.request.contextPath}/controller" class="hidden" method="GET">
                     <input type="hidden" name="command" value="edit_profile">
                     <input type="date" name="birthdate" value="" min="1900-01-01"

@@ -3,7 +3,6 @@ package by.sasnouskikh.jcasino.command.impl;
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
-import by.sasnouskikh.jcasino.manager.QueryManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,13 +23,11 @@ public class ChangeLocaleCommand implements Command {
      * {@link PageNavigator#FORWARD_PREV_QUERY}.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
-     * @see QueryManager
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
-        QueryManager.logQuery(request);
         HttpSession session = request.getSession();
         Object      locale  = request.getParameter(PARAM_LOCALE);
         if (locale != null) {

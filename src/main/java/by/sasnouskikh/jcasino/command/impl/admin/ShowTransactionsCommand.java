@@ -74,7 +74,6 @@ public class ShowTransactionsCommand implements Command {
             request.setAttribute(ATTR_TRANSACTIONS, transactionList);
             navigator = PageNavigator.FORWARD_PAGE_MANAGE_TRANSACTIONS;
         } else {
-            QueryManager.logQuery(request);
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_INVALID_JSP));
             navigator = PageNavigator.FORWARD_PREV_QUERY;
         }

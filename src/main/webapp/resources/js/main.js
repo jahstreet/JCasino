@@ -1,4 +1,4 @@
-$("div.holder").jPages({
+$('div.holder').jPages({
     containerID: "itemContainer",
     perPage: 6,
     startPage: 1,
@@ -7,5 +7,10 @@ $("div.holder").jPages({
     endRange: 1,
     previous: "←",
     next: "→",
-    direction: "random"
+    direction: "random",
+    callback: function (pages) {
+        if (pages.count < 2) {
+            $('div.holder')[0].style.display = "none";
+        }
+    }
 });

@@ -44,7 +44,6 @@ public class GotoManagePlayerCommand implements Command {
      * @see FormValidator
      * @see AdminService#takePlayer(int)
      */
-    @SuppressWarnings("Duplicates")
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         HttpSession    session        = request.getSession();
@@ -52,15 +51,12 @@ public class GotoManagePlayerCommand implements Command {
         MessageManager messageManager = MessageManager.getMessageManager(locale);
         PageNavigator  navigator;
 
-        int playerId;
-
         String stringId = request.getParameter(PARAM_ID);
+        int    playerId;
 
-        //suppressed duplicate warning code-block
         if (FormValidator.validateId(stringId)) {
             playerId = Integer.parseInt(stringId);
         } else {
-            QueryManager.logQuery(request);
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_INVALID_JSP));
             return PageNavigator.FORWARD_PREV_QUERY;
         }
@@ -74,7 +70,6 @@ public class GotoManagePlayerCommand implements Command {
             request.setAttribute(ATTR_PLAYER, player);
             navigator = PageNavigator.FORWARD_PAGE_MANAGE_PLAYER;
         } else {
-            QueryManager.logQuery(request);
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_NOT_EXIST));
             navigator = PageNavigator.FORWARD_PREV_QUERY;
         }

@@ -5,7 +5,6 @@ import by.sasnouskikh.jcasino.command.PageNavigator;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.manager.ConfigConstant;
 import by.sasnouskikh.jcasino.manager.MessageManager;
-import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.service.VerificationService;
 import by.sasnouskikh.jcasino.validator.FormValidator;
 
@@ -37,15 +36,12 @@ public class VerifyScanCommand implements Command {
      * @param request request from client to get parameters to work with
      * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
      * by.sasnouskikh.jcasino.controller.MainController})
-     * @see QueryManager
      * @see MessageManager
      * @see FormValidator
      * @see VerificationService#changePlayerVerStatus(int, byte, VerificationService.MaskOperation, Admin, String)
      */
-    @SuppressWarnings("Duplicates")
     @Override
     public PageNavigator execute(HttpServletRequest request) {
-        QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
         MessageManager messageManager = MessageManager.getMessageManager(locale);
@@ -56,11 +52,9 @@ public class VerifyScanCommand implements Command {
         String playerIdString = request.getParameter(PARAM_ID);
         int    playerId;
 
-        //suppressed duplicate warning code-block
         if (FormValidator.validateId(playerIdString)) {
             playerId = Integer.parseInt(playerIdString);
         } else {
-            QueryManager.logQuery(request);
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_INVALID_JSP));
             return PageNavigator.FORWARD_PREV_QUERY;
         }

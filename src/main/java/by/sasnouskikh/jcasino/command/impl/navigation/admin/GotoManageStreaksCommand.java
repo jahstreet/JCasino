@@ -18,8 +18,8 @@ public class GotoManageStreaksCommand implements Command {
      * Saves current query to session and navigates to manage streaks page.
      *
      * @param request request from client to get parameters to work with
-     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for
-     * {@link by.sasnouskikh.jcasino.controller.MainController})
+     * @return {@link PageNavigator} with response parameters (contains 'query' and 'response type' data for {@link
+     * by.sasnouskikh.jcasino.controller.MainController})
      * @see QueryManager
      */
     @Override

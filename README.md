@@ -7,11 +7,11 @@ Used technologies:
   - Back-end: Java 8, Servlet, WebFilter, WebListener, JSP, JSTL, Java Mail;
   - Database: JDBC, MySQL (with some stored procedures), self-written connection-pool;
   - Tests: JUnit 4, DBUnit, Mockito, PowerMockito, IntelliJ IDEA code coverage tool;
-  - Other: Tomcat, Maven, local and remote deployment support (used Jelastic platform), some fail-safe and scalability features.
+  - Other: Tomcat, Maven, Log4j2, local and remote deployment support (used Jelastic platform), some fail-safe and scalability features.
     
 Application architecture:
 
-  - Client <-> Server ( [WebFilter, WebListener] [Controller <-> Command <-> Service <-> {DAO]) <-> MySQL RDMS}
+  - Client <-> Server ( [WebFilter, WebListener] [Controller <-> Command <-> Service <-> { DAO] ) <-> MySQL RDMS }
   
 Used design patterns:
 
@@ -24,9 +24,10 @@ Used design patterns:
   - Model-View-Controller;
   - GRASP patterns;
   - ACID transaction system;
+  - partial REST features;
   - other...
   
-Application functional:
+Application features:
 
   - Player:
     - Registration, login/logout;
@@ -34,33 +35,33 @@ Application functional:
       e-mail), uploaded passport scan image (by Admin));
     - Technical support(Player asks questions to Admin and rates answers, Player takes answer to his control panel and 
       e-mail);
-    - Player profile editing, changing and recovering password;
-    - Viewing player stats data;
-    - Viewing player account data, replenishing and withdrawing money (stub), taking loan;
-    - Viewing player operation history with some filters;
+    - Edit Player profile, change and recover password;
+    - View player stats data;
+    - View player account data, replenishing and withdrawing money (stub), taking loan;
+    - View player operation history with some filters;
     - All the Slot-Machine games functional.
     
   - Admin:
     - Login/logout;
-    - Adding/editting/deleting news;
-    - Player verification with comments;
-    - Viewing technical support with some filters, answering Player questions;
-    - Viewing transactions data with some filters;
-    - Viewing streaks data with some filters;
-    - Viewing loans data with some filters;
-    - Viewing any Player data;
-    - Changing player status with comments.
+    - Add/edit/delete news;
+    - Verify Player with comments;
+    - View technical support with some filters, answering Player questions;
+    - View transactions data with some filters;
+    - View streaks data with some filters;
+    - View loans data with some filters;
+    - View any Player data;
+    - Change player status with comments.
     
   - JCasino Fruits Game (3-reel slot-machine with five paylines and MD5 Fairness Check FairPlay):
-    - Viewing and choosing playing lines;
-    - Choosing bet amount for 1 line, total bet counts as [1 line bet] * [number of playing lines];
-    - Choosing offset for each reel on every spin;
+    - View and choose playing lines;
+    - Choose bet amount for 1 line, total bet counts as [1 line bet] * [number of playing lines];
+    - Choose offset for each reel on every spin;
     - Finish streak (10 rolls) prematurely to see decoded streak-roll-string;
-    - Turning on/off music, sound design of game;
+    - Turn on/off music, sound design of game;
     - "Demo" and "For real money" play modes.
     
   - Other:
-    - Multilanguage support (Ru/En);
+    - Multi-language support (Ru/En);
     - News feed;
     - JavaScript pagination support;
     - Partial support for mobile devices with small screens.

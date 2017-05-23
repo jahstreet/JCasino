@@ -45,7 +45,6 @@ public class ShowPlayerTransactionsCommand implements Command {
      * @see FormValidator
      * @see TransactionService#takePlayerTransactions(int, String)
      */
-    @SuppressWarnings("Duplicates")
     @Override
     public PageNavigator execute(HttpServletRequest request) {
         HttpSession    session        = request.getSession();
@@ -56,11 +55,9 @@ public class ShowPlayerTransactionsCommand implements Command {
         String playerIdString = request.getParameter(PARAM_ID);
         int    playerId;
 
-        //suppressed duplicate warning code-block
         if (FormValidator.validateId(playerIdString)) {
             playerId = Integer.parseInt(playerIdString);
         } else {
-            QueryManager.logQuery(request);
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_INVALID_JSP));
             return PageNavigator.FORWARD_PREV_QUERY;
         }
@@ -74,7 +71,6 @@ public class ShowPlayerTransactionsCommand implements Command {
             request.setAttribute(ATTR_TRANSACTIONS, transactions);
             navigator = PageNavigator.FORWARD_PAGE_MANAGE_TRANSACTIONS;
         } else {
-            QueryManager.logQuery(request);
             request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_PLAYER_NO_TRANSACTIONS));
             navigator = PageNavigator.FORWARD_PREV_QUERY;
         }

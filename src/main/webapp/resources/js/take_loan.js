@@ -1,3 +1,4 @@
+//noinspection JSUnresolvedVariable
 var form = document.takeLoan,
     input = form.elements.amount,
     INVALID_AMOUNT;

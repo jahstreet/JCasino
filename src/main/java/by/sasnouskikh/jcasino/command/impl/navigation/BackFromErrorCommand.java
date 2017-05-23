@@ -29,10 +29,9 @@ public class BackFromErrorCommand implements Command {
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
-        QueryManager.logQuery(request);
         HttpSession session = request.getSession();
         session.removeAttribute(ATTR_ERROR_MESSAGE);
-        if (session.getAttribute(ATTR_DEMO_PLAY) != null){
+        if (session.getAttribute(ATTR_DEMO_PLAY) != null) {
             session.removeAttribute(ATTR_DEMO_PLAY);
             session.removeAttribute(ATTR_CURRENT_STREAK);
         }

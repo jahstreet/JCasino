@@ -45,7 +45,6 @@ public class GotoAnswerSupportCommand implements Command {
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
-        QueryManager.logQuery(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
         MessageManager messageManager = MessageManager.getMessageManager(locale);
@@ -68,6 +67,7 @@ public class GotoAnswerSupportCommand implements Command {
             question = questionService.takeQuestion(questionId);
         }
         if (question != null) {
+            QueryManager.saveQueryToSession(request);
             request.setAttribute(ATTR_QUESTION, question);
             navigator = PageNavigator.FORWARD_PAGE_ANSWER_SUPPORT;
         } else {

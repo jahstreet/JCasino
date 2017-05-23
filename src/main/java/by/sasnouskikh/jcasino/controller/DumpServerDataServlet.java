@@ -47,7 +47,6 @@ public class DumpServerDataServlet extends HttpServlet {
      * @see Files#copy(Path, OutputStream)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        QueryManager.logQuery(request);
         String         locale         = (String) request.getSession().getAttribute(ATTR_LOCALE);
         MessageManager messageManager = MessageManager.getMessageManager(locale);
 

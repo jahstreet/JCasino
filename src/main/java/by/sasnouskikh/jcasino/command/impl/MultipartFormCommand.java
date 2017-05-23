@@ -59,7 +59,7 @@ public class MultipartFormCommand implements Command {
      * @see QueryManager
      * @see MessageManager
      * @see FormValidator
-     * @see NewsService#addNews(String, String, FileItem, Admin, String)
+     * @see NewsService#addNews(String, String, FileItem, String, Admin, String)
      * @see NewsService#editNews(int, String, FileItem, String, Admin, String)
      * @see PlayerService#uploadPassportScan(Player, FileItem, String)
      */

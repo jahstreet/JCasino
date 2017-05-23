@@ -48,7 +48,6 @@ public class ShowHistoryCommand implements Command {
      */
     @Override
     public PageNavigator execute(HttpServletRequest request) {
-        QueryManager.saveQueryToSession(request);
         HttpSession    session        = request.getSession();
         String         locale         = (String) session.getAttribute(ATTR_LOCALE);
         MessageManager messageManager = MessageManager.getMessageManager(locale);
@@ -77,6 +76,7 @@ public class ShowHistoryCommand implements Command {
         }
 
         if (valid) {
+            QueryManager.saveQueryToSession(request);
             switch (type) {
                 case ATTR_TRANSACTIONS:
                     try (TransactionService transactionService = new TransactionService()) {

@@ -9,14 +9,15 @@ if (locale == "en_US") {
     NOT_ENOUGH_AGE = "Вам нет 18 лет";
 }
 
+//noinspection JSUnresolvedVariable
 var form = document.getElementsByName("registerForm")[0],
     pwd1 = form.elements.password,
     pwd2 = form.elements.password_again,
-    bdate = form.elements.birthdate;
+    birthdateForm = form.elements.birthdate;
 
 pwd1.addEventListener("change", checkPassword, false);
 pwd2.addEventListener("change", checkPassword, false);
-bdate.addEventListener("change", checkBdate, false);
+birthdateForm.addEventListener("change", checkBirthdate, false);
 
 function checkPassword() {
     if (pwd1.value != pwd2.value) {
@@ -26,11 +27,11 @@ function checkPassword() {
     }
 }
 
-function checkBdate() {
-    var bdateValue = new Date(bdate.value),
-        year = bdateValue.getFullYear(),
-        month = bdateValue.getMonth(),
-        day = bdateValue.getDate(),
+function checkBirthdate() {
+    var birthdateValue = new Date(birthdateForm.value),
+        year = birthdateValue.getFullYear(),
+        month = birthdateValue.getMonth(),
+        day = birthdateValue.getDate(),
         curDate = new Date(),
         curYear = curDate.getFullYear(),
         curMonth = curDate.getMonth(),
@@ -41,9 +42,9 @@ function checkBdate() {
     if (!(delYear > 18
         || delYear == 18 && delMonth > 0
         || delYear == 18 && delMonth == 0 && delDay >= 0)) {
-        bdate.setCustomValidity(NOT_ENOUGH_AGE);
+        birthdateForm.setCustomValidity(NOT_ENOUGH_AGE);
     } else {
-        bdate.setCustomValidity('');
+        birthdateForm.setCustomValidity('');
     }
 }
 
@@ -53,9 +54,9 @@ function validateRegister() {
         pwd1.focus();
         return false;
     }
-    checkBdate();
+    checkBirthdate();
     if (!form.checkValidity()) {
-        bdate.focus();
+        birthdateForm.focus();
         return false;
     }
 }

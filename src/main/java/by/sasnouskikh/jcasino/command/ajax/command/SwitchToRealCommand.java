@@ -4,7 +4,6 @@ import by.sasnouskikh.jcasino.command.ajax.AjaxCommand;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.manager.MessageManager;
-import by.sasnouskikh.jcasino.manager.QueryManager;
 import by.sasnouskikh.jcasino.service.PlayerService;
 import by.sasnouskikh.jcasino.service.StreakService;
 
@@ -34,7 +33,6 @@ public class SwitchToRealCommand implements AjaxCommand {
      */
     @Override
     public Map<String, Object> execute(HttpServletRequest request) {
-        QueryManager.logQuery(request);
         HttpSession         session        = request.getSession();
         String              locale         = (String) session.getAttribute(ATTR_LOCALE);
         MessageManager      messageManager = MessageManager.getMessageManager(locale);

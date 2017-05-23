@@ -82,6 +82,7 @@
                     <div class="holder"></div>
                 </c:when>
                 <c:when test="${streaks != null}">
+                    <div class="streakHolder"></div>
                     <table class="custom-table" id="streakItemContainer">
                         <caption><fmt:message key="history.table.streaks.caption"/></caption>
                         <thead>

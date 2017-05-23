@@ -1,4 +1,4 @@
-$("div.holder").jPages({
+$('div.holder').jPages({
     containerID: "itemContainer",
     perPage: 10,
     startPage: 1,
@@ -6,10 +6,15 @@ $("div.holder").jPages({
     midRange: 5,
     endRange: 1,
     previous: "←",
-    next: "→"
+    next: "→",
+    callback: function (pages) {
+        if (pages.count < 2) {
+            $('div.holder')[0].style.display = "none";
+        }
+    }
 });
 
-$("div.transactionHolder").jPages({
+$('div.transactionHolder').jPages({
     containerID: "transactionItemContainer",
     perPage: 10,
     startPage: 1,
@@ -17,10 +22,15 @@ $("div.transactionHolder").jPages({
     midRange: 5,
     endRange: 1,
     previous: "←",
-    next: "→"
+    next: "→",
+    callback: function (pages) {
+        if (pages.count < 2) {
+            $('div.transactionHolder')[0].style.display = "none";
+        }
+    }
 });
 
-$("div.streakHolder").jPages({
+$('div.streakHolder').jPages({
     containerID: "streakItemContainer",
     perPage: 5,
     startPage: 1,
@@ -28,5 +38,10 @@ $("div.streakHolder").jPages({
     midRange: 5,
     endRange: 1,
     previous: "↑",
-    next: "↓"
+    next: "↓",
+    callback: function (pages) {
+        if (pages.count < 2) {
+            $('div.streakHolder')[0].style.display = "none";
+        }
+    }
 });

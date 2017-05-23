@@ -51,7 +51,6 @@ public class GotoStatsCommand implements Command {
                 QueryManager.saveQueryToSession(request);
                 navigator = PageNavigator.FORWARD_PAGE_STATS;
             } else {
-                QueryManager.logQuery(request);
                 request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
                 navigator = PageNavigator.FORWARD_PREV_QUERY;
             }
