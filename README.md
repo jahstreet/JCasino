@@ -7,7 +7,7 @@ Used technologies:
   - Back-end: Java 8, Servlet, WebFilter, WebListener, JSP, JSTL, Java Mail;
   - Database: JDBC, MySQL (with some stored procedures), self-written connection-pool;
   - Tests: JUnit 4, DBUnit, Mockito, PowerMockito, IntelliJ IDEA code coverage tool;
-  - Other: Tomcat, Maven, Log4j2, local and remote deployment support (used Jelastic platform), some fail-safe and scalability features.
+  - Other: Tomcat, Maven, Log4j2, Git, JavaDoc, local and remote deployment support (used Jelastic platform), some fail-safe and scalability features.
     
 Application architecture:
 
@@ -19,12 +19,14 @@ Used design patterns:
   - Builder/Factory;
   - Lazy initialization;
   - Wrapper;
+  - Command;
+  - DAO;
+  - Observer;
   - Chain of responsibility;
   - POST-REDIRECT-GET;
-  - Model-View-Controller;
+  - MVC Layered architecture;
   - GRASP patterns;
   - ACID transaction system;
-  - partial REST features;
   - other...
   
 Application features:
@@ -46,10 +48,10 @@ Application features:
     - Add/edit/delete news;
     - Verify Player with comments;
     - View technical support with some filters, answering Player questions;
-    - View transactions data with some filters;
-    - View streaks data with some filters;
-    - View loans data with some filters;
-    - View any Player data;
+    - View transactions history with some filters;
+    - View streaks history with some filters;
+    - View loans history with some filters;
+    - View Players data;
     - Change player status with comments.
     
   - JCasino Fruits Game (3-reel slot-machine with five paylines and MD5 Fairness Check FairPlay):
@@ -60,7 +62,7 @@ Application features:
     - Turn on/off music, sound design of game;
     - "Demo" and "For real money" play modes.
     
-  - Other:
+  - Common:
     - Multi-language support (Ru/En);
     - News feed;
     - JavaScript pagination support;

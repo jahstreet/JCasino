@@ -36,8 +36,8 @@ $(function () {
     range.slider({
         range: true,
         min: 0,
-        max: 100000,
-        values: [1000, 15000],
+        max: 20000,
+        values: [1000, 10000],
         slide: function (event, ui) {
             input.val(ui.values[0] + " ÷ " + ui.values[1]);
         }
