@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <main class="container">
-    <section class="slider cols col-12">
-        <img src="${pageContext.request.contextPath}/resources/img/slider-cap.png" alt="slider-image">
-    </section>
+    <%@include file="jspf/slider.jsp" %>
     <section class="left-bar cols col-4">
         <c:choose>
             <c:when test="${sessionScope.user.role != null && 'PLAYER'.equals(sessionScope.user.role.toString())}">
@@ -29,7 +27,7 @@
                                 <span><fmt:message key="news.summary"/>...</span>
                             </summary>
                             <p class="news-text"><c:out value="${news.text}"/></p>
-                            <%--<a href="#"><fmt:message key="news.more"/>...</a>--%>
+                                <%--<a href="#"><fmt:message key="news.more"/>...</a>--%>
                         </details>
                         <p>
                             <time>${news.date}</time>

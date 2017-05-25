@@ -258,15 +258,6 @@ header h1 {
 }
 
 /*menu hardcode end*/
-.slider {
-    background: #010e4c;
-    overflow: hidden;
-}
-
-.slider img {
-    max-width: 100%;
-    max-height: 15em;
-}
 
 .left-bar {
 
@@ -871,6 +862,7 @@ select.rate-select#rate-select:hover,
     text-decoration: underline;
 }
 
+/*rules*/
 .rules {
     color: #fff;
     padding: 0 1.5em;
@@ -939,6 +931,7 @@ div.rules-table-container {
     content: '*';
 }
 
+/*range*/
 [id^=slider-range] {
     width: 80%;
     align-self: center;
@@ -988,6 +981,13 @@ html .ui-button.ui-state-disabled:active {
 .ui-widget-content .ui-state-hover {
     border: none;
     background: rgba(220, 0, 0, 1);
+}
+
+/*error pages*/
+ul.error-paragraph {
+    margin: 0 auto;
+    max-width: 80%;
+    color: #fff;
 }
 
 /*tablets and big landscape mobiles*/

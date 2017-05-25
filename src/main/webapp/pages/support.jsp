@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <main class="container">
-    <section class="slider cols col-12">
-        <img src="${pageContext.request.contextPath}/resources/img/slider-cap.png" alt="slider-image">
-    </section>
+    <%@include file="jspf/slider.jsp" %>
     <section class="cols col-2"></section>
     <section class="support cols col-8">
         <h2><fmt:message key="support.header"/></h2>
