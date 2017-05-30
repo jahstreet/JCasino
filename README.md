@@ -1,13 +1,14 @@
 # JCasino Slots
-EPAM Java WEB Development Training final-task project "Slot Casino".
+EPAM Java WEB Development Training final-task project "Slot Casino".<br/>
+@see Project presentation: https://github.com/jahstreet/JCasino/blob/master/JCasino%20presentation.pptx
 
 Used technologies:
 
-  - Front-end: HTML5, CSS3, JavaScript (jQuery, AJAX, some libraries), Canvas animation (for game), responsive design without front-end frameworks;
+  - Front-end: HTML5, CSS3, JavaScript (jQuery, AJAX, some libraries and plugins), Canvas animation (for game), responsive design without front-end frameworks;
   - Back-end: Java 8, Servlet, WebFilter, WebListener, JSP, JSTL, Java Mail;
   - Database: JDBC, MySQL (with some stored procedures), self-written connection-pool;
   - Tests: JUnit 4, DBUnit, Mockito, PowerMockito, IntelliJ IDEA code coverage tool;
-  - Other: Tomcat, Maven, Log4j2, Git, JavaDoc, local and remote deployment support (used Jelastic platform), some fail-safe and scalability features.
+  - Other: Tomcat, Maven, Log4j2, Git, JavaDoc, local and remote deployment settings (used Jelastic platform), some fail-safe and scalability features.
     
 Application architecture:
 
@@ -16,18 +17,18 @@ Application architecture:
 Used design patterns:
 
   - Singleton;
-  - Builder/Factory;
-  - Lazy initialization;
+  - Factory;
   - Wrapper;
+  - Chain of responsibility;
+  - MVC Layered architecture;
+  - Controller;
   - Command;
   - DAO;
-  - Observer;
-  - Chain of responsibility;
-  - POST-REDIRECT-GET;
-  - MVC Layered architecture;
-  - GRASP patterns;
+  - AOP features;
+  - Lazy initialization;
+  - PRG;
   - ACID transaction system;
-  - other...
+  - Other.
   
 Application features:
 
@@ -61,7 +62,15 @@ Application features:
     - Finish streak (10 rolls) prematurely to see decoded streak-roll-string;
     - Turn on/off music, sound design of game;
     - "Demo" and "For real money" play modes.
-    
+  
+  - Security:
+    - User role control;
+    - Page update scenario control;
+    - Custom user navigation prevention;
+    - SQL injection protection;
+    - JavaScript injection protection;
+    - Other.
+  
   - Common:
     - Multi-language support (Ru/En);
     - News feed;
