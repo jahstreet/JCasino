@@ -1,6 +1,6 @@
 # JCasino Slots
 EPAM Java WEB Development Training final-task project "Slot Casino".<br/>
-@see Project presentation: https://github.com/jahstreet/JCasino/blob/master/JCasino%20presentation.pptx
+See Project presentation: https://github.com/jahstreet/JCasino/blob/master/JCasino%20presentation.pptx
 
 Used technologies:
 
