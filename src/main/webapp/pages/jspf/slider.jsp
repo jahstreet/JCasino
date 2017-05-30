@@ -7,11 +7,13 @@
         <ul>
             <li><img src="${pageContext.request.contextPath}/resources/img/slider-cap.png" width="558" height="235"
                      alt="Image One"/></li>
-            <li><img src="${pageContext.request.contextPath}/resources/img/slider-cap.png" width="558" height="235"
+            <li><img src="${pageContext.request.contextPath}/resources/img/slider-cap-1.png" width="558" height="235"
                      alt="Image Two"/></li>
-            <li><img src="${pageContext.request.contextPath}/resources/img/slider-cap.png" width="558" height="235"
+            <li><img src="${pageContext.request.contextPath}/resources/img/slider-cap-2.png" width="558" height="235"
                      alt="Image Three"/></li>
-            <li><img src="${pageContext.request.contextPath}/resources/img/slider-cap.png" width="558" height="235"
+            <li><img src="${pageContext.request.contextPath}/resources/img/slider-cap-3.png" width="558" height="235"
+                     alt="Image Four"/></li>
+            <li><img src="${pageContext.request.contextPath}/resources/img/slider-cap-4.png" width="558" height="235"
                      alt="Image Four"/></li>
         </ul>
     </div>
@@ -21,6 +23,7 @@
         <li onclick="slideshow.pos(1)"></li>
         <li onclick="slideshow.pos(2)"></li>
         <li onclick="slideshow.pos(3)"></li>
+        <li onclick="slideshow.pos(4)"></li>
     </ul>
 </section>
 <script type="text/javascript">

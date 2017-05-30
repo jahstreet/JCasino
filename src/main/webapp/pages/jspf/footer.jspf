@@ -2,7 +2,7 @@
     <p><a href="mailto:jahstreetlove@gmai.com"><fmt:message key="footer.mailto"/></a></p>
 </footer>
 <script>
-    var locale = "${locale}", errorMessage = "${errorMessage}";
+    var locale = "${sessionScope.locale}", errorMessage = "${errorMessage}";
     if (errorMessage) {
         alert(errorMessage);
     }

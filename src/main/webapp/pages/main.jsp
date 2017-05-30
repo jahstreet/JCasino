@@ -16,8 +16,9 @@
         <div class="holder"></div>
         <ul id="itemContainer">
             <c:forEach var="news" items="${newsList}">
-                <c:if test="${news.locale.locale.equals(locale) ||
-                ((locale == null || locale.equals('default')) && news.locale.locale.equals('ru_RU'))}">
+                <c:if test="${news.locale.locale.equals(sessionScope.locale) ||
+                ((sessionScope.locale == null ||
+                sessionScope.locale.equals('default')) && news.locale.locale.equals('ru_RU'))}">
                     <li>
                         <details>
                             <summary>
