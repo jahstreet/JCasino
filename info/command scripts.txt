@@ -1,5 +1,5 @@
-mysqldump -u root -ps-a100500 --routines jcasino > /usr/local/dump/dump.sql
-mysql -u root -ps-a100500 jcasino < /usr/local/dump/dump.sql
+mysqldump -u root -ps-a100500 --routines jcasino > /Users/aleksandrsosnovskih/IdeaProjects/JCasino/jcasino_dump.sql
+mysql -u root -ps-a100500 jcasino < /Users/aleksandrsosnovskih/IdeaProjects/JCasino/jcasino_dump.sql
 
 
 mysql -u root -ps-a100500
