@@ -9,7 +9,7 @@
             <li>Status code: <c:out value="${pageContext.errorData.statusCode}" default="N/A"/></li>
             <li>Exception: <c:out value="${pageContext.errorData.throwable}" default="N/A"/></li>
             <li>Message from exception: <c:out value="${pageContext.exception.message}" default="N/A"/></li>
-            <li>Error message: <c:out value="${errorMessage}" default="Requested resource doesn't exist"/></li>
+            <li>Error message: <c:out value="${errorMessage}" default="Invalid request"/></li>
         </ul>
         <div class="custom-button">
             <a href="${pageContext.request.contextPath}/controller?command=back_from_error">Back</a>

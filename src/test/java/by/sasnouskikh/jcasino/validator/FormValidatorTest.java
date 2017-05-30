@@ -290,6 +290,7 @@ public class FormValidatorTest {
 
         Assert.assertFalse(FormValidator.validateFloatAmount(invalidAmount));
     }
+
     @Test
     public void validateNewsLocaleValidCheck() {
         String validLocale = "rU";
@@ -302,6 +303,34 @@ public class FormValidatorTest {
         String invalidLocale = "rus";
 
         Assert.assertFalse(FormValidator.validateNewsLocale(invalidLocale));
+    }
+
+    @Test
+    public void validateVerificationStatusValidCheck() {
+        String validStatus = "veriFied";
+
+        Assert.assertTrue(FormValidator.validateVerificationStatus(validStatus));
+    }
+
+    @Test
+    public void validateVerificationStatusInvalidCheck() {
+        String invalidStatus = "invalid1";
+
+        Assert.assertFalse(FormValidator.validateVerificationStatus(invalidStatus));
+    }
+
+    @Test
+    public void validateNumberRangeValidCheck() {
+        String validRange = "215 - 44";
+
+        Assert.assertTrue(FormValidator.validateNumberRange(validRange));
+    }
+
+    @Test
+    public void validateNumberRangeInvalidCheck() {
+        String invalidRange = "382";
+
+        Assert.assertFalse(FormValidator.validateNumberRange(invalidRange));
     }
 
 

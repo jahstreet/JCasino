@@ -3,7 +3,6 @@ package by.sasnouskikh.jcasino.game;
 import by.sasnouskikh.jcasino.dao.DAOException;
 import by.sasnouskikh.jcasino.dao.PlayerDAO;
 import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
-import by.sasnouskikh.jcasino.db.ConnectionPoolException;
 import by.sasnouskikh.jcasino.entity.bean.Roll;
 import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.entity.bean.Transaction;
@@ -82,6 +81,7 @@ public class GameEngine {
             streak.getRolls().add(roll);
         } catch (DAOException e) {
             LOGGER.log(Level.ERROR, e.getMessage());
+            throw new ServiceException("Database connection error while spinning.");
         }
         return total;
     }

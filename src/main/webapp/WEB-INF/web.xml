@@ -36,6 +36,9 @@
         <error-code>404</error-code>
         <location>/pages/error/error_404.jsp</location>
     </error-page>
+    <error-page>
+        <location>/pages/error/error.jsp</location>
+    </error-page>
     <jsp-config>
         <jsp-property-group>
             <description>header and footer settings</description>
