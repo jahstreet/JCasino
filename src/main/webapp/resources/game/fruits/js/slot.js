@@ -396,7 +396,15 @@ function spin() {
             if (stop1 && stop2 && stop3) {
                 spin_sound.stop();
                 clearInterval(spinning);
-                checkWin(result+totalBet, lineResult);
+                console.log(result);
+                console.log(result != 0);
+                console.log(result !== 0);
+                if (result != 0) {
+                    checkWin(result + totalBet, lineResult);
+                } else {
+                    changeMoney(totalBet, winTimeout / 8);
+                    setInterval('isSpinning=false', winTimeout / 2);
+                }
             }
         }, 1);
 
@@ -410,7 +418,7 @@ function spin() {
                 offset1 = -Math.ceil(Math.random() * 59) * 150;
                 offset2 = -Math.ceil(Math.random() * 59) * 150;
                 offset3 = -Math.ceil(Math.random() * 59) * 150;
-                changeMoney(totalBet, winTimeout / 4);
+                result = 0;
                 alert('Internet connection error.');
                 ajaxProcessing = false;
             },
@@ -435,7 +443,7 @@ function spin() {
                     offset1 = -(Math.ceil(Math.random() * 60) - 1) * 150;
                     offset2 = -(Math.ceil(Math.random() * 60) - 1) * 150;
                     offset3 = -(Math.ceil(Math.random() * 60) - 1) * 150;
-                    result = totalBet;
+                    result = 0;
                     lineResult = null;
                     alert(error);
                 }
@@ -446,24 +454,22 @@ function spin() {
     }
 
     function checkWin(result, lineResult) {
-        if (!result) {
-            isSpinning = false;
-            return;
-        }
         var index = 0,
             timeout = 0,
             numberLinesWin = 0;
 
-        lineResult.forEach(function (item) {
-            if (item) {
-                numberLinesWin++;
-            }
-        });
-
+        if (lineResult) {
+            lineResult.forEach(function (item) {
+                if (item) {
+                    numberLinesWin++;
+                }
+            });
+        }
         if (!numberLinesWin) {
             isSpinning = false;
             return;
         }
+
         var winTrackNumber = Math.ceil(Math.random() * 2),
             winTrack;
         if (winTrackNumber == 1) {

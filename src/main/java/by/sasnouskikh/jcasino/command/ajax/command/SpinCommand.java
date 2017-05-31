@@ -71,7 +71,7 @@ public class SpinCommand implements AjaxCommand {
 
         //validate/generate streak
         if (!demo) {
-            if (streak == null || StreakService.isComplete(streak)) {
+            if (StreakService.isComplete(streak)) {
                 try (StreakService streakService = new StreakService()) {
                     if (streakService.updateStreak(streak)) {
                         streak = streakService.generateStreak(player.getId());
@@ -88,6 +88,12 @@ public class SpinCommand implements AjaxCommand {
                 streak = StreakService.generateStreak();
                 session.setAttribute(ATTR_CURRENT_STREAK, streak);
             }
+        }
+
+        if (streak == null) {
+            errorMessage.append(messageManager.getMessage(MESSAGE_STREAK_GENERATION_ERROR))
+                        .append(MESSAGE_SEPARATOR);
+            valid = false;
         }
 
         String betString     = request.getParameter(PARAM_BET);

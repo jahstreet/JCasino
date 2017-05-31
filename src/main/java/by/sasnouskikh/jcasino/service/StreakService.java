@@ -225,6 +225,9 @@ public class StreakService extends AbstractService {
      * @see #buildResultString(ArrayDeque)
      */
     public boolean updateStreak(Streak streak) {
+        if (streak == null) {
+            return false;
+        }
         int              id           = streak.getId();
         ArrayDeque<Roll> rolls        = streak.getRolls();
         String           rollString   = buildRollString(rolls);

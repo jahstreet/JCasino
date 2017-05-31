@@ -13,6 +13,8 @@
     <meta name="keywords" content="<fmt:message key="header.head.keywords"/>">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <link rel="SHORTCUT ICON" href="${pageContext.request.contextPath}/resources/img/casino-logo.gif"
+          type="image/x-icon" sizes="32х32">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/game/fruits/css/fruits.css">
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.2.0.js"></script>
 </head>
