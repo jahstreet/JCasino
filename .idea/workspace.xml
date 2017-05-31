@@ -3,24 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="3e983f2f-bc48-465a-a9b4-edfcca97a100" name="Default" comment="JS slider added">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/jcasino.log" afterPath="$PROJECT_DIR$/logs/jcasino.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/command/SwitchToRealCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/command/SwitchToRealCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/MultipartFormCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/MultipartFormCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromGameCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromGameCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoGameFruitsCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/GotoGameFruitsCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ConnectionPool.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ConnectionPool.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/WrappedConnection.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/WrappedConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/GameEngine.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/game/GameEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/MessageManager.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/MessageManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ShowHistoryCommand.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ShowHistoryCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/ConfigConstant.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/ConfigConstant.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/AdminService.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/AdminService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/PlayerService.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/PlayerService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/StreakService.java" afterPath="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/StreakService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/prop/messages.properties" afterPath="$PROJECT_DIR$/src/main/resources/prop/messages.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/prop/messages_en_US.properties" afterPath="$PROJECT_DIR$/src/main/resources/prop/messages_en_US.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/prop/messages_ru_RU.properties" afterPath="$PROJECT_DIR$/src/main/resources/prop/messages_ru_RU.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/verification.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pages/verification.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/game/fruits/js/slot.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/game/fruits/js/slot.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/operation_history.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/operation_history.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/dao/AbstractDAOTest.java" afterPath="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/dao/AbstractDAOTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/dao/DAOTestSuite.java" afterPath="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/dao/DAOTestSuite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/admin/manage_loans.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/admin/manage_loans.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/admin/manage_players.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/admin/manage_players.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/admin/manage_streaks.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/admin/manage_streaks.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/admin/manage_support.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/admin/manage_support.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/admin/manage_transactions.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/admin/manage_transactions.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/admin/manage_verification.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/admin/manage_verification.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/pages/rules.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pages/rules.jsp" />
     </list>
     <ignored path="JCasino.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -113,11 +109,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+            <state relative-caret-position="381">
+              <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="command scripts.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/info/command scripts.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="115" />
               <folding />
             </state>
           </provider>
@@ -149,14 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayersCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/ConfigConstant.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/js/manage_players.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pages/support.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/tiny-slider.css" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/ajax/command/SpinCommand.java" />
-        <option value="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/validator/FormValidatorTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/controller/MainControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/command/ShowPlayerLoansCommandTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/by/sasnouskikh/jcasino/command/GotoIndexCommandTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/PlayerDAOImpl.java" />
@@ -186,7 +184,6 @@
         <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/ProxyConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/db/WrappedConnection.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/navigation/BackFromGameCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/AdminService.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/QuestionService.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/AbstractService.java" />
         <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/DAOHelper.java" />
@@ -199,6 +196,15 @@
         <option value="$PROJECT_DIR$/src/main/webapp/pages/verification.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/resources/game/fruits/js/slot.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/resources/js/operation_history.js" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/AdminService.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/admin/manage_loans.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/admin/manage_players.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/admin/manage_streaks.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/admin/manage_support.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/admin/manage_transactions.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/admin/manage_verification.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ShowHistoryCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/pages/rules.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
       </list>
     </option>
@@ -261,9 +267,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="101" />
+    <option name="x" value="596" />
     <option name="y" value="23" />
-    <option name="width" value="1250" />
+    <option name="width" value="840" />
     <option name="height" value="848" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -310,7 +316,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -530,6 +538,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JCasino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JCasino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="prop" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -773,44 +811,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="navigation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JCasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcasino" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="command" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="ajax" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -869,9 +869,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -1804,7 +1802,8 @@
       <workItem from="1495638370396" duration="16485000" />
       <workItem from="1496003547197" duration="235000" />
       <workItem from="1496057771334" duration="906000" />
-      <workItem from="1496063688971" duration="35929000" />
+      <workItem from="1496063688971" duration="36047000" />
+      <workItem from="1496246895889" duration="3608000" />
     </task>
     <task id="LOCAL-00001" summary="First big redactoring">
       <created>1491502443971</created>
@@ -1954,7 +1953,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1466352000" />
+    <option name="totallyTimeSpent" value="1470078000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1966,7 +1965,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="101" y="23" width="1250" height="848" extended-state="0" />
+    <frame x="596" y="23" width="840" height="848" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1978,26 +1977,26 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29065302" sideWeight="0.75178826" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1940874" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14900662" sideWeight="0.4874446" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37037036" sideWeight="0.24821173" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277849" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.481402" sideWeight="0.5125554" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2685185" sideWeight="0.24821173" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3815621" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25165564" sideWeight="0.73447204" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31077695" sideWeight="0.73447204" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46013865" sideWeight="0.26552796" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18947369" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24839948" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24839948" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329277" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.481402" sideWeight="0.5125554" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290653" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277635" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -2099,126 +2098,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/error/error.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="195">
-            <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-      <provider editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="30">
-            <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/jspf/slider.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/filter/SessionAttributesFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-960">
-          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ChangeLocaleCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="22" column="48" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/jspf/footer.jspf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/LoanDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/entity/bean/News.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/dao/impl/NewsDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="242" column="37" selection-start-line="242" selection-start-column="37" selection-end-line="242" selection-end-column="37" />
-          <folding>
-            <marker date="1496174797000" expanded="true" signature="750:881" ph="SELECT id, d... news" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/jspf/header.jspf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="20" column="91" selection-start-line="20" selection-start-column="91" selection-end-line="20" selection-end-column="91" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/main.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/MultipartFormCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1096">
-          <caret line="133" column="5" selection-start-line="133" selection-start-column="5" selection-end-line="133" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/MessageManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -2231,12 +2110,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
           <caret line="94" column="43" selection-start-line="94" selection-start-column="43" selection-end-line="94" selection-end-column="43" />
-          <folding>
-            <marker date="1496174797000" expanded="true" signature="3348:3378" ph="CALL reset_a... " />
-            <marker date="1496174797000" expanded="true" signature="3600:3630" ph="CALL reset_a... " />
-            <marker date="1496174797000" expanded="true" signature="3838:3857" ph="CALL truncat... " />
-            <marker date="1496174797000" expanded="true" signature="4072:4091" ph="CALL truncat... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2244,7 +2117,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2252,7 +2124,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2284,7 +2155,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-436">
           <caret line="1124" column="17" selection-start-line="1124" selection-start-column="17" selection-end-line="1124" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2292,7 +2162,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="158" column="29" selection-start-line="158" selection-start-column="29" selection-end-line="158" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2316,7 +2185,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
           <caret line="216" column="0" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2360,14 +2228,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/AdminService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="160" column="49" selection-start-line="160" selection-start-column="8" selection-end-line="160" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/LoginCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-480">
@@ -2388,7 +2248,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-222">
           <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2415,7 +2274,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="71" column="6" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2423,7 +2281,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1669">
           <caret line="169" column="86" selection-start-line="169" selection-start-column="86" selection-end-line="169" selection-end-column="86" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2455,15 +2312,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
           <caret line="119" column="44" selection-start-line="119" selection-start-column="44" selection-end-line="119" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/info/command scripts.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="100" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="100" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2500,7 +2348,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2528,10 +2375,130 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/admin/ShowPlayersCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="98" column="48" selection-start-line="98" selection-start-column="48" selection-end-line="98" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/service/AdminService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="194" column="17" selection-start-line="194" selection-start-column="17" selection-end-line="194" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/admin/manage_loans.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/admin/manage_news.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="33" column="59" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/admin/manage_player.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-30">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/admin/manage_players.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="71" column="89" selection-start-line="71" selection-start-column="89" selection-end-line="71" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/admin/manage_streaks.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="26" column="63" selection-start-line="26" selection-start-column="63" selection-end-line="26" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/admin/manage_support.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="65" column="47" selection-start-line="65" selection-start-column="47" selection-end-line="65" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/admin/manage_transactions.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="32" column="76" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/admin/manage_verification.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="22" column="59" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/command/impl/ShowHistoryCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="73" column="70" selection-start-line="73" selection-start-column="70" selection-end-line="73" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/by/sasnouskikh/jcasino/manager/ConfigConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="205" column="31" selection-start-line="205" selection-start-column="31" selection-end-line="205" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/rules.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pages/main.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+        <state relative-caret-position="381">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/info/command scripts.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="115" />
           <folding />
         </state>
       </provider>

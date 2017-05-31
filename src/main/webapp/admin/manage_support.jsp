@@ -63,7 +63,7 @@
             <input type="submit" value="<fmt:message key="manage.support.show.submit"/>"/>
         </form>
         <%--questions/answers table--%>
-        <c:if test="${questionList != null}">
+        <c:if test="${questionList != null && !questionList.isEmpty()}">
             <hr/>
             <section class="table-section">
                 <table class="custom-table">

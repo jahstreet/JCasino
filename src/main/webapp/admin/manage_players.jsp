@@ -69,7 +69,7 @@
             <input type="submit" value="<fmt:message key="manage.players.show.submit"/>"/>
         </form>
         <section class="table-section">
-            <c:if test="${requestScope.players != null}">
+            <c:if test="${requestScope.players != null && !requestScope.players.isEmpty()}">
                 <hr/>
                 <table class="custom-table">
                     <caption><fmt:message key="manage.players.table.caption"/></caption>

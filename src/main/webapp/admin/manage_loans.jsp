@@ -40,7 +40,7 @@
             <input type="submit" value="<fmt:message key="manage.loans.show.submit"/>"/>
         </form>
         <section class="table-section">
-            <c:if test="${loans != null}">
+            <c:if test="${loans != null && !loans.isEmpty()}">
                 <table class="custom-table">
                     <caption><fmt:message key="history.table.loans.caption"/></caption>
                     <thead>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <main class="container">
+    <%@include file="jspf/slider.jsp" %>
     <section class="left-bar cols col-4">
         <c:choose>
             <c:when test="${sessionScope.user.role != null && 'PLAYER'.equals(sessionScope.user.role.toString())}">

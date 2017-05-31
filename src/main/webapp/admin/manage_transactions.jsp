@@ -30,7 +30,7 @@
             <input type="submit" value="<fmt:message key="manage.transactions.show.submit"/>"/>
         </form>
         <section class="table-section">
-            <c:if test="${transactions != null}">
+            <c:if test="${transactions != null && !transactions.isEmpty()}">
                 <table class="custom-table">
                     <caption><fmt:message key="history.table.transactions.caption"/></caption>
                     <thead>

@@ -51,7 +51,7 @@ public class AdminService extends AbstractService {
      * Adds news to database.
      *
      * @param formItems collection parsed from multipart-form request
-     * @param admin admin who adds news
+     * @param admin     admin who adds news
      * @param uploadDir upload directory
      * @return added {@link News} object or null
      * @see DAOHelper
@@ -100,11 +100,10 @@ public class AdminService extends AbstractService {
      * Edit news data in database.
      *
      * @param formItems collection parsed from multipart-form request
-     * @param admin admin who adds news
+     * @param admin     admin who adds news
      * @param uploadDir upload directory
      * @return edited {@link News} object or null
      * @see DAOHelper
-     * @see NewsService#ed(String, String, FileItem, String, Admin, String)
      * @see FileItem
      */
     public static News editNews(List<FileItem> formItems, Admin admin, String uploadDir) throws UnsupportedEncodingException, ServiceException {
@@ -184,33 +183,45 @@ public class AdminService extends AbstractService {
         UserDAO      userDAO   = daoHelper.getUserDAO();
         try (UserService userService = new UserService()) {
             List<JCasinoUser> users = userDAO.takeUserList(idPattern);
+            if (users == null) {
+                return players;
+            }
             players.addAll(users.stream()
                                 .filter(user -> user.getRole() == JCasinoUser.UserRole.PLAYER)
                                 .map(userService::initPlayer).collect(Collectors.toList()));
             if (statusFilter != null && !statusFilter.trim().isEmpty()) {
+                if (players.isEmpty()) {
+                    return players;
+                }
                 PlayerStatus.StatusEnum status = PlayerStatus.StatusEnum.valueOf(statusFilter.toUpperCase().trim());
                 players.removeIf(player -> player.getAccount().getStatus().getStatus() != status);
             }
             if (verificationFilter != null && !verificationFilter.trim().isEmpty()) {
+                if (players.isEmpty()) {
+                    return players;
+                }
                 PlayerVerification.VerificationStatus status = PlayerVerification.VerificationStatus.valueOf(verificationFilter.toUpperCase().trim());
                 players.removeIf(player -> player.getVerification().getStatus() != status);
             }
             if (!ignoreRanges) {
+                if (players.isEmpty()) {
+                    return players;
+                }
                 String[]   withdrawalRange = monthWithdrawalRangeString.split(RANGE_SPLITERATOR);
                 BigDecimal botWithdrawal   = BigDecimal.valueOf(Double.parseDouble(withdrawalRange[0]));
                 BigDecimal topWithdrawal   = BigDecimal.valueOf(Double.parseDouble(withdrawalRange[1]));
+                String[]   balanceRange    = balanceRangeString.split(RANGE_SPLITERATOR);
+                BigDecimal botBalance      = BigDecimal.valueOf(Double.parseDouble(balanceRange[0]));
+                BigDecimal topBalance      = BigDecimal.valueOf(Double.parseDouble(balanceRange[1]));
                 players.removeIf(player -> {
+                    if (player == null) {
+                        return false;
+                    }
                     BigDecimal monthWithdrawal = player.getAccount().getThisMonthWithdrawal();
+                    BigDecimal balance         = player.getAccount().getBalance();
                     return !(monthWithdrawal.compareTo(botWithdrawal) >= 0 &&
-                             monthWithdrawal.compareTo(topWithdrawal) <= 0);
-                });
-
-                String[]   balanceRange = balanceRangeString.split(RANGE_SPLITERATOR);
-                BigDecimal botBalance   = BigDecimal.valueOf(Double.parseDouble(balanceRange[0]));
-                BigDecimal topBalance   = BigDecimal.valueOf(Double.parseDouble(balanceRange[1]));
-                players.removeIf(player -> {
-                    BigDecimal balance = player.getAccount().getBalance();
-                    return !(balance.compareTo(botBalance) >= 0 &&
+                             monthWithdrawal.compareTo(topWithdrawal) <= 0) ||
+                           !(balance.compareTo(botBalance) >= 0 &&
                              balance.compareTo(topBalance) <= 0);
                 });
             }

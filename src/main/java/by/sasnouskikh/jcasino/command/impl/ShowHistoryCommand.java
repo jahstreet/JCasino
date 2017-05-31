@@ -71,7 +71,7 @@ public class ShowHistoryCommand implements Command {
         if (month == null || FormValidator.validateDateMonth(month)) {
             request.setAttribute(ATTR_MONTH_INPUT, month);
         } else {
-            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_DATE_OR_ALL));
+            errorMessage.append(messageManager.getMessage(MESSAGE_INVALID_DATE));
             valid = false;
         }
 

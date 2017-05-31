@@ -24,7 +24,7 @@
             <input type="submit" value="<fmt:message key="manage.streaks.show.submit"/>"/>
         </form>
         <section class="table-section">
-            <c:if test="${streaks != null}">
+            <c:if test="${streaks != null && !streaks.isEmpty()}">
                 <div class="holder"></div>
                 <table class="custom-table" id="itemContainer">
                     <caption><fmt:message key="history.table.streaks.caption"/></caption>
