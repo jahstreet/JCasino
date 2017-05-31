@@ -30,16 +30,12 @@ public class WrappedConnection implements AutoCloseable {
      * @param password database user password
      * @see DriverManager#getConnection(String, String, String)
      */
-    WrappedConnection(String url, String login, String password) {
+    WrappedConnection(String url, String login, String password) throws ConnectionPoolException {
         try {
             connection = DriverManager.getConnection(url, login, password);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ConnectionPoolException("Can't access database to create connection.");
         }
-    }
-
-    public Connection getConnection() {
-        return connection;
     }
 
     /**
@@ -76,24 +72,6 @@ public class WrappedConnection implements AutoCloseable {
      */
     public boolean isNull() {
         return connection == null;
-    }
-
-    /**
-     * Returns true if the connection has not been closed and is still valid.
-     * The driver shall submit a query on the connection or use some other
-     * mechanism that positively verifies the connection is still valid when
-     * this method is called.
-     *
-     * @param timeout The time in seconds to wait for the database operation used to validate the connection to
-     *                complete.  If the timeout period expires before the operation completes, this method returns
-     *                false.  A value of 0 indicates a timeout is not applied to the database operation.
-     * @return true if the connection is valid, false otherwise
-     * @throws SQLException if the value supplied for <code>timeout</code> is less then 0
-     * @see DatabaseMetaData#getClientInfoProperties
-     * @since 1.6
-     */
-    public boolean isValid(int timeout) throws SQLException {
-        return connection.isValid(timeout);
     }
 
     /**
@@ -161,6 +139,24 @@ public class WrappedConnection implements AutoCloseable {
      */
     public void rollback() throws SQLException {
         connection.rollback();
+    }
+
+    /**
+     * Returns true if the connection has not been closed and is still valid.
+     * The driver shall submit a query on the connection or use some other
+     * mechanism that positively verifies the connection is still valid when
+     * this method is called.
+     *
+     * @param timeout The time in seconds to wait for the database operation used to validate the connection to
+     *                complete.  If the timeout period expires before the operation completes, this method returns
+     *                false.  A value of 0 indicates a timeout is not applied to the database operation.
+     * @return true if the connection is valid, false otherwise
+     * @throws SQLException if the value supplied for <code>timeout</code> is less then 0
+     * @see DatabaseMetaData#getClientInfoProperties
+     * @since 1.6
+     */
+    boolean isValid(int timeout) throws SQLException {
+        return connection.isValid(timeout);
     }
 
     /**

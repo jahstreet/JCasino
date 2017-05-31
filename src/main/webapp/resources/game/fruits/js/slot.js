@@ -76,7 +76,7 @@ $(document).ready(function () {
         }
 
         switchToRealDiv.onclick = function () {
-            if (!ajaxProcessing) {
+            if (!ajaxProcessing && !isSpinning) {
                 ajaxProcessing = true;
                 $.ajax({
                     url: "/ajax?command=switch_to_real",
@@ -102,13 +102,14 @@ $(document).ready(function () {
                             alert(error);
                         }
                         ajaxProcessing = false;
-                    }
+                    },
+                    timeout: 4000
                 });
             }
         };
 
         switchToDemoDiv.onclick = function () {
-            if (!ajaxProcessing) {
+            if (!ajaxProcessing && !isSpinning) {
                 ajaxProcessing = true;
                 $.ajax({
                     url: "/ajax?command=switch_to_demo",
@@ -134,14 +135,15 @@ $(document).ready(function () {
                             alert(error);
                         }
                         ajaxProcessing = false;
-                    }
+                    },
+                    timeout: 4000
                 });
             }
         };
     }
 
     finishStreakDiv.onclick = function () {
-        if (!ajaxProcessing) {
+        if (!ajaxProcessing && !isSpinning) {
             ajaxProcessing = true;
             $.ajax({
                 url: "/ajax?command=finish_streak",
@@ -162,7 +164,8 @@ $(document).ready(function () {
                         alert(error);
                     }
                     ajaxProcessing = false;
-                }
+                },
+                timeout: 4000
             });
         }
     };
@@ -393,7 +396,7 @@ function spin() {
             if (stop1 && stop2 && stop3) {
                 spin_sound.stop();
                 clearInterval(spinning);
-                checkWin(result, lineResult);
+                checkWin(result+totalBet, lineResult);
             }
         }, 1);
 
@@ -422,7 +425,6 @@ function spin() {
                     offset3 = -(offset[2] - 1) * 150;
                     //noinspection JSUnresolvedVariable
                     result = parseFloat(data.winResult);
-                    console.log(result);
                     //noinspection JSUnresolvedVariable
                     lineResult = data.lines;
                     //noinspection JSUnresolvedVariable
@@ -438,7 +440,8 @@ function spin() {
                     alert(error);
                 }
                 ajaxProcessing = false;
-            }
+            },
+            timeout: 4000
         });
     }
 

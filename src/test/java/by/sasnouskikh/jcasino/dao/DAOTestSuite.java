@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 @RunWith(Suite.class)
@@ -34,12 +33,10 @@ public class DAOTestSuite {
         instance = null;
     }
 
-
     private static void resetDatabase() throws ConnectionPoolException, SQLException {
         try (WrappedConnection conn = instance.takeConnection()) {
-            Connection connection = conn.getConnection();
-            AbstractDAOTest.truncateAll(connection);
-            AbstractDAOTest.resetAutoIncrement(connection);
+            AbstractDAOTest.truncateAll(conn);
+            AbstractDAOTest.resetAutoIncrement(conn);
         }
     }
 }

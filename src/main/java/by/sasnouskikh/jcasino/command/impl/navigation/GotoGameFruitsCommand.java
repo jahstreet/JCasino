@@ -53,6 +53,10 @@ public class GotoGameFruitsCommand implements Command {
                  StreakService streakService = new StreakService()) {
                 if (playerService.updateAccountInfo(player)) {
                     money = player.getAccount().getBalance();
+                    if (money == null || money.compareTo(BigDecimal.ZERO) < 1) {
+                        request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_NO_MONEY));
+                        return PageNavigator.FORWARD_PREV_QUERY;
+                    }
                 } else {
                     request.setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_DATABASE_ACCESS_ERROR));
                     return PageNavigator.FORWARD_PREV_QUERY;

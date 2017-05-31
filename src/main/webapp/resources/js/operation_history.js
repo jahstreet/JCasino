@@ -41,7 +41,9 @@ $('div.streakHolder').jPages({
     next: "↓",
     callback: function (pages) {
         if (pages.count < 2) {
-            $('div.streakHolder')[0].style.display = "none";
+            var holderArray = $('div.streakHolder');
+            holderArray[0].style.display = "none";
+            holderArray[1].style.display = "none";
         }
     }
 });

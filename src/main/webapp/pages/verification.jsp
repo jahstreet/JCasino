@@ -44,14 +44,22 @@
                     <c:when test="${player.verification.scanVerified}">
                         <fmt:message key="verification.ok"/>
                     </c:when>
-                    <c:when test="${!player.verification.scanVerified && player.verification.passport != null}">
-                        <fmt:message key="verification.processing"/>
-                    </c:when>
-                    <c:otherwise>
+                    <c:when test="${player.verification.passport == null}">
                         <span><fmt:message key="verification.no"/></span>
                         <div class="verify-button">
                             <a href="${pageContext.request.contextPath}/controller?command=goto_upload_passport">&#10008</a>
                         </div>
+                    </c:when>
+                    <c:when test="${
+                    player.verification.profileVerified &&
+                    player.verification.emailVerified &&
+                    !player.verification.scanVerified &&
+                    player.verification.passport != null
+                    }">
+                        <fmt:message key="verification.processing"/>
+                    </c:when>
+                    <c:otherwise>
+                        <span><fmt:message key="verification.no"/></span>
                     </c:otherwise>
                 </c:choose>
             </dd>

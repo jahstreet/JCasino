@@ -1,6 +1,7 @@
 package by.sasnouskikh.jcasino.dao;
 
 import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
+import by.sasnouskikh.jcasino.db.WrappedConnection;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
@@ -79,7 +80,19 @@ public abstract class AbstractDAOTest {
         statement.close();
     }
 
+    static void resetAutoIncrement(WrappedConnection connection) throws SQLException {
+        CallableStatement statement = connection.prepareCall("CALL reset_all_autoincrement()");
+        statement.executeUpdate();
+        statement.close();
+    }
+
     static void truncateAll(Connection connection) throws SQLException {
+        CallableStatement statement = connection.prepareCall("CALL truncate_all()");
+        statement.executeUpdate();
+        statement.close();
+    }
+
+    static void truncateAll(WrappedConnection connection) throws SQLException {
         CallableStatement statement = connection.prepareCall("CALL truncate_all()");
         statement.executeUpdate();
         statement.close();

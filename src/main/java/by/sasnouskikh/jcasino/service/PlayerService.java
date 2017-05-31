@@ -538,7 +538,7 @@ public class PlayerService extends AbstractService {
     /**
      * Uploads definite player passport scan image file.
      *
-     * @param player       player whose passport scan is uploading
+     * @param playerId     player id whose passport scan is uploading
      * @param scanFileItem {@link FileItem} image file of player passport scan
      * @param uploadPath   path to 'uploads' directory
      * @return true if operation proceeded successfully
@@ -547,9 +547,9 @@ public class PlayerService extends AbstractService {
      * @see PlayerDAO#changeScanPath(int, String)
      * @see by.sasnouskikh.jcasino.manager.ConfigConstant#AVAILABLE_SCAN_EXT
      */
-    public boolean uploadPassportScan(Player player, FileItem scanFileItem, String uploadPath) throws ServiceException {
-        int    id            = player.getId();
-        String playerDirName = String.valueOf(id);
+    @SuppressWarnings("all")
+    public boolean uploadPassportScan(int playerId, FileItem scanFileItem, String uploadPath) throws ServiceException {
+        String playerDirName = String.valueOf(playerId);
         String playerDirPath = uploadPath + File.separator + SCAN_UPLOAD_DIR + File.separator + playerDirName;
         File   playerDir     = new File(playerDirPath);
         if (!playerDir.exists()) {
@@ -577,11 +577,38 @@ public class PlayerService extends AbstractService {
         try {
             scanFileItem.write(storeFile);
             PlayerDAO playerDAO = daoHelper.getPlayerDAO();
-            return playerDAO.changeScanPath(id, dbFilePath);
+            return playerDAO.changeScanPath(playerId, dbFilePath);
         } catch (Exception e) {
             LOGGER.log(Level.ERROR, "Exception occurred while uploading passport scan. " + e.getMessage());
         }
         return false;
+    }
+
+    /**
+     * Uploads definite player passport scan image file.
+     *
+     * @param player    player whose passport scan is uploading
+     * @param formItems {@link FileItem} collection parsed from multipart-form request
+     * @param uploadDir path to 'uploads' directory
+     * @return true if operation proceeded successfully
+     * @throws ServiceException if passport scan image file extension isn't supported
+     * @see DAOHelper
+     * @see PlayerDAO#changeScanPath(int, String)
+     * @see by.sasnouskikh.jcasino.manager.ConfigConstant#AVAILABLE_SCAN_EXT
+     */
+    public boolean uploadPassportScan(List<FileItem> formItems, Player player, String uploadDir) throws ServiceException {
+        boolean uploaded = false;
+        int     playerId = player.getId();
+        for (FileItem item : formItems) {
+            String fieldName = item.getFieldName();
+            if (!item.isFormField()) {
+                if (PARAM_SCAN.equals(fieldName)) {
+                    uploaded = uploadPassportScan(playerId, item, uploadDir);
+                    break;
+                }
+            }
+        }
+        return uploaded;
     }
 
     /**

@@ -33,7 +33,7 @@ public class MessageManager {
     /**
      * The class instance with default locale.
      */
-    private static final MessageManager messageManagerDefault = new MessageManager(Locale.getDefault());
+    private static final MessageManager messageManagerDefault = messageManagerRU;
     /**
      * {@link ResourceBundle} instance.
      */

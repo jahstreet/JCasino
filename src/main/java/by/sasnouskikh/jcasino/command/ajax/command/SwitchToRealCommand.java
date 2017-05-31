@@ -49,6 +49,10 @@ public class SwitchToRealCommand implements AjaxCommand {
              StreakService streakService = new StreakService()) {
             if (playerService.updateAccountInfo(player)) {
                 money = player.getAccount().getBalance();
+                if (money == null || money.compareTo(BigDecimal.ZERO) < 1) {
+                    responseMap.put(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_NO_MONEY));
+                    return responseMap;
+                }
                 streak = streakService.generateStreak(playerId);
                 success = (streak) != null;
             } else {

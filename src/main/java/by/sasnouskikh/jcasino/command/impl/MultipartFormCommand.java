@@ -7,6 +7,7 @@ import by.sasnouskikh.jcasino.entity.bean.News;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.manager.MessageManager;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.AdminService;
 import by.sasnouskikh.jcasino.service.NewsService;
 import by.sasnouskikh.jcasino.service.PlayerService;
 import by.sasnouskikh.jcasino.service.ServiceException;
@@ -90,8 +91,10 @@ public class MultipartFormCommand implements Command {
             if (formItems != null && !formItems.isEmpty()) {
                 if (player != null) {
                     QueryManager.logMultipartQuery(request, UPLOAD_PASSPORT);
-                    if (uploadPassportScan(formItems, player, uploadDir)) {
-                        return PageNavigator.REDIRECT_GOTO_VERIFICATION;
+                    try (PlayerService playerService = new PlayerService()) {
+                        if (playerService.uploadPassportScan(formItems, player, uploadDir)) {
+                            return PageNavigator.REDIRECT_GOTO_VERIFICATION;
+                        }
                     }
                 } else if (admin != null) {
                     String command = null;
@@ -104,10 +107,10 @@ public class MultipartFormCommand implements Command {
                     }
                     if (ADD_NEWS_COMMAND.equals(command)) {
                         QueryManager.logMultipartQuery(request, UPLOAD_NEWS_LOG);
-                        news = addNews(formItems, admin, uploadDir);
+                        news = AdminService.addNews(formItems, admin, uploadDir);
                     } else if (EDIT_NEWS_COMMAND.equals(command)) {
                         QueryManager.logMultipartQuery(request, EDIT_NEWS_LOG);
-                        news = editNews(formItems, admin, uploadDir);
+                        news = AdminService.editNews(formItems, admin, uploadDir);
                     }
                     if (news != null) {
                         try (NewsService newsService = new NewsService()) {
@@ -127,100 +130,6 @@ public class MultipartFormCommand implements Command {
             LOGGER.log(Level.ERROR, "UTF-8 request encoding not supported in multipart forms. " + e.getMessage());
             request.getSession().setAttribute(ATTR_ERROR_MESSAGE, messageManager.getMessage(MESSAGE_MULTIPART_UPLOAD_ERROR));
             return PageNavigator.REDIRECT_GOTO_ERROR_500;
-        }
-    }
-
-    private boolean uploadPassportScan(List<FileItem> formItems, Player player, String uploadDir) throws ServiceException {
-        boolean uploaded = false;
-        for (FileItem item : formItems) {
-            String fieldName = item.getFieldName();
-            if (!item.isFormField()) {
-                if (PARAM_SCAN.equals(fieldName)) {
-                    try (PlayerService playerService = new PlayerService()) {
-                        uploaded = playerService.uploadPassportScan(player, item, uploadDir);
-                    }
-                    break;
-                }
-            }
-        }
-        return uploaded;
-    }
-
-    private News addNews(List<FileItem> formItems, Admin admin, String uploadDir) throws ServiceException, UnsupportedEncodingException {
-        String   header    = null;
-        String   text      = null;
-        String   locale    = null;
-        FileItem newsImage = null;
-        boolean  valid     = true;
-        for (FileItem item : formItems) {
-            String fieldName = item.getFieldName();
-            if (item.isFormField()) {
-                if (PARAM_HEADER.equals(fieldName)) {
-                    header = item.getString(UTF_8_ENCODING);
-                    if (!FormValidator.validateNewsHeader(header)) {
-                        valid = false;
-                    }
-                }
-                if (PARAM_TEXT.equals(fieldName)) {
-                    text = item.getString(UTF_8_ENCODING);
-                    if (!FormValidator.validateNewsText(text)) {
-                        valid = false;
-                    }
-                }
-                if (PARAM_LOCALE.equals(fieldName)) {
-                    locale = item.getString(UTF_8_ENCODING);
-                    if (!FormValidator.validateNewsLocale(locale)) {
-                        valid = false;
-                    }
-                }
-            } else {
-                if (PARAM_NEWS_IMAGE.equals(fieldName)) {
-                    newsImage = item;
-                }
-            }
-        }
-        try (NewsService newsService = new NewsService()) {
-            return valid ? newsService.addNews(header, text, newsImage, locale, admin, uploadDir) : null;
-        }
-    }
-
-    private News editNews(List<FileItem> formItems, Admin admin, String uploadDir) throws UnsupportedEncodingException, ServiceException {
-        String   header    = null;
-        String   text      = null;
-        FileItem newsImage = null;
-        int      newsId    = 0;
-        boolean  valid     = true;
-        for (FileItem item : formItems) {
-            String fieldName = item.getFieldName();
-            if (item.isFormField()) {
-                if (PARAM_HEADER.equals(fieldName)) {
-                    header = item.getString(UTF_8_ENCODING);
-                    if (!FormValidator.validateNewsHeader(header)) {
-                        valid = false;
-                    }
-                }
-                if (PARAM_TEXT.equals(fieldName)) {
-                    text = item.getString(UTF_8_ENCODING);
-                    if (!FormValidator.validateNewsText(text)) {
-                        valid = false;
-                    }
-                }
-                if (PARAM_ID.equals(fieldName)) {
-                    String idString = item.getString(UTF_8_ENCODING);
-                    if (FormValidator.validateId(idString)) {
-                        newsId = Integer.parseInt(idString);
-                    } else {
-                        valid = false;
-                    }
-                }
-            } else {
-                if (PARAM_NEWS_IMAGE.equals(fieldName)) {
-                    newsImage = item;
-                }
-            }
-        }
-        try (NewsService newsService = new NewsService()) {
-            return valid ? newsService.editNews(newsId, header, newsImage, text, admin, uploadDir) : null;
         }
     }
 }

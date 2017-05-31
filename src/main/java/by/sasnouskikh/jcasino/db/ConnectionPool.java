@@ -32,7 +32,7 @@ public class ConnectionPool {
     private static final String DB_LOGIN           = "user";
     private static final String DB_PASSWORD        = "password";
     private static final String POOL_SIZE          = "poolsize";
-    private static final int    VALIDATION_TIMEOUT = 10;
+    private static final int    VALIDATION_TIMEOUT = 1;
 
     /**
      * Class singleton instance.
@@ -140,9 +140,17 @@ public class ConnectionPool {
         WrappedConnection connection;
         try {
             connection = connections.take();
+            for (int i = 0; i < poolSize; i++) {
+                if (connection.isNull() || connection.isClosed() || !connection.isValid(VALIDATION_TIMEOUT)) {
+                    returnInvalidConnection(connection);
+                    connection = connections.take();
+                } else {
+                    break;
+                }
+            }
             if (connection.isNull() || connection.isClosed() || !connection.isValid(VALIDATION_TIMEOUT)) {
                 returnConnection(connection);
-                return takeConnection();
+                throw new ConnectionPoolException("No valid connections to take. Database denies access.");
             }
         } catch (InterruptedException | SQLException e) {
             throw new ConnectionPoolException("Taking-connection process was interrupted.", e);
@@ -158,9 +166,12 @@ public class ConnectionPool {
      */
     public void returnConnection(WrappedConnection connection) {
         try {
+            if (connection == null) {
+                LOGGER.log(Level.WARN, "Can't return null connection reference to pool.");
+                return;
+            }
             if (connection.isNull() || connection.isClosed() || !connection.isValid(VALIDATION_TIMEOUT)) {
-                connections.put(new WrappedConnection(url, login, password));
-                LOGGER.log(Level.ERROR, "Connection was lost while returning but replaced by a new one.");
+                returnInvalidConnection(connection);
                 return;
             }
             try {
@@ -176,7 +187,7 @@ public class ConnectionPool {
         } catch (SQLException e) {
             LOGGER.log(Level.ERROR, "Database access error occurred.", e);
         } catch (InterruptedException e) {
-            LOGGER.log(Level.ERROR, "Putting connection back into pool was interrupted." + e.getMessage());
+            LOGGER.log(Level.ERROR, "Putting connection back into pool was interrupted. " + e.getMessage());
         }
     }
 
@@ -216,5 +227,33 @@ public class ConnectionPool {
             created.getAndSet(false);
         }
         return counter;
+    }
+
+    /**
+     * Restores damaged connection.
+     *
+     * @return true if processed successfully
+     * @see WrappedConnection
+     */
+    private boolean restoreConnection() throws InterruptedException {
+        boolean           success;
+        WrappedConnection createdConnection = null;
+        try {
+            createdConnection = new WrappedConnection(url, login, password);
+        } catch (ConnectionPoolException e) {
+            LOGGER.log(Level.ERROR, e.getMessage());
+        }
+        if (success = createdConnection != null) {
+            connections.put(createdConnection);
+            LOGGER.log(Level.ERROR, "Connection was lost while returning but replaced by a new one.");
+        }
+        return success;
+    }
+
+    private void returnInvalidConnection(WrappedConnection connection) throws InterruptedException {
+        if (!restoreConnection()) {
+            connections.put(connection);
+            LOGGER.log(Level.ERROR, "Connection was damaged and can't be replaced by a new one, database denies access.");
+        }
     }
 }

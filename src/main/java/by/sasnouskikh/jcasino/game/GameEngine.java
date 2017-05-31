@@ -69,21 +69,21 @@ public class GameEngine {
      */
     public static BigDecimal spin(Streak streak, int[] offset, boolean[] lines, BigDecimal bet) throws ServiceException {
         int        playerId = streak.getPlayerId();
-        BigDecimal totalBet = countTotalBet(bet, lines);
         Roll       roll     = buildRoll(StreakService.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet);
         BigDecimal result   = roll.getResult();
-        BigDecimal total    = result.subtract(totalBet);
-        try (DAOHelper daoHelper = new DAOHelper()) {
-            PlayerDAO playerDAO = daoHelper.getPlayerDAO();
-            if (!playerDAO.changeBalance(playerId, total, Transaction.TransactionType.REPLENISH)) {
+        if (result.compareTo(BigDecimal.ZERO) != 0) {
+            try (DAOHelper daoHelper = new DAOHelper()) {
+                PlayerDAO playerDAO = daoHelper.getPlayerDAO();
+                if (!playerDAO.changeBalance(playerId, result, Transaction.TransactionType.REPLENISH)) {
+                    throw new ServiceException("Database connection error while spinning.");
+                }
+            } catch (DAOException e) {
+                LOGGER.log(Level.ERROR, e.getMessage());
                 throw new ServiceException("Database connection error while spinning.");
             }
-            streak.getRolls().add(roll);
-        } catch (DAOException e) {
-            LOGGER.log(Level.ERROR, e.getMessage());
-            throw new ServiceException("Database connection error while spinning.");
         }
-        return total;
+        streak.getRolls().add(roll);
+        return result;
     }
 
     /**
@@ -100,12 +100,10 @@ public class GameEngine {
      * @see StreakService#parseCurrentRollArray(String, int)
      */
     public static BigDecimal spinDemo(Streak streak, int[] offset, boolean[] lines, BigDecimal bet) {
-        BigDecimal totalBet = countTotalBet(bet, lines);
-        Roll       roll     = buildRoll(StreakService.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet);
-        BigDecimal result   = roll.getResult();
-        BigDecimal total    = result.subtract(totalBet);
+        Roll       roll   = buildRoll(StreakService.parseCurrentRollArray(streak.getRoll(), streak.getRolls().size()), offset, lines, bet);
+        BigDecimal result = roll.getResult();
         streak.getRolls().add(roll);
-        return total;
+        return result;
     }
 
     /**
@@ -199,7 +197,8 @@ public class GameEngine {
                 result = result.add(bet.multiply(defineMultiplier(reelPos[0], i + 1)));
             }
         }
-        return result;
+        BigDecimal totalBet = countTotalBet(bet, lines);
+        return result.subtract(totalBet);
     }
 
     /**

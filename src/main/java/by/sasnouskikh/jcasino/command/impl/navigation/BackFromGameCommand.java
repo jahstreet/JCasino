@@ -2,7 +2,12 @@ package by.sasnouskikh.jcasino.command.impl.navigation;
 
 import by.sasnouskikh.jcasino.command.Command;
 import by.sasnouskikh.jcasino.command.PageNavigator;
+import by.sasnouskikh.jcasino.entity.bean.Streak;
 import by.sasnouskikh.jcasino.manager.QueryManager;
+import by.sasnouskikh.jcasino.service.StreakService;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +22,7 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.ATTR_DEMO_PLAY;
  * @see Command
  */
 public class BackFromGameCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(BackFromGameCommand.class);
 
     /**
      * Sets {@link by.sasnouskikh.jcasino.manager.ConfigConstant#ATTR_CURRENT_STREAK} and
@@ -36,6 +42,17 @@ public class BackFromGameCommand implements Command {
         if (session.getAttribute(ATTR_DEMO_PLAY) != null) {
             session.removeAttribute(ATTR_DEMO_PLAY);
             session.removeAttribute(ATTR_CURRENT_STREAK);
+        } else {
+            Streak currentStreak = (Streak) session.getAttribute(ATTR_CURRENT_STREAK);
+            if (StreakService.isComplete(currentStreak)) {
+                try (StreakService streakService = new StreakService()) {
+                    if (streakService.updateStreak(currentStreak)) {
+                        session.removeAttribute(ATTR_CURRENT_STREAK);
+                    } else {
+                        LOGGER.log(Level.ERROR, "Streak info wasn't saved to database: " + currentStreak);
+                    }
+                }
+            }
         }
         return PageNavigator.REDIRECT_GOTO_INDEX;
     }

@@ -6,20 +6,23 @@ import by.sasnouskikh.jcasino.dao.UserDAO;
 import by.sasnouskikh.jcasino.dao.impl.DAOHelper;
 import by.sasnouskikh.jcasino.entity.bean.Admin;
 import by.sasnouskikh.jcasino.entity.bean.JCasinoUser;
+import by.sasnouskikh.jcasino.entity.bean.News;
 import by.sasnouskikh.jcasino.entity.bean.Player;
 import by.sasnouskikh.jcasino.entity.bean.PlayerStatus;
 import by.sasnouskikh.jcasino.entity.bean.PlayerVerification;
+import by.sasnouskikh.jcasino.validator.FormValidator;
+import org.apache.commons.fileupload.FileItem;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static by.sasnouskikh.jcasino.manager.ConfigConstant.PERCENT;
-import static by.sasnouskikh.jcasino.manager.ConfigConstant.RANGE_SPLITERATOR;
+import static by.sasnouskikh.jcasino.manager.ConfigConstant.*;
 
 /**
  * The class provides Service layer actions available for admin.
@@ -28,6 +31,8 @@ import static by.sasnouskikh.jcasino.manager.ConfigConstant.RANGE_SPLITERATOR;
  */
 public class AdminService extends AbstractService {
     private static final Logger LOGGER = LogManager.getLogger(AdminService.class);
+
+    private static final String UTF_8_ENCODING = "UTF-8";
 
     /**
      * Default instance constructor.
@@ -43,10 +48,110 @@ public class AdminService extends AbstractService {
     }
 
     /**
+     * Adds news to database.
+     *
+     * @param formItems collection parsed from multipart-form request
+     * @param admin admin who adds news
+     * @param uploadDir upload directory
+     * @return added {@link News} object or null
+     * @see DAOHelper
+     * @see NewsService#addNews(String, String, FileItem, String, Admin, String)
+     * @see FileItem
+     */
+    public static News addNews(List<FileItem> formItems, Admin admin, String uploadDir) throws ServiceException, UnsupportedEncodingException {
+        String   header    = null;
+        String   text      = null;
+        String   locale    = null;
+        FileItem newsImage = null;
+        boolean  valid     = true;
+        for (FileItem item : formItems) {
+            String fieldName = item.getFieldName();
+            if (item.isFormField()) {
+                if (PARAM_HEADER.equals(fieldName)) {
+                    header = item.getString(UTF_8_ENCODING);
+                    if (!FormValidator.validateNewsHeader(header)) {
+                        valid = false;
+                    }
+                }
+                if (PARAM_TEXT.equals(fieldName)) {
+                    text = item.getString(UTF_8_ENCODING);
+                    if (!FormValidator.validateNewsText(text)) {
+                        valid = false;
+                    }
+                }
+                if (PARAM_LOCALE.equals(fieldName)) {
+                    locale = item.getString(UTF_8_ENCODING);
+                    if (!FormValidator.validateNewsLocale(locale)) {
+                        valid = false;
+                    }
+                }
+            } else {
+                if (PARAM_NEWS_IMAGE.equals(fieldName)) {
+                    newsImage = item;
+                }
+            }
+        }
+        try (NewsService newsService = new NewsService()) {
+            return valid ? newsService.addNews(header, text, newsImage, locale, admin, uploadDir) : null;
+        }
+    }
+
+    /**
+     * Edit news data in database.
+     *
+     * @param formItems collection parsed from multipart-form request
+     * @param admin admin who adds news
+     * @param uploadDir upload directory
+     * @return edited {@link News} object or null
+     * @see DAOHelper
+     * @see NewsService#ed(String, String, FileItem, String, Admin, String)
+     * @see FileItem
+     */
+    public static News editNews(List<FileItem> formItems, Admin admin, String uploadDir) throws UnsupportedEncodingException, ServiceException {
+        String   header    = null;
+        String   text      = null;
+        FileItem newsImage = null;
+        int      newsId    = 0;
+        boolean  valid     = true;
+        for (FileItem item : formItems) {
+            String fieldName = item.getFieldName();
+            if (item.isFormField()) {
+                if (PARAM_HEADER.equals(fieldName)) {
+                    header = item.getString(UTF_8_ENCODING);
+                    if (!FormValidator.validateNewsHeader(header)) {
+                        valid = false;
+                    }
+                }
+                if (PARAM_TEXT.equals(fieldName)) {
+                    text = item.getString(UTF_8_ENCODING);
+                    if (!FormValidator.validateNewsText(text)) {
+                        valid = false;
+                    }
+                }
+                if (PARAM_ID.equals(fieldName)) {
+                    String idString = item.getString(UTF_8_ENCODING);
+                    if (FormValidator.validateId(idString)) {
+                        newsId = Integer.parseInt(idString);
+                    } else {
+                        valid = false;
+                    }
+                }
+            } else {
+                if (PARAM_NEWS_IMAGE.equals(fieldName)) {
+                    newsImage = item;
+                }
+            }
+        }
+        try (NewsService newsService = new NewsService()) {
+            return valid ? newsService.editNews(newsId, header, newsImage, text, admin, uploadDir) : null;
+        }
+    }
+
+    /**
      * Calls DAO layer to take {@link Player} object due to its id.
      *
      * @param id player id to take
-     * @return taken {@link Player} object
+     * @return taken {@link Player} object or null
      * @see DAOHelper
      * @see UserDAO#takeUser(int)
      * @see UserService#initPlayer(JCasinoUser)
@@ -67,7 +172,7 @@ public class AdminService extends AbstractService {
      * Calls DAO layer to take list of {@link Player} objects due to given parameters.
      *
      * @param id player id to take
-     * @return taken {@link Player} object
+     * @return taken list of {@link Player} objects
      * @see DAOHelper
      * @see UserDAO#takeUserList(String)
      * @see UserService#initPlayer(JCasinoUser)
